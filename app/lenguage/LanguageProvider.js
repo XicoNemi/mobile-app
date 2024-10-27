@@ -20,6 +20,7 @@ const LanguageProvider = {
     },
     HomeScreen: {
       welcomeText: 'Welcome Back, Neftali',
+      search:'Search',
       sectionTitleItineraries: 'Try Our Itineraries',
       sectionSubtitleVisit: 'You Must Visit →',
       sectionTitleContinue: 'Continue Your Itinerary →',
@@ -56,6 +57,7 @@ const LanguageProvider = {
     },
     HomeScreen: {
       welcomeText: 'Bienvenido de vuelta Neftali',
+      search:'Buscar',
       sectionTitleItineraries: 'Prueba Nuestros Itinerarios',
       sectionSubtitleVisit: 'Debes Visitar →',
       sectionTitleContinue: 'Continúa Tu Itinerario →',

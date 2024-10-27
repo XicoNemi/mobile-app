@@ -8,7 +8,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <HeaderComponent title={LanguageProvider.spa.ProfileScreen.title} rightIcon='notifications-outline' />
-      <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
+      <Text style={styles.text}>Esta es la pantalla de Perfil</Text>
     </View>
   );
 };

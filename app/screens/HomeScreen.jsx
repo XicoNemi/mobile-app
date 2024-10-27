@@ -37,7 +37,7 @@ const HomeScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.searchBar}>
           <TextInput
-            placeholder={LanguageProvider.spa.HomeScreen.welcomeText}
+            placeholder={LanguageProvider.spa.HomeScreen.search}
             style={styles.searchInput}
           />
           <Ionicons name='search-outline' size={20} color='black' />

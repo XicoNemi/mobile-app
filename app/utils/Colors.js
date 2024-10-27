@@ -1,0 +1,1 @@
+// Aqui iran los colores mas bien la paleta de colores

@@ -5,7 +5,7 @@ import HeaderComponent from '../components/HeaderComponent';
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <HeaderComponent title="Perfil" rightIcon='notifications-outline' /> 
+      <HeaderComponent title='Perfil' rightIcon='notifications-outline' />
       <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
     </View>
   );

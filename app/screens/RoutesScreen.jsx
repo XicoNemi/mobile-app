@@ -5,7 +5,7 @@ import HeaderComponent from '../components/HeaderComponent';
 const RoutesScreen = () => {
   return (
     <View style={styles.container}>
-      <HeaderComponent title="Rutas" rightIcon='menu-outline' /> 
+      <HeaderComponent title='Rutas' rightIcon='menu-outline' />
       <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
     </View>
   );

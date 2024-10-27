@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import {
-  View, Text, TouchableOpacity, TextInput, StyleSheet, FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  FlatList,
   ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MenuDropdown from '../components/MenuDropdownComponent';
 import { useNavigation } from '@react-navigation/native';
+import LanguageProvider from '../lenguage/LanguageProvider';
 
 const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -16,13 +22,13 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={toggleMenu}>
-          <Ionicons name="menu-outline" size={35} color="black" />
+          <Ionicons name='menu-outline' size={35} color='black' />
         </TouchableOpacity>
 
         <Text style={styles.title}>Inicio</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-          <Ionicons name="person-circle-outline" size={35} color="black" />
+          <Ionicons name='person-circle-outline' size={35} color='black' />
         </TouchableOpacity>
       </View>
 
@@ -30,13 +36,20 @@ const HomeScreen = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.searchBar}>
-          <TextInput placeholder="Buscar" style={styles.searchInput} />
-          <Ionicons name="search-outline" size={20} color="black" />
+          <TextInput
+            placeholder={LanguageProvider.spa.HomeScreen.welcomeText}
+            style={styles.searchInput}
+          />
+          <Ionicons name='search-outline' size={20} color='black' />
         </View>
 
-        <Text style={styles.welcomeText}>Bienvenido de vuelta Neftali</Text>
+        <Text style={styles.welcomeText}>
+          {LanguageProvider.spa.HomeScreen.welcomeText}
+        </Text>
 
-        <Text style={styles.sectionTitle}>Prueba nuestros itinerarios</Text>
+        <Text style={styles.sectionTitle}>
+          {LanguageProvider.spa.HomeScreen.sectionTitleItineraries}
+        </Text>
         <FlatList
           horizontal
           data={[1, 2, 3]}
@@ -50,14 +63,16 @@ const HomeScreen = () => {
           style={styles.itineraryList}
         />
 
-        <Text style={styles.sectionSubtitle}>Debes visitarlos →</Text>
+        <Text style={styles.sectionSubtitle}>
+          {LanguageProvider.spa.HomeScreen.sectionSubtitleVisit}
+        </Text>
         <FlatList
           horizontal
           data={[1, 2, 3, 4]}
           keyExtractor={(item) => item.toString()}
           renderItem={({ item }) => (
             <View style={styles.visitBox}>
-              <Ionicons name="beer-outline" size={30} color="black" />
+              <Ionicons name='beer-outline' size={30} color='black' />
               <Text style={styles.visitText}>Mr Cheve</Text>
             </View>
           )}
@@ -65,7 +80,9 @@ const HomeScreen = () => {
           style={styles.visitList}
         />
 
-        <Text style={styles.sectionTitle}>Continúa tu Itinerario →</Text>
+        <Text style={styles.sectionTitle}>
+          {LanguageProvider.spa.HomeScreen.sectionTitleContinue}
+        </Text>
         <FlatList
           horizontal
           data={[1, 2, 3]}

@@ -1,4 +1,6 @@
 const LanguageProvider = {
+   
+    // Textos en ingles
   en: {
     components: {
       menuItems: {
@@ -22,7 +24,19 @@ const LanguageProvider = {
       sectionSubtitleVisit: 'You Must Visit →',
       sectionTitleContinue: 'Continue Your Itinerary →',
     },
+    ItinerariesScreen: {
+        title: 'Itineraries',
+
+    },
+    ProfileScreen:{
+        title: 'Profile',
+    },
+    RoutesScreen:{
+        title: 'Routes',
+    },
   },
+
+  // Textos en español
   spa: {
     components: {
       menuItems: {
@@ -45,6 +59,15 @@ const LanguageProvider = {
       sectionTitleItineraries: 'Prueba Nuestros Itinerarios',
       sectionSubtitleVisit: 'Debes Visitar →',
       sectionTitleContinue: 'Continúa Tu Itinerario →',
+    },
+    ItinerariesScreen: {
+        title: 'Itinerarios',
+    },
+    ProfileScreen:{
+        title: 'Perfil',
+    },
+    RoutesScreen:{
+        title: 'Rutas',
     },
   },
 };

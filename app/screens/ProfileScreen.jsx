@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import HeaderComponent from '../components/HeaderComponent';
+import LanguageProvider from '../lenguage/LanguageProvider';
+
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <HeaderComponent title='Perfil' rightIcon='notifications-outline' />
+      <HeaderComponent title={LanguageProvider.spa.ProfileScreen.title} rightIcon='notifications-outline' />
       <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
     </View>
   );

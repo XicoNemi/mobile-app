@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import HeaderComponent from '../components/HeaderComponent';
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Perfil</Text>
-      <Text style={styles.info}>Aquí puedes ver la información de tu perfil.</Text>
+      <HeaderComponent title="Perfil" rightIcon='notifications-outline' /> 
+      <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
     </View>
   );
 };
@@ -13,16 +14,14 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'white',
   },
-  title: {
-    fontSize: 30,
+  text: {
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
-  }
-  
+    textAlign: 'center',
+    marginTop: 20,
+  },
 });
 
 export default ProfileScreen;

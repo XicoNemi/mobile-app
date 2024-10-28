@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { BlurView } from 'expo-blur'; // Esta librería permite el efecto de desenfoque en la imagen de fondo
 import LanguageProvider from '../lenguage/LanguageProvider';
+import Colors from '../utils/Colors';
 
 const LoginScreen = ({ navigation }) => {
   const handleLogin = () => {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '55%',
-    backgroundColor: '#E6077E',
+    backgroundColor: Colors.primary,
     borderRadius: 15,
     paddingVertical: 15,
     marginTop: 30,

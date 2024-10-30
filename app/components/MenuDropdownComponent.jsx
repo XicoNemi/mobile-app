@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import LanguageProvider from '../lenguage/LanguageProvider';
 
 const menuItems = [
-  { icon: 'map-outline', label: 'Rutas', screen: 'RoutesScreen' },
-  { icon: 'bed-outline', label: 'Hospedaje' },
-  { icon: 'star-outline', label: 'Gastronomía' },
-  { icon: 'calendar-outline', label: 'Eventos' },
-  { icon: 'heart-outline', label: 'Turismo' },
-  { icon: 'list-outline', label: 'Itinerarios', screen: 'ItinerariesScreen' },
+  { icon: 'map-outline', label: LanguageProvider.spa.components.menuItems.routes, screen: 'RoutesScreen' },
+  { icon: 'bed-outline', label: LanguageProvider.spa.components.menuItems.bed },
+  { icon: 'star-outline', label: LanguageProvider.spa.components.menuItems.food },
+  { icon: 'calendar-outline', label: LanguageProvider.spa.components.menuItems.events },
+  { icon: 'heart-outline', label: LanguageProvider.spa.components.menuItems.tourism },
+  { icon: 'list-outline', label: LanguageProvider.spa.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
 ];
 
 const MenuDropdown = ({ navigation }) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,11 +12,20 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MenuDropdown from '../components/MenuDropdownComponent';
 import { useNavigation } from '@react-navigation/native';
 import LanguageProvider from '../lenguage/LanguageProvider';
-
+import SkeletonComponent from '../components/SkeletonComponent'; 
 const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [loading, setLoading] = useState(true); 
   const toggleMenu = () => setMenuVisible(!menuVisible);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer); 
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -35,45 +44,75 @@ const HomeScreen = () => {
       {menuVisible && <MenuDropdown navigation={navigation} />}
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Barra de búsqueda */}
         <View style={styles.searchBar}>
-          <TextInput
-            placeholder={LanguageProvider.spa.HomeScreen.search}
-            style={styles.searchInput}
-          />
-          <Ionicons name='search-outline' size={20} color='black' />
+          {loading ? (
+            <SkeletonComponent width="100%" height={40} />
+          ) : (
+            <>
+              <TextInput
+                placeholder={LanguageProvider.spa.HomeScreen.search}
+                style={styles.searchInput}
+              />
+              <Ionicons name='search-outline' size={20} color='black' />
+            </>
+          )}
         </View>
 
         <Text style={styles.welcomeText}>
-          {LanguageProvider.spa.HomeScreen.welcomeText}
+          {loading ? (
+            <SkeletonComponent width="50%" height={40} />
+          ) : (
+            LanguageProvider.spa.HomeScreen.welcomeText
+          )}
         </Text>
 
         <Text style={styles.sectionTitle}>
-          {LanguageProvider.spa.HomeScreen.sectionTitleItineraries}
+          {loading ? (
+            <SkeletonComponent width="70%" height={30} />
+          ) : (
+            LanguageProvider.spa.HomeScreen.sectionTitleItineraries
+          )}
         </Text>
+
         <FlatList
           horizontal
-          data={[1, 2, 3]}
+          data={loading ? [1, 2, 3] : [1, 2, 3]} // Mantener el mismo número de elementos para la carga
           keyExtractor={(item) => item.toString()}
           renderItem={({ item }) => (
             <View style={styles.itineraryBox}>
-              <Text style={styles.itineraryText}>Itinerario {item}</Text>
+              {loading ? (
+                <SkeletonComponent width={250} height={200} />
+              ) : (
+                <Text style={styles.itineraryText}>Itinerario {item}</Text>
+              )}
             </View>
           )}
           showsHorizontalScrollIndicator={false}
           style={styles.itineraryList}
         />
-
         <Text style={styles.sectionSubtitle}>
-          {LanguageProvider.spa.HomeScreen.sectionSubtitleVisit}
+          {loading ? (
+            <SkeletonComponent width="70%" height={30} />
+          ) : (
+            LanguageProvider.spa.HomeScreen.sectionSubtitleVisit
+          )}
         </Text>
+
         <FlatList
           horizontal
-          data={[1, 2, 3, 4]}
+          data={loading ? [1, 2, 3, 4] : [1, 2, 3, 4]}
           keyExtractor={(item) => item.toString()}
           renderItem={({ item }) => (
             <View style={styles.visitBox}>
-              <Ionicons name='beer-outline' size={30} color='black' />
-              <Text style={styles.visitText}>Mr Cheve</Text>
+              {loading ? (
+                <SkeletonComponent width={120} height={120} borderRadius={90}/>
+              ) : (
+                <>
+                  <Ionicons name='beer-outline' size={30} color='black' />
+                  <Text style={styles.visitText}>Mr Cheve</Text>
+                </>
+              )}
             </View>
           )}
           showsHorizontalScrollIndicator={false}
@@ -81,16 +120,27 @@ const HomeScreen = () => {
         />
 
         <Text style={styles.sectionTitle}>
-          {LanguageProvider.spa.HomeScreen.sectionTitleContinue}
+          {loading ? (
+            <SkeletonComponent width="70%" height={30} />
+          ) : (
+            LanguageProvider.spa.HomeScreen.sectionTitleContinue
+          )}
         </Text>
+
         <FlatList
           horizontal
-          data={[1, 2, 3]}
+          data={loading ? [1, 2, 3] : [1, 2, 3]}
           keyExtractor={(item) => item.toString()}
           renderItem={({ item }) => (
             <View style={styles.continueBox}>
-              <View style={styles.itineraryBoxSmall} />
-              <Text style={styles.continueText}>Itinerario {item}</Text>
+              {loading ? (
+                <SkeletonComponent width={200} height={150} />
+              ) : (
+                <>
+                  <View style={styles.itineraryBoxSmall} />
+                  <Text style={styles.continueText}>Itinerario {item}</Text>
+                </>
+              )}
             </View>
           )}
           showsHorizontalScrollIndicator={false}

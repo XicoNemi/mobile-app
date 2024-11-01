@@ -15,6 +15,7 @@
     "expo": "~51.0.28",
     "expo-blur": "^13.0.2",
     "expo-linear-gradient": "^13.0.2",
+    "expo-secure-store": "^13.0.2",
     "expo-status-bar": "~1.12.1",
     "mobileappxiconemi": "file:",
     "moti": "^0.29.0",

@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import HeaderComponent from '../components/HeaderComponent';
 import LanguageProvider from '../lenguage/LanguageProvider';
-
+import AssignLenguaje from '../lenguage/AssignLenguage'; 
 
 const RoutesScreen = () => {
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); 
+
+  useEffect(() => {
+    AssignLenguaje(setTextsLeng); 
+  }, []);
+
   return (
     <View style={styles.container}>
-      <HeaderComponent title={LanguageProvider.spa.RoutesScreen.title} rightIcon='menu-outline' />
-      <Text style={styles.text}>Esta es la pantalla de Rutas</Text>
+      <HeaderComponent title={textsLeng.RoutesScreen.title} rightIcon='menu-outline' />
     </View>
   );
 };

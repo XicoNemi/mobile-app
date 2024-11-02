@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LanguageProvider from '../lenguage/LanguageProvider';
-
-const menuItems = [
-  { icon: 'map-outline', label: LanguageProvider.spa.components.menuItems.routes, screen: 'RoutesScreen' },
-  { icon: 'bed-outline', label: LanguageProvider.spa.components.menuItems.bed },
-  { icon: 'star-outline', label: LanguageProvider.spa.components.menuItems.food },
-  { icon: 'calendar-outline', label: LanguageProvider.spa.components.menuItems.events },
-  { icon: 'heart-outline', label: LanguageProvider.spa.components.menuItems.tourism },
-  { icon: 'list-outline', label: LanguageProvider.spa.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
-];
+import AssignLenguaje from '../lenguage/AssignLenguage'; 
 
 const MenuDropdown = ({ navigation }) => {
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); 
+
+  useEffect(() => {
+    AssignLenguaje(setTextsLeng); 
+}, []);
+
+
+  const menuItems = [
+    { icon: 'map-outline', label: textsLeng.components.menuItems.routes, screen: 'RoutesScreen' },
+    { icon: 'bed-outline', label: textsLeng.components.menuItems.bed },
+    { icon: 'star-outline', label: textsLeng.components.menuItems.food },
+    { icon: 'calendar-outline', label: textsLeng.components.menuItems.events },
+    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism },
+    { icon: 'list-outline', label: textsLeng.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
+  ];
+
   return (
     <View style={styles.menu}>
       {menuItems.map((item, index) => (

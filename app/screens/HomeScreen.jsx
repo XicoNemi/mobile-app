@@ -12,17 +12,24 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MenuDropdown from '../components/MenuDropdownComponent';
 import { useNavigation } from '@react-navigation/native';
 import LanguageProvider from '../lenguage/LanguageProvider';
+import AssignLenguaje from '../lenguage/AssignLenguage';
 import SkeletonComponent from '../components/SkeletonComponent'; 
+
 const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [loading, setLoading] = useState(true); 
-  const toggleMenu = () => setMenuVisible(!menuVisible);
+  const [loading, setLoading] = useState(true);
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializar con el idioma español
   const navigation = useNavigation();
+
+  const toggleMenu = () => setMenuVisible(!menuVisible);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 2000);
+
+    // Cargar el idioma
+    AssignLenguaje(setTextsLeng);
 
     return () => clearTimeout(timer); 
   }, []);
@@ -34,7 +41,7 @@ const HomeScreen = () => {
           <Ionicons name='menu-outline' size={35} color='black' />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Inicio</Text>
+        <Text style={styles.title}>{textsLeng.HomeScreen.title}</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
           <Ionicons name='person-circle-outline' size={35} color='black' />
@@ -51,7 +58,7 @@ const HomeScreen = () => {
           ) : (
             <>
               <TextInput
-                placeholder={LanguageProvider.spa.HomeScreen.search}
+                placeholder={textsLeng.HomeScreen.search}
                 style={styles.searchInput}
               />
               <Ionicons name='search-outline' size={20} color='black' />
@@ -63,7 +70,7 @@ const HomeScreen = () => {
           {loading ? (
             <SkeletonComponent width="50%" height={40} />
           ) : (
-            LanguageProvider.spa.HomeScreen.welcomeText
+            textsLeng.HomeScreen.welcomeText
           )}
         </Text>
 
@@ -71,7 +78,7 @@ const HomeScreen = () => {
           {loading ? (
             <SkeletonComponent width="70%" height={30} />
           ) : (
-            LanguageProvider.spa.HomeScreen.sectionTitleItineraries
+            textsLeng.HomeScreen.sectionTitleItineraries
           )}
         </Text>
 
@@ -84,18 +91,19 @@ const HomeScreen = () => {
               {loading ? (
                 <SkeletonComponent width={250} height={200} />
               ) : (
-                <Text style={styles.itineraryText}>Itinerario {item}</Text>
+                <Text style={styles.itineraryText}>{textsLeng.HomeScreen.itineraryText} {item}</Text>
               )}
             </View>
           )}
           showsHorizontalScrollIndicator={false}
           style={styles.itineraryList}
         />
+        
         <Text style={styles.sectionSubtitle}>
           {loading ? (
             <SkeletonComponent width="70%" height={30} />
           ) : (
-            LanguageProvider.spa.HomeScreen.sectionSubtitleVisit
+            textsLeng.HomeScreen.sectionSubtitleVisit
           )}
         </Text>
 
@@ -123,7 +131,7 @@ const HomeScreen = () => {
           {loading ? (
             <SkeletonComponent width="70%" height={30} />
           ) : (
-            LanguageProvider.spa.HomeScreen.sectionTitleContinue
+            textsLeng.HomeScreen.sectionTitleContinue
           )}
         </Text>
 
@@ -138,7 +146,7 @@ const HomeScreen = () => {
               ) : (
                 <>
                   <View style={styles.itineraryBoxSmall} />
-                  <Text style={styles.continueText}>Itinerario {item}</Text>
+                  <Text style={styles.continueText}>{textsLeng.HomeScreen.continueText} {item}</Text>
                 </>
               )}
             </View>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,8 +10,10 @@ import {
 import { BlurView } from 'expo-blur'; // Esta librería permite el efecto de desenfoque en la imagen de fondo
 import LanguageProvider from '../lenguage/LanguageProvider';
 import Colors from '../utils/Colors';
+import LanguageSwitcher from '../lenguage/LanguageSwitcher'; 
 
 const LoginScreen = ({ navigation }) => {
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializa el idioma
   const handleLogin = () => {
     navigation.navigate('HomeScreen');
   };
@@ -21,28 +23,33 @@ const LoginScreen = ({ navigation }) => {
       source={require('../../assets/background.png')}
       style={styles.background}
     >
+      {/* Componente para cambiar el idioma*/}
+      <View style={styles.languageSwitcher}>
+      <LanguageSwitcher setTextsLeng={setTextsLeng}/>
+      </View>
+
       <BlurView intensity={40} tint='light' style={styles.overlay}>
         <Text style={styles.title}>
-          {LanguageProvider.spa.LoginScreen.title}
+          {textsLeng.LoginScreen.title}
         </Text>
 
         <TextInput
           style={styles.input}
-          placeholder={LanguageProvider.spa.LoginScreen.usernamePlaceholder}
+          placeholder={textsLeng.LoginScreen.usernamePlaceholder}
           placeholderTextColor='#AAAAAA'
           keyboardType='email-address'
         />
 
         <TextInput
           style={styles.input}
-          placeholder={LanguageProvider.spa.LoginScreen.passwordPlaceholder}
+          placeholder={textsLeng.LoginScreen.passwordPlaceholder}
           placeholderTextColor='#AAAAAA'
           secureTextEntry
         />
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>
-            {LanguageProvider.spa.LoginScreen.loginButton}
+            {textsLeng.LoginScreen.loginButton}
           </Text>
         </TouchableOpacity>
       </BlurView>
@@ -91,6 +98,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  languageSwitcher: {
+    position: 'absolute',
+    top: 40,
+    right: 20, 
+    zIndex: 1, 
   },
 });
 

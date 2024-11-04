@@ -19,6 +19,7 @@ const LanguageProvider = {
       loginButton: 'Log In',
     },
     HomeScreen: {
+      start:'Start',
       welcomeText: 'Welcome Back, Neftali',
       search:'Search',
       sectionTitleItineraries: 'Try Our Itineraries',
@@ -56,6 +57,7 @@ const LanguageProvider = {
       loginButton: 'Iniciar Sesión',
     },
     HomeScreen: {
+      start:'Inicio',
       welcomeText: 'Bienvenido de vuelta Neftali',
       search:'Buscar',
       sectionTitleItineraries: 'Prueba Nuestros Itinerarios',

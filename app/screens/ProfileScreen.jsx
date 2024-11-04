@@ -14,7 +14,6 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <HeaderComponent title={textsLeng.ProfileScreen.title} rightIcon='notifications-outline' />
-      <Text style={styles.text}>{textsLeng.ProfileScreen.description}</Text>
     </View>
   );
 };
@@ -23,13 +22,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 20,
-  },
+  }
 });
 
 export default ProfileScreen;

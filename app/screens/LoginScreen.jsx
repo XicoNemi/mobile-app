@@ -11,6 +11,7 @@ import { BlurView } from 'expo-blur'; // Esta librería permite el efecto de des
 import LanguageProvider from '../lenguage/LanguageProvider';
 import Colors from '../utils/Colors';
 import LanguageSwitcher from '../lenguage/LanguageSwitcher'; 
+import SizeConstants from '../utils/SizeConstants';
 
 const LoginScreen = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializa el idioma
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   title: {
-    fontSize: 32,
+    fontSize: SizeConstants.titles,
     color: 'white',
     textAlign: 'center',
     marginBottom: 20,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginVertical: 10,
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
   },
   button: {
     width: '55%',
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
     fontWeight: 'bold',
   },
   languageSwitcher: {

@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import LanguageProvider from '../lenguage/LanguageProvider';
 import AssignLenguaje from '../lenguage/AssignLenguage';
 import SkeletonComponent from '../components/SkeletonComponent'; 
+import SizeConstants from '../utils/SizeConstants';
 
 const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -38,13 +39,13 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={toggleMenu}>
-          <Ionicons name='menu-outline' size={35} color='black' />
+          <Ionicons name='menu-outline' size={SizeConstants.iconsG} color='black' />
         </TouchableOpacity>
 
-        <Text style={styles.title}>{textsLeng.HomeScreen.title}</Text>
+        <Text style={styles.title}>{textsLeng.HomeScreen.start}</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-          <Ionicons name='person-circle-outline' size={35} color='black' />
+          <Ionicons name='person-circle-outline' size={SizeConstants.iconsG} color='black' />
         </TouchableOpacity>
       </View>
 
@@ -61,7 +62,7 @@ const HomeScreen = () => {
                 placeholder={textsLeng.HomeScreen.search}
                 style={styles.searchInput}
               />
-              <Ionicons name='search-outline' size={20} color='black' />
+              <Ionicons name='search-outline' size={SizeConstants.iconsCH} color='black' />
             </>
           )}
         </View>
@@ -117,7 +118,7 @@ const HomeScreen = () => {
                 <SkeletonComponent width={120} height={120} borderRadius={90}/>
               ) : (
                 <>
-                  <Ionicons name='beer-outline' size={30} color='black' />
+                  <Ionicons name='beer-outline' size={SizeConstants.iconsM} color='black' />
                   <Text style={styles.visitText}>Mr Cheve</Text>
                 </>
               )}
@@ -173,16 +174,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 25,
+    fontSize: SizeConstants.subtitles,
     fontWeight: 'bold',
   },
   welcomeText: {
-    fontSize: 35,
+    fontSize: SizeConstants.titles,
     fontWeight: 'bold',
     marginVertical: 20,
   },
   sectionTitle: {
-    fontSize: 25,
+    fontSize: SizeConstants.subtitles,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -199,10 +200,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   itineraryText: {
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
   },
   sectionSubtitle: {
-    fontSize: 18,
+    fontSize: SizeConstants.subtitles,
     marginVertical: 10,
   },
   visitList: {
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
   },
   visitText: {
     marginTop: 5,
-    fontSize: 14,
+    fontSize: SizeConstants.texts,
   },
   searchBar: {
     flexDirection: 'row',
@@ -232,6 +233,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     marginRight: 10,
+    fontSize: SizeConstants.texts
   },
   continueBox: {
     alignItems: 'center',
@@ -245,7 +247,7 @@ const styles = StyleSheet.create({
   },
   continueText: {
     marginTop: 8,
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
     fontWeight: 'bold',
   },
 });

@@ -15,7 +15,7 @@ const StackUser = () => {
         component={LoginScreen}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'simple_push',
         }}
       />
       <Stack.Screen
@@ -23,7 +23,7 @@ const StackUser = () => {
         component={ItinerariesScreen}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'simple_push',
         }}
       />
 
@@ -32,7 +32,7 @@ const StackUser = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'simple_push',
         }}
       />
 
@@ -41,7 +41,7 @@ const StackUser = () => {
         component={RoutesScreen}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'simple_push',
         }}
       />
 
@@ -50,7 +50,7 @@ const StackUser = () => {
         component={ProfileScreen}
         options={{
           headerShown: false,
-          animation: 'slide_from_right',
+          animation: 'simple_push',
         }}
       />
     </Stack.Navigator>

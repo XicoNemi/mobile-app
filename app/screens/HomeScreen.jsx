@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MenuDropdown from '../components/MenuDropdownComponent';
+import ProfileMenuDropdown from '../components/ProfileMenuDropdown';
 import { useNavigation } from '@react-navigation/native';
 import LanguageProvider from '../lenguage/LanguageProvider';
 import AssignLenguaje from '../lenguage/AssignLenguage';
@@ -18,11 +19,15 @@ import SizeConstants from '../utils/SizeConstants';
 
 const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializar con el idioma español
   const navigation = useNavigation();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
+  const toggleMenuProfile = () => setMenuVisibleProfile(!menuVisibleProfile);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,12 +49,14 @@ const HomeScreen = () => {
 
         <Text style={styles.title}>{textsLeng.HomeScreen.start}</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+        <TouchableOpacity onPress={toggleMenuProfile}>
           <Ionicons name='person-circle-outline' size={SizeConstants.iconsG} color='black' />
         </TouchableOpacity>
       </View>
 
       {menuVisible && <MenuDropdown navigation={navigation} />}
+      {menuVisibleProfile && <ProfileMenuDropdown navigation={navigation} />}
+
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Barra de búsqueda */}

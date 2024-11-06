@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     position: 'absolute',
     top: 50,
-    left: 15,
+    left: 10,
     zIndex: 1,
   },
   menuItem: {

@@ -37,7 +37,9 @@ const LanguageSwitcher = ({ setTextsLeng }) => {
         onPress={changeLanguage} 
       >
         <Ionicons name="globe-outline" size={SizeConstants.iconsCH} color="black" style={styles.icon} />
-        <Text style={styles.text}>Cambiar idioma</Text>
+        <Text style={styles.text}>
+          {language === 'spa' ? 'Cambiar idioma' : 'Chng language'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,17 +53,18 @@ const styles = StyleSheet.create({
   translator: {
     flexDirection: 'row',
     backgroundColor: '#f2f2f2',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 6,
+    borderRadius: 6,
     alignItems: 'center',
   },
   icon: {
-    marginRight: 8,
+    marginRight: 5,
   },
   text: {
+    marginLeft: 5,
     color: 'black',
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
     fontWeight: 'bold',
   },
 });

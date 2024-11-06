@@ -10,6 +10,8 @@ const LanguageProvider = {
         events: 'Events',
         tourism: 'Tourism',
         itineraries: 'Itineraries',
+        myProfile:'My profile',
+        logOut:'Log out'
       },
     },
     LoginScreen: {
@@ -48,6 +50,8 @@ const LanguageProvider = {
         events: 'Eventos',
         tourism: 'Turismo',
         itineraries: 'Itinerarios',
+        myProfile:'Mi perfil',
+        logOut:'Cerrar sesión'
       },
     },
     LoginScreen: {

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons'; // Asegúrate de que Ionicons esté instalado
 import { saveValue, getValueFor } from '../utils/localStorage';
 import AssignLenguaje from '../lenguage/AssignLenguage';
 import LanguageProvider from '../lenguage/LanguageProvider';
-import Colors from '../utils/Colors';
+import SizeConstants from '../utils/SizeConstants';
 const LanguageSwitcher = ({ setTextsLeng }) => {
   const [language, setLanguage] = useState('spa');
 
@@ -22,22 +23,21 @@ const LanguageSwitcher = ({ setTextsLeng }) => {
     loadLanguage();
   }, []);
 
-  const changeLanguage = async (lang) => {
-    await saveValue('lenguage', lang);
-    setLanguage(lang);
-    setTextsLeng(LanguageProvider[lang]);
+  const changeLanguage = async () => {
+    const newLanguage = language === 'spa' ? 'en' : 'spa';
+    await saveValue('lenguage', newLanguage);
+    setLanguage(newLanguage);
+    setTextsLeng(LanguageProvider[newLanguage]);
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.translator}
-        onPress={() => changeLanguage(language === 'spa' ? 'en' : 'spa')} // Cambia el idioma
+        onPress={changeLanguage} 
       >
-        <Image
-          style={styles.flag}
-          source={language === 'spa' ? require('../../assets/mx.png') : require('../../assets/usa.png')}
-        />
+        <Ionicons name="globe-outline" size={SizeConstants.iconsCH} color="black" style={styles.icon} />
+        <Text style={styles.text}>Cambiar idioma</Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,24 +45,24 @@ const LanguageSwitcher = ({ setTextsLeng }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   translator: {
-    width: 55,
-    height: 46,
-    backgroundColor: Colors.primary,
-    borderRadius: 20,
+    flexDirection: 'row',
+    backgroundColor: '#f2f2f2',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    margin: 10,
   },
-  flag: {
-    height: '80%',
-    width: '80%',
-    resizeMode: 'contain',
+  icon: {
+    marginRight: 8,
+  },
+  text: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

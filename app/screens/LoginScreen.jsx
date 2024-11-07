@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LanguageProvider from "../lenguage/LanguageProvider";
@@ -12,22 +13,38 @@ import Colors from "../utils/Colors";
 import LanguageSwitcher from "../lenguage/LanguageSwitcher";
 import SizeConstants from "../utils/SizeConstants";
 import AssignLenguaje from "../lenguage/AssignLenguage";
-import {signIn} from "../utils/Api";
+import api from "../utils/Api"; 
+import LoaderComponent from "../components/LoaderComponent"; 
 
 const LoginScreen = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng); // Cargar el idioma
+    AssignLenguaje(setTextsLeng); 
   }, []);
 
-  const handleLogin = () => {
-    navigation.navigate("HomeScreen");
+  const handleLogin = async () => {
+    setIsLoading(true); 
+    try {
+      const { user, token } = await api.signIn(email, password); 
+      Alert.alert("Login exitoso", `Bienvenido ${user.name}`);
+      navigation.navigate("HomeScreen"); 
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Hubo un problema al iniciar sesión");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
+      <LoaderComponent isVisible={isLoading} text={textsLeng.LoginScreen.messageLog} />
+
       <View style={styles.languageSwitcher}>
         <LanguageSwitcher setTextsLeng={setTextsLeng} />
       </View>
@@ -39,6 +56,8 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         placeholderTextColor="#AAAAAA"
         keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
       />
 
       <Text style={styles.label}>{textsLeng.LoginScreen.password}</Text>
@@ -47,6 +66,8 @@ const LoginScreen = ({ navigation }) => {
           style={styles.passwordInput}
           placeholderTextColor="#AAAAAA"
           secureTextEntry={!isPasswordVisible}
+          value={password}
+          onChangeText={setPassword}
         />
         <TouchableOpacity
           onPress={() => setIsPasswordVisible(!isPasswordVisible)}

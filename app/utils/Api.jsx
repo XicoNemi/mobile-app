@@ -38,11 +38,13 @@ const signIn = async (email, password) => {
   try {
     const response = await api.post('/api/auth/sing-in', { email, password });
     const token = response.headers['auth-token'];  // Obtiene el token del encabezado
+    console.log("Token desde API:", token);  // Para verificar que el token se está obteniendo
     return { user: response.data, token };  // Retorna los datos del usuario y el token
   } catch (error) {
     handleError(error);  // Maneja el error
   }
 };
+
 
 export default {
   signUp,

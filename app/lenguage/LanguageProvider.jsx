@@ -23,6 +23,7 @@ const LanguageProvider = {
       signFacebook: "Continue with Facebook",
       dontAccount: "Don't have an account?",
       signUp: ", Sign up",
+      messageLog:"Logging in..."
     },
     RegisterScreen: {
       createAccount: "Create your account",
@@ -74,6 +75,7 @@ const LanguageProvider = {
       signFacebook: "Continua con Facebook",
       dontAccount: "¿No tienes una cuenta?",
       signUp: ", Regístrate",
+      messageLog:"Iniciando sesión..."
     },
     RegisterScreen: {
       createAccount: "Crea tu Cuenta",

@@ -1,39 +1,42 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { Overlay } from 'react-native-elements';
+import { ActivityIndicator, Modal, StyleSheet, Text, View } from 'react-native';
 
-export default function LoaderComponent(props) {
-  const { isVisible, text } = props;
-
+export default function LoaderComponent({ isVisible = false, text = '' }) {
   return (
-    <Overlay
-      isVisible={isVisible}
-      windowBackgroundColor="rgba(0,0,0,5)"
-      overlayBackgroundColor="transparent"
-      overlayStyle={styles.overlay}
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={isVisible}
+      onRequestClose={() => {}}
     >
-      <View style={styles.vista}>
-        <ActivityIndicator size="large" color="#3D5CA4" />
-        {text && <Text> {text} </Text>}
+      <View style={styles.overlay}>
+        <View style={styles.vista}>
+          <ActivityIndicator size="large" color="#3D5CA4" />
+          {text && <Text style={styles.text}>{text}</Text>}
+        </View>
       </View>
-    </Overlay>
-  )
+    </Modal>
+  );
 }
 
 const styles = StyleSheet.create({
   overlay: {
-    height: 100,
-    width: 200,
-    borderRadius: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   vista: {
-    flex: 1,
+    width: 200,
+    height: 100,
+    borderRadius: 10,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 10,
   },
   text: {
-    color: "blue",
-    textTransform: "uppercase",
-    marginTop: "10"
-  }
+    color: 'black',
+    marginTop: 10,
+  },
 });

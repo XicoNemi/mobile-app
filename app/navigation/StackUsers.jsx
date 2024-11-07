@@ -1,56 +1,66 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../screens/LoginScreen.jsx';
-import HomeScreen from '../screens/HomeScreen.jsx';
-import ItinerariesScreen from '../screens/ItinerariesScreen.jsx';
-import RoutesScreen from '../screens/RoutesScreen.jsx';
-import ProfileScreen from '../screens/ProfileScreen.jsx';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "../screens/LoginScreen.jsx";
+import HomeScreen from "../screens/HomeScreen.jsx";
+import ItinerariesScreen from "../screens/ItinerariesScreen.jsx";
+import RoutesScreen from "../screens/RoutesScreen.jsx";
+import ProfileScreen from "../screens/ProfileScreen.jsx";
+import RegisterScreen from "../screens/RegisterScreen.jsx";
 
 const Stack = createNativeStackNavigator();
 
 const StackUser = () => {
   return (
-    <Stack.Navigator initialRouteName='LoginScreen'>
+    <Stack.Navigator initialRouteName="LoginScreen">
       <Stack.Screen
-        name='LoginScreen'
+        name="LoginScreen"
         component={LoginScreen}
         options={{
           headerShown: false,
-          animation: 'simple_push',
+          animation: "simple_push",
         }}
       />
       <Stack.Screen
-        name='ItinerariesScreen'
+        name="ItinerariesScreen"
         component={ItinerariesScreen}
         options={{
           headerShown: false,
-          animation: 'simple_push',
+          animation: "simple_push",
         }}
       />
 
       <Stack.Screen
-        name='HomeScreen'
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           headerShown: false,
-          animation: 'simple_push',
+          animation: "simple_push",
         }}
       />
 
       <Stack.Screen
-        name='RoutesScreen'
+        name="RoutesScreen"
         component={RoutesScreen}
         options={{
           headerShown: false,
-          animation: 'simple_push',
+          animation: "simple_push",
         }}
       />
 
       <Stack.Screen
-        name='ProfileScreen'
+        name="ProfileScreen"
         component={ProfileScreen}
         options={{
           headerShown: false,
-          animation: 'simple_push',
+          animation: "simple_push",
+        }}
+      />
+
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{
+          headerShown: false,
+          animation: "simple_push",
         }}
       />
     </Stack.Navigator>

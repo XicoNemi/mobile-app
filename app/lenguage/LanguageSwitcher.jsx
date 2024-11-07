@@ -36,7 +36,7 @@ const LanguageSwitcher = ({ setTextsLeng }) => {
         style={styles.translator}
         onPress={changeLanguage} 
       >
-        <Ionicons name="globe-outline" size={SizeConstants.iconsCH} color="black" style={styles.icon} />
+        <Ionicons name="language-sharp" size={SizeConstants.iconsCH} color="black" style={styles.icon} />
         <Text style={styles.text}>
           {language === 'spa' ? 'Cambiar idioma' : 'Chng language'}
         </Text>

@@ -23,8 +23,20 @@ const LanguageProvider = {
       signFacebook: "Continue with Facebook",
       dontAccount: "Don't have an account?",
       signUp: ", Sign up",
-      messageLog:"Logging in..."
+      messageLog: "Logging in...",
+      enterEmail: {
+        texts: {
+          invalidEmail: "Please enter a valid email address.",
+          errorNext: "Email field is required.",
+        },
+      },
+      loginPassword: {
+        texts: {
+          passwordError: "Password must be at least 6 characters long.",
+        },
+      },
     },
+
     RegisterScreen: {
       createAccount: "Create your account",
       name: "Name/s",
@@ -75,7 +87,19 @@ const LanguageProvider = {
       signFacebook: "Continua con Facebook",
       dontAccount: "¿No tienes una cuenta?",
       signUp: ", Regístrate",
-      messageLog:"Iniciando sesión..."
+      messageLog: "Iniciando sesión...",
+      enterEmail: {
+        texts: {
+          invalidEmail:
+            "Por favor ingrese una dirección de correo electrónico válida.",
+          errorNext: "El campo de correo es obligatorio.",
+        },
+      },
+      loginPassword: {
+        texts: {
+          passwordError: "La contraseña debe tener al menos 6 caracteres.",
+        },
+      },
     },
     RegisterScreen: {
       createAccount: "Crea tu Cuenta",

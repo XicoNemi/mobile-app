@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import HeaderComponent from '../components/HeaderComponent';
+import HeaderComponent from '../components/generals/HeaderComponent';
 import LanguageProvider from '../lenguage/LanguageProvider';
 import AssignLenguaje from '../lenguage/AssignLenguage'; 
 

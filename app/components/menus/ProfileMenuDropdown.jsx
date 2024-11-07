@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import SizeConstants from '../utils/SizeConstants';
-import AssignLenguaje from '../lenguage/AssignLenguage';
-import LanguageProvider from '../lenguage/LanguageProvider';
+import SizeConstants from '../../utils/SizeConstants';
+import AssignLenguaje from '../../lenguage/AssignLenguage';
+import LanguageProvider from '../../lenguage/LanguageProvider';
 import { useNavigation } from '@react-navigation/native'; 
-import LanguageSwitcher from '../lenguage/LanguageSwitcher';  
+import LanguageSwitcher from '../../lenguage/LanguageSwitcher';  
 
 const ProfileMenuDropdown = ({}) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); 

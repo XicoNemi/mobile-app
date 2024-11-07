@@ -1,38 +1,32 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import Colors from "../utils/Colors";
 import LanguageSwitcher from "../lenguage/LanguageSwitcher";
 import SizeConstants from "../utils/SizeConstants";
 import AssignLenguaje from "../lenguage/AssignLenguage";
-import api from "../utils/Api"; 
-import LoaderComponent from "../components/LoaderComponent"; 
+import api from "../utils/Api";
+import LoaderComponent from "../components/generals/LoaderComponent";
+import EnterEmailComponent from "../components/login/EnterEmailComponent";
+import EnterPasswordComponent from "../components/login/EnterPasswordComponent";
 
 const LoginScreen = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng); 
+    AssignLenguaje(setTextsLeng);
   }, []);
 
   const handleLogin = async () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     try {
-      const { user, token } = await api.signIn(email, password); 
+      const { user, token } = await api.signIn(email, password);
       Alert.alert("Login exitoso", `Bienvenido ${user.name}`);
-      navigation.navigate("HomeScreen"); 
+      navigation.navigate("HomeScreen");
     } catch (error) {
       console.error(error);
       Alert.alert("Error", "Hubo un problema al iniciar sesión");
@@ -43,7 +37,10 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LoaderComponent isVisible={isLoading} text={textsLeng.LoginScreen.messageLog} />
+      <LoaderComponent
+        isVisible={isLoading}
+        text={textsLeng.LoginScreen.messageLog}
+      />
 
       <View style={styles.languageSwitcher}>
         <LanguageSwitcher setTextsLeng={setTextsLeng} />
@@ -51,40 +48,19 @@ const LoginScreen = ({ navigation }) => {
 
       <Text style={styles.title}>{textsLeng.LoginScreen.title}</Text>
 
-      <Text style={styles.label}>{textsLeng.LoginScreen.email}</Text>
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#AAAAAA"
-        keyboardType="email-address"
+      {/* Componente de email */}
+      <EnterEmailComponent
         value={email}
-        onChangeText={setEmail}
+        setEmail={setEmail}
+        textsLeng={textsLeng}
       />
 
-      <Text style={styles.label}>{textsLeng.LoginScreen.password}</Text>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholderTextColor="#AAAAAA"
-          secureTextEntry={!isPasswordVisible}
-          value={password}
-          onChangeText={setPassword}
-        />
-        <TouchableOpacity
-          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-        >
-          <Ionicons
-            name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
-            size={20}
-            color="gray"
-          />
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity>
-        <Text style={styles.forgotPasswordText}>
-          {textsLeng.LoginScreen.rememberMe}
-        </Text>
-      </TouchableOpacity>
+      {/* Componente de contraseña */}
+      <EnterPasswordComponent
+        value={password}
+        setPassword={setPassword}
+        textsLeng={textsLeng}
+      />
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.buttonText}>
@@ -150,41 +126,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 50,
   },
-  label: {
-    width: "90%",
-    color: Colors.primaryText,
-    marginBottom: 5,
-  },
-  input: {
-    width: "90%",
-    height: 50,
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 5,
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "90%",
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-  },
-  passwordInput: {
-    flex: 1,
-    height: 50,
-    fontSize: SizeConstants.texts,
-  },
-  forgotPasswordText: {
-    color: Colors.events,
-    alignSelf: "flex-start",
-    marginLeft: "5%",
-    marginBottom: 10,
-    marginTop: 15,
-  },
   loginButton: {
     width: "90%",
     backgroundColor: Colors.primary,
@@ -220,7 +161,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333",
     paddingVertical: 10,
-    paddingHorizontal: 100,
+    paddingHorizontal: 93,
     borderRadius: 22,
     marginBottom: 10,
     width: "95%",
@@ -231,8 +172,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#333",
     paddingVertical: 10,
-    paddingHorizontal: 93,
+    paddingHorizontal: 85,
     borderRadius: 22,
+    marginBottom: 10,
     width: "95%",
     height: 50,
   },

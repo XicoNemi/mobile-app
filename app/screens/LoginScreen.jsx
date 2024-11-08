@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import Colors from "../utils/Colors";
 import LanguageSwitcher from "../lenguage/LanguageSwitcher";
@@ -10,6 +9,8 @@ import api from "../utils/Api";
 import LoaderComponent from "../components/generals/LoaderComponent";
 import EnterEmailComponent from "../components/login/EnterEmailComponent";
 import EnterPasswordComponent from "../components/login/EnterPasswordComponent";
+import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
+import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
 
 const LoginScreen = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
@@ -48,14 +49,11 @@ const LoginScreen = ({ navigation }) => {
 
       <Text style={styles.title}>{textsLeng.LoginScreen.title}</Text>
 
-      {/* Componente de email */}
       <EnterEmailComponent
         value={email}
         setEmail={setEmail}
         textsLeng={textsLeng}
       />
-
-      {/* Componente de contraseña */}
       <EnterPasswordComponent
         value={password}
         setPassword={setPassword}
@@ -74,27 +72,16 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.divider} />
       </View>
 
-      <TouchableOpacity style={styles.googleButton}>
-        <Ionicons
-          name="logo-google"
-          size={SizeConstants.iconsCH}
-          color="white"
-        />
-        <Text style={styles.socialButtonText}>
-          {textsLeng.LoginScreen.signGoogle}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.facebookButton}>
-        <Ionicons
-          name="logo-facebook"
-          size={SizeConstants.iconsCH}
-          color="white"
-        />
-        <Text style={styles.socialButtonText}>
-          {textsLeng.LoginScreen.signFacebook}
-        </Text>
-      </TouchableOpacity>
+      <GoogleButtonComponent
+        onPress={() => {
+          /* lógica de Google aquí */
+        }}
+      />
+      <FacebookButtonComponent
+        onPress={() => {
+          /* lógica de Facebook aquí */
+        }}
+      />
 
       <Text style={styles.registerText}>
         {textsLeng.LoginScreen.dontAccount}{" "}
@@ -118,7 +105,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 100,
+    marginBottom: 50,
   },
   title: {
     fontSize: SizeConstants.subtitles,
@@ -156,33 +143,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     color: "black",
   },
-  googleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    paddingHorizontal: 93,
-    borderRadius: 22,
-    marginBottom: 10,
-    width: "95%",
-    height: 50,
-  },
-  facebookButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    paddingHorizontal: 85,
-    borderRadius: 22,
-    marginBottom: 10,
-    width: "95%",
-    height: 50,
-  },
-  socialButtonText: {
-    color: "white",
-    fontSize: SizeConstants.texts,
-    marginLeft: 10,
-  },
   registerText: {
     marginTop: 20,
     color: "black",
@@ -192,12 +152,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "static",
-    top: 170,
+    top: 150,
     color: "black",
   },
   languageSwitcher: {
     position: "static",
-    bottom: 30,
+    bottom: 65,
     left: 120,
     zIndex: 1,
   },

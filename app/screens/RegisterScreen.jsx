@@ -3,22 +3,32 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import AssignLenguaje from "../lenguage/AssignLenguage";
-import {signUp} from "../utils/Api"
+import { signUp } from "../utils/Api";
+import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
+import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
+import UserDataComponent from "../components/register/UserDataComponent"; // Importa el componente
 
 const RegisterScreen = ({ navigation }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
 
+  // Estados para los datos del usuario
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   useEffect(() => {
-    AssignLenguaje(setTextsLeng); // Cargar el idioma
+    AssignLenguaje(setTextsLeng); 
   }, []);
 
   const handleRegister = () => {
@@ -30,64 +40,29 @@ const RegisterScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
 
-      <TouchableOpacity style={styles.socialButton}>
-        <Ionicons
-          name="logo-google"
-          size={SizeConstants.iconsCH}
-          color="white"
-        />
-        <Text style={styles.socialButtonText}>
-          {textsLeng.LoginScreen.signGoogle}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.socialButton}>
-        <Ionicons
-          name="logo-facebook"
-          size={SizeConstants.iconsCH}
-          color="white"
-        />
-        <Text style={styles.socialButtonText}>
-          {textsLeng.LoginScreen.signFacebook}
-        </Text>
-      </TouchableOpacity>
+      <GoogleButtonComponent textsLeng={textsLeng} />
+      
+      <FacebookButtonComponent textsLeng={textsLeng} />
 
       <View style={styles.dividerContainer}>
         <View style={styles.divider} />
-        <Text style={styles.dividerText}>ó</Text>
+        <Text style={styles.dividerText}>or</Text>
         <View style={styles.divider} />
       </View>
 
-      <Text style={styles.label}>{textsLeng.RegisterScreen.name}</Text>
-      <TextInput style={styles.input} placeholderTextColor="#AAAAAA" />
-
-      <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
-      <TextInput style={styles.input} placeholderTextColor="#AAAAAA" />
-
-      <Text style={styles.label}>{textsLeng.LoginScreen.email}</Text>
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#AAAAAA"
-        keyboardType="email-address"
+      {/* Componente de datos del usuario */}
+      <UserDataComponent
+        name={name}
+        setName={setName}
+        lastName={lastName}
+        setLastName={setLastName}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        repeatPassword={repeatPassword}
+        setRepeatPassword={setRepeatPassword}
       />
-
-      <Text style={styles.label}>{textsLeng.LoginScreen.password}</Text>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholderTextColor="#AAAAAA"
-          secureTextEntry={!isPasswordVisible}
-        />
-        <TouchableOpacity
-          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-        >
-          <Ionicons
-            name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
-            size={20}
-            color="gray"
-          />
-        </TouchableOpacity>
-      </View>
 
       <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
         <Text style={styles.buttonText}>
@@ -104,8 +79,6 @@ const RegisterScreen = ({ navigation }) => {
           {textsLeng.LoginScreen.loginButton}
         </Text>
       </Text>
-
-      <Text style={styles.footerText}>Powered By DreamTeam-UTXJ</Text>
     </View>
   );
 };
@@ -117,7 +90,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 50,
+    marginTop: 20,
   },
   title: {
     fontSize: SizeConstants.subtitles,
@@ -129,46 +102,6 @@ const styles = StyleSheet.create({
     width: "90%",
     color: Colors.primaryText,
     marginBottom: 5,
-  },
-  input: {
-    width: "90%",
-    height: 50,
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "90%",
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-  passwordInput: {
-    flex: 1,
-    height: 50,
-    fontSize: SizeConstants.texts,
-  },
-  socialButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    paddingHorizontal: 85,
-    borderRadius: 22,
-    marginBottom: 10,
-    width: "95%",
-    height: 50,
-  },
-  socialButtonText: {
-    color: "white",
-    fontSize: SizeConstants.texts,
-    marginLeft: 10,
   },
   dividerContainer: {
     flexDirection: "row",
@@ -199,16 +132,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   loginText: {
-    marginTop: 20,
+    marginTop: 15,
     color: "black",
   },
   loginLink: {
     color: Colors.events,
-  },
-  footerText: {
-    position: "static",
-    top: 90,
-    color: "black",
   },
 });
 

@@ -27,10 +27,10 @@ const EnterEmailComponent = ({ email, setEmail, textsLeng }) => {
   const verifyEmail = (value) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
-      setError(textsLeng.LoginScreen.enterEmail.texts.invalidEmail);
+      setError(textsLeng.LoginScreen.enterEmail.texts.errorNext);
       setIsValidEmail(false);
     } else if (!emailPattern.test(value)) {
-      setError(textsLeng.LoginScreen.enterEmail.texts.errorNext);
+      setError(textsLeng.LoginScreen.enterEmail.texts.invalidEmail);
       setIsValidEmail(false);
     } else {
       setError("");

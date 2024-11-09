@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
 import { logIn } from "../features/authSlice"; // Importar la acción logIn del slice de auth
 import LanguageProvider from "../lenguage/LanguageProvider";
@@ -13,30 +13,49 @@ import EnterEmailComponent from "../components/login/EnterEmailComponent";
 import EnterPasswordComponent from "../components/login/EnterPasswordComponent";
 import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
+import CustomAlert from "../components/generals/CustomAlertComponent"; // Importar el componente de alerta personalizada
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const authData = useSelector((state) => state.auth); // Obtener los datos del estado de autenticación desde Redux
+  const authData = useSelector((state) => state.auth); 
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // Estado para mostrar el modal de alerta
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertDetails, setAlertDetails] = useState("");
+  const [alertIcon, setAlertIcon] = useState("alert-circle-outline"); 
+
   useEffect(() => {
     AssignLenguaje(setTextsLeng);
-  }, []);
+    // Monitorear los cambios en authData
+    console.log("Datos guardados en Redux:", authData);
+  }, [authData]);
 
   const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      setAlertTitle("Error");
+      setAlertMessage("Por favor, complete todos los campos");
+      setAlertIcon("close-circle-outline");
+      setAlertVisible(true); // Mostrar alerta de error
+      return;
+    }
+
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
       dispatch(logIn({ id: user.id, name: user.name, token })); // Guardar datos en Redux
-      Alert.alert("Login exitoso", `Bienvenido ${user.name}`);
-      console.log("Datos guardados en Redux:", authData); // Imprimir los datos almacenados en Redux
       navigation.navigate("HomeScreen"); // Navegar a la pantalla principal después de guardar en Redux
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", "Hubo un problema al iniciar sesión");
+      setAlertTitle("Error");
+      setAlertMessage("Hubo un problema al iniciar sesión");
+      setAlertIcon("close-circle-outline");
+      setAlertVisible(true); // Mostrar alerta de error
     } finally {
       setIsLoading(false);
     }
@@ -100,6 +119,17 @@ const LoginScreen = ({ navigation }) => {
       </Text>
 
       <Text style={styles.footerText}>Powered By DreamTeam-UTXJ</Text>
+
+      <CustomAlert
+        isVisible={alertVisible}
+        onClose={() => setAlertVisible(false)}
+        title={alertTitle}
+        message={alertMessage}
+        details={alertDetails}
+        iconName={alertIcon}
+        onConfirm={() => setAlertVisible(false)} 
+        showCancelButton={false} 
+      />
     </View>
   );
 };
@@ -158,7 +188,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "static",
-    top: 150,
+    top: 140,
     color: "black",
   },
   languageSwitcher: {

@@ -33,9 +33,9 @@ function AppContent() {
   const token = auth.token; // Asumiendo que el token está en el estado 'auth.token'
   
   if (token) {
-    console.log(token, "Siuu");
+    console.log("Siuu Ya hay token y es :",token);
   } else {
-    console.log("No hay token Triste");
+    console.log("No hay token Terrible");
   }
 
   return (

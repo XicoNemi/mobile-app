@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { saveValue, removeValue } from '../utils/localStorage';
+import { saveValue, deleteValue } from '../utils/localStorage';
 
 // Estado inicial para autenticación
 const initState = {
@@ -12,20 +12,20 @@ const initState = {
 
 // Slice de autenticación
 export const authSlice = createSlice({
-    name: 'auth',
-    initialState: initState,
-    reducers: {
-        logIn: (state, action) => {
-            // Actualiza el estado con los valores pasados
-            const newState = { ...state, ...action.payload, session: true };
-            saveValue("token", newState.token);  // Guarda el token en local storage
-            return newState;
-        },
-        logOut: () => {
-            removeValue("token");  // Elimina el token del local storage
-            return initState;  // Restaura el estado inicial
-        },
+  name: 'auth',
+  initialState: initState,
+  reducers: {
+    logIn: (state, action) => {
+      // Actualiza el estado con los valores pasados
+      const newState = { ...state, ...action.payload, session: true };
+      saveValue("token", newState.token); // Guarda el token en el almacenamiento seguro
+      return newState;
     },
+    logOut: () => {
+      deleteValue("token"); // Elimina el token del almacenamiento seguro
+      return initState; // Restaura el estado inicial
+    },
+  },
 });
 
 // Exportar las acciones

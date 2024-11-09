@@ -1,5 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, Modal, StyleSheet, Text, View } from 'react-native';
+import Colors from '../../utils/Colors';
+import SizeConstants from '../../utils/SizeConstants';
 
 export default function LoaderComponent({ isVisible = false, text = '' }) {
   return (
@@ -11,7 +13,7 @@ export default function LoaderComponent({ isVisible = false, text = '' }) {
     >
       <View style={styles.overlay}>
         <View style={styles.vista}>
-          <ActivityIndicator size="large" color="#3D5CA4" />
+          <ActivityIndicator size="large" color={Colors.primary} />
           {text && <Text style={styles.text}>{text}</Text>}
         </View>
       </View>
@@ -27,16 +29,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   vista: {
-    width: 200,
-    height: 100,
-    borderRadius: 10,
+    width: 260,  
+    height: 140, 
+    borderRadius: 15,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    padding: 15,
   },
   text: {
     color: 'black',
+    fontSize: SizeConstants.texts,
     marginTop: 10,
+    textAlign: 'center',
   },
 });

@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import AssignLenguaje from "../lenguage/AssignLenguage";
-import { signUp } from "../utils/Api";
+import api from "../utils/Api";
 import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
 import UserDataComponent from "../components/register/UserDataComponent"; // Importa el componente
@@ -28,7 +23,7 @@ const RegisterScreen = ({ navigation }) => {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng); 
+    AssignLenguaje(setTextsLeng);
   }, []);
 
   const handleRegister = () => {
@@ -41,7 +36,7 @@ const RegisterScreen = ({ navigation }) => {
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
 
       <GoogleButtonComponent textsLeng={textsLeng} />
-      
+
       <FacebookButtonComponent textsLeng={textsLeng} />
 
       <View style={styles.dividerContainer}>

@@ -1,1 +1,9 @@
-// Aquí irá la lógica del store de Redux, que se encarga de gestionar el estado global de la aplicación.
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '../features/authSlice';
+
+export const store = configureStore({
+    reducer: {
+        auth: authReducer,
+        // Agregar otros reducers si es necesario
+    },
+});

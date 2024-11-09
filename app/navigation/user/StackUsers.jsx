@@ -1,19 +1,18 @@
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../screens/LoginScreen.jsx";
-import HomeScreen from "../screens/HomeScreen.jsx";
-import ItinerariesScreen from "../screens/ItinerariesScreen.jsx";
-import RoutesScreen from "../screens/RoutesScreen.jsx";
-import ProfileScreen from "../screens/ProfileScreen.jsx";
-import RegisterScreen from "../screens/RegisterScreen.jsx";
+import HomeScreen from "../../screens/HomeScreen";
+import ItinerariesScreen from "../../screens/ItinerariesScreen";
+import RoutesScreen from "../../screens/RoutesScreen";
+import ProfileScreen from "../../screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
 const StackUser = () => {
   return (
-    <Stack.Navigator initialRouteName="LoginScreen">
+    <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
-        name="LoginScreen"
-        component={LoginScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
           headerShown: false,
           animation: "simple_push",
@@ -27,16 +26,6 @@ const StackUser = () => {
           animation: "simple_push",
         }}
       />
-
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-
       <Stack.Screen
         name="RoutesScreen"
         component={RoutesScreen}
@@ -45,19 +34,9 @@ const StackUser = () => {
           animation: "simple_push",
         }}
       />
-
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-
-      <Stack.Screen
-        name="RegisterScreen"
-        component={RegisterScreen}
         options={{
           headerShown: false,
           animation: "simple_push",

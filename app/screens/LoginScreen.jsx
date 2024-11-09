@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
+import { logIn } from "../features/authSlice"; // Importar la acción logIn del slice de auth
 import LanguageProvider from "../lenguage/LanguageProvider";
 import Colors from "../utils/Colors";
 import LanguageSwitcher from "../lenguage/LanguageSwitcher";
@@ -13,6 +15,8 @@ import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
 
 const LoginScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const authData = useSelector((state) => state.auth); // Obtener los datos del estado de autenticación desde Redux
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +30,10 @@ const LoginScreen = ({ navigation }) => {
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
+      dispatch(logIn({ id: user.id, name: user.name, token })); // Guardar datos en Redux
       Alert.alert("Login exitoso", `Bienvenido ${user.name}`);
-      navigation.navigate("HomeScreen");
+      console.log("Datos guardados en Redux:", authData); // Imprimir los datos almacenados en Redux
+      navigation.navigate("HomeScreen"); // Navegar a la pantalla principal después de guardar en Redux
     } catch (error) {
       console.error(error);
       Alert.alert("Error", "Hubo un problema al iniciar sesión");

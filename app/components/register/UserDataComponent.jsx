@@ -9,6 +9,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const UserDataComponent = ({
   name,
@@ -19,28 +20,48 @@ const UserDataComponent = ({
   setEmail,
   password,
   setPassword,
-  repeatPassword,
-  setRepeatPassword,
+  tel,
+  setTel,
+  birthday,
+  setBirthday,
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
   const [error, setError] = useState({});
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
-  // Estados de validación de cada campo
   const [isValidName, setIsValidName] = useState(false);
   const [isValidLastName, setIsValidLastName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
-  const [isValidRepeatPassword, setIsValidRepeatPassword] = useState(false);
+  const [isValidTel, setIsValidTel] = useState(false);
+  const [isValidBirthday, setIsValidBirthday] = useState(false);
 
   const handleInputChange = (field, value) => {
     if (typingTimeout) clearTimeout(typingTimeout);
-    if (field === "name") setName(value);
-    if (field === "lastName") setLastName(value);
-    if (field === "email") setEmail(value);
-    if (field === "password") setPassword(value);
-    if (field === "repeatPassword") setRepeatPassword(value);
+
+    switch (field) {
+      case "name":
+        setName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "tel":
+        setTel(value);
+        break;
+      case "birthday":
+        setBirthday(value);
+        break;
+      default:
+        break;
+    }
 
     setTypingTimeout(
       setTimeout(() => {
@@ -94,19 +115,77 @@ const UserDataComponent = ({
         }));
         break;
 
-      case "repeatPassword":
-        const isValidRepeatPassword = value === password;
-        setIsValidRepeatPassword(isValidRepeatPassword);
+      case "tel":
+        const telPattern = /^[0-9]{10}$/;
+        const isValidTel = value && telPattern.test(value);
+        setIsValidTel(isValidTel);
         setError((prevError) => ({
           ...prevError,
-          repeatPassword: isValidRepeatPassword
-            ? ""
-            : "Las contraseñas no coinciden.",
+          tel: isValidTel ? "" : "El número de teléfono debe tener 10 dígitos.",
         }));
+        break;
+
+      case "birthday":
+        let formattedDate = value;
+        // Añadir un cero al inicio del día o mes si son de un solo dígito
+        const [day, month, year] = value.split("-");
+        if (day && day.length === 1) {
+          formattedDate = `0${day}-${month}-${year}`;
+        }
+        if (month && month.length === 1) {
+          formattedDate = `${day}-${"0" + month}-${year}`;
+        }
+
+        const datePattern = /^\d{2}-\d{2}-\d{4}$/;
+        const isValidBirthday =
+          formattedDate && datePattern.test(formattedDate);
+
+        // Validar si la fecha es válida y no es una fecha futura
+        if (isValidBirthday) {
+          const [formattedDay, formattedMonth, formattedYear] = formattedDate
+            .split("-")
+            .map((num) => parseInt(num, 10));
+          const enteredDate = new Date(
+            formattedYear,
+            formattedMonth - 1,
+            formattedDay
+          );
+          const currentDate = new Date();
+          if (enteredDate > currentDate) {
+            setIsValidBirthday(false);
+            setError((prevError) => ({
+              ...prevError,
+              birthday: "La fecha de nacimiento no puede ser una fecha futura.",
+            }));
+          } else {
+            setIsValidBirthday(true);
+            setError((prevError) => ({
+              ...prevError,
+              birthday: "",
+            }));
+          }
+        } else {
+          setIsValidBirthday(false);
+          setError((prevError) => ({
+            ...prevError,
+            birthday: "La fecha debe tener el formato DD-MM-AAAA.",
+          }));
+        }
         break;
 
       default:
         break;
+    }
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      const formattedDate = `${selectedDate.getDate()}-${
+        selectedDate.getMonth() + 1
+      }-${selectedDate.getFullYear()}`;
+      setBirthday(formattedDate);
+      verifyInput("birthday", formattedDate);
     }
   };
 
@@ -122,7 +201,6 @@ const UserDataComponent = ({
         placeholderTextColor="#AAAAAA"
         value={name}
         onChangeText={(value) => handleInputChange("name", value)}
-        accessibilityLabel="Nombre"
       />
       {error.name && <Text style={styles.errorText}>{error.name}</Text>}
 
@@ -136,7 +214,6 @@ const UserDataComponent = ({
         placeholderTextColor="#AAAAAA"
         value={lastName}
         onChangeText={(value) => handleInputChange("lastName", value)}
-        accessibilityLabel="Apellido"
       />
       {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
 
@@ -151,9 +228,57 @@ const UserDataComponent = ({
         keyboardType="email-address"
         value={email}
         onChangeText={(value) => handleInputChange("email", value)}
-        accessibilityLabel="Correo electrónico"
       />
       {error.email && <Text style={styles.errorText}>{error.email}</Text>}
+
+      {/* Fila de Teléfono y Fecha de Nacimiento */}
+      <View style={styles.rowContainer}>
+        {/* Teléfono */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Teléfono</Text>
+          <TextInput
+            style={[
+              styles.input,
+              { borderColor: isValidTel ? Colors.routes : Colors.primary },
+            ]}
+            placeholderTextColor="#AAAAAA"
+            keyboardType="phone-pad"
+            value={tel}
+            onChangeText={(value) => handleInputChange("tel", value)}
+          />
+          {error.tel && <Text style={styles.errorText}>{error.tel}</Text>}
+        </View>
+
+        {/* Fecha de Nacimiento */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Fecha de Nacimiento</Text>
+          <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  borderColor: isValidBirthday ? Colors.routes : Colors.primary,
+                },
+              ]}
+              placeholderTextColor="#AAAAAA"
+              value={birthday}
+              editable={false}
+            />
+          </TouchableOpacity>
+          {error.birthday && (
+            <Text style={styles.errorText}>{error.birthday}</Text>
+          )}
+        </View>
+      </View>
+
+      {showDatePicker && (
+        <DateTimePicker
+          value={new Date()}
+          mode="date"
+          display="calendar"
+          onChange={handleDateChange}
+        />
+      )}
 
       {/* Contraseña */}
       <Text style={styles.label}>Contraseña</Text>
@@ -169,7 +294,6 @@ const UserDataComponent = ({
           secureTextEntry={!isPasswordVisible}
           value={password}
           onChangeText={(value) => handleInputChange("password", value)}
-          accessibilityLabel="Contraseña"
         />
         <TouchableOpacity
           onPress={() => setIsPasswordVisible(!isPasswordVisible)}
@@ -182,38 +306,6 @@ const UserDataComponent = ({
         </TouchableOpacity>
       </View>
       {error.password && <Text style={styles.errorText}>{error.password}</Text>}
-
-      {/* Repetir Contraseña */}
-      <Text style={styles.label}>Repetir Contraseña</Text>
-      <View
-        style={[
-          styles.passwordContainer,
-          {
-            borderColor: isValidRepeatPassword ? Colors.routes : Colors.primary,
-          },
-        ]}
-      >
-        <TextInput
-          style={styles.passwordInput}
-          placeholderTextColor="#AAAAAA"
-          secureTextEntry={!isRepeatPasswordVisible}
-          value={repeatPassword}
-          onChangeText={(value) => handleInputChange("repeatPassword", value)}
-          accessibilityLabel="Repetir contraseña"
-        />
-        <TouchableOpacity
-          onPress={() => setIsRepeatPasswordVisible(!isRepeatPasswordVisible)}
-        >
-          <Ionicons
-            name={isRepeatPasswordVisible ? "eye-off-outline" : "eye-outline"}
-            size={20}
-            color="gray"
-          />
-        </TouchableOpacity>
-      </View>
-      {error.repeatPassword && (
-        <Text style={styles.errorText}>{error.repeatPassword}</Text>
-      )}
     </View>
   );
 };
@@ -221,14 +313,22 @@ const UserDataComponent = ({
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    marginBottom: 1,
+    marginBottom: -5,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  inputContainer: {
+    width: "48%",
   },
   label: {
     color: Colors.primary,
     marginBottom: 5,
   },
   input: {
-    height: 50,
+    height: 45,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
@@ -236,6 +336,7 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 1,
     borderRadius: 5,
@@ -245,7 +346,6 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     height: 45,
-    fontSize: SizeConstants.texts,
   },
   errorText: {
     color: "red",

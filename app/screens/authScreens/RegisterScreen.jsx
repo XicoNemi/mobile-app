@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
-import Colors from "../utils/Colors";
-import SizeConstants from "../utils/SizeConstants";
-import LanguageProvider from "../lenguage/LanguageProvider";
-import AssignLenguaje from "../lenguage/AssignLenguage";
-import api from "../utils/Api";
-import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
-import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
-import UserDataComponent from "../components/register/UserDataComponent"; // Importa el componente
+import Colors from "../../utils/Colors";
+import SizeConstants from "../../utils/SizeConstants";
+import LanguageProvider from "../../lenguage/LanguageProvider";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
+import api from "../../utils/Api";
+import GoogleButtonComponent from "../../components/login/GoogleButtonComponent";
+import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
+import UserDataComponent from "../../components/register/UserDataComponent";
 
 const RegisterScreen = ({ navigation }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
 
-  // Estados para los datos del usuario
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [tel, setTel] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   useEffect(() => {
     AssignLenguaje(setTextsLeng);
   }, []);
 
   const handleRegister = () => {
-    // Aquí iría la lógica para registrarse, como enviar los datos al servidor
-    navigation.navigate("HomeScreen");
+    navigation.navigate("");
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
 
       <GoogleButtonComponent textsLeng={textsLeng} />
@@ -45,7 +49,6 @@ const RegisterScreen = ({ navigation }) => {
         <View style={styles.divider} />
       </View>
 
-      {/* Componente de datos del usuario */}
       <UserDataComponent
         name={name}
         setName={setName}
@@ -57,6 +60,10 @@ const RegisterScreen = ({ navigation }) => {
         setPassword={setPassword}
         repeatPassword={repeatPassword}
         setRepeatPassword={setRepeatPassword}
+        tel={tel}
+        setTel={setTel}
+        birthday={birthday}
+        setBirthday={setBirthday}
       />
 
       <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
@@ -74,18 +81,18 @@ const RegisterScreen = ({ navigation }) => {
           {textsLeng.LoginScreen.loginButton}
         </Text>
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollViewContainer: {
+    flexGrow: 1,
     backgroundColor: "#F4F4F4",
     paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 1,
   },
   title: {
     fontSize: SizeConstants.subtitles,
@@ -103,6 +110,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 20,
     width: "90%",
+    marginBottom: 10,
+    marginTop: 5,
   },
   divider: {
     flex: 1,

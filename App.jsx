@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./app/store/store";
 import StackUser from "./app/navigation/user/StackUsers";
-import StackLogin from "./app/navigation/StackLogIn "; 
+import StackLogin from "./app/navigation/auth/StackLogIn";
 
 // Acciones y utilidades de autenticación
 import { logIn } from "./app/features/authSlice";
@@ -30,10 +30,10 @@ function AppContent() {
   }, []);
 
   // Verificación del token y logging
-  const token = auth.token; // Asumiendo que el token está en el estado 'auth.token'
-  
+  const token = auth.token;
+
   if (token) {
-    console.log("Siuu Ya hay token y es :",token);
+    console.log("Siuu Ya hay token y es :", token);
   } else {
     console.log("No hay token Terrible");
   }

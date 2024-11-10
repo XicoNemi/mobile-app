@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
-import { logIn } from "../features/authSlice"; // Importar la acción logIn del slice de auth
-import LanguageProvider from "../lenguage/LanguageProvider";
-import Colors from "../utils/Colors";
-import LanguageSwitcher from "../lenguage/LanguageSwitcher";
-import SizeConstants from "../utils/SizeConstants";
-import AssignLenguaje from "../lenguage/AssignLenguage";
-import api from "../utils/Api";
-import LoaderComponent from "../components/generals/LoaderComponent";
-import EnterEmailComponent from "../components/login/EnterEmailComponent";
-import EnterPasswordComponent from "../components/login/EnterPasswordComponent";
-import GoogleButtonComponent from "../components/login/GoogleButtonComponent";
-import FacebookButtonComponent from "../components/login/FacebookButtonComponent";
-import CustomAlert from "../components/generals/CustomAlertComponent"; // Importar el componente de alerta personalizada
+import { logIn } from "../../features/authSlice"; // Importar la acción logIn del slice de auth
+import LanguageProvider from "../../lenguage/LanguageProvider";
+import Colors from "../../utils/Colors";
+import LanguageSwitcher from "../../lenguage/LanguageSwitcher";
+import SizeConstants from "../../utils/SizeConstants";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
+import api from "../../utils/Api";
+import LoaderComponent from "../../components/generals/LoaderComponent";
+import EnterEmailComponent from "../../components/login/EnterEmailComponent";
+import EnterPasswordComponent from "../../components/login/EnterPasswordComponent";
+import GoogleButtonComponent from "../../components/login/GoogleButtonComponent";
+import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
+import CustomAlert from "../../components/generals/CustomAlertComponent"; // Importar el componente de alerta personalizada
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const authData = useSelector((state) => state.auth); 
+  const authData = useSelector((state) => state.auth);
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
   const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertDetails, setAlertDetails] = useState("");
-  const [alertIcon, setAlertIcon] = useState("alert-circle-outline"); 
+  const [alertIcon, setAlertIcon] = useState("alert-circle-outline");
 
   useEffect(() => {
     AssignLenguaje(setTextsLeng);
@@ -127,8 +127,8 @@ const LoginScreen = ({ navigation }) => {
         message={alertMessage}
         details={alertDetails}
         iconName={alertIcon}
-        onConfirm={() => setAlertVisible(false)} 
-        showCancelButton={false} 
+        onConfirm={() => setAlertVisible(false)}
+        showCancelButton={false}
       />
     </View>
   );

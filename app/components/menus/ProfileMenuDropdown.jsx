@@ -10,12 +10,8 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../features/authSlice";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 
-const ProfileMenuDropdown = ({}) => {
+const ProfileMenuDropdown = () => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [alertTitle, setAlertTitle] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertIcon, setAlertIcon] = useState("alert-circle-outline");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -25,20 +21,16 @@ const ProfileMenuDropdown = ({}) => {
   }, []);
 
   const handleLogout = () => {
-    setAlertTitle(textsLeng.components.menuItems.logOut);
-    setAlertMessage("¿Estás seguro de que deseas cerrar sesión?");
-    setAlertIcon("log-out-outline");
-    setAlertVisible(true);
+    setIsModalVisible(true);
   };
 
   const confirmLogout = () => {
-    setAlertVisible(false);
     setIsModalVisible(false);
-    dispatch(logOut()); // Despachar la acción de cierre de sesión
+    dispatch(logOut());
   };
 
   const cancelLogout = () => {
-    setAlertVisible(false);
+    setIsModalVisible(false);
   };
 
   return (
@@ -75,13 +67,20 @@ const ProfileMenuDropdown = ({}) => {
       </TouchableOpacity>
 
       <CustomAlert
-        isVisible={alertVisible}
+        isVisible={isModalVisible}
+        title={textsLeng.AlertMessagelogOut.title}
+        message={textsLeng.AlertMessagelogOut.message}
+        iconName="alert-circle-outline"
         onClose={cancelLogout}
-        title={alertTitle}
-        message={alertMessage}
-        iconName={alertIcon}
         onConfirm={confirmLogout}
-        showCancelButton={true}
+        primaryButton={{
+          text: textsLeng.AlertMessagelogOut.confirmButtonTitle,
+          onPress: confirmLogout,
+        }}
+        secondaryButton={{
+          text: textsLeng.AlertMessagelogOut.cancelButtonTitle,
+          onPress: cancelLogout,
+        }}
       />
     </View>
   );
@@ -89,7 +88,7 @@ const ProfileMenuDropdown = ({}) => {
 
 const styles = StyleSheet.create({
   menu: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#F4F4F4",
     padding: 20,
     borderRadius: 5,
     position: "absolute",

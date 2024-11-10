@@ -11,8 +11,15 @@ const LanguageProvider = {
         itineraries: "Itineraries",
         myProfile: "My profile",
         logOut: "Log out",
-      },
+      }
     },
+      AlertMessagelogOut:{
+          title:"Log ou",
+          message:"Are you sure you want to log out?",
+          confirmButtonTitle:"Yes",
+          cancelButtonTitle:"No"
+      }
+    ,
     LoginScreen: {
       title: "Login with your account",
       loginButton: "Login",
@@ -89,7 +96,13 @@ const LanguageProvider = {
         itineraries: "Itinerarios",
         myProfile: "Mi perfil",
         logOut: "Cerrar sesión",
-      },
+      }
+    },
+      AlertMessagelogOut:{
+          title:"Cerrar Sesión",
+          message:"¿Estás seguro de que deseas cerrar la sesión?",
+          confirmButtonTitle:"Si",
+          cancelButtonTitle:"No"
     },
     LoginScreen: {
       title: "Inicia Sesión con tu cuenta",

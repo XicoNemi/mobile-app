@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import SizeConstants from "../../utils/SizeConstants";
 import LanguageProvider from "../../lenguage/LanguageProvider";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
@@ -14,7 +13,8 @@ const GoogleButtonComponent = ({ onPress }) => {
 
   return (
     <TouchableOpacity style={styles.googleButton} onPress={onPress}>
-      <Ionicons name="logo-google" size={SizeConstants.iconsCH} color="white" />
+      {/* Cargar la imagen del ícono de Google desde assets */}
+      <Image source={require("../../../assets/google.png")} style={styles.icon} />
       <Text style={styles.socialButtonText}>{textsLeng.LoginScreen.signGoogle}</Text>
     </TouchableOpacity>
   );
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "95%",
     height: 50,
+  },
+  icon: {
+    width: 27,  
+    height: 27, 
   },
   socialButtonText: {
     color: "white",

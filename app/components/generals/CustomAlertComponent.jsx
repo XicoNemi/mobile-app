@@ -3,18 +3,23 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../utils/Colors";
+import SizeConstants from "../../utils/SizeConstants";
 
-const CustomAlert = ({
+const CustomAlertComponent = ({
   isVisible,
   onClose,
   title,
   message,
-  details,
   iconName = "alert-circle-outline",
-  onConfirm,
-  onCancel,
+  iconColor = Colors.primary,
+  primaryButton = { text: "Aceptar", onPress: () => {} },
+  secondaryButton = { text: "Cancelar", onPress: () => {} },
   showCancelButton = true,
 }) => {
+  const buttonStyle = showCancelButton
+    ? styles.buttonConfirm
+    : styles.buttonSingle;
+
   return (
     <Modal
       isVisible={isVisible}
@@ -26,17 +31,34 @@ const CustomAlert = ({
       style={styles.modal}
     >
       <View style={styles.alertContainer}>
-        <Ionicons name={iconName} size={50} color={Colors.primary} style={styles.icon} />
+        <Ionicons
+          name={iconName}
+          size={SizeConstants.iconsXG}
+          color={iconColor}
+          style={styles.icon}
+        />
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.message}>{message}</Text>
-        {details && <Text style={styles.details}>{details}</Text>}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.buttonConfirm} onPress={() => { onConfirm(); onClose(); }}>
-            <Text style={styles.buttonText}>Aceptar</Text>
+          <TouchableOpacity
+            style={buttonStyle}
+            onPress={() => {
+              primaryButton.onPress();
+              onClose();
+            }}
+          >
+            <Text style={styles.buttonText}>{primaryButton.text}</Text>
           </TouchableOpacity>
+
           {showCancelButton && (
-            <TouchableOpacity style={styles.buttonCancel} onPress={() => { onCancel?.(); onClose(); }}>
-              <Text style={styles.buttonText}>Cancelar</Text>
+            <TouchableOpacity
+              style={styles.buttonCancel}
+              onPress={() => {
+                secondaryButton.onPress();
+                onClose();
+              }}
+            >
+              <Text style={styles.buttonText}>{secondaryButton.text}</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -58,25 +80,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    marginBottom: 20,
+    marginBottom: 1,
   },
   title: {
-    fontSize: 20,
+    fontSize: SizeConstants.subtitles,
     fontWeight: "bold",
-    color: Colors.primaryText,
+    color: "black",
     marginBottom: 10,
   },
   message: {
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
     color: Colors.secondaryText,
     textAlign: "center",
     marginBottom: 10,
-  },
-  details: {
-    fontSize: 14,
-    color: Colors.grey,
-    textAlign: "center",
-    marginBottom: 20,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -101,11 +117,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     flex: 1,
   },
+  buttonSingle: {
+    backgroundColor: Colors.routes,
+    borderRadius: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    alignItems: "center",
+    marginLeft: 65,
+  },
   buttonText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
   },
 });
 
-export default CustomAlert;
+export default CustomAlertComponent;

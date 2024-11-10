@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
 import { logIn } from "../../features/authSlice"; // Importar la acción logIn del slice de auth
 import LanguageProvider from "../../lenguage/LanguageProvider";
@@ -44,26 +44,27 @@ const LoginScreen = ({ navigation }) => {
       setAlertVisible(true); // Mostrar alerta de error
       return;
     }
-
+  
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
       dispatch(logIn({ id: user.id, name: user.name, token })); // Guardar datos en Redux
       navigation.navigate("HomeScreen"); // Navegar a la pantalla principal después de guardar en Redux
     } catch (error) {
-      console.error(error);
+      // Mostrar el mensaje de error específico que vino desde el backend
       setAlertTitle("Error");
-      setAlertMessage("Hubo un problema al iniciar sesión");
+      setAlertMessage(error.message);  // Mostrar el mensaje específico desde el backend
       setAlertIcon("close-circle-outline");
       setAlertVisible(true); // Mostrar alerta de error
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
-    <View style={styles.container}>
-      <LoaderComponent
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}> 
+    <LoaderComponent
         isVisible={isLoading}
         text={textsLeng.LoginScreen.messageLog}
       />
@@ -130,24 +131,24 @@ const LoginScreen = ({ navigation }) => {
         onConfirm={() => setAlertVisible(false)}
         showCancelButton={false}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollViewContainer: {
+    flexGrow: 1,
     backgroundColor: "#F4F4F4",
     paddingHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 50,
+    marginTop: 1,
   },
   title: {
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: 50,
+    marginBottom: 100,
   },
   loginButton: {
     width: "90%",
@@ -189,12 +190,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "static",
-    top: 140,
+    top: 110,
     color: "black",
   },
   languageSwitcher: {
     position: "static",
-    bottom: 65,
+    bottom: 70,
     left: 120,
     zIndex: 1,
   },

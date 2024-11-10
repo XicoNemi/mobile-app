@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   translator: {
     flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#F4F4F4',
     paddingVertical: 6,
     paddingHorizontal: 6,
     borderRadius: 6,

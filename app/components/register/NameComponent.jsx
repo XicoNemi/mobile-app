@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import LanguageProvider from "../../lenguage/LanguageProvider";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const NameComponent = ({ name, setName, lastName, setLastName }) => {
   const [error, setError] = useState({});
   const [isValidName, setIsValidName] = useState(false);
   const [isValidLastName, setIsValidLastName] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState(null);
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
+
+  useEffect(() => {
+    AssignLenguaje(setTextsLeng);
+  }, []);
 
   const handleInputChange = (field, value) => {
     if (field === "name") {
@@ -15,27 +23,38 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
       setLastName(value);
     }
 
-    verifyInput(field, value);
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    setError((prevError) => ({
+      ...prevError,
+      [field]: "",
+    }));
+
+    setTypingTimeout(
+      setTimeout(() => {
+        verifyInput(field, value);
+      }, 2000)
+    );
   };
 
   const verifyInput = (field, value) => {
     switch (field) {
       case "name":
-        const isValidName = value && value.length >= 2;
+        const isValidName = value && value.length >= 5;
         setIsValidName(isValidName);
         setError((prevError) => ({
           ...prevError,
-          name: isValidName ? "" : "El nombre debe tener al menos 2 caracteres.",
+          name: isValidName ? "" : textsLeng.RegisterScreen.nameError,
         }));
         break;
       case "lastName":
-        const isValidLastName = value && value.length >= 2;
+        const isValidLastName = value && value.length >= 5;
         setIsValidLastName(isValidLastName);
         setError((prevError) => ({
           ...prevError,
           lastName: isValidLastName
             ? ""
-            : "El apellido debe tener al menos 2 caracteres.",
+            : textsLeng.RegisterScreen.lastNameError,
         }));
         break;
       default:
@@ -46,7 +65,7 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
   return (
     <View style={styles.container}>
       {/* Nombre */}
-      <Text style={styles.label}>Nombre</Text>
+      <Text style={styles.label}>{textsLeng.RegisterScreen.name}</Text>
       <TextInput
         style={[
           styles.input,
@@ -59,7 +78,7 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
       {error.name && <Text style={styles.errorText}>{error.name}</Text>}
 
       {/* Apellido */}
-      <Text style={styles.label}>Apellido</Text>
+      <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
       <TextInput
         style={[
           styles.input,
@@ -82,7 +101,6 @@ const styles = StyleSheet.create({
   label: {
     color: Colors.primary,
     marginBottom: 5,
-    
   },
   input: {
     height: 45,

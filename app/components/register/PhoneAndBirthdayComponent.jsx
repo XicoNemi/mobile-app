@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import LanguageProvider from "../../lenguage/LanguageProvider";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const PhoneAndBirthdayComponent = ({
   tel,
@@ -16,10 +18,17 @@ const PhoneAndBirthdayComponent = ({
   birthday,
   setBirthday,
 }) => {
+  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [error, setError] = useState({});
   const [isValidTel, setIsValidTel] = useState(false);
   const [isValidBirthday, setIsValidBirthday] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState(null);
+
+  
+  useEffect(() => {
+    AssignLenguaje(setTextsLeng);
+  }, []);
 
   const handleInputChange = (field, value) => {
     if (field === "tel") {
@@ -28,7 +37,18 @@ const PhoneAndBirthdayComponent = ({
       setBirthday(value);
     }
 
-    verifyInput(field, value);
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    setError((prevError) => ({
+      ...prevError,
+      [field]: "", // Elimina el mensaje de error al escribir
+    }));
+
+    setTypingTimeout(
+      setTimeout(() => {
+        verifyInput(field, value);
+      }, 2000)
+    );
   };
 
   const verifyInput = (field, value) => {
@@ -41,7 +61,7 @@ const PhoneAndBirthdayComponent = ({
           ...prevError,
           tel: isValidTel
             ? ""
-            : "El número de teléfono debe tener 10 dígitos.",
+            : textsLeng.RegisterScreen.enterEmail.texts.invalidPhone,
         }));
         break;
       case "birthday":
@@ -71,7 +91,7 @@ const PhoneAndBirthdayComponent = ({
             setIsValidBirthday(false);
             setError((prevError) => ({
               ...prevError,
-              birthday: "La fecha de nacimiento no puede ser una fecha futura.",
+              birthday:  textsLeng.RegisterScreen.enterEmail.texts.futureDate,
             }));
           } else {
             setIsValidBirthday(true);
@@ -84,7 +104,7 @@ const PhoneAndBirthdayComponent = ({
           setIsValidBirthday(false);
           setError((prevError) => ({
             ...prevError,
-            birthday: "La fecha debe tener el formato DD-MM-AAAA.",
+            birthday: textsLeng.RegisterScreen.enterEmail.texts.dateFormat,
           }));
         }
         break;
@@ -110,7 +130,7 @@ const PhoneAndBirthdayComponent = ({
       <View style={styles.rowContainer}>
         {/* Teléfono */}
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Teléfono</Text>
+          <Text style={styles.label}>{textsLeng.RegisterScreen.tel}</Text>
           <TextInput
             style={[
               styles.input,
@@ -126,7 +146,7 @@ const PhoneAndBirthdayComponent = ({
 
         {/* Fecha de Nacimiento */}
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Fecha de Nacimiento</Text>
+          <Text style={styles.label}>{textsLeng.RegisterScreen.birthday}</Text>
           <TouchableOpacity onPress={() => setShowDatePicker(true)}>
             <TextInput
               style={[
@@ -161,7 +181,6 @@ const styles = StyleSheet.create({
     width: "90%",
     marginBottom: 15,
     marginTop: -5
-
   },
   rowContainer: {
     flexDirection: "row",

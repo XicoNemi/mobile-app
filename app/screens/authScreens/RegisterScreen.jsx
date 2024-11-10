@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   loginText: {
-    marginTop: 15,
+    marginTop: 5,
     color: "black",
   },
   loginLink: {

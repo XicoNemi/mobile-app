@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     marginBottom: 15,
+    marginTop: -15
   },
   label: {
     color: Colors.primary,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
-    fontSize: SizeConstants.texts - 3,
+    fontSize: SizeConstants.texts - 5,
     marginTop: -2,
   },
 });

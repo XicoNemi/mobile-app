@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
@@ -14,16 +15,19 @@ import AssignLenguaje from "../../lenguage/AssignLenguage";
 import api from "../../utils/Api";
 import GoogleButtonComponent from "../../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
-import UserDataComponent from "../../components/register/UserDataComponent";
+import NameComponent from "../../components/register/NameComponent";
+import EnterEmailComponent from "../../components/login/EnterEmailComponent";
+import EnterPasswordComponent from "../../components/login/EnterPasswordComponent";
+import PhoneAndBirthdayComponent from "../../components/register/PhoneAndBirthdayComponent";
 
 const RegisterScreen = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
 
+  // Estados para los datos del usuario
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
   const [tel, setTel] = useState("");
   const [birthday, setBirthday] = useState("");
 
@@ -49,21 +53,30 @@ const RegisterScreen = ({ navigation }) => {
         <View style={styles.divider} />
       </View>
 
-      <UserDataComponent
+      <NameComponent
         name={name}
         setName={setName}
         lastName={lastName}
         setLastName={setLastName}
-        email={email}
+      />
+
+      <EnterEmailComponent
+        value={email}
         setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        repeatPassword={repeatPassword}
-        setRepeatPassword={setRepeatPassword}
+        textsLeng={textsLeng}
+      />
+
+      <PhoneAndBirthdayComponent
         tel={tel}
         setTel={setTel}
         birthday={birthday}
         setBirthday={setBirthday}
+      />
+
+      <EnterPasswordComponent
+        value={password}
+        setPassword={setPassword}
+        textsLeng={textsLeng}
       />
 
       <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
@@ -129,6 +142,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: "center",
     marginVertical: 10,
+    marginTop: 15,
   },
   buttonText: {
     color: "white",

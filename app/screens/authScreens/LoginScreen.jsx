@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "95%",
     height: 50,
+    marginTop: 25,
   },
   buttonText: {
     color: "white",

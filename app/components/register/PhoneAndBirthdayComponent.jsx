@@ -140,6 +140,7 @@ const PhoneAndBirthdayComponent = ({
             keyboardType="phone-pad"
             value={tel}
             onChangeText={(value) => handleInputChange("tel", value)}
+            maxLength={10}
           />
           {error.tel && <Text style={styles.errorText}>{error.tel}</Text>}
         </View>

@@ -51,46 +51,65 @@ const RegisterScreen = ({ navigation }) => {
       setAlertVisible(true); // Mostrar alerta de error
       return;
     }
-  
-    setIsLoading(true); // Activamos el loader
+
+    setIsLoading(true); 
     try {
       // Preparar los datos para el registro
-      const userData = { name, lastname: lastName, email, password, tel, birthday };
-  
+      const userData = {
+        name,
+        lastname: lastName,
+        email,
+        password,
+        tel,
+        birthday,
+      };
+
       // Llamada al API para crear la cuenta
       const response = await api.signUp(userData);
-  
-      // Verificar si la respuesta contiene un mensaje de error
-      if (response.message && response.message.includes("El correo ya existe")) {
+
+      if (
+        response.message &&
+        response.message.includes("El correo ya existe")
+      ) {
         // Si hay error (correo ya existe)
-        throw new Error(response.message); // Lanzar un error explícito para manejarlo en el catch
+        throw new Error(response.message); 
       }
-  
+
       // Si la cuenta fue creada correctamente
       setAlertTitle("Éxito");
-      setAlertMessage(response.message || "Cuenta creada con éxito. Revisa tu correo para verificar la cuenta.");
+      setAlertMessage(
+        response.message ||
+          "Cuenta creada con éxito. Revisa tu correo para verificar la cuenta."
+      );
       setAlertIcon("checkmark-circle-outline");
       setAlertVisible(true);
+
+      setName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setTel("");
+      setBirthday("");
     } catch (error) {
       // Manejo de errores
-      const errorMessage = error.response ? error.response.data.message : error.message;
-  
+      const errorMessage = error.response
+        ? error.response.data.message
+        : error.message;
+
       setAlertTitle("Error"); // Aquí aseguramos que el título es "Error"
-      setAlertMessage(errorMessage || "Algo salió mal, por favor intenta nuevamente.");
+      setAlertMessage(
+        errorMessage || "Algo salió mal, por favor intenta nuevamente."
+      );
       setAlertIcon("close-circle-outline"); // Icono de error
       setAlertVisible(true);
     } finally {
-      setIsLoading(false); // Desactivar el loader
+      setIsLoading(false); 
     }
   };
-  
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-      <LoaderComponent
-        isVisible={isLoading}
-        text="Creando cuenta..."
-      />
+      <LoaderComponent isVisible={isLoading} text="Creando cuenta..." />
 
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
 

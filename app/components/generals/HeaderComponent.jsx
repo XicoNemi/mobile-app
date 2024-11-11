@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import SizeConstants from '../utils/SizeConstants';
+import SizeConstants from '../../utils/SizeConstants';
 
 const Header = ({ title, rightIcon, onRightIconPress }) => {
   const navigation = useNavigation();

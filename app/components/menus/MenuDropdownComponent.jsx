@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import LanguageProvider from '../lenguage/LanguageProvider';
-import AssignLenguaje from '../lenguage/AssignLenguage'; 
-import SizeConstants from '../utils/SizeConstants';
+import LanguageProvider from '../../lenguage/LanguageProvider';
+import AssignLenguaje from '../../lenguage/AssignLenguage'; 
+import SizeConstants from '../../utils/SizeConstants';
 
 const MenuDropdown = ({ navigation }) => {
   const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); 

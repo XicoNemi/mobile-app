@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import HeaderComponent from "../components/HeaderComponent";
+import HeaderComponent from "../components/generals/HeaderComponent";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import AssignLenguaje from "../lenguage/AssignLenguage";
 import Ionicons from "react-native-vector-icons/Ionicons";

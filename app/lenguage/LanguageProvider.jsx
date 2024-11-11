@@ -11,15 +11,14 @@ const LanguageProvider = {
         itineraries: "Itineraries",
         myProfile: "My profile",
         logOut: "Log out",
-      }
+      },
     },
-      AlertMessagelogOut:{
-          title:"Log ou",
-          message:"Are you sure you want to log out?",
-          confirmButtonTitle:"Yes",
-          cancelButtonTitle:"No"
-      }
-    ,
+    AlertMessagelogOut: {
+      title: "Log ou",
+      message: "Are you sure you want to log out?",
+      confirmButtonTitle: "Yes",
+      cancelButtonTitle: "No",
+    },
     LoginScreen: {
       title: "Login with your account",
       loginButton: "Login",
@@ -64,6 +63,12 @@ const LanguageProvider = {
           dateFormat: "Please enter the date in DD-MM-YYYY format.",
         },
       },
+      recoverPassword: "Recover Password",
+      sendLink: "Send link",
+      passwordRecoveryMessage:
+        "We have sent you an email with instructions to reset your password.",
+      messageRecoveryIndication:
+        "Please check your spam folder if you haven't received it.",
     },
     HomeScreen: {
       start: "Start",
@@ -96,13 +101,13 @@ const LanguageProvider = {
         itineraries: "Itinerarios",
         myProfile: "Mi perfil",
         logOut: "Cerrar sesión",
-      }
+      },
     },
-      AlertMessagelogOut:{
-          title:"Cerrar Sesión",
-          message:"¿Estás seguro de que deseas cerrar la sesión?",
-          confirmButtonTitle:"Si",
-          cancelButtonTitle:"No"
+    AlertMessagelogOut: {
+      title: "Cerrar Sesión",
+      message: "¿Estás seguro de que deseas cerrar la sesión?",
+      confirmButtonTitle: "Si",
+      cancelButtonTitle: "No",
     },
     LoginScreen: {
       title: "Inicia Sesión con tu cuenta",
@@ -148,6 +153,12 @@ const LanguageProvider = {
           dateFormat: "Por favor ingrese la fecha en formato DD-MM-AAAA.",
         },
       },
+      recoverPassword: "Recuperar Contraseña",
+      sendLink: "Enviar Link",
+      passwordRecoveryMessage:
+        "Te hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña.",
+      messageRecoveryIndication:
+        "Por favor revisa tu carpeta de spam si no has recibido el correo.",
     },
     HomeScreen: {
       start: "Inicio",

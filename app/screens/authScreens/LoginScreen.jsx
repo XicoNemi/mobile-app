@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
 import { logIn } from "../../features/authSlice"; // Importar la acción logIn del slice de auth
 import LanguageProvider from "../../lenguage/LanguageProvider";
@@ -44,7 +50,6 @@ const LoginScreen = ({ navigation }) => {
       setAlertVisible(true); // Mostrar alerta de error
       return;
     }
-  
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
@@ -53,18 +58,17 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       // Mostrar el mensaje de error específico que vino desde el backend
       setAlertTitle("Error");
-      setAlertMessage(error.message);  // Mostrar el mensaje específico desde el backend
+      setAlertMessage(error.message); // Mostrar el mensaje específico desde el backend
       setAlertIcon("close-circle-outline");
       setAlertVisible(true); // Mostrar alerta de error
     } finally {
       setIsLoading(false);
     }
   };
-  
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContainer}> 
-    <LoaderComponent
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <LoaderComponent
         isVisible={isLoading}
         text={textsLeng.LoginScreen.messageLog}
       />
@@ -80,11 +84,22 @@ const LoginScreen = ({ navigation }) => {
         setEmail={setEmail}
         textsLeng={textsLeng}
       />
+
       <EnterPasswordComponent
         value={password}
         setPassword={setPassword}
         textsLeng={textsLeng}
       />
+
+      <Text style={styles.PasswordRecoveryScreen}>
+        {" "}
+        <Text
+          style={styles.PasswordRecoveryScreenLink}
+          onPress={() => navigation.navigate("PasswordRecoveryScreen")}
+        >
+          {textsLeng.LoginScreen.rememberMe}{" "}
+        </Text>
+      </Text>
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.buttonText}>
@@ -159,7 +174,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "95%",
     height: 50,
-    marginTop: 25,
+    marginTop: 20,
   },
   buttonText: {
     color: "white",
@@ -188,9 +203,16 @@ const styles = StyleSheet.create({
   registerLink: {
     color: Colors.events,
   },
+  PasswordRecoveryScreen: {
+    marginTop: 15,
+    color: "black",
+  },
+  PasswordRecoveryScreenLink: {
+    color: Colors.events,
+  },
   footerText: {
     position: "static",
-    top: 110,
+    top: 100,
     color: "black",
   },
   languageSwitcher: {

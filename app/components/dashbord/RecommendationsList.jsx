@@ -4,16 +4,18 @@ import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
 
 const recommendationsData = [
-    { id: 1, image: require("../../../assets/visit1.jpeg"), name: "Xochipila" },
-    { id: 2, image: require("../../../assets/visit2.webp"), name: "Cru Celestial" },
-    { id: 3, image: require("../../../assets/visit3.jpeg"), name: "Parroquia San Juan" },
+  { id: 1, image: require("../../../assets/visit1.jpeg"), name: "Xochipila" },
+  { id: 2, image: require("../../../assets/visit2.webp"), name: "Cruz Celestial" },
+  { id: 3, image: require("../../../assets/visit3.jpeg"), name: "Parroquia San Juan" },
 ];
 
 const RecommendationsList = ({ loading }) => {
+  const data = loading ? recommendationsData.map((item, index) => ({ ...item, id: index + 1 })) : recommendationsData;
+
   return (
     <FlatList
       horizontal
-      data={loading ? [1, 2, 3] : recommendationsData}
+      data={data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <View style={styles.recommendationBox}>

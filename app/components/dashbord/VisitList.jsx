@@ -10,10 +10,12 @@ const visitData = [
 ];
 
 const VisitList = ({ loading }) => {
+  const data = loading ? visitData.map((item, index) => ({ ...item, id: index + 1 })) : visitData;
+
   return (
     <FlatList
       horizontal
-      data={loading ? [1, 2, 3] : visitData}
+      data={data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <View style={styles.visitBox}>

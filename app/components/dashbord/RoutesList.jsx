@@ -10,10 +10,12 @@ const routesData = [
 ];
 
 const RoutesList = ({ loading }) => {
+  const data = loading ? routesData.map((item, index) => ({ ...item, id: index + 1 })) : routesData;
+
   return (
     <FlatList
       horizontal
-      data={loading ? [1, 2, 3] : routesData}
+      data={data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <View style={styles.routeBox}>

@@ -49,7 +49,7 @@ const signUp = async (userData) => {
 // Función para iniciar sesión
 const signIn = async (email, password) => {
   try {
-    const response = await api.post('/api/auth/sing-in', { email, password });
+    const response = await api.post('/api/auth/sign-in', { email, password });
     const token = response.headers['auth-token'];  // Obtiene el token del encabezado
     return { user: response.data, token };  // Retorna los datos del usuario y el token
   } catch (error) {

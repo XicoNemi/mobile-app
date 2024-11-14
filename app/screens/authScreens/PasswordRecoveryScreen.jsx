@@ -6,24 +6,25 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
-import LanguageProvider from "../../lenguage/LanguageProvider";
 import LoaderComponent from "../../components/generals/LoaderComponent"; // Import LoaderComponent
 
 const PasswordRecoveryScreen = ({}) => {
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
   const [loading, setLoading] = useState(false); // State for loader visibility
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const handleEmailChange = (value) => {
     setEmail(value);

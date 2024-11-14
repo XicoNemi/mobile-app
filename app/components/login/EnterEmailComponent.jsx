@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";

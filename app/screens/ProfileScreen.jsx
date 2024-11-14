@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../components/generals/HeaderComponent';
-import LanguageProvider from '../lenguage/LanguageProvider';
-import AssignLenguaje from '../lenguage/AssignLenguage'; 
+import AssignLenguaje from '../lenguage/AssignLenguage';
 
 const ProfileScreen = () => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializar con el idioma español
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng); // Cargar el idioma
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>

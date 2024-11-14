@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import HeaderComponent from "../components/generals/HeaderComponent";
-import LanguageProvider from "../lenguage/LanguageProvider";
-import AssignLenguaje from "../lenguage/AssignLenguage";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import ItineraryCardComponent from "../components/ItineraryCardComponent";
-import SizeConstants from "../utils/SizeConstants";
-import Colors from "../utils/Colors";
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import HeaderComponent from '../components/generals/HeaderComponent';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import ItineraryCardComponent from '../components/ItineraryCardComponent';
+import SizeConstants from '../utils/SizeConstants';
+import Colors from '../utils/Colors';
+import AssignLenguaje from '../lenguage/AssignLenguage';
 
 const ItinerariesScreen = () => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const itineraries = [
     { title: "Itinerario 1", date: "31-Octubre-2024" },
@@ -27,13 +22,11 @@ const ItinerariesScreen = () => {
   ];
 
   const handleCreateItinerary = () => {
-    // Lógica para crear un nuevo itinerario
-    console.log("Crear Itinerario");
+    console.log('Crear Itinerario');
   };
 
   const handleViewDetail = () => {
-    // Lógica para ver detalle del itinerario
-    console.log("Ver detalle");
+    console.log('Ver detalle');
   };
 
   return (
@@ -48,7 +41,7 @@ const ItinerariesScreen = () => {
         onPress={handleCreateItinerary}
       >
         <Ionicons name="add-outline" size={20} color="white" />
-        <Text style={styles.createButtonText}>Crear Itinerario</Text>
+        <Text style={styles.createButtonText}>{textsLeng.ItinerariesScreen.createButtonText}</Text>
       </TouchableOpacity>
 
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -68,20 +61,20 @@ const ItinerariesScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   createButton: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: Colors.primary,
     padding: 10,
     borderRadius: 10,
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     margin: 15,
   },
   createButtonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontWeight: 'bold',
     marginLeft: 5,
     fontSize: SizeConstants.texts,
   },

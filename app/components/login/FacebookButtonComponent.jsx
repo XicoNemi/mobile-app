@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { useSelector } from "react-redux";
 import SizeConstants from "../../utils/SizeConstants";
-import LanguageProvider from "../../lenguage/LanguageProvider";
-import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const FacebookButtonComponent = ({ onPress }) => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Idioma predeterminado
-
-  useEffect(() => {
-    AssignLenguaje(setTextsLeng); // Cargar el idioma seleccionado
-  }, []);
+  const textsLeng = useSelector((state) => state.language.texts);
 
   return (
     <TouchableOpacity style={styles.facebookButton} onPress={onPress}>

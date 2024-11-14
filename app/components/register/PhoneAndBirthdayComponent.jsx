@@ -7,9 +7,9 @@ import {
   StyleSheet,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
-import LanguageProvider from "../../lenguage/LanguageProvider";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const PhoneAndBirthdayComponent = ({
@@ -18,17 +18,17 @@ const PhoneAndBirthdayComponent = ({
   birthday,
   setBirthday,
 }) => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [error, setError] = useState({});
   const [isValidTel, setIsValidTel] = useState(false);
   const [isValidBirthday, setIsValidBirthday] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
 
-  
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const handleInputChange = (field, value) => {
     if (field === "tel") {
@@ -61,7 +61,7 @@ const PhoneAndBirthdayComponent = ({
           ...prevError,
           tel: isValidTel
             ? ""
-            : textsLeng.RegisterScreen.enterEmail.texts.invalidPhone,
+            : textsLeng.RegisterScreen.invalidPhone,
         }));
         break;
       case "birthday":
@@ -91,7 +91,7 @@ const PhoneAndBirthdayComponent = ({
             setIsValidBirthday(false);
             setError((prevError) => ({
               ...prevError,
-              birthday:  textsLeng.RegisterScreen.enterEmail.texts.futureDate,
+              birthday: textsLeng.RegisterScreen.futureDate,
             }));
           } else {
             setIsValidBirthday(true);
@@ -104,7 +104,7 @@ const PhoneAndBirthdayComponent = ({
           setIsValidBirthday(false);
           setError((prevError) => ({
             ...prevError,
-            birthday: textsLeng.RegisterScreen.enterEmail.texts.dateFormat,
+            birthday: textsLeng.RegisterScreen.dateFormat,
           }));
         }
         break;

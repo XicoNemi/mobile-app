@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import LanguageProvider from "../../lenguage/LanguageProvider";
+import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
@@ -21,7 +21,8 @@ import LoaderComponent from "../../components/generals/LoaderComponent";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 
 const RegisterScreen = ({ navigation }) => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
 
   // Estados para los datos del usuario
   const [name, setName] = useState("");
@@ -39,8 +40,8 @@ const RegisterScreen = ({ navigation }) => {
   const [alertIcon, setAlertIcon] = useState("checkmark-circle-outline");
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const handleRegister = async () => {
     // Validaciones de los campos
@@ -113,9 +114,9 @@ const RegisterScreen = ({ navigation }) => {
 
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
 
-      <GoogleButtonComponent textsLeng={textsLeng} />
+      <GoogleButtonComponent />
 
-      <FacebookButtonComponent textsLeng={textsLeng} />
+      <FacebookButtonComponent />
 
       <View style={styles.dividerContainer}>
         <View style={styles.divider} />
@@ -131,7 +132,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       <EnterEmailComponent
-        value={email}
+        email={email}
         setEmail={setEmail}
         textsLeng={textsLeng}
       />
@@ -144,7 +145,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       <EnterPasswordComponent
-        value={password}
+        password={password}
         setPassword={setPassword}
         textsLeng={textsLeng}
       />

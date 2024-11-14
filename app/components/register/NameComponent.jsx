@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
-import LanguageProvider from "../../lenguage/LanguageProvider";
+import { setLanguage, setTextsLeng } from "../../features/languageSlice";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const NameComponent = ({ name, setName, lastName, setLastName }) => {
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
   const [error, setError] = useState({});
   const [isValidName, setIsValidName] = useState(false);
   const [isValidLastName, setIsValidLastName] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const handleInputChange = (field, value) => {
     if (field === "name") {

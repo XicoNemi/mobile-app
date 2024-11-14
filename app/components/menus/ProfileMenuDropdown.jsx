@@ -3,22 +3,21 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
-import LanguageProvider from "../../lenguage/LanguageProvider";
 import { useNavigation } from "@react-navigation/native";
 import LanguageSwitcher from "../../lenguage/LanguageSwitcher";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/authSlice";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 
 const ProfileMenuDropdown = () => {
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
-  }, []);
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const handleLogout = () => {
     setIsModalVisible(true);
@@ -52,7 +51,7 @@ const ProfileMenuDropdown = () => {
       </TouchableOpacity>
 
       <View style={styles.languageSwitcherContainer}>
-        <LanguageSwitcher setTextsLeng={setTextsLeng} />
+        <LanguageSwitcher />
       </View>
 
       <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>

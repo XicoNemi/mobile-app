@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
 import { logIn } from "../../features/authSlice"; // Importar la acción logIn del slice de auth
-import LanguageProvider from "../../lenguage/LanguageProvider";
 import Colors from "../../utils/Colors";
 import LanguageSwitcher from "../../lenguage/LanguageSwitcher";
 import SizeConstants from "../../utils/SizeConstants";
@@ -23,8 +22,8 @@ import CustomAlert from "../../components/generals/CustomAlertComponent"; // Imp
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
   const authData = useSelector((state) => state.auth);
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,10 +36,10 @@ const LoginScreen = ({ navigation }) => {
   const [alertIcon, setAlertIcon] = useState("alert-circle-outline");
 
   useEffect(() => {
-    AssignLenguaje(setTextsLeng);
+    AssignLenguaje(dispatch);
     // Monitorear los cambios en authData
     console.log("Datos guardados en Redux:", authData);
-  }, [authData]);
+  }, [authData, dispatch]);
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -74,19 +73,19 @@ const LoginScreen = ({ navigation }) => {
       />
 
       <View style={styles.languageSwitcher}>
-        <LanguageSwitcher setTextsLeng={setTextsLeng} />
+        <LanguageSwitcher />
       </View>
 
       <Text style={styles.title}>{textsLeng.LoginScreen.title}</Text>
 
       <EnterEmailComponent
-        value={email}
+        email={email}
         setEmail={setEmail}
         textsLeng={textsLeng}
       />
 
       <EnterPasswordComponent
-        value={password}
+        password={password}
         setPassword={setPassword}
         textsLeng={textsLeng}
       />

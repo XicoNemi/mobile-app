@@ -12,17 +12,17 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MenuDropdown from "../components/menus/MenuDropdownComponent";
 import ProfileMenuDropdown from "../components/menus/ProfileMenuDropdown";
 import { useNavigation } from "@react-navigation/native";
-import LanguageProvider from "../lenguage/LanguageProvider";
+import { useSelector, useDispatch } from "react-redux";
 import AssignLenguaje from "../lenguage/AssignLenguage";
 import SkeletonComponent from "../components/generals/SkeletonComponent";
 import SizeConstants from "../utils/SizeConstants";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
-
   const [loading, setLoading] = useState(true);
-  const [textsLeng, setTextsLeng] = useState(LanguageProvider.spa); // Inicializar con el idioma español
   const navigation = useNavigation();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
@@ -34,10 +34,10 @@ const HomeScreen = () => {
     }, 2000);
 
     // Cargar el idioma
-    AssignLenguaje(setTextsLeng);
+    AssignLenguaje(dispatch);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>

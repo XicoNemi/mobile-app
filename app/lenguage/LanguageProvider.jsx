@@ -72,7 +72,7 @@ const LanguageProvider = {
     },
     HomeScreen: {
       start: "Start",
-      welcomeText: "Welcome Back",
+      welcomeText: "Welcome",
       search: "Search",
       sectionTitleItineraries: "Try Our Itineraries",
       sectionSubtitleVisit: "You Must Visit →",
@@ -162,7 +162,7 @@ const LanguageProvider = {
     },
     HomeScreen: {
       start: "Inicio",
-      welcomeText: "Bienvenido de vuelta",
+      welcomeText: "Bienvenido",
       search: "Buscar",
       sectionTitleItineraries: "Prueba Nuestros Itinerarios",
       sectionSubtitleVisit: "Debes Visitar →",

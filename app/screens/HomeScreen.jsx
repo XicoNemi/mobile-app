@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
-  FlatList,
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -16,6 +15,10 @@ import { useSelector, useDispatch } from "react-redux";
 import AssignLenguaje from "../lenguage/AssignLenguage";
 import SkeletonComponent from "../components/generals/SkeletonComponent";
 import SizeConstants from "../utils/SizeConstants";
+import Colors from "../utils/Colors";
+import RoutesList from "../components/dashbord/RoutesList";
+import VisitList from "../components/dashbord/VisitList";
+import RecommendationsList from "../components/dashbord/RecommendationsList";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -89,7 +92,10 @@ const HomeScreen = () => {
           {loading ? (
             <SkeletonComponent width="50%" height={40} />
           ) : (
-            `${textsLeng.HomeScreen.welcomeText}, ${userName}`
+            <>
+              {textsLeng.HomeScreen.welcomeText},{" "}
+              <Text style={styles.userName}>{userName}</Text>
+            </>
           )}
         </Text>
 
@@ -101,24 +107,7 @@ const HomeScreen = () => {
           )}
         </Text>
 
-        <FlatList
-          horizontal
-          data={loading ? [1, 2, 3] : [1, 2, 3]} // Mantener el mismo número de elementos para la carga
-          keyExtractor={(item) => item.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.itineraryBox}>
-              {loading ? (
-                <SkeletonComponent width={250} height={200} />
-              ) : (
-                <Text style={styles.itineraryText}>
-                  {textsLeng.HomeScreen.itineraryText} {item}
-                </Text>
-              )}
-            </View>
-          )}
-          showsHorizontalScrollIndicator={false}
-          style={styles.itineraryList}
-        />
+        <RoutesList loading={loading} />
 
         <Text style={styles.sectionSubtitle}>
           {loading ? (
@@ -128,29 +117,7 @@ const HomeScreen = () => {
           )}
         </Text>
 
-        <FlatList
-          horizontal
-          data={loading ? [1, 2, 3, 4] : [1, 2, 3, 4]}
-          keyExtractor={(item) => item.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.visitBox}>
-              {loading ? (
-                <SkeletonComponent width={120} height={120} borderRadius={90} />
-              ) : (
-                <>
-                  <Ionicons
-                    name="beer-outline"
-                    size={SizeConstants.iconsM}
-                    color="black"
-                  />
-                  <Text style={styles.visitText}>Mr Cheve</Text>
-                </>
-              )}
-            </View>
-          )}
-          showsHorizontalScrollIndicator={false}
-          style={styles.visitList}
-        />
+        <VisitList loading={loading} />
 
         <Text style={styles.sectionTitle}>
           {loading ? (
@@ -160,27 +127,7 @@ const HomeScreen = () => {
           )}
         </Text>
 
-        <FlatList
-          horizontal
-          data={loading ? [1, 2, 3] : [1, 2, 3]}
-          keyExtractor={(item) => item.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.continueBox}>
-              {loading ? (
-                <SkeletonComponent width={200} height={150} />
-              ) : (
-                <>
-                  <View style={styles.itineraryBoxSmall} />
-                  <Text style={styles.continueText}>
-                    {textsLeng.HomeScreen.continueText} {item}
-                  </Text>
-                </>
-              )}
-            </View>
-          )}
-          showsHorizontalScrollIndicator={false}
-          style={styles.itineraryList}
-        />
+        <RecommendationsList loading={loading} />
       </ScrollView>
     </View>
   );
@@ -208,45 +155,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 20,
   },
+  userName: {
+    color: Colors.primary,
+  },
   sectionTitle: {
     fontSize: SizeConstants.subtitles,
     fontWeight: "bold",
     marginBottom: 10,
   },
-  itineraryList: {
-    marginBottom: 20,
-  },
-  itineraryBox: {
-    width: 250,
-    height: 200,
-    backgroundColor: "#e0e0e0",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    marginRight: 10,
-  },
-  itineraryText: {
-    fontSize: SizeConstants.texts,
-  },
   sectionSubtitle: {
     fontSize: SizeConstants.subtitles,
     marginVertical: 10,
-  },
-  visitList: {
-    marginBottom: 20,
-  },
-  visitBox: {
-    width: 120,
-    height: 120,
-    backgroundColor: "#e0e0e0",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 90,
-    marginRight: 10,
-  },
-  visitText: {
-    marginTop: 5,
-    fontSize: SizeConstants.texts,
   },
   searchBar: {
     flexDirection: "row",
@@ -260,21 +179,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     fontSize: SizeConstants.texts,
-  },
-  continueBox: {
-    alignItems: "center",
-    marginRight: 10,
-  },
-  itineraryBoxSmall: {
-    width: 200,
-    height: 150,
-    backgroundColor: "#d0d0d0",
-    borderRadius: 10,
-  },
-  continueText: {
-    marginTop: 8,
-    fontSize: SizeConstants.texts,
-    fontWeight: "bold",
   },
 });
 

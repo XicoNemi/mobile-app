@@ -33,7 +33,7 @@ const handleError = (error) => {
 // Función para registrar un nuevo usuario
 const signUp = async (userData) => {
   try {
-    const response = await api.post('/api/auth/sing-up', userData);
+    const response = await api.post('/api/auth/sign-up', userData);
 
     // Accediendo a los mensajes de la respuesta si la creación es exitosa
     console.log(response.data);  // Si todo es correcto, mostrar la data (usuario creado)

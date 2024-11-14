@@ -20,6 +20,7 @@ import SizeConstants from "../utils/SizeConstants";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
+  const userName = useSelector((state) => state.auth.name); // Obtener el nombre del usuario del estado de Redux
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -88,7 +89,7 @@ const HomeScreen = () => {
           {loading ? (
             <SkeletonComponent width="50%" height={40} />
           ) : (
-            textsLeng.HomeScreen.welcomeText
+            `${textsLeng.HomeScreen.welcomeText}, ${userName}`
           )}
         </Text>
 

@@ -64,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
         tel,
         birthday,
       };
-
+      console.log(userData);
       // Llamada al API para crear la cuenta
       const response = await api.signUp(userData);
 

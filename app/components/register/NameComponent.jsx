@@ -35,7 +35,7 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
     setTypingTimeout(
       setTimeout(() => {
         verifyInput(field, value);
-      }, 2000)
+      }, 1500)
     );
   };
 

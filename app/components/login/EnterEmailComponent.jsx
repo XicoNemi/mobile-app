@@ -20,7 +20,7 @@ const EnterEmailComponent = ({ email, setEmail, textsLeng }) => {
     setTypingTimeout(
       setTimeout(() => {
         verifyEmail(value);
-      }, 2000)
+      }, 1500)
     );
   };
 

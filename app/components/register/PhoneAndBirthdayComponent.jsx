@@ -34,7 +34,8 @@ const PhoneAndBirthdayComponent = ({
     if (field === "tel") {
       setTel(value);
     } else {
-      setBirthday(value);
+      const unixDate = Math.floor(new Date(value).getTime() / 1000); // Convertir a UNIX
+      setBirthday({ unix: unixDate, display: value });
     }
 
     if (typingTimeout) clearTimeout(typingTimeout);
@@ -47,7 +48,7 @@ const PhoneAndBirthdayComponent = ({
     setTypingTimeout(
       setTimeout(() => {
         verifyInput(field, value);
-      }, 2000)
+      }, 1500)
     );
   };
 
@@ -119,7 +120,8 @@ const PhoneAndBirthdayComponent = ({
       const formattedDate = `${selectedDate.getDate()}-${
         selectedDate.getMonth() + 1
       }-${selectedDate.getFullYear()}`;
-      setBirthday(formattedDate);
+      const unixDate = Math.floor(selectedDate.getTime() / 1000); // Convertir a UNIX
+      setBirthday({ unix: unixDate, display: formattedDate }); // Guardar la fecha en formato UNIX y legible
       verifyInput("birthday", formattedDate);
     }
   };
@@ -155,7 +157,7 @@ const PhoneAndBirthdayComponent = ({
                 { borderColor: isValidBirthday ? Colors.routes : Colors.primary },
               ]}
               placeholderTextColor="#AAAAAA"
-              value={birthday}
+              value={birthday.display} // Mostrar la fecha legible
               editable={false}
             />
           </TouchableOpacity>

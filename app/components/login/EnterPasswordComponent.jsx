@@ -27,7 +27,7 @@ const EnterPasswordComponent = ({ password, setPassword, textsLeng }) => {
     setTypingTimeout(
       setTimeout(() => {
         verifyPassword(value);
-      }, 2000)
+      }, 1500)
     );
   };
 

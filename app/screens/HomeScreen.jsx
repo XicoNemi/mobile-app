@@ -23,7 +23,7 @@ import RecommendationsList from "../components/dashbord/RecommendationsList";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
-  const userName = useSelector((state) => state.auth.name); // Obtener el nombre del usuario del estado de Redux
+  const userName = useSelector((state) => state.auth.name);
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);

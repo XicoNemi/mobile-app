@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MobileAppXicoNemi",
-    "slug": "MobileAppXicoNemi",
+    "name": "XicoNemi",
+    "slug": "XicoNemi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

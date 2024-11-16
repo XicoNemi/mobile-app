@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   languageSwitcher: {
     position: "static",
-    bottom: 70,
+    bottom: 80,
     left: 120,
     zIndex: 1,
   },

@@ -136,13 +136,17 @@ const ProfileScreen = ({ navigation }) => {
             <Text style={styles.labelLenguage}>
               {textsLeng.ProfileScreen.changeLenguage}
             </Text>
-            <Switch
-              trackColor={{ false: "#767577", true: Colors.primary }}
-              thumbColor={isDarkMode ? "#000" : "#000"}
-              onValueChange={toggleDarkMode}
-              value={isDarkMode}
-            />
+            <View style={styles.switchContainer}>
+              <Switch
+                trackColor={{ false: "#767577", true: Colors.primary }}
+                thumbColor={isDarkMode ? "#000" : "#000"}
+                onValueChange={toggleDarkMode}
+                value={isDarkMode}
+                style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }}
+              />
+            </View>
           </View>
+
           <TouchableOpacity
             style={styles.logoutButton}
             onPress={handleLogout}
@@ -154,12 +158,9 @@ const ProfileScreen = ({ navigation }) => {
         </View>
       ) : (
         <View style={styles.changePasswordContainer}>
-          {/* Contenido de "Cambiar contraseña" */}
           <ChangePasswordComponent />
         </View>
       )}
-
-      {/* Alerta de confirmación de cierre de sesión */}
       <CustomAlert
         isVisible={isModalVisible}
         title={textsLeng.AlertMessagelogOut.title}
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 75,
     marginBottom: 20,
   },
   avatar: {
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
   detailRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15, 
+    marginBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#E0E0E0",
     paddingBottom: 15,
@@ -253,32 +254,35 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   label: {
-    fontSize: SizeConstants.texts,
-    color: "#000", 
-    marginBottom: 5, // Separación entre la etiqueta y el valor
+    fontSize: SizeConstants.textsM,
+    color: "#000",
+    marginBottom: 5,
   },
-  labelLenguage: {	
-    color: "#000", 
-    fontWeight: "bold", 
-    marginStart: -30,
+  labelLenguage: {
+    color: "#000",
+    marginStart: 20,
+    fontSize: SizeConstants.textsM,
   },
   value: {
-    fontSize: SizeConstants.texts, // Tamaño más prominente para diferenciar del label
-    color: Colors.primary, // Color destacado para el texto del valor
-    fontWeight: "bold", // Resaltar los valores
+    fontSize: SizeConstants.texts,
+    color: Colors.primary,
   },
   switchRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // Espaciado automático entre elementos
-    paddingBottom: 10, // Espaciado inferior para mayor claridad
+    paddingBottom: 10,
     marginEnd: 100,
-  },  
+  },
+
+  switchContainer: {
+    marginStart: 100,
+  },
+
   changePasswordContainer: { paddingHorizontal: 22, marginTop: 35 },
   logoutButton: {
     backgroundColor: Colors.primary,
     borderRadius: 50,
-    paddingVertical: 12,
+    paddingVertical: 10,
     width: "45%",
     alignSelf: "center",
     alignItems: "center",

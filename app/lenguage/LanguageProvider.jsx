@@ -83,6 +83,18 @@ const LanguageProvider = {
     },
     ProfileScreen: {
       title: "Profile",
+      email: "Email",
+      phoneNum: "Phone Number",
+      changeLenguage: "Change Language",
+      changePasswordTitle: "Change Password",
+      changePassword:{
+        passwordError: "Password must be at least 6 characters long.",
+        notPassword:"Passwords do not match",
+        currentPassword:"Current password",
+        newPassword:"New password",
+        confirmPassword:"Confirm password",
+        change:"Change",
+      }
     },
     RoutesScreen: {
       title: "Routes",
@@ -173,6 +185,18 @@ const LanguageProvider = {
     },
     ProfileScreen: {
       title: "Perfil",
+      email: "Correo Electrónico",
+      phoneNum: "Número de Teléfono",
+      changeLenguage: "Cambiar Idioma",
+      changePasswordTitle: "Cambiar Contraseña",
+      changePassword:{
+        passwordError: "La contraseña debe tener al menos 6 caracteres.",
+        notPassword:"Las contraseñas no coinciden",
+        currentPassword:"Contraseña actual",
+        newPassword:"Nueva contraseña",
+        confirmPassword:"Confirmar contraseña",
+        change:"Cambiar",
+      }
     },
     RoutesScreen: {
       title: "Rutas",

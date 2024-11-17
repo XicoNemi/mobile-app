@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import AssignLenguaje from '../lenguage/AssignLenguage';
 import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   Switch,
   Image,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Colors from "../utils/Colors"
-import SizeConstants from "../utils/SizeConstants"
+import Colors from "../utils/Colors";
+import SizeConstants from "../utils/SizeConstants";
+import ChangePasswordComponent from "../components/register/ChangePasswordComponent"; 
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const dispatch = useDispatch();
+  const textsLeng = useSelector((state) => state.language.texts);
+
+  useEffect(() => {
+    AssignLenguaje(dispatch);
+  }, [dispatch]);
 
   const toggleDarkMode = () => setIsDarkMode((prevState) => !prevState);
 
@@ -31,12 +39,10 @@ const ProfileScreen = ({ navigation }) => {
       {/* Avatar y nombre */}
       <View style={styles.profileHeader}>
         <Image
-          source={require("../../assets/avatar.png")} 
+          source={require("../../assets/avatar.png")}
           style={styles.avatar}
         />
-        <Text style={styles.userName}>
-          Eli Haziel,19
-        </Text>
+        <Text style={styles.userName}>Eli Haziel, 19</Text>
       </View>
 
       <View style={styles.tabContainer}>
@@ -59,7 +65,7 @@ const ProfileScreen = ({ navigation }) => {
               !isEditingPassword && styles.activeTabText,
             ]}
           >
-            Perfil
+            {textsLeng.ProfileScreen.title}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -81,7 +87,7 @@ const ProfileScreen = ({ navigation }) => {
               isEditingPassword && styles.activeTabText,
             ]}
           >
-            Cambiar contraseña
+            {textsLeng.ProfileScreen.changePasswordTitle}
           </Text>
         </TouchableOpacity>
       </View>
@@ -92,23 +98,27 @@ const ProfileScreen = ({ navigation }) => {
           <View style={styles.detailRow}>
             <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
             <View style={styles.detailColumn}>
-              <Text style={styles.label}>Correo Electrónico:</Text>
+              <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
               <Text style={styles.value}>jfosadoanimas@gmail.com</Text>
             </View>
           </View>
           <View style={styles.detailRow}>
             <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
             <View style={styles.detailColumn}>
-              <Text style={styles.label}>Número de Teléfono:</Text>
+              <Text style={styles.label}>{textsLeng.ProfileScreen.phoneNum}</Text>
               <Text style={styles.value}>76476476476</Text>
             </View>
           </View>
           <View style={styles.switchRow}>
-            <Ionicons name="language-outline" size={SizeConstants.iconsCH} color="#000" />
-            <Text style={styles.label}>Cambiar de idioma</Text>
+            <Ionicons
+              name="language-outline"
+              size={SizeConstants.iconsCH}
+              color="#000"
+            />
+            <Text style={styles.label}>{textsLeng.ProfileScreen.changeLenguage}</Text>
             <Switch
-              trackColor={{ false: "#767577", true:  Colors.primary }}
-              thumbColor={isDarkMode ? "#FFF" : "#FFF"}
+              trackColor={{ false: "#767577", true: Colors.primary }}
+              thumbColor={isDarkMode ? "#000" : "#000"}
               onValueChange={toggleDarkMode}
               value={isDarkMode}
             />
@@ -117,12 +127,7 @@ const ProfileScreen = ({ navigation }) => {
       ) : (
         <View style={styles.changePasswordContainer}>
           {/* Contenido de "Cambiar contraseña" */}
-          <TextInput style={styles.input} placeholder="Contraseña actual" secureTextEntry />
-          <TextInput style={styles.input} placeholder="Contraseña nueva" secureTextEntry />
-          <TextInput style={styles.input} placeholder="Confirmar contraseña" secureTextEntry />
-          <TouchableOpacity style={styles.changePasswordButton}>
-            <Text style={styles.changePasswordText}>Cambiar</Text>
-          </TouchableOpacity>
+          <ChangePasswordComponent />
         </View>
       )}
     </View>
@@ -130,11 +135,11 @@ const ProfileScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
+  container: {
+    flex: 1,
     backgroundColor: "white",
     marginTop: 30,
-    padding: 20
+    padding: 20,
   },
   backButton: {
     width: 40,
@@ -200,7 +205,7 @@ const styles = StyleSheet.create({
   },
   detailColumn: { marginLeft: 10 },
   label: { fontSize: 16, fontWeight: "bold" },
-  value: { fontSize: 16, color:  Colors.primary },
+  value: { fontSize: 16, color: Colors.primary },
   switchRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -208,20 +213,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   changePasswordContainer: { paddingHorizontal: 20, marginTop: 20 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#D3D3D3",
-    borderRadius: 5,
-    marginBottom: 15,
-    padding: 10,
-  },
-  changePasswordButton: {
-    backgroundColor:  Colors.primary,
-    padding: 10,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  changePasswordText: { color: "white", fontSize: 16 },
 });
 
 export default ProfileScreen;

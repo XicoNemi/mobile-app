@@ -87,6 +87,7 @@ const LanguageProvider = {
       phoneNum: "Phone Number",
       changeLenguage: "Change Language",
       changePasswordTitle: "Change Password",
+      logout:"Log out",
       changePassword:{
         passwordError: "Password must be at least 6 characters long.",
         notPassword:"Passwords do not match",
@@ -189,6 +190,7 @@ const LanguageProvider = {
       phoneNum: "Número de Teléfono",
       changeLenguage: "Cambiar Idioma",
       changePasswordTitle: "Cambiar Contraseña",
+      logout:"Cerrar sesión",
       changePassword:{
         passwordError: "La contraseña debe tener al menos 6 caracteres.",
         notPassword:"Las contraseñas no coinciden",

@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import AssignLenguaje from '../lenguage/AssignLenguage';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AssignLenguaje from "../lenguage/AssignLenguage";
 import {
   View,
   Text,
@@ -12,11 +12,14 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
-import ChangePasswordComponent from "../components/register/ChangePasswordComponent"; 
+import ChangePasswordComponent from "../components/register/ChangePasswordComponent";
+import CustomAlert from "../components/generals/CustomAlertComponent";
+import { logOut } from "../features/authSlice";
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
 
@@ -25,6 +28,19 @@ const ProfileScreen = ({ navigation }) => {
   }, [dispatch]);
 
   const toggleDarkMode = () => setIsDarkMode((prevState) => !prevState);
+
+  const handleLogout = () => {
+    setIsModalVisible(true);
+  };
+
+  const confirmLogout = () => {
+    setIsModalVisible(false);
+    dispatch(logOut());
+  };
+
+  const cancelLogout = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -105,17 +121,21 @@ const ProfileScreen = ({ navigation }) => {
           <View style={styles.detailRow}>
             <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
             <View style={styles.detailColumn}>
-              <Text style={styles.label}>{textsLeng.ProfileScreen.phoneNum}</Text>
+              <Text style={styles.label}>
+                {textsLeng.ProfileScreen.phoneNum}
+              </Text>
               <Text style={styles.value}>76476476476</Text>
             </View>
           </View>
           <View style={styles.switchRow}>
             <Ionicons
-              name="language-outline"
+              name="globe-sharp"
               size={SizeConstants.iconsCH}
               color="#000"
             />
-            <Text style={styles.label}>{textsLeng.ProfileScreen.changeLenguage}</Text>
+            <Text style={styles.labelLenguage}>
+              {textsLeng.ProfileScreen.changeLenguage}
+            </Text>
             <Switch
               trackColor={{ false: "#767577", true: Colors.primary }}
               thumbColor={isDarkMode ? "#000" : "#000"}
@@ -123,6 +143,14 @@ const ProfileScreen = ({ navigation }) => {
               value={isDarkMode}
             />
           </View>
+          <TouchableOpacity
+            style={styles.logoutButton}
+            onPress={handleLogout}
+          >
+            <Text style={styles.logoutButtonText}>
+              {textsLeng.ProfileScreen.logout}
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.changePasswordContainer}>
@@ -130,6 +158,24 @@ const ProfileScreen = ({ navigation }) => {
           <ChangePasswordComponent />
         </View>
       )}
+
+      {/* Alerta de confirmación de cierre de sesión */}
+      <CustomAlert
+        isVisible={isModalVisible}
+        title={textsLeng.AlertMessagelogOut.title}
+        message={textsLeng.AlertMessagelogOut.message}
+        iconName="alert-circle-outline"
+        onClose={cancelLogout}
+        onConfirm={confirmLogout}
+        primaryButton={{
+          text: textsLeng.AlertMessagelogOut.confirmButtonTitle,
+          onPress: confirmLogout,
+        }}
+        secondaryButton={{
+          text: textsLeng.AlertMessagelogOut.cancelButtonTitle,
+          onPress: cancelLogout,
+        }}
+      />
     </View>
   );
 };
@@ -186,7 +232,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     marginLeft: 5,
-    fontSize: 16,
+    fontSize: SizeConstants.texts,
     color: "#808080",
   },
   activeTabText: {
@@ -194,25 +240,55 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   icon: { marginRight: 5 },
-  profileDetails: { paddingHorizontal: 20, marginTop: 20 },
+  profileDetails: { paddingHorizontal: 22, marginTop: 35 },
   detailRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 15, 
     borderBottomWidth: 1,
-    borderBottomColor: "#D3D3D3",
-    paddingBottom: 10,
+    borderBottomColor: "#E0E0E0",
+    paddingBottom: 15,
   },
-  detailColumn: { marginLeft: 10 },
-  label: { fontSize: 16, fontWeight: "bold" },
-  value: { fontSize: 16, color: Colors.primary },
+  detailColumn: {
+    marginLeft: 20
+  },
+  label: {
+    fontSize: SizeConstants.texts,
+    color: "#000", 
+    marginBottom: 5, // Separación entre la etiqueta y el valor
+  },
+  labelLenguage: {	
+    color: "#000", 
+    fontWeight: "bold", 
+    marginStart: -30,
+  },
+  value: {
+    fontSize: SizeConstants.texts, // Tamaño más prominente para diferenciar del label
+    color: Colors.primary, // Color destacado para el texto del valor
+    fontWeight: "bold", // Resaltar los valores
+  },
   switchRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 15,
+    justifyContent: "space-between", // Espaciado automático entre elementos
+    paddingBottom: 10, // Espaciado inferior para mayor claridad
+    marginEnd: 100,
+  },  
+  changePasswordContainer: { paddingHorizontal: 22, marginTop: 35 },
+  logoutButton: {
+    backgroundColor: Colors.primary,
+    borderRadius: 50,
+    paddingVertical: 12,
+    width: "45%",
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 100,
   },
-  changePasswordContainer: { paddingHorizontal: 20, marginTop: 20 },
+  logoutButtonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: SizeConstants.texts,
+  },
 });
 
 export default ProfileScreen;

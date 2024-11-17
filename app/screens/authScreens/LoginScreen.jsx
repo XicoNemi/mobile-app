@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux"; // Importar useDispatch y useSelector
-import { logIn } from "../../features/authSlice"; // Importar la acción logIn del slice de auth
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../../features/authSlice";
 import Colors from "../../utils/Colors";
 import LanguageSwitcher from "../../lenguage/LanguageSwitcher";
 import SizeConstants from "../../utils/SizeConstants";
@@ -18,7 +18,8 @@ import EnterEmailComponent from "../../components/login/EnterEmailComponent";
 import EnterPasswordComponent from "../../components/login/EnterPasswordComponent";
 import GoogleButtonComponent from "../../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
-import CustomAlert from "../../components/generals/CustomAlertComponent"; // Importar el componente de alerta personalizada
+import CustomAlert from "../../components/generals/CustomAlertComponent";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Estado para mostrar el modal de alerta
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
@@ -37,7 +37,6 @@ const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
     AssignLenguaje(dispatch);
-    // Monitorear los cambios en authData
     console.log("Datos guardados en Redux:", authData);
   }, [authData, dispatch]);
 
@@ -46,20 +45,19 @@ const LoginScreen = ({ navigation }) => {
       setAlertTitle("Error");
       setAlertMessage("Por favor, complete todos los campos");
       setAlertIcon("close-circle-outline");
-      setAlertVisible(true); // Mostrar alerta de error
+      setAlertVisible(true);
       return;
     }
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
-      dispatch(logIn({ id: user.id, name: user.name, token })); // Guardar datos en Redux
-      navigation.navigate("HomeScreen"); // Navegar a la pantalla principal después de guardar en Redux
+      dispatch(logIn({ id: user.id, name: user.name, token }));
+      navigation.navigate("HomeScreen");
     } catch (error) {
-      // Mostrar el mensaje de error específico que vino desde el backend
       setAlertTitle("Error");
-      setAlertMessage(error.message); // Mostrar el mensaje específico desde el backend
+      setAlertMessage(error.message);
       setAlertIcon("close-circle-outline");
-      setAlertVisible(true); // Mostrar alerta de error
+      setAlertVisible(true);
     } finally {
       setIsLoading(false);
     }
@@ -153,27 +151,27 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     backgroundColor: "#F4F4F4",
-    paddingHorizontal: 20,
+    paddingHorizontal: wp('5%'),
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 1,
+    marginTop: hp('1%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: 100,
+    marginBottom: hp('12.5%'),
   },
   loginButton: {
     width: "90%",
     backgroundColor: Colors.primary,
-    borderRadius: 22,
-    paddingVertical: 15,
+    borderRadius: wp('5.5%'),
+    paddingVertical: hp('1.875%'),
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: hp('1.25%'),
     width: "95%",
-    height: 50,
-    marginTop: 20,
+    height: hp('6.25%'),
+    marginTop: hp('2.5%'),
   },
   buttonText: {
     color: "white",
@@ -183,27 +181,27 @@ const styles = StyleSheet.create({
   dividerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: hp('2.5%'),
     width: "90%",
   },
   divider: {
     flex: 1,
-    height: 1.5,
+    height: hp('0.1875%'),
     backgroundColor: "#D3D3D3",
   },
   dividerText: {
-    marginHorizontal: 10,
+    marginHorizontal: wp('2.5%'),
     color: "black",
   },
   registerText: {
-    marginTop: 20,
+    marginTop: hp('2.5%'),
     color: "black",
   },
   registerLink: {
     color: Colors.events,
   },
   PasswordRecoveryScreen: {
-    marginTop: 15,
+    marginTop: hp('1.875%'),
     color: "black",
   },
   PasswordRecoveryScreenLink: {
@@ -211,13 +209,13 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "static",
-    top: 100,
+    top: hp('11%'),
     color: "black",
   },
   languageSwitcher: {
     position: "static",
-    bottom: 70,
-    left: 120,
+    bottom: hp('8.75%'),
+    left: wp('30%'),
     zIndex: 1,
   },
 });

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const EnterEmailComponent = ({ email, setEmail, textsLeng }) => {
   const [error, setError] = useState("");
@@ -59,24 +60,24 @@ const EnterEmailComponent = ({ email, setEmail, textsLeng }) => {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    marginBottom: 15,
-    marginTop: -15
+    marginBottom: hp('1.875%'),
+    marginTop: hp('-1.875%'),
   },
   label: {
     color: Colors.primary,
-    marginBottom: 5,
+    marginBottom: hp('0.625%'),
   },
   input: {
-    height: 50,
+    height: hp('6.25%'),
     borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 5,
+    borderRadius: wp('1.25%'),
+    paddingHorizontal: wp('2.5%'),
+    marginBottom: hp('0.625%'),
   },
   errorText: {
     color: "red",
     fontSize: SizeConstants.texts - 5,
-    marginTop: -2,
+    marginTop: hp('-0.25%'),
   },
 });
 

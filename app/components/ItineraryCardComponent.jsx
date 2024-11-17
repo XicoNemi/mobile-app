@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ItineraryCardComponent = ({ title, date, onPress }) => {
   return (
@@ -17,7 +18,7 @@ const ItineraryCardComponent = ({ title, date, onPress }) => {
       <View style={styles.card}>
         <View style={styles.content}>
           <View style={styles.iconPlaceholder}>
-            <Ionicons name="shapes-outline" size={50} color="gray" />
+            <Ionicons name="shapes-outline" size={SizeConstants.iconsXG} color="gray" />
           </View>
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText}>Ver detalle</Text>
@@ -30,14 +31,14 @@ const ItineraryCardComponent = ({ title, date, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    marginTop: 20,
+    marginVertical: hp('1.25%'),
+    marginTop: hp('2.5%'),
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 30,
-    marginBottom: 15,
+    paddingHorizontal: wp('7.5%'),
+    marginBottom: hp('1.875%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,
@@ -51,32 +52,33 @@ const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
     borderColor: "#E0E0E0",
-    borderRadius: 15,
-    padding: 20,
-    marginHorizontal: 20,
+    borderRadius: wp('3.75%'),
+    padding: wp('5%'),
+    marginHorizontal: wp('5%'),
   },
   content: {
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: hp('1.25%'),
   },
   iconPlaceholder: {
-    width: 270,
-    height: 130,
+    width: wp('67.5%'),
+    height: hp('16.25%'),
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F0F0F0",
-    borderRadius: 10,
+    borderRadius: wp('2.5%'),
   },
   button: {
     backgroundColor: Colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    borderRadius: 15,
-    marginTop: 10,
+    paddingVertical: hp('1.25%'),
+    paddingHorizontal: wp('7.5%'),
+    borderRadius: wp('3.75%'),
+    marginTop: hp('1.25%'),
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: SizeConstants.texts,
   },
 });
 

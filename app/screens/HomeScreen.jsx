@@ -19,6 +19,7 @@ import Colors from "../utils/Colors";
 import RoutesList from "../components/dashbord/RoutesList";
 import VisitList from "../components/dashbord/VisitList";
 import RecommendationsList from "../components/dashbord/RecommendationsList";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const HomeScreen = () => {
         {/* Barra de búsqueda */}
         <View style={styles.searchBar}>
           {loading ? (
-            <SkeletonComponent width="100%" height={40} />
+            <SkeletonComponent width="100%" height={hp('5%')} />
           ) : (
             <>
               <TextInput
@@ -90,7 +91,7 @@ const HomeScreen = () => {
 
         <Text style={styles.welcomeText}>
           {loading ? (
-            <SkeletonComponent width="50%" height={40} />
+            <SkeletonComponent width="50%" height={hp('5%')} />
           ) : (
             <>
               {textsLeng.HomeScreen.welcomeText},{" "}
@@ -101,7 +102,7 @@ const HomeScreen = () => {
 
         <Text style={styles.sectionTitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={30} />
+            <SkeletonComponent width="70%" height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionTitleItineraries
           )}
@@ -111,7 +112,7 @@ const HomeScreen = () => {
 
         <Text style={styles.sectionSubtitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={30} />
+            <SkeletonComponent width="70%" height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionSubtitleVisit
           )}
@@ -121,7 +122,7 @@ const HomeScreen = () => {
 
         <Text style={styles.sectionTitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={30} />
+            <SkeletonComponent width="70%" height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionTitleContinue
           )}
@@ -137,14 +138,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    padding: 16,
-    marginTop: 35,
+    padding: wp('4%'),
+    marginTop: hp('4.375%'),
   },
   topBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: hp('1.25%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: SizeConstants.titles,
     fontWeight: "bold",
-    marginVertical: 20,
+    marginVertical: hp('2.5%'),
   },
   userName: {
     color: Colors.primary,
@@ -161,23 +162,23 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: SizeConstants.subtitles,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: hp('1.25%'),
   },
   sectionSubtitle: {
     fontSize: SizeConstants.subtitles,
-    marginVertical: 10,
+    marginVertical: hp('1.25%'),
   },
   searchBar: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
-    borderRadius: 20,
-    padding: 10,
-    marginTop: 10,
+    borderRadius: wp('5%'),
+    padding: wp('2.5%'),
+    marginTop: hp('1.25%'),
   },
   searchInput: {
     flex: 1,
-    marginRight: 10,
+    marginRight: wp('2.5%'),
     fontSize: SizeConstants.texts,
   },
 });

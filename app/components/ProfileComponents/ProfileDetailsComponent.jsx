@@ -12,6 +12,7 @@ import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
 import SkeletonComponent from "../generals/SkeletonComponent";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
                 {loading ? (
                     <SkeletonComponent
                         width="100%"
-                        height={45}
+                        height={hp('5.625%')}
                     />
                 ) : (
                     <>
@@ -49,7 +50,7 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
                 {loading ? (
                     <SkeletonComponent
                         width="100%"
-                        height={45}
+                        height={hp('5.625%')}
                     />
                 ) : (
                     <>
@@ -91,27 +92,27 @@ const styles = StyleSheet.create({
     container: {
         width: "90%",
         alignSelf: "center",
-        marginTop: 20,
+        marginTop: hp('2.5%'),
     },
     detailRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 15,
+        marginBottom: hp('1.875%'),
         borderBottomWidth: 0.8,
         borderBottomColor: "#E0E0E0",
-        paddingBottom: 15,
+        paddingBottom: hp('1.875%'),
     },
     detailColumn: {
-        marginLeft: 20,
+        marginLeft: wp('5%'),
     },
     label: {
         fontSize: SizeConstants.textsM,
         color: "#000",
-        marginBottom: 5,
+        marginBottom: hp('0.625%'),
     },
     labelLenguage: {
         color: "#000",
-        marginStart: 20,
+        marginStart: wp('5%'),
         fontSize: SizeConstants.textsM,
     },
     value: {
@@ -121,20 +122,20 @@ const styles = StyleSheet.create({
     switchRow: {
         flexDirection: "row",
         alignItems: "center",
-        paddingBottom: 10,
+        paddingBottom: hp('1.25%'),
     },
     switchContainer: {
-        marginStart: 100,
+        marginStart: wp('25%'),
     },
     logoutButtonContainer: {
-        marginTop: 120,
+        marginTop: hp('8%'),
         width: "50%",
         alignSelf: "center",
     },
     logoutButton: {
         backgroundColor: Colors.primary,
-        borderRadius: 50,
-        paddingVertical: 10,
+        borderRadius: wp('12.5%'),
+        paddingVertical: hp('1.25%'),
         width: "100%",
         alignItems: "center",
     },

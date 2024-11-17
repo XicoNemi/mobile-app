@@ -7,6 +7,7 @@ import ItineraryCardComponent from '../components/ItineraryCardComponent';
 import SizeConstants from '../utils/SizeConstants';
 import Colors from '../utils/Colors';
 import AssignLenguaje from '../lenguage/AssignLenguage';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ItinerariesScreen = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const ItinerariesScreen = () => {
         style={styles.createButton}
         onPress={handleCreateItinerary}
       >
-        <Ionicons name="add-outline" size={20} color="white" />
+        <Ionicons name="add-outline" size={SizeConstants.iconsCH} color="white" />
         <Text style={styles.createButtonText}>{textsLeng.ItinerariesScreen.createButtonText}</Text>
       </TouchableOpacity>
 
@@ -67,19 +68,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.primary,
-    padding: 10,
-    borderRadius: 10,
+    padding: hp('1.25%'),
+    borderRadius: wp('2.5%'),
     alignSelf: 'flex-end',
-    margin: 15,
+    margin: wp('3.75%'),
   },
   createButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    marginLeft: 5,
+    marginLeft: wp('1.25%'),
     fontSize: SizeConstants.texts,
   },
   scrollView: {
-    paddingHorizontal: 15,
+    paddingHorizontal: wp('3.75%'),
   },
 });
 

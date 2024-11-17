@@ -19,6 +19,7 @@ import { setLanguage, setTextsLeng } from "../features/languageSlice";
 import { saveValue } from "../utils/localStorage";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import SkeletonComponent from "../components/generals/SkeletonComponent";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -65,8 +66,8 @@ const ProfileScreen = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.profileHeader}>
         {loading ? (
-          <View style={{ width: 180, height: 180, borderRadius: 90, overflow: 'hidden' }}>
-            <SkeletonComponent width={180} height={180} borderRadius={90} />
+          <View style={{ width: wp('45%'), height: wp('45%'), borderRadius: wp('22.5%'), overflow: 'hidden' }}>
+            <SkeletonComponent width={wp('45%')} height={wp('45%')} borderRadius={wp('22.5%')} />
           </View>
         ) : (
           <Image
@@ -75,7 +76,7 @@ const ProfileScreen = ({ navigation }) => {
           />
         )}
         {loading ? (
-          <View style={{ width: 250, height: 30, borderRadius: 10, overflow: 'hidden', marginTop: 10 }}>
+          <View style={{ width: wp('62.5%'), height: hp('4%'), borderRadius: wp('2.5%'), overflow: 'hidden', marginTop: hp('1%') }}>
             <SkeletonComponent />
           </View>
         ) : (
@@ -145,33 +146,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    marginTop: 30,
-    padding: 20,
+    marginTop: hp('3%'),
+    padding: wp('5%'),
   },
   backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: wp('10%'),
+    height: wp('10%'),
+    borderRadius: wp('5%'),
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    top: 10,
-    left: 11,
+    top: hp('1%'),
+    left: wp('2.75%'),
     zIndex: 10,
   },
   profileHeader: {
     alignItems: "center",
-    marginTop: 75,
-    marginBottom: 20,
+    marginTop: hp('10%'),
+    marginBottom: hp('2.5%'),
   },
   avatar: {
-    width: 180,
-    height: 180,
-    borderRadius: 40,
+    width: wp('45%'),
+    height: wp('45%'),
+    borderRadius: wp('10%'),
   },
   userName: {
-    marginTop: 10,
+    marginTop: hp('1%'),
     fontSize: SizeConstants.iconsG,
     fontWeight: "bold",
   },
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#D3D3D3",
   },
   tabButton: {
-    paddingVertical: 10,
+    paddingVertical: hp('1.25%'),
     flexDirection: "row",
     alignItems: "center",
   },
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.primary,
   },
   tabText: {
-    marginLeft: 5,
+    marginLeft: wp('1.25%'),
     fontSize: SizeConstants.texts,
     color: "#808080",
   },
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
   },
-  icon: { marginRight: 5 },
+  icon: { marginRight: wp('1.25%') },
 });
 
 export default ProfileScreen;

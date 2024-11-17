@@ -12,7 +12,7 @@ import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from '../../lenguage/AssignLenguage';
 import SkeletonComponent from "../generals/SkeletonComponent";
-
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ChangePasswordComponent = () => {
     const [currentPassword, setCurrentPassword] = useState("");
@@ -47,7 +47,7 @@ const ChangePasswordComponent = () => {
         <View style={styles.container}>
             <View style={styles.inputGroup}>
                 {loading ? (
-                    <SkeletonComponent width="100%" height={50} borderRadius={5} />
+                    <SkeletonComponent width="100%" height={hp('6.25%')} borderRadius={wp('1.25%')} />
                 ) : (
                     <>
                         <Text style={styles.label}>
@@ -80,7 +80,7 @@ const ChangePasswordComponent = () => {
                     >
                         <Ionicons
                             name={isNewVisible ? "eye-off-outline" : "eye-outline"}
-                            size={20}
+                            size={SizeConstants.iconsCH}
                             color="gray"
                         />
                     </TouchableOpacity>
@@ -101,7 +101,7 @@ const ChangePasswordComponent = () => {
                     >
                         <Ionicons
                             name={isConfirmVisible ? "eye-off-outline" : "eye-outline"}
-                            size={20}
+                            size={SizeConstants.iconsCH}
                             color="gray"
                         />
                     </TouchableOpacity>
@@ -119,41 +119,41 @@ const styles = StyleSheet.create({
     container: {
         width: "90%",
         alignSelf: "center",
-        marginTop: 20,
+        marginTop: hp('2.5%'),
     },
     inputGroup: {
-        marginBottom: 20,
+        marginBottom: hp('2%'),
     },
     label: {
         color: Colors.primary,
-        marginBottom: 5,
+        marginBottom: hp('0.625%'),
     },
     passwordContainer: {
         flexDirection: "row",
         alignItems: "center",
         borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
+        borderRadius: wp('1.25%'),
+        paddingHorizontal: wp('2.5%'),
         borderColor: Colors.primary,
     },
     passwordInput: {
         flex: 1,
-        height: 50,
+        height: hp('6.2%'),
         fontSize: SizeConstants.texts,
     },
     errorText: {
         color: "red",
         fontSize: SizeConstants.texts - 5,
-        marginTop: -15,
+        marginTop: hp('-1.875%'),
     },
     button: {
         backgroundColor: Colors.primary,
-        borderRadius: 50,
-        paddingVertical: 10,
+        borderRadius: wp('12.5%'),
+        paddingVertical: hp('1.25%'),
         width: "50%",
         alignSelf: "center",
         alignItems: "center",
-        marginTop: 50,
+        marginTop: hp('1.5%'),
     },
     buttonText: {
         color: "white",

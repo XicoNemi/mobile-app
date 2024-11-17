@@ -8,6 +8,7 @@ import LanguageSwitcher from "../../lenguage/LanguageSwitcher";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/authSlice";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ProfileMenuDropdown = () => {
   const dispatch = useDispatch();
@@ -88,25 +89,25 @@ const ProfileMenuDropdown = () => {
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: "#F4F4F4",
-    padding: 20,
-    borderRadius: 5,
+    padding: wp('5%'),
+    borderRadius: wp('1.25%'),
     position: "absolute",
-    top: 50,
-    right: 10,
+    top: hp('6.25%'),
+    right: wp('2.5%'),
     zIndex: 1,
   },
   menuItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 8,
+    marginVertical: hp('1%'),
   },
   menuText: {
-    marginLeft: 12,
+    marginLeft: wp('3%'),
     fontSize: SizeConstants.texts,
   },
   languageSwitcherContainer: {
-    marginVertical: 8,
-    marginLeft: -8,
+    marginVertical: hp('1%'),
+    marginLeft: wp('-2%'),
   },
 });
 

@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const PhoneAndBirthdayComponent = ({
   tel,
@@ -181,8 +182,8 @@ const PhoneAndBirthdayComponent = ({
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    marginBottom: 15,
-    marginTop: -5
+    marginBottom: hp('1.875%'),
+    marginTop: hp('-1.25%'),
   },
   rowContainer: {
     flexDirection: "row",
@@ -194,20 +195,20 @@ const styles = StyleSheet.create({
   },
   label: {
     color: Colors.primary,
-    marginBottom: 5,
+    marginBottom: hp('0.625%'),
   },
   input: {
-    height: 45,
+    height: hp('6.25%'),
     borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 15,
+    borderRadius: wp('1.25%'),
+    paddingHorizontal: wp('2.5%'),
+    marginBottom: hp('1.875%'),
   },
   errorText: {
     color: "red",
     fontSize: SizeConstants.texts - 5,
-    marginTop: -12,
-    marginBottom: 10,
+    marginTop: hp('-1.25%'),
+    marginBottom: hp('1.25%'),
   },
 });
 

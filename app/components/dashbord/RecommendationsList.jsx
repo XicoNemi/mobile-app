@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet, Image } from "react-native";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const recommendationsData = [
   { id: 1, image: require("../../../assets/visit1.jpeg"), name: "Xochipila" },
@@ -20,7 +21,7 @@ const RecommendationsList = ({ loading }) => {
       renderItem={({ item }) => (
         <View style={styles.recommendationBox}>
           {loading ? (
-            <SkeletonComponent width={200} height={150} />
+            <SkeletonComponent width={wp('50%')} height={hp('20%')} />
           ) : (
             <>
               <Image source={item.image} style={styles.recommendationImage} />
@@ -37,19 +38,19 @@ const RecommendationsList = ({ loading }) => {
 
 const styles = StyleSheet.create({
   recommendationList: {
-    marginBottom: 20,
+    marginBottom: hp('2.5%'),
   },
   recommendationBox: {
     alignItems: "center",
-    marginRight: 10,
+    marginRight: wp('2.5%'),
   },
   recommendationImage: {
-    width: 200,
-    height: 150,
-    borderRadius: 10,
+    width: wp('50%'),
+    height: hp('20%'),
+    borderRadius: wp('2.5%'),
   },
   recommendationText: {
-    marginTop: 8,
+    marginTop: hp('1%'),
     fontSize: SizeConstants.texts,
     fontWeight: "bold",
   },

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet, Image } from "react-native";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const routesData = [
   { id: 1, image: require("../../../assets/route1.jpg"), title: "Ruta 1" },
@@ -20,7 +21,7 @@ const RoutesList = ({ loading }) => {
       renderItem={({ item }) => (
         <View style={styles.routeBox}>
           {loading ? (
-            <SkeletonComponent width={250} height={200} />
+            <SkeletonComponent width={wp('62.5%')} height={hp('25%')} />
           ) : (
             <Image source={item.image} style={styles.routeImage} />
           )}
@@ -34,21 +35,21 @@ const RoutesList = ({ loading }) => {
 
 const styles = StyleSheet.create({
   routeList: {
-    marginBottom: 20,
+    marginBottom: hp('2.5%'),
   },
   routeBox: {
-    width: 250,
-    height: 200,
+    width: wp('62.5%'),
+    height: hp('25%'),
     backgroundColor: "#e0e0e0",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
-    marginRight: 10,
+    borderRadius: wp('2.5%'),
+    marginRight: wp('2.5%'),
   },
   routeImage: {
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: wp('2.5%'),
   },
 });
 

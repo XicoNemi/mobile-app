@@ -6,6 +6,7 @@ import { setLanguage, setTextsLeng } from "../features/languageSlice";
 import { saveValue, getValueFor } from "../utils/localStorage";
 import SizeConstants from "../utils/SizeConstants";
 import LanguageProvider from "../lenguage/LanguageProvider";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const LanguageSwitcher = () => {
   const dispatch = useDispatch();
@@ -55,16 +56,16 @@ const styles = StyleSheet.create({
   translator: {
     flexDirection: "row",
     backgroundColor: "#F4F4F4",
-    paddingVertical: 6,
-    paddingHorizontal: 6,
-    borderRadius: 6,
+    paddingVertical: hp('0.75%'),
+    paddingHorizontal: wp('2.5%'),
+    borderRadius: wp('1.5%'),
     alignItems: "center",
   },
   icon: {
-    marginRight: 5,
+    marginRight: wp('1.25%'),
   },
   text: {
-    marginLeft: 5,
+    marginLeft: wp('1.25%'),
     color: "black",
     fontSize: SizeConstants.texts,
     fontWeight: "bold",

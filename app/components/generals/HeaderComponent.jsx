@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import SizeConstants from '../../utils/SizeConstants';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Header = ({ title, rightIcon, onRightIconPress }) => {
   const navigation = useNavigation();
@@ -32,17 +33,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: wp('5%'),
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    marginTop: 35,
+    marginTop: hp('4.375%'),
   },
   backButton: {
-    marginRight: 20,
+    marginRight: wp('5%'),
   },
   rightButton: {
-    marginLeft: 20,
+    marginLeft: wp('5%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,

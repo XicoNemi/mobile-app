@@ -2,6 +2,7 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import { useSelector } from "react-redux";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const GoogleButtonComponent = ({ onPress }) => {
   const textsLeng = useSelector((state) => state.language.texts);
@@ -20,21 +21,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#333",
-    paddingVertical: 10,
-    paddingHorizontal: 93,
-    borderRadius: 22,
-    marginBottom: 10,
+    paddingVertical: hp('1.25%'),
+    paddingHorizontal: wp('23.25%'),
+    borderRadius: wp('5.5%'),
+    marginBottom: hp('1.25%'),
     width: "95%",
-    height: 50,
+    height: hp('6.25%'),
   },
   icon: {
-    width: 27,  
-    height: 27, 
+    width: wp('6.75%'),  
+    height: wp('6.75%'), 
   },
   socialButtonText: {
     color: "white",
     fontSize: SizeConstants.texts,
-    marginLeft: 10,
+    marginLeft: wp('2.5%'),
   },
 });
 

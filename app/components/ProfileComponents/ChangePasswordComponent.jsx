@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     container: {
         width: "90%",
         alignSelf: "center",
+        marginTop: 20,
     },
     inputGroup: {
         marginBottom: 20,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
         width: "50%",
         alignSelf: "center",
         alignItems: "center",
-        marginTop: 25,
+        marginTop: 50,
     },
     buttonText: {
         color: "white",

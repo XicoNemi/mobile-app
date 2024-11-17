@@ -6,13 +6,13 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Switch,
   Image,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
 import ChangePasswordComponent from "../components/ProfileComponents/ChangePasswordComponent";
+import ProfileDetailsComponent from "../components/ProfileComponents/ProfileDetailsComponent";
 import CustomAlert from "../components/generals/CustomAlertComponent";
 import { logOut } from "../features/authSlice";
 import { setLanguage, setTextsLeng } from "../features/languageSlice";
@@ -27,12 +27,12 @@ const ProfileScreen = ({ navigation }) => {
   const language = useSelector((state) => state.language.language);
 
   useEffect(() => {
-    AssignLenguaje(dispatch); // Para inicializar los textos según el idioma almacenado.
+    AssignLenguaje(dispatch);
   }, [dispatch]);
 
   const toggleLanguage = async () => {
     const newLanguage = language === "spa" ? "en" : "spa";
-    await saveValue("lenguage", newLanguage); // Guarda el idioma en almacenamiento local.
+    await saveValue("lenguage", newLanguage);
     dispatch(setLanguage(newLanguage));
     dispatch(setTextsLeng(LanguageProvider[newLanguage]));
   };
@@ -115,59 +115,16 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Condición para mostrar el contenido correcto */}
       {!isEditingPassword ? (
-        <View style={styles.profileDetails}>
-          {/* Contenido de "Perfil" */}
-          <View style={styles.detailRow}>
-            <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
-            <View style={styles.detailColumn}>
-              <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
-              <Text style={styles.value}>neftaliarturohernandez@gmail.com</Text>
-            </View>
-          </View>
-          <View style={styles.detailRow}>
-            <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
-            <View style={styles.detailColumn}>
-              <Text style={styles.label}>
-                {textsLeng.ProfileScreen.phoneNum}
-              </Text>
-              <Text style={styles.value}>7641146446</Text>
-            </View>
-          </View>
-          <View style={styles.switchRow}>
-            <Ionicons
-              name="globe-sharp"
-              size={SizeConstants.iconsCH}
-              color="#000"
-            />
-            <Text style={styles.labelLenguage}>
-              {textsLeng.ProfileScreen.changeLenguage}
-            </Text>
-            <View style={styles.switchContainer}>
-              <Switch
-                trackColor={{ false: "#767577", true: Colors.primary }}
-                thumbColor={language === "spa" ? "#000" : "#000"}
-                onValueChange={toggleLanguage}
-                value={language === "en"}
-                style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }}
-              />
-            </View>
-          </View>
-
-          <TouchableOpacity
-            style={styles.logoutButton}
-            onPress={handleLogout}
-          >
-            <Text style={styles.logoutButtonText}>
-              {textsLeng.ProfileScreen.logout}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <ProfileDetailsComponent
+          toggleLanguage={toggleLanguage}
+          handleLogout={handleLogout}
+        />
       ) : (
-        <View style={styles.changePasswordContainer}>
-          <ChangePasswordComponent />
-        </View>
+        <ChangePasswordComponent />
       )}
+
       <CustomAlert
         isVisible={isModalVisible}
         title={textsLeng.AlertMessagelogOut.title}
@@ -248,58 +205,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   icon: { marginRight: 5 },
-  profileDetails: { paddingHorizontal: 22, marginTop: 35 },
-  detailRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 15,
-    borderBottomWidth: 0.8,
-    borderBottomColor: "#E0E0E0",
-    paddingBottom: 15,
-  },
-  detailColumn: {
-    marginLeft: 20
-  },
-  label: {
-    fontSize: SizeConstants.textsM,
-    color: "#000",
-    marginBottom: 5,
-  },
-  labelLenguage: {
-    color: "#000",
-    marginStart: 20,
-    fontSize: SizeConstants.textsM,
-  },
-  value: {
-    fontSize: SizeConstants.texts,
-    color: Colors.primary,
-  },
-  switchRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingBottom: 10,
-    marginEnd: 100,
-  },
-
-  switchContainer: {
-    marginStart: 100,
-  },
-
-  changePasswordContainer: { paddingHorizontal: 22, marginTop: 35 },
-  logoutButton: {
-    backgroundColor: Colors.primary,
-    borderRadius: 50,
-    paddingVertical: 10,
-    width: "45%",
-    alignSelf: "center",
-    alignItems: "center",
-    marginTop: 100,
-  },
-  logoutButtonText: {
-    color: "#FFF",
-    fontWeight: "bold",
-    fontSize: SizeConstants.texts,
-  },
 });
 
 export default ProfileScreen;

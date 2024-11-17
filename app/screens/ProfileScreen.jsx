@@ -12,22 +12,30 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
-import ChangePasswordComponent from "../components/register/ChangePasswordComponent";
+import ChangePasswordComponent from "../components/ProfileComponents/ChangePasswordComponent";
 import CustomAlert from "../components/generals/CustomAlertComponent";
 import { logOut } from "../features/authSlice";
+import { setLanguage, setTextsLeng } from "../features/languageSlice";
+import { saveValue } from "../utils/localStorage";
+import LanguageProvider from "../lenguage/LanguageProvider";
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
+  const language = useSelector((state) => state.language.language);
 
   useEffect(() => {
-    AssignLenguaje(dispatch);
+    AssignLenguaje(dispatch); // Para inicializar los textos según el idioma almacenado.
   }, [dispatch]);
 
-  const toggleDarkMode = () => setIsDarkMode((prevState) => !prevState);
+  const toggleLanguage = async () => {
+    const newLanguage = language === "spa" ? "en" : "spa";
+    await saveValue("lenguage", newLanguage); // Guarda el idioma en almacenamiento local.
+    dispatch(setLanguage(newLanguage));
+    dispatch(setTextsLeng(LanguageProvider[newLanguage]));
+  };
 
   const handleLogout = () => {
     setIsModalVisible(true);
@@ -44,7 +52,6 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* Botón de regresar */}
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}
@@ -58,7 +65,7 @@ const ProfileScreen = ({ navigation }) => {
           source={require("../../assets/avatar.png")}
           style={styles.avatar}
         />
-        <Text style={styles.userName}>Eli Haziel, 19</Text>
+        <Text style={styles.userName}>Neftali Arturo</Text>
       </View>
 
       <View style={styles.tabContainer}>
@@ -115,7 +122,7 @@ const ProfileScreen = ({ navigation }) => {
             <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
             <View style={styles.detailColumn}>
               <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
-              <Text style={styles.value}>jfosadoanimas@gmail.com</Text>
+              <Text style={styles.value}>neftaliarturohernandez@gmail.com</Text>
             </View>
           </View>
           <View style={styles.detailRow}>
@@ -124,7 +131,7 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={styles.label}>
                 {textsLeng.ProfileScreen.phoneNum}
               </Text>
-              <Text style={styles.value}>76476476476</Text>
+              <Text style={styles.value}>7641146446</Text>
             </View>
           </View>
           <View style={styles.switchRow}>
@@ -139,9 +146,9 @@ const ProfileScreen = ({ navigation }) => {
             <View style={styles.switchContainer}>
               <Switch
                 trackColor={{ false: "#767577", true: Colors.primary }}
-                thumbColor={isDarkMode ? "#000" : "#000"}
-                onValueChange={toggleDarkMode}
-                value={isDarkMode}
+                thumbColor={language === "spa" ? "#000" : "#000"}
+                onValueChange={toggleLanguage}
+                value={language === "en"}
                 style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }}
               />
             </View>
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     top: 10,
-    left: 10,
+    left: 11,
     zIndex: 10,
   },
   profileHeader: {
@@ -219,7 +226,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: "#D3D3D3",
   },
   tabButton: {
@@ -228,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   activeTabButton: {
-    borderBottomWidth: 2,
+    borderBottomWidth: 1.5,
     borderBottomColor: Colors.primary,
   },
   tabText: {
@@ -246,7 +253,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 15,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.8,
     borderBottomColor: "#E0E0E0",
     paddingBottom: 15,
   },

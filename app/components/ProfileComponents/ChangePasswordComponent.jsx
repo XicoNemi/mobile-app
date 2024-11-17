@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from '../../lenguage/AssignLenguage';
+import SkeletonComponent from "../generals/SkeletonComponent";
 
 
 const ChangePasswordComponent = () => {
@@ -23,9 +24,13 @@ const ChangePasswordComponent = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, [dispatch]);
 
     const validatePasswords = () => {
@@ -35,27 +40,31 @@ const ChangePasswordComponent = () => {
             setError(textsLeng.ProfileScreen.changePassword.passwordError);
         } else {
             setError("");
-            // Aquí puedes añadir lógica para guardar la contraseña nueva
         }
     };
 
     return (
         <View style={styles.container}>
-            {/* Contraseña actual */}
             <View style={styles.inputGroup}>
-                <Text style={styles.label}>{textsLeng.ProfileScreen.changePassword.currentPassword}</Text>
-                <View style={styles.passwordContainer}>
-                    <TextInput
-                        style={styles.passwordInput}
-                        placeholderTextColor="#AAAAAA"
-                        secureTextEntry={!isCurrentVisible}
-                        value={currentPassword}
-                        onChangeText={setCurrentPassword}
-                    />
-                </View>
+                {loading ? (
+                    <SkeletonComponent width="100%" height={50} borderRadius={5} />
+                ) : (
+                    <>
+                        <Text style={styles.label}>
+                            {textsLeng.ProfileScreen.changePassword.currentPassword}
+                        </Text>
+                        <View style={styles.passwordContainer}>
+                            <TextInput
+                                style={styles.passwordInput}
+                                placeholderTextColor="#AAAAAA"
+                                secureTextEntry={!isCurrentVisible}
+                                value={currentPassword}
+                                onChangeText={setCurrentPassword}
+                            />
+                        </View>
+                    </>
+                )}
             </View>
-
-            {/* Contraseña nueva */}
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>{textsLeng.ProfileScreen.changePassword.newPassword}</Text>
                 <View style={styles.passwordContainer}>
@@ -77,8 +86,6 @@ const ChangePasswordComponent = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-
-            {/* Confirmar contraseña */}
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>{textsLeng.ProfileScreen.changePassword.confirmPassword}</Text>
                 <View style={styles.passwordContainer}>
@@ -100,10 +107,7 @@ const ChangePasswordComponent = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-            {/* Botón para validar */}
             <TouchableOpacity style={styles.button} onPress={validatePasswords}>
                 <Text style={styles.buttonText}>{textsLeng.ProfileScreen.changePassword.change}</Text>
             </TouchableOpacity>

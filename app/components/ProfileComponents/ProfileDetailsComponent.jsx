@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -11,37 +11,56 @@ import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
+import SkeletonComponent from "../generals/SkeletonComponent";
 
 const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const language = useSelector((state) => state.language.language);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         AssignLenguaje(dispatch);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, [dispatch]);
 
     return (
         <View style={styles.container}>
-            {/* Email */}
             <View style={styles.detailRow}>
-                <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
-                <View style={styles.detailColumn}>
-                    <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
-                    <Text style={styles.value}>neftaliarturohernandez@gmail.com</Text>
-                </View>
+                {loading ? (
+                    <SkeletonComponent
+                        width="100%"
+                        height={45}
+                    />
+                ) : (
+                    <>
+                        <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
+                        <View style={styles.detailColumn}>
+                            <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
+                            <Text style={styles.value}>neftaliarturohernandez@gmail.com</Text>
+                        </View>
+                    </>
+                )}
             </View>
-
-            {/* Teléfono */}
             <View style={styles.detailRow}>
-                <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
-                <View style={styles.detailColumn}>
-                    <Text style={styles.label}>{textsLeng.ProfileScreen.phoneNum}</Text>
-                    <Text style={styles.value}>7641146446</Text>
-                </View>
+                {loading ? (
+                    <SkeletonComponent
+                        width="100%"
+                        height={45}
+                    />
+                ) : (
+                    <>
+                        <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
+                        <View style={styles.detailColumn}>
+                            <Text style={styles.label}>{textsLeng.ProfileScreen.phoneNum}</Text>
+                            <Text style={styles.value}>7641146446</Text>
+                        </View>
+                    </>
+                )}
             </View>
-
-            {/* Cambiar idioma */}
             <View style={styles.switchRow}>
                 <Ionicons name="globe-sharp" size={SizeConstants.iconsCH} color="#000" />
                 <Text style={styles.labelLenguage}>
@@ -57,13 +76,13 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
                     />
                 </View>
             </View>
-
-            {/* Botón de cerrar sesión */}
-            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                <Text style={styles.logoutButtonText}>
-                    {textsLeng.ProfileScreen.logout}
-                </Text>
-            </TouchableOpacity>
+            <View style={styles.logoutButtonContainer}>
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                    <Text style={styles.logoutButtonText}>
+                        {textsLeng.ProfileScreen.logout}
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -107,14 +126,17 @@ const styles = StyleSheet.create({
     switchContainer: {
         marginStart: 100,
     },
+    logoutButtonContainer: {
+        marginTop: 120,
+        width: "50%",
+        alignSelf: "center",
+    },
     logoutButton: {
         backgroundColor: Colors.primary,
         borderRadius: 50,
         paddingVertical: 10,
-        width: "50%",
-        alignSelf: "center",
+        width: "100%",
         alignItems: "center",
-        marginTop: 120,
     },
     logoutButtonText: {
         color: "#FFF",

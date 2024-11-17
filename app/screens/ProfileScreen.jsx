@@ -18,16 +18,21 @@ import { logOut } from "../features/authSlice";
 import { setLanguage, setTextsLeng } from "../features/languageSlice";
 import { saveValue } from "../utils/localStorage";
 import LanguageProvider from "../lenguage/LanguageProvider";
+import SkeletonComponent from "../components/generals/SkeletonComponent";
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
   const language = useSelector((state) => state.language.language);
 
   useEffect(() => {
     AssignLenguaje(dispatch);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   }, [dispatch]);
 
   const toggleLanguage = async () => {
@@ -58,22 +63,28 @@ const ProfileScreen = ({ navigation }) => {
       >
         <Ionicons name="arrow-back" size={SizeConstants.iconsCH} color="#FFF" />
       </TouchableOpacity>
-
-      {/* Avatar y nombre */}
       <View style={styles.profileHeader}>
-        <Image
-          source={require("../../assets/avatar.png")}
-          style={styles.avatar}
-        />
-        <Text style={styles.userName}>Neftali Arturo</Text>
+        {loading ? (
+          <View style={{ width: 180, height: 180, borderRadius: 90, overflow: 'hidden' }}>
+            <SkeletonComponent width={180} height={180} borderRadius={90} />
+          </View>
+        ) : (
+          <Image
+            source={require("../../assets/avatar.png")}
+            style={styles.avatar}
+          />
+        )}
+        {loading ? (
+          <View style={{ width: 250, height: 30, borderRadius: 10, overflow: 'hidden', marginTop: 10 }}>
+            <SkeletonComponent />
+          </View>
+        ) : (
+          <Text style={styles.userName}>Neftali Arturo</Text>
+        )}
       </View>
-
       <View style={styles.tabContainer}>
         <TouchableOpacity
-          style={[
-            styles.tabButton,
-            !isEditingPassword && styles.activeTabButton,
-          ]}
+          style={[styles.tabButton, !isEditingPassword && styles.activeTabButton]}
           onPress={() => setIsEditingPassword(false)}
         >
           <Ionicons
@@ -82,20 +93,12 @@ const ProfileScreen = ({ navigation }) => {
             color={!isEditingPassword ? "#000" : "#808080"}
             style={styles.icon}
           />
-          <Text
-            style={[
-              styles.tabText,
-              !isEditingPassword && styles.activeTabText,
-            ]}
-          >
+          <Text style={[styles.tabText, !isEditingPassword && styles.activeTabText]}>
             {textsLeng.ProfileScreen.title}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[
-            styles.tabButton,
-            isEditingPassword && styles.activeTabButton,
-          ]}
+          style={[styles.tabButton, isEditingPassword && styles.activeTabButton]}
           onPress={() => setIsEditingPassword(true)}
         >
           <Ionicons
@@ -104,18 +107,11 @@ const ProfileScreen = ({ navigation }) => {
             color={isEditingPassword ? "#000" : "#808080"}
             style={styles.icon}
           />
-          <Text
-            style={[
-              styles.tabText,
-              isEditingPassword && styles.activeTabText,
-            ]}
-          >
+          <Text style={[styles.tabText, isEditingPassword && styles.activeTabText]}>
             {textsLeng.ProfileScreen.changePasswordTitle}
           </Text>
         </TouchableOpacity>
       </View>
-
-      {/* Condición para mostrar el contenido correcto */}
       {!isEditingPassword ? (
         <ProfileDetailsComponent
           toggleLanguage={toggleLanguage}

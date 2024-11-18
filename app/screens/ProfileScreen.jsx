@@ -21,20 +21,24 @@ import { saveValue } from "../utils/localStorage";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import SkeletonComponent from "../components/generals/SkeletonComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../utils/Api'; 
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
   const language = useSelector((state) => state.language.language);
+  const auth = useSelector((state) => state.auth);  // Obtiene el token y ID desde el estado
 
   useEffect(() => {
     AssignLenguaje(dispatch);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+    fetchUserData(); // Cargar los datos del usuario cuando se monta el componente
   }, [dispatch]);
 
   const toggleLanguage = async () => {
@@ -55,6 +59,25 @@ const ProfileScreen = ({ navigation }) => {
 
   const cancelLogout = () => {
     setIsModalVisible(false);
+  };
+  const fetchUserData = async () => {
+    try {
+      const response = await api.getUser(auth.id, auth.token);
+      setUserData(response);
+    } catch (error) {
+      console.error("Error al obtener los datos del usuario:", error.message);
+    }
+  };
+  // Función para calcular la edad a partir de la fecha de nacimiento
+  const calculateAge = (birthday) => {
+    const birthDate = new Date(birthday * 1000);  // Convertir de timestamp a fecha
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
   };
 
   return (
@@ -82,7 +105,15 @@ const ProfileScreen = ({ navigation }) => {
               <SkeletonComponent />
             </View>
           ) : (
-            <Text style={styles.userName}>Neftali Arturo</Text>
+            userData && (
+              <View style={styles.userNameContainer}>
+                <Text style={styles.userName}>{userData.name},</Text>
+                <Text style={[styles.age, { color: Colors.primary }]}>
+                  {calculateAge(userData.birthday)} {textsLeng.ProfileScreen.ageText}
+                </Text>
+
+              </View>
+            )
           )}
         </View>
         <View style={styles.tabContainer}>
@@ -145,6 +176,7 @@ const ProfileScreen = ({ navigation }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
@@ -178,10 +210,20 @@ const styles = StyleSheet.create({
     height: wp('45%'),
     borderRadius: wp('10%'),
   },
-  userName: {
+  userNameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: hp('1%'),
-    fontSize: SizeConstants.iconsG,
-    fontWeight: "bold",
+  },
+  userName: {
+    fontSize: SizeConstants.subtitles,
+    fontWeight: 'bold',
+    marginRight: wp('2%'),
+  },
+  age: {
+    color: Colors.primary,
+    fontSize: SizeConstants.subtitles,
+    fontWeight: 'bold',
   },
   tabContainer: {
     flexDirection: "row",

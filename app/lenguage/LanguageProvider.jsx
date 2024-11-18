@@ -80,6 +80,10 @@ const LanguageProvider = {
     },
     ItinerariesScreen: {
       title: "Itineraries",
+      createButtonText: "Create Itinerary",
+      message:"Your next visits →",
+      details:"Details",
+      itinerariesDetail:"Itinerary Details",
     },
     ProfileScreen: {
       title: "Profile",
@@ -183,6 +187,10 @@ const LanguageProvider = {
     },
     ItinerariesScreen: {
       title: "Itinerarios",
+      createButtonText: "Crear Itinerario",
+      message:"Sus próximas visitas →",
+      details:"Detalles",
+      itinerariesDetail:"Detalles del Itinerario",
     },
     ProfileScreen: {
       title: "Perfil",

@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: hp('12.5%'),
+    marginBottom: hp('11%'),
+    fontWeight: "bold"
   },
   loginButton: {
     width: "90%",
@@ -196,6 +197,7 @@ const styles = StyleSheet.create({
   registerText: {
     marginTop: hp('2.5%'),
     color: "black",
+    fontWeight: "bold"
   },
   registerLink: {
     color: Colors.events,
@@ -206,11 +208,13 @@ const styles = StyleSheet.create({
   },
   PasswordRecoveryScreenLink: {
     color: Colors.events,
+    fontWeight: "bold"
   },
   footerText: {
     position: "static",
-    top: hp('6.5%'),
+    top: hp('7.9%'),
     color: "black",
+    fontSize: SizeConstants.texts - 3,
   },
   languageSwitcher: {
     position: "static",

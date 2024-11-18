@@ -193,7 +193,8 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: hp('2%'),
+    marginBottom: hp('1.5%'),
+    fontWeight: "bold"
   },
   registerButton: {
     width: "90%",
@@ -212,9 +213,11 @@ const styles = StyleSheet.create({
   loginText: {
     marginTop: hp('1.25%'),
     color: "black",
+    fontWeight: "bold"
   },
   loginLink: {
     color: Colors.events,
+    fontWeight: "bold"
   },
   dividerContainer: {
     flexDirection: "row",

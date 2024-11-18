@@ -1,10 +1,10 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen";
-import ItinerariesScreen from "../../screens/ItinerariesScreen";
+import ItinerariesScreen from "../../screens/itineraries/ItinerariesScreen";
 import RoutesScreen from "../../screens/RoutesScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
-
+import ItineraryDetailScreen from "../../screens/itineraries/ItineraryDetailScreen";
 const Stack = createNativeStackNavigator();
 
 const StackUser = () => {
@@ -37,6 +37,14 @@ const StackUser = () => {
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
+        options={{
+          headerShown: false,
+          animation: "simple_push",
+        }}
+      />
+      <Stack.Screen
+        name="ItineraryDetailScreen"
+        component={ItineraryDetailScreen}
         options={{
           headerShown: false,
           animation: "simple_push",

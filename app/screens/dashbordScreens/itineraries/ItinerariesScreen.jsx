@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
+import HeaderComponent from '../../../components/generals/HeaderComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ItineraryCardComponent from '../../components/itinerary/ItineraryCardComponent';
-import SizeConstants from '../../utils/SizeConstants';
-import Colors from '../../utils/Colors';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
+import ItineraryCardComponent from '../../../components/dashbord/ItineraryCardComponent';
+import SizeConstants from '../../../utils/SizeConstants';
+import Colors from '../../../utils/Colors';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 
@@ -24,25 +24,25 @@ const ItinerariesScreen = () => {
       title: "Participacion XicoBike",
       date: "Lun., 25 de nov - Vie., 29 de nov. ",
       days: "5 días, en 19 días",
-      image: require('../../../assets/background.png'),
+      image: require('../../../../assets/background.png'),
     },
     {
       title: "Visita a Xico",
       date: "Lun., 25 de nov - Vie., 29 de nov.",
       days: "3 días, en 22 días",
-      image: require('../../../assets/route2.jpg'),
+      image: require('../../../../assets/route2.jpg'),
     },
     {
       title: "Recorrido por la ciudad",
       date: "Lun., 25 de nov - Vie., 29 de nov.",
       days: "2 días, en 25 días",
-      image: require('../../../assets/visit2.webp'),
+      image: require('../../../../assets/visit2.webp'),
     },
     {
       title: "Tour por la ciudad",
       date: "Lun., 25 de nov - Vie., 29 de nov.",
       days: "4 días, en 30 días",
-      image: require('../../../assets/visit1.jpeg'),
+      image: require('../../../../assets/visit1.jpeg'),
     },
   ];
 

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
-import SizeConstants from '../../utils/SizeConstants';
-import SearchInputComponent from '../../components/dashbord/SearchInputComponent';
-import TourismCardComponent from '../../components/tourismComponent/TourismCardComponent'; // Importa el componente
+import HeaderComponent from '../../../components/generals/HeaderComponent';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
+import SizeConstants from '../../../utils/SizeConstants';
+import SearchInputComponent from '../../../components/generals/SearchInputComponent';
+import TourismCardComponent from '../../../components/dashbord/TourismCardComponent'; // Importa el componente
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TourismScreen = () => {
@@ -22,19 +22,19 @@ const TourismScreen = () => {
             id: 1,
             title: 'Museo casa de Carranza',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/museo1.jpeg'),
+            image: require('../../../../assets/museo1.jpeg'),
         },
         {
             id: 2,
             title: 'Virgen de Guadalupe',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/virgen.jpg'),
+            image: require('../../../../assets/virgen.jpg'),
         },
         {
             id: 3,
             title: 'Xochipila',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/visit1.jpeg'),
+            image: require('../../../../assets/visit1.jpeg'),
         },  
     ];
 

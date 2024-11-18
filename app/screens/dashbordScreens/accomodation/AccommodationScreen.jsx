@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
-import AccomodationCardComponent from '../../components/accomodationComponents/AccomodationCardComponent';
-import SearchInputComponent from '../../components/dashbord/SearchInputComponent';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
-import SizeConstants from '../../utils/SizeConstants';
+import HeaderComponent from '../../../components/generals/HeaderComponent';
+import AccomodationCardComponent from '../../../components/dashbord/AccomodationCardComponent';
+import SearchInputComponent from '../../../components/generals/SearchInputComponent';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
+import SizeConstants from '../../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const AccommodationScreen = () => {
@@ -21,19 +21,19 @@ const AccommodationScreen = () => {
             id: '1',
             title: 'Hotel Villa de Cortez',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/hotel1.jpg'),
+            image: require('../../../../assets/hotel1.jpg'),
         },
         {
             id: '2',
             title: 'Hotel Casablanca',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/hotel2.jpg'),
+            image: require('../../../../assets/hotel2.jpg'),
         },
         {
             id: '3',
             title: 'Hotel Cafetalero',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/hotel3.jpg'),
+            image: require('../../../../assets/hotel3.jpg'),
         }
     ];
 

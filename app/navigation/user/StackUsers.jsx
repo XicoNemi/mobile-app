@@ -1,15 +1,15 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../../screens/dashbord/HomeScreen";
-import ItinerariesScreen from "../../screens/itineraries/ItinerariesScreen";
-import RoutesScreen from "../../screens/routes/RoutesScreen";
-import ProfileScreen from "../../screens/ProfileScreen";
-import ItineraryDetailScreen from "../../screens/itineraries/ItineraryDetailScreen";
-import AccommodationScreen from "../../screens/accomodation/AccommodationScreen";
-import GastronomyScreen from "../../screens/gastronomy/GastronomyScreen";
-import EventsScreen from "../../screens/events/EventsScreen";
-import TourismScreen from "../../screens/tourism/TourismScreen";
-import CreateItinerariesScreen from "../../screens/itineraries/CreateItinerariesScreen";
+import HomeScreen from "../../screens/dashbordScreens/HomeScreen";
+import ItinerariesScreen from "../../screens/dashbordScreens/itineraries/ItinerariesScreen";
+import RoutesScreen from "../../screens/dashbordScreens/routes/RoutesScreen";
+import ProfileScreen from "../../screens/dashbordScreens/profile/ProfileScreen";
+import ItineraryDetailScreen from "../../screens/dashbordScreens/itineraries/ItineraryDetailScreen";
+import AccommodationScreen from "../../screens/dashbordScreens/accomodation/AccommodationScreen";
+import GastronomyScreen from "../../screens/dashbordScreens/gastronomy/GastronomyScreen";
+import EventsScreen from "../../screens/dashbordScreens/events/EventsScreen";
+import TourismScreen from "../../screens/dashbordScreens/tourism/TourismScreen";
+import CreateItinerariesScreen from "../../screens/dashbordScreens/itineraries/CreateItinerariesScreen";
 
 const Stack = createNativeStackNavigator();
 

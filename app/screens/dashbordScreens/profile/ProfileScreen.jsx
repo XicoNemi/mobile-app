@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import AssignLenguaje from "../lenguage/AssignLenguage";
+import AssignLenguaje from "../../../lenguage/AssignLenguage";
 import {
   View,
   Text,
@@ -10,18 +10,18 @@ import {
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Colors from "../utils/Colors";
-import SizeConstants from "../utils/SizeConstants";
-import ChangePasswordComponent from "../components/profileComponents/ChangePasswordComponent";
-import ProfileDetailsComponent from "../components/profileComponents/ProfileDetailsComponent";
-import CustomAlert from "../components/generals/CustomAlertComponent";
-import { logOut } from "../features/authSlice";
-import { setLanguage, setTextsLeng } from "../features/languageSlice";
-import { saveValue } from "../utils/localStorage";
-import LanguageProvider from "../lenguage/LanguageProvider";
-import SkeletonComponent from "../components/generals/SkeletonComponent";
+import Colors from "../../../utils/Colors";
+import SizeConstants from "../../../utils/SizeConstants";
+import ChangePasswordComponent from "../../../components/profileComponents/ChangePasswordComponent";
+import ProfileDetailsComponent from "../../../components/profileComponents/ProfileDetailsComponent";
+import CustomAlert from "../../../components/generals/CustomAlertComponent";
+import { logOut } from "../../../features/authSlice";
+import { setLanguage, setTextsLeng } from "../../../features/languageSlice";
+import { saveValue } from "../../../utils/localStorage";
+import LanguageProvider from "../../../lenguage/LanguageProvider";
+import SkeletonComponent from "../../../components/generals/SkeletonComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import api from '../utils/Api';
+import api from '../../../utils/Api';
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -96,7 +96,7 @@ const ProfileScreen = ({ navigation }) => {
             </View>
           ) : (
             <Image
-              source={require("../../assets/avatar.png")}
+              source={require("../../../../assets/avatar.png")}
               style={styles.avatar}
             />
           )}

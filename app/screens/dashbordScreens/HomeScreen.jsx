@@ -18,7 +18,7 @@ import Colors from "../../utils/Colors";
 import RoutesList from "../../components/dashbord/RoutesList";
 import VisitList from "../../components/dashbord/VisitList";
 import RecommendationsList from "../../components/dashbord/RecommendationsList";
-import SearchInputComponent from "../../components/dashbord/SearchInputComponent";
+import SearchInputComponent from "../../components/generals/SearchInputComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomeScreen = () => {

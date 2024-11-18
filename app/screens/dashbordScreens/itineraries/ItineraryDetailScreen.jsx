@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
+import HeaderComponent from '../../../components/generals/HeaderComponent';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
 
-const CreateItinerariesScreen = () => {
+const ItineraryDetailScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
 
@@ -14,7 +14,7 @@ const CreateItinerariesScreen = () => {
 
     return (
         <View style={styles.container}>
-            <HeaderComponent title={textsLeng.ItinerariesScreen.CreateItinerariesScreen.title} rightIcon='menu-outline' />
+            <HeaderComponent title={textsLeng.ItinerariesScreen.itinerariesDetailScreen.title} rightIcon='person-circle-outline' />
         </View>
     );
 };
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateItinerariesScreen;
+export default ItineraryDetailScreen;

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
-import SizeConstants from '../../utils/SizeConstants';
-import SearchInputComponent from '../../components/dashbord/SearchInputComponent';
-import GastronomyCardComponent from '../../components/gastronomy/GastronomyCardComponent';
+import HeaderComponent from '../../../components/generals/HeaderComponent';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
+import SizeConstants from '../../../utils/SizeConstants';
+import SearchInputComponent from '../../../components/generals/SearchInputComponent';
+import EventsCardComponent from '../../../components/dashbord/EventsCardComponent'; // Importa el componente
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const GastronomyScreen = () => {
+const EventsScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
 
@@ -20,32 +20,32 @@ const GastronomyScreen = () => {
     const tourismData = [
         {
             id: 1,
-            title: 'Restaurante Aranjuez',
+            title: 'Feria de la Primavera',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/gastro1.png'),
+            image: require('../../../../assets/feria.png'),
         },
         {
             id: 2,
-            title: 'Parrilladas Don Mundo',
+            title: '1 Molotiza',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/gastro2.png'),
+            image: require('../../../../assets/molotisa.png'),
         },
         {
             id: 3,
-            title: 'Mr Cheve',
+            title: 'Tour del cafe y catacion',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/gastro3.png'),
+            image: require('../../../../assets/tourCafe.png'),
         },  
     ];
 
     return (
         <View style={styles.container}>
-                <HeaderComponent title={textsLeng.GastronomyScreen.title} rightIcon="menu-outline" />
+                <HeaderComponent title={textsLeng.EventsScreen.title} rightIcon="menu-outline" />
                 <ScrollView contentContainerStyle={styles.scrollView}showsVerticalScrollIndicator={false}>
                 <SearchInputComponent />
-                <Text style={styles.message}>{textsLeng.GastronomyScreen.message}</Text>
+                <Text style={styles.message}>{textsLeng.EventsScreen.message}</Text>
                 {tourismData.map((item) => (
-                    <GastronomyCardComponent
+                    <EventsCardComponent
                         key={item.id}
                         title={item.title}
                         description={item.description}
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GastronomyScreen;
+export default EventsScreen;

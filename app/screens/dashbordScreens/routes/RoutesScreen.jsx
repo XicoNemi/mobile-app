@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import HeaderComponent from '../../components/generals/HeaderComponent';
-import AssignLenguaje from '../../lenguage/AssignLenguage';
+import HeaderComponent from '../../../components/generals/HeaderComponent';
+import AssignLenguaje from '../../../lenguage/AssignLenguage';
 
 const RoutesScreen = () => {
   const dispatch = useDispatch();

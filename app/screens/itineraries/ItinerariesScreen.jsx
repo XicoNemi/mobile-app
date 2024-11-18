@@ -68,7 +68,6 @@ const ItinerariesScreen = () => {
           <Ionicons name="add-outline" size={SizeConstants.iconsCH} color="white" />
           <Text style={styles.createButtonText}>{textsLeng.ItinerariesScreen.createButtonText}</Text>
         </TouchableOpacity>
-
         <Text style={styles.message}>{textsLeng.ItinerariesScreen.message}</Text>
 
         {itineraries.map((itinerary, index) => (

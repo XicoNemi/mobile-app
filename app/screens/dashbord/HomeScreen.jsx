@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TextInput,
   StyleSheet,
   ScrollView,
 } from "react-native";
@@ -19,6 +18,7 @@ import Colors from "../../utils/Colors";
 import RoutesList from "../../components/dashbord/RoutesList";
 import VisitList from "../../components/dashbord/VisitList";
 import RecommendationsList from "../../components/dashbord/RecommendationsList";
+import SearchInputComponent from "../../components/dashbord/SearchInputComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomeScreen = () => {
@@ -28,6 +28,7 @@ const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
   const navigation = useNavigation();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
@@ -36,9 +37,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
-
-    // Cargar el idioma
+    }, 1300);
     AssignLenguaje(dispatch);
 
     return () => clearTimeout(timer);
@@ -70,29 +69,18 @@ const HomeScreen = () => {
       {menuVisibleProfile && <ProfileMenuDropdown navigation={navigation} />}
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Barra de búsqueda */}
-        <View style={styles.searchBar}>
-          {loading ? (
-            <SkeletonComponent width="100%" height={hp('5%')} />
-          ) : (
-            <>
-              <TextInput
-                placeholder={textsLeng.HomeScreen.search}
-                style={styles.searchInput}
-              />
-              <Ionicons
-                name="search-outline"
-                size={SizeConstants.iconsCH}
-                color="black"
-              />
-            </>
-          )}
-        </View>
+        {loading ? (
+          <View style={{ width: wp('90%'), height: hp('7%'), borderRadius: wp('3%'), overflow: 'hidden' }}>
+            <SkeletonComponent />
+          </View>) : (
+          <SearchInputComponent />
+        )}
 
         <Text style={styles.welcomeText}>
           {loading ? (
-            <SkeletonComponent width="50%" height={hp('5%')} />
-          ) : (
+            <View style={{ width: wp('90%'), height: hp('6%'), borderRadius: wp('1%'), overflow: 'hidden' }}>
+              <SkeletonComponent />
+            </View>) : (
             <>
               {textsLeng.HomeScreen.welcomeText}{" "}
               <Text style={styles.userName}>{userName}</Text>
@@ -155,10 +143,13 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.titles,
     fontWeight: "bold",
     marginVertical: hp('2.5%'),
+    textAlign: "center",
   },
   userName: {
     color: Colors.primary,
     fontSize: SizeConstants.titles,
+    flexWrap: 'nowrap ',
+    textAlign: "center",
   },
   sectionTitle: {
     fontSize: SizeConstants.subtitles,
@@ -169,19 +160,6 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     marginVertical: hp('1.25%'),
     fontWeight: "bold"
-  },
-  searchBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
-    borderRadius: wp('5%'),
-    padding: wp('2.5%'),
-    marginTop: hp('1.25%'),
-  },
-  searchInput: {
-    flex: 1,
-    marginRight: wp('2.5%'),
-    fontSize: SizeConstants.texts,
   },
 });
 

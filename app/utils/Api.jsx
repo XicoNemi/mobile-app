@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://5.183.9.47:11111', // La URL base del backend
+  baseURL: 'http://5.183.9.47:11111',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -34,7 +34,7 @@ const handleError = (error) => {
 const signUp = async (userData) => {
   try {
     const response = await api.post('/api/auth/sign-up', userData);
-    console.log(response.data); // Si todo es correcto, mostrar la data (usuario creado)
+    console.log(response.data); // Si todo es correcto, mostrar la data (usuario creado) con fines de depuracion por el momento
     return response.data; // Retorna la información del usuario creado
   } catch (error) {
     const { message, status } = handleError(error);
@@ -48,8 +48,8 @@ const signUp = async (userData) => {
 const signIn = async (email, password) => {
   try {
     const response = await api.post('/api/auth/sign-in', { email, password });
-    const token = response.headers['auth-token']; // Obtiene el token del encabezado
-    return { user: response.data, token }; // Retorna los datos del usuario y el token
+    const token = response.headers['auth-token'];
+    return { user: response.data, token }; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);
@@ -63,10 +63,10 @@ const getUser = async (id, token) => {
   try {
     const response = await api.get(`/api/users/${id}`, {
       headers: {
-        'auth-token': token, // Incluye el token en el encabezado
+        'auth-token': token, 
       },
     });
-    return response.data; // Retorna los datos del usuario
+    return response.data; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);
@@ -78,5 +78,5 @@ const getUser = async (id, token) => {
 export default {
   signUp,
   signIn,
-  getUser, // Exporta la nueva función
+  getUser, 
 };

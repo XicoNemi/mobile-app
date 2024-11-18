@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    marginTop: hp('4.375%'),
+    marginTop: hp('3%'),
   },
   backButton: {
     marginRight: wp('5%'),

@@ -37,7 +37,7 @@ const ProfileScreen = ({ navigation }) => {
     AssignLenguaje(dispatch);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1300);
     UserData(); 
   }, [dispatch]);
 

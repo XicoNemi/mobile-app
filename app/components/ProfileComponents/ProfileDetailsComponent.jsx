@@ -25,7 +25,7 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout, email, tel }) =
         AssignLenguaje(dispatch);
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 1300);
     }, [dispatch]);
 
     return (

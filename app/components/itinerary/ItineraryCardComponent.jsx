@@ -17,12 +17,10 @@ const ItineraryCardComponent = ({ title, date, days, onPress, image, style }) =>
 
   return (
     <View style={[styles.cardContainer, style]}>
-      {/* Imagen de la tarjeta */}
       <Image
         source={image}
         style={styles.image}
       />
-      {/* Contenido de texto */}
       <View style={styles.content}>
         <Text style={styles.title} numberOfLines={1}>{title}</Text>
         <Text style={styles.date} numberOfLines={1}>{date}</Text>
@@ -31,7 +29,6 @@ const ItineraryCardComponent = ({ title, date, days, onPress, image, style }) =>
           <Text style={styles.daysText}>{days}</Text>
         </View>
       </View>
-      {/* Botón de detalle */}
       <TouchableOpacity style={styles.button} onPress={onPress}>
         <Text style={styles.buttonText}>{textsLeng.ItinerariesScreen.details}</Text>
       </TouchableOpacity>
@@ -98,12 +95,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: hp('1.2%'), 
+    paddingVertical: hp('1.2%'),
     paddingHorizontal: wp('4%'),
     borderRadius: wp('4%'),
     position: 'absolute',
     right: wp('2%'),
-    top: hp('13%'), 
+    top: hp('13%'),
   },
   buttonText: {
     color: "white",

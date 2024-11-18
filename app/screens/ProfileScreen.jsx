@@ -21,7 +21,7 @@ import { saveValue } from "../utils/localStorage";
 import LanguageProvider from "../lenguage/LanguageProvider";
 import SkeletonComponent from "../components/generals/SkeletonComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import api from '../utils/Api'; 
+import api from '../utils/Api';
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -38,7 +38,7 @@ const ProfileScreen = ({ navigation }) => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-    fetchUserData(); // Cargar los datos del usuario cuando se monta el componente
+    UserData(); 
   }, [dispatch]);
 
   const toggleLanguage = async () => {
@@ -60,7 +60,7 @@ const ProfileScreen = ({ navigation }) => {
   const cancelLogout = () => {
     setIsModalVisible(false);
   };
-  const fetchUserData = async () => {
+  const UserData = async () => {
     try {
       const response = await api.getUser(auth.id, auth.token);
       setUserData(response);
@@ -150,6 +150,8 @@ const ProfileScreen = ({ navigation }) => {
           <ProfileDetailsComponent
             toggleLanguage={toggleLanguage}
             handleLogout={handleLogout}
+            email={userData?.email}  
+            tel={userData?.tel}    
           />
         ) : (
           <ChangePasswordComponent />

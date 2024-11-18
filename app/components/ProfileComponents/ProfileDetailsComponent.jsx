@@ -14,7 +14,7 @@ import AssignLenguaje from "../../lenguage/AssignLenguage";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
+const ProfileDetailsComponent = ({ toggleLanguage, handleLogout, email, tel }) => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const language = useSelector((state) => state.language.language);
@@ -41,7 +41,7 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
                         <Ionicons name="mail" size={SizeConstants.iconsCH} color="#000" />
                         <View style={styles.detailColumn}>
                             <Text style={styles.label}>{textsLeng.ProfileScreen.email}</Text>
-                            <Text style={styles.value}>neftaliarturohernandez@gmail.com</Text>
+                            <Text style={styles.value}>{email}</Text>
                         </View>
                     </>
                 )}
@@ -57,7 +57,7 @@ const ProfileDetailsComponent = ({ toggleLanguage, handleLogout }) => {
                         <Ionicons name="call-sharp" size={SizeConstants.iconsCH} color="#000" />
                         <View style={styles.detailColumn}>
                             <Text style={styles.label}>{textsLeng.ProfileScreen.phoneNum}</Text>
-                            <Text style={styles.value}>7641146446</Text>
+                            <Text style={styles.value}>{tel}</Text>
                         </View>
                     </>
                 )}

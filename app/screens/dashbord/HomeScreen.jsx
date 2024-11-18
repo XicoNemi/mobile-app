@@ -8,17 +8,17 @@ import {
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import MenuDropdown from "../components/menus/MenuDropdownComponent";
-import ProfileMenuDropdown from "../components/menus/ProfileMenuDropdown";
+import MenuDropdown from "../../components/menus/MenuDropdownComponent";
+import ProfileMenuDropdown from "../../components/menus/ProfileMenuDropdown";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import AssignLenguaje from "../lenguage/AssignLenguage";
-import SkeletonComponent from "../components/generals/SkeletonComponent";
-import SizeConstants from "../utils/SizeConstants";
-import Colors from "../utils/Colors";
-import RoutesList from "../components/dashbord/RoutesList";
-import VisitList from "../components/dashbord/VisitList";
-import RecommendationsList from "../components/dashbord/RecommendationsList";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
+import SkeletonComponent from "../../components/generals/SkeletonComponent";
+import SizeConstants from "../../utils/SizeConstants";
+import Colors from "../../utils/Colors";
+import RoutesList from "../../components/dashbord/RoutesList";
+import VisitList from "../../components/dashbord/VisitList";
+import RecommendationsList from "../../components/dashbord/RecommendationsList";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomeScreen = () => {

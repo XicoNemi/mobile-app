@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../../screens/HomeScreen";
+import HomeScreen from "../../screens/dashbord/HomeScreen";
 import ItinerariesScreen from "../../screens/itineraries/ItinerariesScreen";
 import RoutesScreen from "../../screens/RoutesScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
@@ -16,6 +16,7 @@ const Stack = createNativeStackNavigator();
 const StackUser = () => {
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
+      {/* Pantallas principales */}
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -25,24 +26,18 @@ const StackUser = () => {
         }}
       />
       <Stack.Screen
-        name="ItinerariesScreen"
-        component={ItinerariesScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-      <Stack.Screen
-        name="RoutesScreen"
-        component={RoutesScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-      <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
+        options={{
+          headerShown: false,
+          animation: "simple_push",
+        }}
+      />
+
+      {/* Pantallas de itinerarios */}
+      <Stack.Screen
+        name="ItinerariesScreen"
+        component={ItinerariesScreen}
         options={{
           headerShown: false,
           animation: "simple_push",
@@ -57,6 +52,26 @@ const StackUser = () => {
         }}
       />
       <Stack.Screen
+        name="CreateItinerariesScreen"
+        component={CreateItinerariesScreen}
+        options={{
+          headerShown: false,
+          animation: "simple_push",
+        }}
+      />
+
+      {/* Pantallas de rutas */}
+      <Stack.Screen
+        name="RoutesScreen"
+        component={RoutesScreen}
+        options={{
+          headerShown: false,
+          animation: "simple_push",
+        }}
+      />
+
+      {/* Pantallas de alojamiento */}
+      <Stack.Screen
         name="AccommodationScreen"
         component={AccommodationScreen}
         options={{
@@ -64,6 +79,8 @@ const StackUser = () => {
           animation: "simple_push",
         }}
       />
+
+      {/* Pantallas de gastronomía */}
       <Stack.Screen
         name="GastronomyScreen"
         component={GastronomyScreen}
@@ -72,6 +89,8 @@ const StackUser = () => {
           animation: "simple_push",
         }}
       />
+
+      {/* Pantallas de eventos */}
       <Stack.Screen
         name="EventsScreen"
         component={EventsScreen}
@@ -80,17 +99,11 @@ const StackUser = () => {
           animation: "simple_push",
         }}
       />
+
+      {/* Pantallas de turismo */}
       <Stack.Screen
         name="TourismScreen"
         component={TourismScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-      <Stack.Screen
-        name="CreateItinerariesScreen"
-        component={CreateItinerariesScreen}
         options={{
           headerShown: false,
           animation: "simple_push",

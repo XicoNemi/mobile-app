@@ -210,7 +210,7 @@ const LanguageProvider = {
       itinerariesDetailScreen:{
         title:"Detalles del Itinerario",
       },
-      createItinerariesScreen:{
+      CreateItinerariesScreen:{
         title:"Nuevo Itinerario",
       }
     },

@@ -40,7 +40,7 @@ const AccommodationScreen = () => {
     return (
         <View style={styles.container}>
             <HeaderComponent title={textsLeng.AccommodationScreen.title} rightIcon="menu-outline" />
-            <ScrollView contentContainerStyle={styles.scrollView}>
+            <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
                 <SearchInputComponent />
                 <Text style={styles.message}>{textsLeng.AccommodationScreen.message}</Text>
                 {hospedajes.map((hospedaje, index) => (

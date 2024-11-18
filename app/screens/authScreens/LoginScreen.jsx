@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
       <LoaderComponent
         isVisible={isLoading}
         text={textsLeng.LoginScreen.messageLog}

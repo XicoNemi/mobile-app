@@ -5,10 +5,10 @@ import HeaderComponent from '../../components/generals/HeaderComponent';
 import AssignLenguaje from '../../lenguage/AssignLenguage';
 import SizeConstants from '../../utils/SizeConstants';
 import SearchInputComponent from '../../components/dashbord/SearchInputComponent';
-import TourismCardComponent from '../../components/tourismComponent/TourismCardComponent'; // Importa el componente
+import EventsCardComponent from '../../components/events/EventsCardComponent'; // Importa el componente
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const TourismScreen = () => {
+const EventsScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
 
@@ -20,32 +20,32 @@ const TourismScreen = () => {
     const tourismData = [
         {
             id: 1,
-            title: 'Museo casa de Carranza',
+            title: 'Feria de la Primavera',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../assets/museo1.jpeg'),
+            image: require('../../../assets/feria.png'),
         },
         {
             id: 2,
-            title: 'Virgen de Guadalupe',
+            title: '1 Molotiza',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/virgen.jpg'),
+            image: require('../../../assets/molotisa.png'),
         },
         {
             id: 3,
-            title: 'Xochipila',
+            title: 'Tour del cafe y catacion',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../assets/visit1.jpeg'),
+            image: require('../../../assets/tourCafe.png'),
         },  
     ];
 
     return (
         <View style={styles.container}>
-                <HeaderComponent title={textsLeng.TourismScreen.title} rightIcon="menu-outline" />
-                <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
+                <HeaderComponent title={textsLeng.EventsScreen.title} rightIcon="menu-outline" />
+                <ScrollView contentContainerStyle={styles.scrollView}showsVerticalScrollIndicator={false}>
                 <SearchInputComponent />
-                <Text style={styles.message}>{textsLeng.TourismScreen.message}</Text>
+                <Text style={styles.message}>{textsLeng.EventsScreen.message}</Text>
                 {tourismData.map((item) => (
-                    <TourismCardComponent
+                    <EventsCardComponent
                         key={item.id}
                         title={item.title}
                         description={item.description}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: SizeConstants.subtitles,
         marginTop: hp('2.5%'),
-        marginBottom: hp('1%'),
+        marginBottom: hp('2%'),
         fontWeight: 'bold',
     },
     scrollView: {
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TourismScreen;
+export default EventsScreen;

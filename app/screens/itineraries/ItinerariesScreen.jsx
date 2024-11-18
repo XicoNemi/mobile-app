@@ -60,7 +60,7 @@ const ItinerariesScreen = () => {
         title={textsLeng.ItinerariesScreen.title}
         rightIcon="person-circle-outline"
       />
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
         <TouchableOpacity
           style={styles.createButton}
           onPress={handleCreateItinerary}

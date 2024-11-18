@@ -7,7 +7,7 @@ import ProfileScreen from "../../screens/ProfileScreen";
 import ItineraryDetailScreen from "../../screens/itineraries/ItineraryDetailScreen";
 import AccommodationScreen from "../../screens/accomodation/AccommodationScreen";
 import GastronomyScreen from "../../screens/GastronomyScreen";
-import EventsScreen from "../../screens/EventsScreen";
+import EventsScreen from "../../screens/events/EventsScreen";
 import TourismScreen from "../../screens/tourism/TourismScreen";
 import CreateItinerariesScreen from "../../screens/itineraries/CreateItinerariesScreen";
 

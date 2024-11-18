@@ -115,9 +115,11 @@ const LanguageProvider = {
     },
     GastronomyScreen: {
       title: "Gastronomy",
+      message:"Recommended places →",
     },
     EventsScreen: {
       title: "Events",
+      message:"Available events →",
     },
     TourismScreen: {
       title: "Tourism",
@@ -241,9 +243,11 @@ const LanguageProvider = {
     },
     GastronomyScreen: {
       title: "Gastronomía",
+      message:"Lugares recomendados →",
     },
     EventsScreen: {
       title: "Eventos",
+      message:"Eventos disponibles →",
     }, 
     TourismScreen: {
       title: "Turismo",

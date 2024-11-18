@@ -8,7 +8,7 @@ import ItineraryDetailScreen from "../../screens/itineraries/ItineraryDetailScre
 import AccommodationScreen from "../../screens/accomodation/AccommodationScreen";
 import GastronomyScreen from "../../screens/GastronomyScreen";
 import EventsScreen from "../../screens/EventsScreen";
-import TourismScreen from "../../screens/TourismScreen";
+import TourismScreen from "../../screens/tourism/TourismScreen";
 import CreateItinerariesScreen from "../../screens/itineraries/CreateItinerariesScreen";
 
 const Stack = createNativeStackNavigator();

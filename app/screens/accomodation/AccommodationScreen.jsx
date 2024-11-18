@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../components/generals/HeaderComponent';
-import AccomodationCardComponent from '../../components/accomodation/AccomodationCardComponent';
+import AccomodationCardComponent from '../../components/accomodationComponents/AccomodationCardComponent';
 import SearchInputComponent from '../../components/dashbord/SearchInputComponent';
 import AssignLenguaje from '../../lenguage/AssignLenguage';
 import SizeConstants from '../../utils/SizeConstants';
@@ -42,7 +42,7 @@ const AccommodationScreen = () => {
             <HeaderComponent title={textsLeng.AccommodationScreen.title} rightIcon="menu-outline" />
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <SearchInputComponent />
-                <Text style={styles.message}>{textsLeng.ItinerariesScreen.message}</Text>
+                <Text style={styles.message}>{textsLeng.AccommodationScreen.message}</Text>
                 {hospedajes.map((hospedaje, index) => (
                     <AccomodationCardComponent
                         key={index}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         color: "#000",
         fontSize: SizeConstants.subtitles,
         marginTop: hp('2.5%'),
-        marginBottom: hp('1%'),
+        marginBottom: hp('2%'),
         fontWeight: 'bold',
     },
     scrollView: {

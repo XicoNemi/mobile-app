@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: wp('5%'),
     backgroundColor: '#fff',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.3,
     borderBottomColor: '#ddd',
     marginTop: hp('3%'),
   },

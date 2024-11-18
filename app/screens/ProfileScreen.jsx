@@ -12,8 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
 import SizeConstants from "../utils/SizeConstants";
-import ChangePasswordComponent from "../components/ProfileComponents/ChangePasswordComponent";
-import ProfileDetailsComponent from "../components/ProfileComponents/ProfileDetailsComponent";
+import ChangePasswordComponent from "../components/profileComponents/ChangePasswordComponent";
+import ProfileDetailsComponent from "../components/profileComponents/ProfileDetailsComponent";
 import CustomAlert from "../components/generals/CustomAlertComponent";
 import { logOut } from "../features/authSlice";
 import { setLanguage, setTextsLeng } from "../features/languageSlice";
@@ -109,7 +109,7 @@ const ProfileScreen = ({ navigation }) => {
               <View style={styles.userNameContainer}>
                 <Text style={styles.userName}>{userData.name},</Text>
                 <Text style={[styles.age, { color: Colors.primary }]}>
-                  {calculateAge(userData.birthday)} {textsLeng.ProfileScreen.ageText}
+                  {calculateAge(userData.birthday)} {textsLeng.ProfileScreen.ageText}Años
                 </Text>
 
               </View>

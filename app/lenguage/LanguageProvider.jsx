@@ -111,6 +111,7 @@ const LanguageProvider = {
     },
     AccommodationScreen: {
       title: "Accommodation",
+      message:"Available accommodations →",
     },
     GastronomyScreen: {
       title: "Gastronomy",
@@ -120,6 +121,7 @@ const LanguageProvider = {
     },
     TourismScreen: {
       title: "Tourism",
+      message:"Places to visit →",
     },
   },
 
@@ -235,6 +237,7 @@ const LanguageProvider = {
     },
     AccommodationScreen: {
       title: "Hospedaje",
+      message:"Hospedajes disponibles →",
     },
     GastronomyScreen: {
       title: "Gastronomía",
@@ -244,6 +247,7 @@ const LanguageProvider = {
     }, 
     TourismScreen: {
       title: "Turismo",
+      message:"Lugares para visitar →",
     },
   },
 };

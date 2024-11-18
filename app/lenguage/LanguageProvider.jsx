@@ -83,7 +83,12 @@ const LanguageProvider = {
       createButtonText: "Create Itinerary",
       message:"Your next visits →",
       details:"Details",
-      itinerariesDetail:"Itinerary Details",
+      itinerariesDetailScreen:{
+        title:"Itinerary Details",
+      },
+      CreateItinerariesScreen:{
+        title:"New Itinerary",
+      }
     },
     ProfileScreen: {
       title: "Profile",
@@ -103,6 +108,18 @@ const LanguageProvider = {
     },
     RoutesScreen: {
       title: "Routes",
+    },
+    AccommodationScreen: {
+      title: "Accommodation",
+    },
+    GastronomyScreen: {
+      title: "Gastronomy",
+    },
+    EventsScreen: {
+      title: "Events",
+    },
+    TourismScreen: {
+      title: "Tourism",
     },
   },
 
@@ -190,7 +207,12 @@ const LanguageProvider = {
       createButtonText: "Crear Itinerario",
       message:"Sus próximas visitas →",
       details:"Detalles",
-      itinerariesDetail:"Detalles del Itinerario",
+      itinerariesDetailScreen:{
+        title:"Detalles del Itinerario",
+      },
+      createItinerariesScreen:{
+        title:"Nuevo Itinerario",
+      }
     },
     ProfileScreen: {
       title: "Perfil",
@@ -210,6 +232,18 @@ const LanguageProvider = {
     },
     RoutesScreen: {
       title: "Rutas",
+    },
+    AccommodationScreen: {
+      title: "Hospedaje",
+    },
+    GastronomyScreen: {
+      title: "Gastronomía",
+    },
+    EventsScreen: {
+      title: "Eventos",
+    }, 
+    TourismScreen: {
+      title: "Turismo",
     },
   },
 };

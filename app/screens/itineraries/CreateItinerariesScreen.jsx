@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../components/generals/HeaderComponent';
 import AssignLenguaje from '../../lenguage/AssignLenguage';
 
-const ItineraryDetailScreen = () => {
+const CreateItinerariesScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
 
@@ -14,7 +14,7 @@ const ItineraryDetailScreen = () => {
 
     return (
         <View style={styles.container}>
-            <HeaderComponent title={textsLeng.ItinerariesScreen.itinerariesDetailScreen.title} rightIcon='person-circle-outline' />
+            <HeaderComponent title={textsLeng.ItinerariesScreen.CreateItinerariesScreen.title} rightIcon='menu-outline' />
         </View>
     );
 };
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ItineraryDetailScreen;
+export default CreateItinerariesScreen;

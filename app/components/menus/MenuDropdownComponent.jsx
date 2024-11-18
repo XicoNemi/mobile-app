@@ -16,10 +16,10 @@ const MenuDropdown = ({ navigation }) => {
 
   const menuItems = [
     { icon: 'map-outline', label: textsLeng.components.menuItems.routes, screen: 'RoutesScreen' },
-    { icon: 'bed-outline', label: textsLeng.components.menuItems.bed },
-    { icon: 'star-outline', label: textsLeng.components.menuItems.food },
-    { icon: 'calendar-outline', label: textsLeng.components.menuItems.events },
-    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism },
+    { icon: 'bed-outline', label: textsLeng.components.menuItems.bed, screen: 'AccommodationScreen' },
+    { icon: 'star-outline', label: textsLeng.components.menuItems.food,  screen: 'GastronomyScreen' },
+    { icon: 'calendar-outline', label: textsLeng.components.menuItems.events, screen: 'EventsScreen' },
+    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism, screen: 'TourismScreen' },
     { icon: 'list-outline', label: textsLeng.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
   ];
 

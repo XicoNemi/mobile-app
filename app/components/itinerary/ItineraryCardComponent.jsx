@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: wp('4%'),
     padding: wp('2.5%'),
-    marginBottom: hp('0.7%'),
+    marginBottom: hp('0.9%'),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: SizeConstants.subtitles,
+    fontSize: SizeConstants.textsM,
     fontWeight: "bold",
     color: Colors.primary,
     marginBottom: hp('0.5%'),
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     color: "gray",
     marginBottom: hp('0.5%'),
     flexWrap: 'nowrap',
+    fontSize: SizeConstants.texts,
   },
   daysContainer: {
     flexDirection: "row",
@@ -91,22 +92,24 @@ const styles = StyleSheet.create({
     marginLeft: wp('1%'),
     fontSize: wp('4%'),
     color: "gray",
+    fontSize: SizeConstants.texts,
   },
   button: {
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: hp('1.2%'), // Ajusta el tamaño
+    paddingVertical: hp('1.2%'), 
     paddingHorizontal: wp('4%'),
     borderRadius: wp('4%'),
     position: 'absolute',
     right: wp('2%'),
-    top: hp('13%'), // Alinea el botón a la altura de daysContainer
+    top: hp('13%'), 
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
     fontSize: wp('4%'),
+    fontSize: SizeConstants.texts,
   },
 });
 

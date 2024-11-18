@@ -8,11 +8,11 @@ import SizeConstants from '../../utils/SizeConstants';
 import Colors from '../../utils/Colors';
 import AssignLenguaje from '../../lenguage/AssignLenguage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { useNavigation } from '@react-navigation/native'; // Importa el hook
+import { useNavigation } from '@react-navigation/native';
 
 const ItinerariesScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation(); // Obtén el objeto de navegación
+  const navigation = useNavigation();
   const textsLeng = useSelector((state) => state.language.texts);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ItinerariesScreen = () => {
   ];
 
   const handleCreateItinerary = () => {
-    console.log('Crear Itinerario');
+    navigation.navigate('CreateItinerariesScreen');
   };
 
   const handleViewDetail = (itinerary) => {
@@ -78,7 +78,7 @@ const ItinerariesScreen = () => {
             date={itinerary.date}
             days={itinerary.days}
             image={itinerary.image}
-            onPress={() => handleViewDetail(itinerary)} // Pasa el itinerario como parámetro
+            onPress={() => handleViewDetail(itinerary)}
           />
         ))}
       </ScrollView>

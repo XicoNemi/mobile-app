@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../utils/Colors";
@@ -57,92 +58,98 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Ionicons name="arrow-back" size={SizeConstants.iconsCH} color="#FFF" />
-      </TouchableOpacity>
-      <View style={styles.profileHeader}>
-        {loading ? (
-          <View style={{ width: wp('45%'), height: wp('45%'), borderRadius: wp('22.5%'), overflow: 'hidden' }}>
-            <SkeletonComponent width={wp('45%')} height={wp('45%')} borderRadius={wp('22.5%')} />
-          </View>
-        ) : (
-          <Image
-            source={require("../../assets/avatar.png")}
-            style={styles.avatar}
-          />
-        )}
-        {loading ? (
-          <View style={{ width: wp('62.5%'), height: hp('4%'), borderRadius: wp('2.5%'), overflow: 'hidden', marginTop: hp('1%') }}>
-            <SkeletonComponent />
-          </View>
-        ) : (
-          <Text style={styles.userName}>Neftali Arturo</Text>
-        )}
-      </View>
-      <View style={styles.tabContainer}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
+      <View style={styles.container}>
         <TouchableOpacity
-          style={[styles.tabButton, !isEditingPassword && styles.activeTabButton]}
-          onPress={() => setIsEditingPassword(false)}
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
         >
-          <Ionicons
-            name="person-circle-outline"
-            size={SizeConstants.iconsM}
-            color={!isEditingPassword ? "#000" : "#808080"}
-            style={styles.icon}
-          />
-          <Text style={[styles.tabText, !isEditingPassword && styles.activeTabText]}>
-            {textsLeng.ProfileScreen.title}
-          </Text>
+          <Ionicons name="arrow-back" size={SizeConstants.iconsCH} color="#FFF" />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, isEditingPassword && styles.activeTabButton]}
-          onPress={() => setIsEditingPassword(true)}
-        >
-          <Ionicons
-            name="settings-sharp"
-            size={SizeConstants.iconsM}
-            color={isEditingPassword ? "#000" : "#808080"}
-            style={styles.icon}
+        <View style={styles.profileHeader}>
+          {loading ? (
+            <View style={{ width: wp('45%'), height: wp('45%'), borderRadius: wp('22.5%'), overflow: 'hidden' }}>
+              <SkeletonComponent width={wp('45%')} height={wp('45%')} borderRadius={wp('22.5%')} />
+            </View>
+          ) : (
+            <Image
+              source={require("../../assets/avatar.png")}
+              style={styles.avatar}
+            />
+          )}
+          {loading ? (
+            <View style={{ width: wp('62.5%'), height: hp('4%'), borderRadius: wp('2.5%'), overflow: 'hidden', marginTop: hp('1%') }}>
+              <SkeletonComponent />
+            </View>
+          ) : (
+            <Text style={styles.userName}>Neftali Arturo</Text>
+          )}
+        </View>
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tabButton, !isEditingPassword && styles.activeTabButton]}
+            onPress={() => setIsEditingPassword(false)}
+          >
+            <Ionicons
+              name="person-circle-outline"
+              size={SizeConstants.iconsM}
+              color={!isEditingPassword ? "#000" : "#808080"}
+              style={styles.icon}
+            />
+            <Text style={[styles.tabText, !isEditingPassword && styles.activeTabText]}>
+              {textsLeng.ProfileScreen.title}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tabButton, isEditingPassword && styles.activeTabButton]}
+            onPress={() => setIsEditingPassword(true)}
+          >
+            <Ionicons
+              name="settings-sharp"
+              size={SizeConstants.iconsM}
+              color={isEditingPassword ? "#000" : "#808080"}
+              style={styles.icon}
+            />
+            <Text style={[styles.tabText, isEditingPassword && styles.activeTabText]}>
+              {textsLeng.ProfileScreen.changePasswordTitle}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {!isEditingPassword ? (
+          <ProfileDetailsComponent
+            toggleLanguage={toggleLanguage}
+            handleLogout={handleLogout}
           />
-          <Text style={[styles.tabText, isEditingPassword && styles.activeTabText]}>
-            {textsLeng.ProfileScreen.changePasswordTitle}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {!isEditingPassword ? (
-        <ProfileDetailsComponent
-          toggleLanguage={toggleLanguage}
-          handleLogout={handleLogout}
-        />
-      ) : (
-        <ChangePasswordComponent />
-      )}
+        ) : (
+          <ChangePasswordComponent />
+        )}
 
-      <CustomAlert
-        isVisible={isModalVisible}
-        title={textsLeng.AlertMessagelogOut.title}
-        message={textsLeng.AlertMessagelogOut.message}
-        iconName="alert-circle-outline"
-        onClose={cancelLogout}
-        onConfirm={confirmLogout}
-        primaryButton={{
-          text: textsLeng.AlertMessagelogOut.confirmButtonTitle,
-          onPress: confirmLogout,
-        }}
-        secondaryButton={{
-          text: textsLeng.AlertMessagelogOut.cancelButtonTitle,
-          onPress: cancelLogout,
-        }}
-      />
-    </View>
+        <CustomAlert
+          isVisible={isModalVisible}
+          title={textsLeng.AlertMessagelogOut.title}
+          message={textsLeng.AlertMessagelogOut.message}
+          iconName="alert-circle-outline"
+          onClose={cancelLogout}
+          onConfirm={confirmLogout}
+          primaryButton={{
+            text: textsLeng.AlertMessagelogOut.confirmButtonTitle,
+            onPress: confirmLogout,
+          }}
+          secondaryButton={{
+            text: textsLeng.AlertMessagelogOut.cancelButtonTitle,
+            onPress: cancelLogout,
+          }}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flexGrow: 1,
+    backgroundColor: "white",
+  },
   container: {
     flex: 1,
     backgroundColor: "white",

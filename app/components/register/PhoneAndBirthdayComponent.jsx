@@ -157,7 +157,7 @@ const PhoneAndBirthdayComponent = ({
                 { borderColor: isValidBirthday ? Colors.routes : Colors.primary },
               ]}
               placeholderTextColor="#AAAAAA"
-              value={birthday ? new Date(birthday * 1000).toLocaleDateString() : ""} // Convertir UNIX a fecha legible
+              value={birthday ? new Date(birthday * 1000).toLocaleDateString() : ""} 
               editable={false}
             />
           </TouchableOpacity>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     marginBottom: hp('1.875%'),
-    marginTop: hp('-1.25%'),
+    marginTop: hp('-1%'),
   },
   rowContainer: {
     flexDirection: "row",
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('0.625%'),
   },
   input: {
-    height: hp('6.25%'),
+    height: hp('6%'),
     borderWidth: 1,
     borderRadius: wp('1.25%'),
     paddingHorizontal: wp('2.5%'),

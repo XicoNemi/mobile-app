@@ -94,7 +94,7 @@ const HomeScreen = () => {
             <SkeletonComponent width="50%" height={hp('5%')} />
           ) : (
             <>
-              {textsLeng.HomeScreen.welcomeText},{" "}
+              {textsLeng.HomeScreen.welcomeText}{" "}
               <Text style={styles.userName}>{userName}</Text>
             </>
           )}
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     color: Colors.primary,
+    fontSize: SizeConstants.titles,
   },
   sectionTitle: {
     fontSize: SizeConstants.subtitles,
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
   sectionSubtitle: {
     fontSize: SizeConstants.subtitles,
     marginVertical: hp('1.25%'),
+    fontWeight: "bold"
   },
   searchBar: {
     flexDirection: "row",

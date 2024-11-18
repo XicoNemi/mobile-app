@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: hp('3.75%'),
+    marginBottom: hp('2%'),
   },
   registerButton: {
     width: "90%",
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp('1.875%'),
     alignItems: "center",
     marginVertical: hp('1.25%'),
-    marginTop: hp('3.75%'),
+    marginTop: hp('2.5%'),
   },
   buttonText: {
     color: "white",

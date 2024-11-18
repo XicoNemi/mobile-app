@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#333",
-    paddingVertical: hp('1.25%'),
+    paddingVertical: hp('1%'),
     paddingHorizontal: wp('21.25%'),
     borderRadius: wp('5.5%'),
-    marginBottom: hp('1.25%'),
+    marginBottom: hp('1.10%'),
     width: "95%",
-    height: hp('6.25%'),
+    height: hp('6%'),
   },
   icon: {
     width: wp('6.25%'),  
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   socialButtonText: {
     color: "white",
     fontSize: SizeConstants.texts,
-    marginLeft: wp('2.5%'),
+    marginLeft: wp('2.0%'),
   },
 });
 

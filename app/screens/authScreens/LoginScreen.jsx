@@ -209,13 +209,13 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "static",
-    top: hp('11%'),
+    top: hp('6.5%'),
     color: "black",
   },
   languageSwitcher: {
     position: "static",
-    bottom: hp('8.75%'),
-    left: wp('30%'),
+    bottom: hp('5.2%'),
+    left: wp('26%'),
     zIndex: 1,
   },
 });

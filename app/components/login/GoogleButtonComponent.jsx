@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: wp('5.5%'),
     marginBottom: hp('1.25%'),
     width: "95%",
-    height: hp('6.25%'),
+    height: hp('6%'),
   },
   icon: {
     width: wp('6.75%'),  

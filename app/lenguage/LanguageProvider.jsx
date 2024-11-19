@@ -34,9 +34,6 @@ const LanguageProvider = {
         texts: {
           invalidEmail: "Please enter a valid email address.",
           errorNext: "Email field is required.",
-          invalidPhone: "Please enter a valid phone number.",
-          futureDate: "The selected date cannot be in the future.",
-          dateFormat: "Please enter the date in DD-MM-YYYY format.",
         },
       },
       loginPassword: {
@@ -58,8 +55,8 @@ const LanguageProvider = {
       tel: "Phone",
       enterEmail: {
         texts: {
-          invalidPhone: "Please enter a valid phone number.",
-          futureDate: "The selected date cannot be in the future.",
+          invalidPhone: "Enter a valid phone number.",
+          futureDate: "The date cannot be future.",
           dateFormat: "Please enter the date in DD-MM-YYYY format.",
         },
       },
@@ -81,13 +78,13 @@ const LanguageProvider = {
     ItinerariesScreen: {
       title: "Itineraries",
       createButtonText: "Create Itinerary",
-      message:"Your next visits →",
-      details:"Details",
-      itinerariesDetailScreen:{
-        title:"Itinerary Details",
+      message: "Your next visits →",
+      details: "Details",
+      itinerariesDetailScreen: {
+        title: "Itinerary Details",
       },
-      CreateItinerariesScreen:{
-        title:"New Itinerary",
+      CreateItinerariesScreen: {
+        title: "New Itinerary",
       }
     },
     ProfileScreen: {
@@ -96,14 +93,14 @@ const LanguageProvider = {
       phoneNum: "Phone Number",
       changeLenguage: "Change Language",
       changePasswordTitle: "Change Password",
-      logout:"Log out",
-      changePassword:{
+      logout: "Log out",
+      changePassword: {
         passwordError: "Password must be at least 6 characters long.",
-        notPassword:"Passwords do not match",
-        currentPassword:"Current password",
-        newPassword:"New password",
-        confirmPassword:"Confirm password",
-        change:"Change",
+        notPassword: "Passwords do not match",
+        currentPassword: "Current password",
+        newPassword: "New password",
+        confirmPassword: "Confirm password",
+        change: "Change",
       }
     },
     RoutesScreen: {
@@ -111,19 +108,19 @@ const LanguageProvider = {
     },
     AccommodationScreen: {
       title: "Accommodation",
-      message:"Available accommodations →",
+      message: "Available accommodations →",
     },
     GastronomyScreen: {
       title: "Gastronomy",
-      message:"Recommended places →",
+      message: "Recommended places →",
     },
     EventsScreen: {
       title: "Events",
-      message:"Available events →",
+      message: "Available events →",
     },
     TourismScreen: {
       title: "Tourism",
-      message:"Places to visit →",
+      message: "Places to visit →",
     },
   },
 
@@ -163,9 +160,6 @@ const LanguageProvider = {
           invalidEmail:
             "Por favor ingrese una dirección de correo electrónico válida.",
           errorNext: "El campo de correo es obligatorio.",
-          invalidPhone: "Por favor ingrese un número de teléfono válido.",
-          futureDate: "La fecha seleccionada no puede ser en el futuro.",
-          dateFormat: "Por favor ingrese la fecha en formato DD-MM-AAAA.",
         },
       },
       loginPassword: {
@@ -186,8 +180,8 @@ const LanguageProvider = {
       tel: "Teléfono",
       enterEmail: {
         texts: {
-          invalidPhone: "Por favor ingrese un número de teléfono válido.",
-          futureDate: "La fecha seleccionada no puede ser en el futuro.",
+          invalidPhone: "Ingrese un número de teléfono válido.",
+          futureDate: "La fecha no puede ser futura.",
           dateFormat: "Por favor ingrese la fecha en formato DD-MM-AAAA.",
         },
       },
@@ -209,13 +203,13 @@ const LanguageProvider = {
     ItinerariesScreen: {
       title: "Itinerarios",
       createButtonText: "Crear Itinerario",
-      message:"Sus próximas visitas →",
-      details:"Detalles",
-      itinerariesDetailScreen:{
-        title:"Detalles del Itinerario",
+      message: "Sus próximas visitas →",
+      details: "Detalles",
+      itinerariesDetailScreen: {
+        title: "Detalles del Itinerario",
       },
-      CreateItinerariesScreen:{
-        title:"Nuevo Itinerario",
+      CreateItinerariesScreen: {
+        title: "Nuevo Itinerario",
       }
     },
     ProfileScreen: {
@@ -224,14 +218,14 @@ const LanguageProvider = {
       phoneNum: "Número de Teléfono",
       changeLenguage: "Cambiar Idioma",
       changePasswordTitle: "Cambiar Contraseña",
-      logout:"Cerrar sesión",
-      changePassword:{
+      logout: "Cerrar sesión",
+      changePassword: {
         passwordError: "La contraseña debe tener al menos 6 caracteres.",
-        notPassword:"Las contraseñas no coinciden",
-        currentPassword:"Contraseña actual",
-        newPassword:"Nueva contraseña",
-        confirmPassword:"Confirmar contraseña",
-        change:"Cambiar",
+        notPassword: "Las contraseñas no coinciden",
+        currentPassword: "Contraseña actual",
+        newPassword: "Nueva contraseña",
+        confirmPassword: "Confirmar contraseña",
+        change: "Cambiar",
       }
     },
     RoutesScreen: {
@@ -239,19 +233,19 @@ const LanguageProvider = {
     },
     AccommodationScreen: {
       title: "Hospedaje",
-      message:"Hospedajes disponibles →",
+      message: "Hospedajes disponibles →",
     },
     GastronomyScreen: {
       title: "Gastronomía",
-      message:"Lugares recomendados →",
+      message: "Lugares recomendados →",
     },
     EventsScreen: {
       title: "Eventos",
-      message:"Eventos disponibles →",
-    }, 
+      message: "Eventos disponibles →",
+    },
     TourismScreen: {
       title: "Turismo",
-      message:"Lugares para visitar →",
+      message: "Lugares para visitar →",
     },
   },
 };

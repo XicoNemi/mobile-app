@@ -62,7 +62,7 @@ const PhoneAndBirthdayComponent = ({
           ...prevError,
           tel: isValidTel
             ? ""
-            : textsLeng.RegisterScreen.invalidPhone,
+            : textsLeng.RegisterScreen.enterEmail.texts.invalidPhone,
         }));
         break;
       case "birthday":
@@ -92,7 +92,7 @@ const PhoneAndBirthdayComponent = ({
             setIsValidBirthday(false);
             setError((prevError) => ({
               ...prevError,
-              birthday: textsLeng.RegisterScreen.futureDate,
+              birthday: textsLeng.RegisterScreen.enterEmail.texts.futureDate,
             }));
           } else {
             setIsValidBirthday(true);
@@ -105,7 +105,7 @@ const PhoneAndBirthdayComponent = ({
           setIsValidBirthday(false);
           setError((prevError) => ({
             ...prevError,
-            birthday: textsLeng.RegisterScreen.dateFormat,
+            birthday: textsLeng.RegisterScreen.enterEmail.texts.dateFormat,
           }));
         }
         break;

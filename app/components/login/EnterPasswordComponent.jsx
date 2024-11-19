@@ -9,6 +9,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const EnterPasswordComponent = ({ password, setPassword, textsLeng }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -62,7 +63,7 @@ const EnterPasswordComponent = ({ password, setPassword, textsLeng }) => {
         >
           <Ionicons
             name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
-            size={20}
+            size={SizeConstants.iconsCH}
             color="gray"
           />
         </TouchableOpacity>
@@ -75,29 +76,29 @@ const EnterPasswordComponent = ({ password, setPassword, textsLeng }) => {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    marginTop: -15
+    marginTop: hp('-1.875%'),
   },
   label: {
     color: Colors.primary,
-    marginBottom: 5,
+    marginBottom: hp('0.625%'),
   },
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderRadius: wp('1.25%'),
+    paddingHorizontal: wp('2.5%'),
   },
   passwordInput: {
     flex: 1,
-    height: 50,
+    height: hp('6.25%'),
     fontSize: SizeConstants.texts,
   },
   errorText: {
     color: "red",
     fontSize: SizeConstants.texts - 5,
-    marginTop: 2,
-    marginBottom: 10,
+    marginTop: hp('0.25%'),
+    marginBottom: hp('1.25%'),
   },
 });
 

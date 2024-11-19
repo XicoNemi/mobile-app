@@ -19,6 +19,7 @@ import EnterPasswordComponent from "../../components/login/EnterPasswordComponen
 import PhoneAndBirthdayComponent from "../../components/register/PhoneAndBirthdayComponent";
 import LoaderComponent from "../../components/generals/LoaderComponent";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -109,7 +110,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
       <LoaderComponent isVisible={isLoading} text="Creando cuenta..." />
 
       <Text style={styles.title}>{textsLeng.RegisterScreen.createAccount}</Text>
@@ -183,25 +184,26 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     backgroundColor: "#F4F4F4",
-    paddingHorizontal: 20,
+    paddingHorizontal: wp('5%'),
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 1,
+    marginTop: hp('1%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: hp('1.5%'),
+    fontWeight: "bold"
   },
   registerButton: {
     width: "90%",
     backgroundColor: Colors.primary,
-    borderRadius: 20,
-    paddingVertical: 15,
+    borderRadius: wp('5%'),
+    paddingVertical: hp('1.875%'),
     alignItems: "center",
-    marginVertical: 10,
-    marginTop: 15,
+    marginVertical: hp('1.25%'),
+    marginTop: hp('2.5%'),
   },
   buttonText: {
     color: "white",
@@ -209,27 +211,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   loginText: {
-    marginTop: 5,
+    marginTop: hp('1.25%'),
     color: "black",
+    fontWeight: "bold"
   },
   loginLink: {
     color: Colors.events,
+    fontWeight: "bold"
   },
   dividerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: hp('2.5%'),
     width: "90%",
-    marginBottom: 10,
-    marginTop: 5,
+    marginBottom: hp('2.5%'),
+    marginTop: hp('1.25%'),
   },
   divider: {
     flex: 1,
-    height: 1.5,
+    height: hp('0.1875%'),
     backgroundColor: "#D3D3D3",
   },
   dividerText: {
-    marginHorizontal: 10,
+    marginHorizontal: wp('2.5%'),
     color: "black",
   },
 });

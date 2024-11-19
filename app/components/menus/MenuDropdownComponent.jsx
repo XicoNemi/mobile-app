@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
 import SizeConstants from '../../utils/SizeConstants';
 import AssignLenguaje from '../../lenguage/AssignLenguage';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const MenuDropdown = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -15,10 +16,10 @@ const MenuDropdown = ({ navigation }) => {
 
   const menuItems = [
     { icon: 'map-outline', label: textsLeng.components.menuItems.routes, screen: 'RoutesScreen' },
-    { icon: 'bed-outline', label: textsLeng.components.menuItems.bed },
-    { icon: 'star-outline', label: textsLeng.components.menuItems.food },
-    { icon: 'calendar-outline', label: textsLeng.components.menuItems.events },
-    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism },
+    { icon: 'bed-outline', label: textsLeng.components.menuItems.bed, screen: 'AccommodationScreen' },
+    { icon: 'star-outline', label: textsLeng.components.menuItems.food,  screen: 'GastronomyScreen' },
+    { icon: 'calendar-outline', label: textsLeng.components.menuItems.events, screen: 'EventsScreen' },
+    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism, screen: 'TourismScreen' },
     { icon: 'list-outline', label: textsLeng.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
   ];
 
@@ -45,20 +46,20 @@ const MenuDropdown = ({ navigation }) => {
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: '#f2f2f2',
-    padding: 20,
-    borderRadius: 5,
+    padding: wp('5%'),
+    borderRadius: wp('1.25%'),
     position: 'absolute',
-    top: 50,
-    left: 10,
+    top: hp('6.25%'),
+    left: wp('2.5%'),
     zIndex: 1,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: hp('1%'),
   },
   menuText: {
-    marginLeft: 12,
+    marginLeft: wp('3%'),
     fontSize: SizeConstants.texts,
   },
 });

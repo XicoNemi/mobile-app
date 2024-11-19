@@ -4,6 +4,7 @@ import Modal from "react-native-modal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CustomAlertComponent = ({
   isVisible,
@@ -74,25 +75,25 @@ const styles = StyleSheet.create({
   },
   alertContainer: {
     backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
+    borderRadius: wp('2.5%'),
+    padding: wp('5%'),
     width: "80%",
     alignItems: "center",
   },
   icon: {
-    marginBottom: 1,
+    marginBottom: hp('1%'),
   },
   title: {
     fontSize: SizeConstants.subtitles,
     fontWeight: "bold",
     color: "black",
-    marginBottom: 10,
+    marginBottom: hp('1.25%'),
   },
   message: {
     fontSize: SizeConstants.texts,
     color: Colors.secondaryText,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: hp('1.25%'),
   },
   buttonContainer: {
     flexDirection: "row",
@@ -101,29 +102,29 @@ const styles = StyleSheet.create({
   },
   buttonConfirm: {
     backgroundColor: Colors.routes,
-    borderRadius: 15,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    borderRadius: wp('3.75%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('5%'),
     alignItems: "center",
-    marginRight: 10,
+    marginRight: wp('2.5%'),
     flex: 1,
   },
   buttonCancel: {
     backgroundColor: Colors.primary,
-    borderRadius: 15,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    borderRadius: wp('3.75%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('5%'),
     alignItems: "center",
-    marginLeft: 10,
+    marginLeft: wp('2.5%'),
     flex: 1,
   },
   buttonSingle: {
     backgroundColor: Colors.routes,
-    borderRadius: 15,
-    paddingVertical: 12,
-    paddingHorizontal: 40,
+    borderRadius: wp('3.75%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('10%'),
     alignItems: "center",
-    marginLeft: 65,
+    marginLeft: wp('16.25%'),
   },
   buttonText: {
     color: "white",

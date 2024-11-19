@@ -80,12 +80,50 @@ const LanguageProvider = {
     },
     ItinerariesScreen: {
       title: "Itineraries",
+      createButtonText: "Create Itinerary",
+      message:"Your next visits →",
+      details:"Details",
+      itinerariesDetailScreen:{
+        title:"Itinerary Details",
+      },
+      CreateItinerariesScreen:{
+        title:"New Itinerary",
+      }
     },
     ProfileScreen: {
       title: "Profile",
+      email: "Email",
+      phoneNum: "Phone Number",
+      changeLenguage: "Change Language",
+      changePasswordTitle: "Change Password",
+      logout:"Log out",
+      changePassword:{
+        passwordError: "Password must be at least 6 characters long.",
+        notPassword:"Passwords do not match",
+        currentPassword:"Current password",
+        newPassword:"New password",
+        confirmPassword:"Confirm password",
+        change:"Change",
+      }
     },
     RoutesScreen: {
       title: "Routes",
+    },
+    AccommodationScreen: {
+      title: "Accommodation",
+      message:"Available accommodations →",
+    },
+    GastronomyScreen: {
+      title: "Gastronomy",
+      message:"Recommended places →",
+    },
+    EventsScreen: {
+      title: "Events",
+      message:"Available events →",
+    },
+    TourismScreen: {
+      title: "Tourism",
+      message:"Places to visit →",
     },
   },
 
@@ -170,12 +208,50 @@ const LanguageProvider = {
     },
     ItinerariesScreen: {
       title: "Itinerarios",
+      createButtonText: "Crear Itinerario",
+      message:"Sus próximas visitas →",
+      details:"Detalles",
+      itinerariesDetailScreen:{
+        title:"Detalles del Itinerario",
+      },
+      CreateItinerariesScreen:{
+        title:"Nuevo Itinerario",
+      }
     },
     ProfileScreen: {
       title: "Perfil",
+      email: "Correo Electrónico",
+      phoneNum: "Número de Teléfono",
+      changeLenguage: "Cambiar Idioma",
+      changePasswordTitle: "Cambiar Contraseña",
+      logout:"Cerrar sesión",
+      changePassword:{
+        passwordError: "La contraseña debe tener al menos 6 caracteres.",
+        notPassword:"Las contraseñas no coinciden",
+        currentPassword:"Contraseña actual",
+        newPassword:"Nueva contraseña",
+        confirmPassword:"Confirmar contraseña",
+        change:"Cambiar",
+      }
     },
     RoutesScreen: {
       title: "Rutas",
+    },
+    AccommodationScreen: {
+      title: "Hospedaje",
+      message:"Hospedajes disponibles →",
+    },
+    GastronomyScreen: {
+      title: "Gastronomía",
+      message:"Lugares recomendados →",
+    },
+    EventsScreen: {
+      title: "Eventos",
+      message:"Eventos disponibles →",
+    }, 
+    TourismScreen: {
+      title: "Turismo",
+      message:"Lugares para visitar →",
     },
   },
 };

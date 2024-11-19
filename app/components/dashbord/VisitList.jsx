@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet, Image } from "react-native";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const visitData = [
   { id: 1, image: require("../../../assets/recommendation1.jpeg"), name: "Mr Cheve" },
@@ -20,7 +21,7 @@ const VisitList = ({ loading }) => {
       renderItem={({ item }) => (
         <View style={styles.visitBox}>
           {loading ? (
-            <SkeletonComponent width={120} height={120} borderRadius={60} />
+            <SkeletonComponent width={wp('30%')} height={wp('30%')} borderRadius={wp('15%')} />
           ) : (
             <>
               <Image source={item.image} style={styles.visitImage} />
@@ -37,20 +38,20 @@ const VisitList = ({ loading }) => {
 
 const styles = StyleSheet.create({
   visitList: {
-    marginBottom: 30,
+    marginBottom: hp('3.75%'),
   },
   visitBox: {
-    width: 120,
+    width: wp('30%'),
     alignItems: "center",
-    marginRight: 20,
+    marginRight: wp('5%'),
   },
   visitImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: wp('30%'),
+    height: wp('30%'),
+    borderRadius: wp('15%'),
   },
   visitText: {
-    marginTop: 5,
+    marginTop: hp('0.625%'),
     fontSize: SizeConstants.texts,
     textAlign: "center",
   },

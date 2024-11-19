@@ -1,12 +1,13 @@
 import React from 'react';
 import { Skeleton } from 'moti/skeleton';
 import { View, StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function SkeletonComponent({
   width = "100%",
-  height = 100, 
+  height = hp('12.5%'), 
   colorMode = 'light',
-  borderRadius = 10
+  borderRadius = wp('2.5%')
 }) {
   return (
     <View style={[styles.container, { width, height }]}>

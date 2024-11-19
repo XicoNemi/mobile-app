@@ -28,7 +28,6 @@ const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [searchText, setSearchText] = useState("");
   const navigation = useNavigation();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);

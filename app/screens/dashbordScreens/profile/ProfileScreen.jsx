@@ -12,8 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../../utils/Colors";
 import SizeConstants from "../../../utils/SizeConstants";
-import ChangePasswordComponent from "../../../components/profileComponents/ChangePasswordComponent";
-import ProfileDetailsComponent from "../../../components/profileComponents/ProfileDetailsComponent";
+import ChangePasswordComponent from "../../../components/profileComponents/ChangePasswordComponent";  
+import ProfileDetailsComponent from "../../../components/profileComponents/ProfileDetailsComponent";  
 import CustomAlert from "../../../components/generals/CustomAlertComponent";
 import { logOut } from "../../../features/authSlice";
 import { setLanguage, setTextsLeng } from "../../../features/languageSlice";

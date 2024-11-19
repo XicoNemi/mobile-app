@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../../components/generals/HeaderComponent';
@@ -7,6 +7,7 @@ import ItineraryCardComponent from '../../../components/dashbord/ItineraryCardCo
 import SizeConstants from '../../../utils/SizeConstants';
 import Colors from '../../../utils/Colors';
 import AssignLenguaje from '../../../lenguage/AssignLenguage';
+import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,15 +15,20 @@ const ItinerariesScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const textsLeng = useSelector((state) => state.language.texts);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AssignLenguaje(dispatch);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+    return () => clearTimeout(timer);
   }, [dispatch]);
 
   const itineraries = [
     {
       title: "Participacion XicoBike",
-      date: "Lun., 25 de nov - Vie., 29 de nov. ",
+      date: "Lun., 25 de nov - Vie., 29 de nov.",
       days: "5 días, en 19 días",
       image: require('../../../../assets/background.png'),
     },
@@ -70,16 +76,24 @@ const ItinerariesScreen = () => {
         </TouchableOpacity>
         <Text style={styles.message}>{textsLeng.ItinerariesScreen.message}</Text>
 
-        {itineraries.map((itinerary, index) => (
-          <ItineraryCardComponent
-            key={index}
-            title={itinerary.title}
-            date={itinerary.date}
-            days={itinerary.days}
-            image={itinerary.image}
-            onPress={() => handleViewDetail(itinerary)}
-          />
-        ))}
+        {loading ? (
+          [1, 2, 3, 4].map((skeleton) => (
+            <View key={skeleton} style={{ marginBottom: hp('1%') }}>
+              <SkeletonComponent width={wp('92%')} height={hp('20%')} />
+            </View>
+          ))
+        ) : (
+          itineraries.map((itinerary, index) => (
+            <ItineraryCardComponent
+              key={index}
+              title={itinerary.title}
+              date={itinerary.date}
+              days={itinerary.days}
+              image={itinerary.image}
+              onPress={() => handleViewDetail(itinerary)}
+            />
+          ))
+        )}
       </ScrollView>
     </View>
   );

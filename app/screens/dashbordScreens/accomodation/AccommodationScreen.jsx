@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../../components/generals/HeaderComponent';
@@ -6,14 +6,20 @@ import AccomodationCardComponent from '../../../components/dashbord/Accomodation
 import SearchInputComponent from '../../../components/generals/SearchInputComponent';
 import AssignLenguaje from '../../../lenguage/AssignLenguage';
 import SizeConstants from '../../../utils/SizeConstants';
+import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const AccommodationScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1200);
+        return () => clearTimeout(timer);
     }, [dispatch]);
 
     const hospedajes = [
@@ -36,22 +42,31 @@ const AccommodationScreen = () => {
             image: require('../../../../assets/hotel3.jpg'),
         }
     ];
-
+    const skeletonNumber = [1, 2, 3];
     return (
         <View style={styles.container}>
             <HeaderComponent title={textsLeng.AccommodationScreen.title} rightIcon="menu-outline" />
             <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
                 <SearchInputComponent />
                 <Text style={styles.message}>{textsLeng.AccommodationScreen.message}</Text>
-                {hospedajes.map((hospedaje, index) => (
-                    <AccomodationCardComponent
-                        key={index}
-                        title={hospedaje.title}
-                        description={hospedaje.description}
-                        image={hospedaje.image}
-                        onPress={() => console.log('Hospedaje seleccionado:', hospedaje.title)}
-                    />
-                ))}
+
+                {loading ? (
+                    skeletonNumber.map((skeleton) => (
+                        <View key={skeleton} style={{ marginBottom: hp('2.5%') }}>
+                            <SkeletonComponent width={wp('90%')} height={hp('35.8%')} />
+                        </View>
+                    ))
+                ) : (
+                    hospedajes.map((hospedaje) => (
+                        <AccomodationCardComponent
+                            key={hospedaje.id}
+                            title={hospedaje.title}
+                            description={hospedaje.description}
+                            image={hospedaje.image}
+                            onPress={() => console.log('Hospedaje seleccionado:', hospedaje.title)}
+                        />
+                    ))
+                )}
             </ScrollView>
         </View>
     );

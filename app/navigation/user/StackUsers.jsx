@@ -1,5 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from 'expo-status-bar';
 import HomeScreen from "../../screens/dashbordScreens/HomeScreen";
 import ItinerariesScreen from "../../screens/dashbordScreens/itineraries/ItinerariesScreen";
 import RoutesScreen from "../../screens/dashbordScreens/routes/RoutesScreen";
@@ -15,101 +16,70 @@ const Stack = createNativeStackNavigator();
 
 const StackUser = () => {
   return (
-    <Stack.Navigator initialRouteName="HomeScreen">
-      {/* Pantallas principales */}
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
+    <>
+      <StatusBar style="auto" backgroundColor="white" translucent />
+      <Stack.Navigator
+        initialRouteName="HomeScreen"
+        screenOptions={{
+          headerShown: false, // Oculta el header en todas las pantallas
+          animation: "simple_push", // Aplica la animación a todas las pantallas
         }}
-      />
-      <Stack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+      >
+        {/* Pantallas principales */}
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+        />
 
-      {/* Pantallas de itinerarios */}
-      <Stack.Screen
-        name="ItinerariesScreen"
-        component={ItinerariesScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-      <Stack.Screen
-        name="ItineraryDetailScreen"
-        component={ItineraryDetailScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-      <Stack.Screen
-        name="CreateItinerariesScreen"
-        component={CreateItinerariesScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+        {/* Pantallas de itinerarios */}
+        <Stack.Screen
+          name="ItinerariesScreen"
+          component={ItinerariesScreen}
+        />
+        <Stack.Screen
+          name="ItineraryDetailScreen"
+          component={ItineraryDetailScreen}
+        />
+        <Stack.Screen
+          name="CreateItinerariesScreen"
+          component={CreateItinerariesScreen}
+        />
 
-      {/* Pantallas de rutas */}
-      <Stack.Screen
-        name="RoutesScreen"
-        component={RoutesScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+        {/* Pantallas de rutas */}
+        <Stack.Screen
+          name="RoutesScreen"
+          component={RoutesScreen}
+        />
 
-      {/* Pantallas de alojamiento */}
-      <Stack.Screen
-        name="AccommodationScreen"
-        component={AccommodationScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+        {/* Pantallas de alojamiento */}
+        <Stack.Screen
+          name="AccommodationScreen"
+          component={AccommodationScreen}
+        />
 
-      {/* Pantallas de gastronomía */}
-      <Stack.Screen
-        name="GastronomyScreen"
-        component={GastronomyScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+        {/* Pantallas de gastronomía */}
+        <Stack.Screen
+          name="GastronomyScreen"
+          component={GastronomyScreen}
+        />
 
-      {/* Pantallas de eventos */}
-      <Stack.Screen
-        name="EventsScreen"
-        component={EventsScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
+        {/* Pantallas de eventos */}
+        <Stack.Screen
+          name="EventsScreen"
+          component={EventsScreen}
+        />
 
-      {/* Pantallas de turismo */}
-      <Stack.Screen
-        name="TourismScreen"
-        component={TourismScreen}
-        options={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      />
-    </Stack.Navigator>
+        {/* Pantallas de turismo */}
+        <Stack.Screen
+          name="TourismScreen"
+          component={TourismScreen}
+        />
+      </Stack.Navigator>
+    </>
   );
 };
 

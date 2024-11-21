@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     padding: wp('4%'),
-    marginTop: hp('4.375%'),
+    marginTop: hp('3%'),
   },
   topBar: {
     flexDirection: "row",

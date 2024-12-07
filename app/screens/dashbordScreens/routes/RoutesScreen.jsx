@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../../components/generals/HeaderComponent';
 import AssignLenguaje from '../../../lenguage/AssignLenguage';

@@ -42,7 +42,7 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
   const verifyInput = (field, value) => {
     switch (field) {
       case "name":
-        const isValidName = value && value.length >= 5;
+        const isValidName = value && value.length >= 4;
         setIsValidName(isValidName);
         setError((prevError) => ({
           ...prevError,
@@ -50,7 +50,7 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
         }));
         break;
       case "lastName":
-        const isValidLastName = value && value.length >= 5;
+        const isValidLastName = value && value.length >= 4;
         setIsValidLastName(isValidLastName);
         setError((prevError) => ({
           ...prevError,

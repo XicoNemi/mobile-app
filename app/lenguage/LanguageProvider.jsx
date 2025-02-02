@@ -49,8 +49,8 @@ const LanguageProvider = {
       lastName: "Last name/s",
       register: "Register",
       alreadyAccount: "Already have an account?, ",
-      nameError: "Name must be at least 5 characters long.",
-      lastNameError: "Last name must be at least 5 characters long.",
+      nameError: "Name must be at least 4 characters long.",
+      lastNameError: "Last name must be at least 4 characters long.",
       birthday: "Birthday",
       tel: "Phone",
       enterEmail: {
@@ -174,8 +174,8 @@ const LanguageProvider = {
       lastName: "Apellido/s",
       register: "Regístrate",
       alreadyAccount: "¿Ya tienes una cuenta?, ",
-      nameError: "El nombre debe tener al menos 5 caracteres.",
-      lastNameError: "El apellido debe tener al menos 5 caracteres.",
+      nameError: "El nombre debe tener al menos 4 caracteres.",
+      lastNameError: "El apellido debe tener al menos 4 caracteres.",
       birthday: "Cumpleaños",
       tel: "Teléfono",
       enterEmail: {

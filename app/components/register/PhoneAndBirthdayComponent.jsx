@@ -75,7 +75,7 @@ const PhoneAndBirthdayComponent = ({
           formattedDate = `${day}-${"0" + month}-${year}`;
         }
 
-        const datePattern = /^\d{2}-\d{2}-\d{4}$/;
+        const datePattern = /^\d{1}-\d{2}-\d{4}$/;
         const isValidBirthday = formattedDate && datePattern.test(formattedDate);
 
         if (isValidBirthday) {

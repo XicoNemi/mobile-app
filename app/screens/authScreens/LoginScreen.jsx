@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "absolute",
-    bottom: hp('7.9%'), 
+    bottom: hp('4%'), 
     color: "black",
     fontSize: SizeConstants.texts - 3,
   },

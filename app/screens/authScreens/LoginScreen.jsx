@@ -211,15 +211,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   footerText: {
-    position: "static",
-    top: hp('7.9%'),
+    position: "absolute",
+    bottom: hp('7.9%'), 
     color: "black",
     fontSize: SizeConstants.texts - 3,
   },
   languageSwitcher: {
-    position: "static",
-    bottom: hp('5.2%'),
-    left: wp('26%'),
+    position: "absolute",
+    top: hp('5.2%'), 
+    right: wp('5%'),
     zIndex: 1,
   },
 });

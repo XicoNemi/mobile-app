@@ -68,7 +68,7 @@ const LanguageProvider = {
         "Please check your spam folder if you haven't received it.",
     },
     HomeScreen: {
-      start: "Start",
+      start: "Home",
       welcomeText: "Welcome",
       search: "Search",
       sectionTitleItineraries: "Try Our Itineraries",

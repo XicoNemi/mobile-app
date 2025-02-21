@@ -212,14 +212,14 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "absolute",
-    bottom: hp('4%'), 
+    bottom: hp('4%'),
     color: "black",
     fontSize: SizeConstants.texts - 3,
   },
   languageSwitcher: {
-    position: "absolute",
-    top: hp('5.2%'), 
-    right: wp('5%'),
+    position: "relative",
+    bottom: hp('6.2%'),
+    left: wp('25%'),
     zIndex: 1,
   },
 });

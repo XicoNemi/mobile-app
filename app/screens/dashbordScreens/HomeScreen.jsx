@@ -38,7 +38,7 @@ const HomeScreen = () => {
     if (!menuVisible) {
       setTimeout(() => {
         setMenuVisible(false);
-      }, 5000); // Cierra el menú después de 5 segundos
+      }, 10000); // Cierra el menú después de 5 segundos
     }
   };
 
@@ -50,7 +50,7 @@ const HomeScreen = () => {
       if (!menuVisibleProfile) {
         setTimeout(() => {
           setMenuVisibleProfile(false);
-        }, 5000); 
+        }, 10000); 
       }
     }
   };

@@ -39,6 +39,11 @@ const HomeScreen = () => {
       setAlertVisible(true);
     } else {
       setMenuVisibleProfile(!menuVisibleProfile);
+      if (!menuVisibleProfile) {
+        setTimeout(() => {
+          setMenuVisibleProfile(false);
+        }, 5000); 
+      }
     }
   };
 

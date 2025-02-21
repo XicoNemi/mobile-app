@@ -20,6 +20,7 @@ import GoogleButtonComponent from "../../components/login/GoogleButtonComponent"
 import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -69,6 +70,13 @@ const LoginScreen = ({ navigation }) => {
         isVisible={isLoading}
         text={textsLeng.LoginScreen.messageLog}
       />
+
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Ionicons name="arrow-back" size={SizeConstants.iconsCH} color="#FFF" />
+      </TouchableOpacity>
 
       <View style={styles.languageSwitcher}>
         <LanguageSwitcher />
@@ -155,6 +163,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: hp('1%'),
+  },
+  backButton: {
+    width: wp('10%'),
+    height: wp('10%'),
+    borderRadius: wp('5%'),
+    backgroundColor: Colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: hp('4.2%'),
+    left: wp('2.75%'),
+    zIndex: 10,
   },
   title: {
     fontSize: SizeConstants.subtitles,

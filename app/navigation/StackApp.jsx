@@ -18,32 +18,32 @@ import PasswordRecoveryScreen from "../screens/authScreens/PasswordRecoveryScree
 const Stack = createNativeStackNavigator();
 
 const StackApp = () => {
-  return (
-    <>
-      <StatusBar style="auto" backgroundColor="white" translucent />
-      <Stack.Navigator
-        initialRouteName="HomeScreen"
-        screenOptions={{
-          headerShown: false,
-          animation: "simple_push",
-        }}
-      >
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="ItinerariesScreen" component={ItinerariesScreen} />
-        <Stack.Screen name="ItineraryDetailScreen" component={ItineraryDetailScreen} />
-        <Stack.Screen name="CreateItinerariesScreen" component={CreateItinerariesScreen} />
-        <Stack.Screen name="RoutesScreen" component={RoutesScreen} />
-        <Stack.Screen name="AccommodationScreen" component={AccommodationScreen} />
-        <Stack.Screen name="GastronomyScreen" component={GastronomyScreen} />
-        <Stack.Screen name="EventsScreen" component={EventsScreen} />
-        <Stack.Screen name="TourismScreen" component={TourismScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="PasswordRecoveryScreen" component={PasswordRecoveryScreen} />
-      </Stack.Navigator>
-    </>
-  );
+    return (
+        <>
+            <StatusBar style="auto" backgroundColor="white" translucent />
+            <Stack.Navigator
+                initialRouteName="HomeScreen"
+                screenOptions={{
+                    headerShown: false,
+                    animation: "simple_push",
+                }}
+            >
+                <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+                <Stack.Screen name="ItinerariesScreen" component={ItinerariesScreen} />
+                <Stack.Screen name="ItineraryDetailScreen" component={ItineraryDetailScreen} />
+                <Stack.Screen name="CreateItinerariesScreen" component={CreateItinerariesScreen} />
+                <Stack.Screen name="RoutesScreen" component={RoutesScreen} />
+                <Stack.Screen name="AccommodationScreen" component={AccommodationScreen} />
+                <Stack.Screen name="GastronomyScreen" component={GastronomyScreen} />
+                <Stack.Screen name="EventsScreen" component={EventsScreen} />
+                <Stack.Screen name="TourismScreen" component={TourismScreen} />
+                <Stack.Screen name="LoginScreen" component={LoginScreen} />
+                <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+                <Stack.Screen name="PasswordRecoveryScreen" component={PasswordRecoveryScreen} />
+            </Stack.Navigator>
+        </>
+    );
 };
 
 export default StackApp;

@@ -122,6 +122,12 @@ const LanguageProvider = {
       title: "Tourism",
       message: "Places to visit →",
     },
+    CustomAlertComponent: {
+      accessRequired: "Access required",
+      accessMessage: "To access the profile you must log in",
+      loginButton: "Log in",
+      cancelButton: "Cancel",
+    },
   },
 
   // Textos en español
@@ -246,6 +252,12 @@ const LanguageProvider = {
     TourismScreen: {
       title: "Turismo",
       message: "Lugares para visitar →",
+    },
+    CustomAlertComponent: {
+      accessRequired: "Acceso requerido",
+      accessMessage: "Para acceder a perfil debe de logearte",
+      loginButton: "Logearse",
+      cancelButton: "Cancelar",
     },
   },
 };

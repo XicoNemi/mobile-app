@@ -33,7 +33,15 @@ const HomeScreen = () => {
   const [alertVisible, setAlertVisible] = useState(false);
   const navigation = useNavigation();
 
-  const toggleMenu = () => setMenuVisible(!menuVisible);
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+    if (!menuVisible) {
+      setTimeout(() => {
+        setMenuVisible(false);
+      }, 5000); // Cierra el menú después de 5 segundos
+    }
+  };
+
   const toggleMenuProfile = () => {
     if (!userName) {
       setAlertVisible(true);
@@ -146,14 +154,14 @@ const HomeScreen = () => {
       <CustomAlertComponent
         isVisible={alertVisible}
         onClose={() => setAlertVisible(false)}
-        title="Acceso requerido"
-        message="Para acceder a perfil debe de logearte"
+        title={textsLeng.CustomAlertComponent.accessRequired}
+        message={textsLeng.CustomAlertComponent.accessMessage}
         primaryButton={{
-          text: "Logearse",
+          text: textsLeng.CustomAlertComponent.loginButton,
           onPress: () => navigation.navigate("LoginScreen"),
         }}
         secondaryButton={{
-          text: "Cancelar",
+          text: textsLeng.CustomAlertComponent.cancelButton,
           onPress: () => setAlertVisible(false),
         }}
       />

@@ -255,7 +255,7 @@ const LanguageProvider = {
     },
     CustomAlertComponent: {
       accessRequired: "Acceso requerido",
-      accessMessage: "Para acceder a perfil debe de logearte",
+      accessMessage: "Para acceder a perfil debes de iniciar sesión",
       loginButton: "Iniciar sesión",
       cancelButton: "Cancelar",
     },

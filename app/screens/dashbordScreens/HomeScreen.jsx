@@ -19,6 +19,8 @@ import RoutesList from "../../components/dashbord/RoutesList";
 import VisitList from "../../components/dashbord/VisitList";
 import RecommendationsList from "../../components/dashbord/RecommendationsList";
 import SearchInputComponent from "../../components/generals/SearchInputComponent";
+import CustomAlertComponent from "../../components/generals/CustomAlertComponent";
+import { logOut } from "../../features/authSlice";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomeScreen = () => {
@@ -28,10 +30,23 @@ const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [alertVisible, setAlertVisible] = useState(false);
   const navigation = useNavigation();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
-  const toggleMenuProfile = () => setMenuVisibleProfile(!menuVisibleProfile);
+  const toggleMenuProfile = () => {
+    if (!userName) {
+      setAlertVisible(true);
+    } else {
+      setMenuVisibleProfile(!menuVisibleProfile);
+    }
+  };
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    setMenuVisibleProfile(false);
+    navigation.navigate("HomeScreen");
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,7 +80,12 @@ const HomeScreen = () => {
       </View>
 
       {menuVisible && <MenuDropdown navigation={navigation} />}
-      {menuVisibleProfile && <ProfileMenuDropdown navigation={navigation} />}
+      {menuVisibleProfile && (
+        <ProfileMenuDropdown
+          navigation={navigation}
+          onLogout={handleLogout}
+        />
+      )}
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {loading ? (
@@ -82,7 +102,7 @@ const HomeScreen = () => {
             </View>) : (
             <>
               {textsLeng.HomeScreen.welcomeText}{" "}
-              <Text style={styles.userName}>{userName}</Text>
+              <Text style={styles.userName}>{userName ? userName : "a XicoNemi"}</Text>
             </>
           )}
         </Text>
@@ -117,6 +137,21 @@ const HomeScreen = () => {
 
         <RecommendationsList loading={loading} />
       </ScrollView>
+
+      <CustomAlertComponent
+        isVisible={alertVisible}
+        onClose={() => setAlertVisible(false)}
+        title="Acceso requerido"
+        message="Para acceder a perfil debe de logearte"
+        primaryButton={{
+          text: "Logearse",
+          onPress: () => navigation.navigate("LoginScreen"),
+        }}
+        secondaryButton={{
+          text: "Cancelar",
+          onPress: () => setAlertVisible(false),
+        }}
+      />
     </View>
   );
 };

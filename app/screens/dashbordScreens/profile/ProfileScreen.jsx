@@ -55,6 +55,7 @@ const ProfileScreen = ({ navigation }) => {
   const confirmLogout = () => {
     setIsModalVisible(false);
     dispatch(logOut());
+    navigation.navigate("HomeScreen");
   };
 
   const cancelLogout = () => {
@@ -254,5 +255,6 @@ const styles = StyleSheet.create({
   },
   icon: { marginRight: wp('1.25%') },
 });
+
 
 export default ProfileScreen;

@@ -7,37 +7,34 @@ import { useSelector } from "react-redux";
 import Api from "../../utils/Api";
 import { useNavigation } from "@react-navigation/native";
 
-const visitData = [
-  { id: 1, image: require("../../../assets/recommendation1.jpeg"), name: "Mr Cheve" },
-  { id: 2, image: require("../../../assets/recommendation2.jpeg"), name: "Parrilladas Don Mundo" },
-  { id: 3, image: require("../../../assets/recommendation3.jpeg"), name: "Restaurant Aranjuez" },
-];
-
 const VisitList = ({ loading }) => {
   const [businesses, setBusinesses] = useState([]);
   const token = useSelector((state) => state.auth.token);
   const navigation = useNavigation();
 
   useEffect(() => {
+    // Función para obtener la lista de negocios
     const fetchBusinesses = async () => {
-      if (token) {
-        try {
-          const data = await Api.getBusinesses(token);
-          setBusinesses(data);
-        } catch (error) {
-          console.error(error);
-        }
+      try {
+        // Si el usuario está logueado, obtener la lista de negocios con token
+        // Si no está logueado, obtener la lista de negocios públicos
+        const data = token ? await Api.getBusinesses(token) : await Api.getPublicBusinesses();
+        setBusinesses(data); // Actualizar el estado con la lista de negocios obtenida
+      } catch (error) {
+        console.error(error); // Manejar errores en la consola
       }
     };
-    fetchBusinesses();
-  }, [token]);
+    fetchBusinesses(); // Llamar a la función para obtener los negocios
+  }, [token]); // Ejecutar el efecto cuando el token cambie
 
-  const data = loading ? visitData.map((item, index) => ({ ...item, id: index + 1 })) : (token ? businesses : visitData);
+  // Si está cargando, mapear los negocios para mostrar un esqueleto de carga
+  // Si no está cargando, usar la lista de negocios obtenida
+  const data = loading ? businesses.map((item, index) => ({ ...item, id: index + 1 })) : businesses;
 
+  // Función para manejar el evento de presionar un negocio
   const handlePress = (item) => {
-    if (token) {
-      navigation.navigate("BusinessDetailScreen", { business: item });
-    }
+    // Navegar a la pantalla de detalles del negocio con los datos del negocio seleccionado
+    navigation.navigate("BusinessDetailScreen", { business: item });
   };
 
   return (
@@ -51,7 +48,7 @@ const VisitList = ({ loading }) => {
             <SkeletonComponent width={wp('30%')} height={wp('30%')} borderRadius={wp('15%')} />
           ) : (
             <>
-              <Image source={token ? { uri: item.url_image } : item.image} style={styles.visitImage} />
+              <Image source={{ uri: item.url_image }} style={styles.visitImage} />
               <Text style={styles.visitText}>{item.name}</Text>
             </>
           )}

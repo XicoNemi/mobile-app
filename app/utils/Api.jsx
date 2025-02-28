@@ -35,7 +35,7 @@ const signUp = async (userData) => {
   try {
     const response = await api.post('/api/auth/sign-up', userData);
     console.log(response.data); // Si todo es correcto, mostrar la data (usuario creado) con fines de depuracion por el momento
-    return response.data; // Retorna la información del usuario creado
+    return response.data; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);
@@ -92,9 +92,23 @@ const getBusinesses = async (token) => {
   }
 };
 
+// Función para obtener la lista de negocios públicos (no requiere token)
+const getPublicBusinesses = async () => {
+  try {
+    const response = await api.get('api/business/public');
+    return response.data; 
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+};
+
 export default {
   signUp,
   signIn,
   getUser,
-  getBusinesses, // Agregar la nueva función al export
+  getBusinesses,
+  getPublicBusinesses, 
 };

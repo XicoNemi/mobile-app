@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://backend-app-or4g.onrender.com',
+  baseURL: 'https://available-karlotta-ethdev11-59ebf81c.koyeb.app',
   headers: {
     'Content-Type': 'application/json',
   },

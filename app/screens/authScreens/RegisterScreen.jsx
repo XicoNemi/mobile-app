@@ -13,7 +13,7 @@ import AssignLenguaje from "../../lenguage/AssignLenguage";
 import api from "../../utils/Api";
 import GoogleButtonComponent from "../../components/login/GoogleButtonComponent";
 import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
-import NameComponent from "../../components/register/NameComponent";
+import NameGenderComponent from "../../components/register/NameGenderComponent";
 import EnterEmailComponent from "../../components/login/EnterEmailComponent";
 import EnterPasswordComponent from "../../components/login/EnterPasswordComponent";
 import PhoneAndBirthdayComponent from "../../components/register/PhoneAndBirthdayComponent";
@@ -28,6 +28,7 @@ const RegisterScreen = ({ navigation }) => {
   // Estados para los datos del usuario
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState(""); // Nuevo estado para género
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
@@ -46,7 +47,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async () => {
     // Validaciones de los campos
-    if (!name || !lastName || !email || !password || !tel || !birthday) {
+    if (!name || !lastName || !gender || !email || !password || !tel || !birthday) {
       setAlertTitle("Error");
       setAlertMessage("Por favor, complete todos los campos");
       setAlertIcon("close-circle-outline");
@@ -60,10 +61,12 @@ const RegisterScreen = ({ navigation }) => {
       const userData = {
         name,
         lastname: lastName,
+        gender, // Añadir género a los datos del usuario
         email,
         password,
         tel,
         birthday,
+        type: "Common" // Añadir el campo "type"
       };
       console.log(userData);
       // Llamada al API para crear la cuenta
@@ -88,6 +91,7 @@ const RegisterScreen = ({ navigation }) => {
 
       setName("");
       setLastName("");
+      setGender(""); // Resetear género
       setEmail("");
       setPassword("");
       setTel("");
@@ -125,11 +129,13 @@ const RegisterScreen = ({ navigation }) => {
         <View style={styles.divider} />
       </View>
 
-      <NameComponent
+      <NameGenderComponent
         name={name}
         setName={setName}
         lastName={lastName}
         setLastName={setLastName}
+        gender={gender}
+        setGender={setGender}
       />
 
       <EnterEmailComponent

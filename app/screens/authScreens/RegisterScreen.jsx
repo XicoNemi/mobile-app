@@ -61,12 +61,12 @@ const RegisterScreen = ({ navigation }) => {
       const userData = {
         name,
         lastname: lastName,
-        gender, // Añadir género a los datos del usuario
+        gender, 
         email,
         password,
         tel,
         birthday,
-        type: "Common" // Añadir el campo "type"
+        type: "Common" 
       };
       console.log(userData);
       // Llamada al API para crear la cuenta
@@ -91,7 +91,7 @@ const RegisterScreen = ({ navigation }) => {
 
       setName("");
       setLastName("");
-      setGender(""); // Resetear género
+      setGender(""); 
       setEmail("");
       setPassword("");
       setTel("");
@@ -102,11 +102,11 @@ const RegisterScreen = ({ navigation }) => {
         ? error.response.data.message
         : error.message;
 
-      setAlertTitle("Error"); // Aquí aseguramos que el título es "Error"
+      setAlertTitle("Error"); 
       setAlertMessage(
         errorMessage || "Algo salió mal, por favor intenta nuevamente."
       );
-      setAlertIcon("close-circle-outline"); // Icono de error
+      setAlertIcon("close-circle-outline"); 
       setAlertVisible(true);
     } finally {
       setIsLoading(false); 

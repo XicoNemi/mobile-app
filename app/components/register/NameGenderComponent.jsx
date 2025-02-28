@@ -15,6 +15,7 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
     const [isValidLastName, setIsValidLastName] = useState(false);
     const [isValidGender, setIsValidGender] = useState(false);
     const [typingTimeout, setTypingTimeout] = useState(null);
+    const [hasInteractedWithGender, setHasInteractedWithGender] = useState(false);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
@@ -62,11 +63,11 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                 }));
                 break;
             case "gender":
-                const isValidGender = value !== "";
+                const isValidGender = value !== "" && value !== "Selecciona un género";
                 setIsValidGender(isValidGender);
                 setError((prevError) => ({
                     ...prevError,
-                    gender: isValidGender ? "" : textsLeng.RegisterScreen.genderError,
+                    gender: isValidGender || !hasInteractedWithGender ? "" : textsLeng.RegisterScreen.genderError,
                 }));
                 break;
             default:
@@ -121,6 +122,7 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                             style={styles.picker}
                             onValueChange={(itemValue) => {
                                 setGender(itemValue);
+                                setHasInteractedWithGender(true);
                                 verifyInput("gender", itemValue);
                             }}
                         >

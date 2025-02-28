@@ -56,9 +56,11 @@ const HomeScreen = () => {
   };
 
   const handleLogout = () => {
+    setMenuVisibleProfile(false); // Cerrar el menú inmediatamente
     dispatch(logOut());
-    setMenuVisibleProfile(false);
-    navigation.navigate("HomeScreen");
+    setTimeout(() => {
+        navigation.navigate("HomeScreen");
+    }, 0); // Navegar después de cerrar sesión
   };
 
   useEffect(() => {

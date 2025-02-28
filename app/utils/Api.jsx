@@ -75,8 +75,26 @@ const getUser = async (id, token) => {
   }
 };
 
+// Función para obtener la lista de negocios (requiere token)
+const getBusinesses = async (token) => {
+  try {
+    const response = await api.get('/api/business', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data; // Retorna la lista de negocios
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+};
+
 export default {
   signUp,
   signIn,
-  getUser, 
+  getUser,
+  getBusinesses, // Agregar la nueva función al export
 };

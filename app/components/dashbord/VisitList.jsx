@@ -1,8 +1,11 @@
-import React from "react";
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from "react-native";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useSelector } from "react-redux";
+import Api from "../../utils/Api";
+import { useNavigation } from "@react-navigation/native";
 
 const visitData = [
   { id: 1, image: require("../../../assets/recommendation1.jpeg"), name: "Mr Cheve" },
@@ -11,7 +14,31 @@ const visitData = [
 ];
 
 const VisitList = ({ loading }) => {
-  const data = loading ? visitData.map((item, index) => ({ ...item, id: index + 1 })) : visitData;
+  const [businesses, setBusinesses] = useState([]);
+  const token = useSelector((state) => state.auth.token);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchBusinesses = async () => {
+      if (token) {
+        try {
+          const data = await Api.getBusinesses(token);
+          setBusinesses(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    fetchBusinesses();
+  }, [token]);
+
+  const data = loading ? visitData.map((item, index) => ({ ...item, id: index + 1 })) : (token ? businesses : visitData);
+
+  const handlePress = (item) => {
+    if (token) {
+      navigation.navigate("BusinessDetailScreen", { business: item });
+    }
+  };
 
   return (
     <FlatList
@@ -19,19 +46,18 @@ const VisitList = ({ loading }) => {
       data={data}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <View style={styles.visitBox}>
+        <TouchableOpacity onPress={() => handlePress(item)} style={styles.visitBox}>
           {loading ? (
             <SkeletonComponent width={wp('30%')} height={wp('30%')} borderRadius={wp('15%')} />
           ) : (
             <>
-              <Image source={item.image} style={styles.visitImage} />
+              <Image source={token ? { uri: item.url_image } : item.image} style={styles.visitImage} />
               <Text style={styles.visitText}>{item.name}</Text>
             </>
           )}
-        </View>
+        </TouchableOpacity>
       )}
       showsHorizontalScrollIndicator={false}
-      style={styles.visitList}
     />
   );
 };

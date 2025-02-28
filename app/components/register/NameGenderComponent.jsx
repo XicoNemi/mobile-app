@@ -13,6 +13,7 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
     const [error, setError] = useState({});
     const [isValidName, setIsValidName] = useState(false);
     const [isValidLastName, setIsValidLastName] = useState(false);
+    const [isValidGender, setIsValidGender] = useState(false);
     const [typingTimeout, setTypingTimeout] = useState(null);
 
     useEffect(() => {
@@ -60,10 +61,22 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                         : textsLeng.RegisterScreen.lastNameError,
                 }));
                 break;
+            case "gender":
+                const isValidGender = value !== "";
+                setIsValidGender(isValidGender);
+                setError((prevError) => ({
+                    ...prevError,
+                    gender: isValidGender ? "" : textsLeng.RegisterScreen.genderError,
+                }));
+                break;
             default:
                 break;
         }
     };
+
+    useEffect(() => {
+        verifyInput("gender", gender);
+    }, [gender]);
 
     return (
         <View style={styles.container}>
@@ -80,31 +93,45 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
             />
             {error.name && <Text style={styles.errorText}>{error.name}</Text>}
 
-            {/* Apellido */}
-            <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
-            <TextInput
-                style={[
-                    styles.input,
-                    { borderColor: isValidLastName ? Colors.routes : Colors.primary },
-                ]}
-                placeholderTextColor="#AAAAAA"
-                value={lastName}
-                onChangeText={(value) => handleInputChange("lastName", value)}
-            />
-            {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
+            <View style={styles.row}>
+                {/* Apellido */}
+                <View style={styles.halfContainer}>
+                    <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
+                    <TextInput
+                        style={[
+                            styles.input,
+                            { borderColor: isValidLastName ? Colors.routes : Colors.primary },
+                        ]}
+                        placeholderTextColor="#AAAAAA"
+                        value={lastName}
+                        onChangeText={(value) => handleInputChange("lastName", value)}
+                    />
+                    {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
+                </View>
 
-            {/* Género */}
-            <Text style={styles.label}>{textsLeng.RegisterScreen.gender}</Text>
-            <View style={styles.pickerContainer}>
-                <Picker
-                    selectedValue={gender}
-                    style={styles.picker}
-                    onValueChange={(itemValue) => setGender(itemValue)}
-                >
-                    <Picker.Item label="Masculino" value="Masculino" />
-                    <Picker.Item label="Femenino" value="Femenino" />
-                    <Picker.Item label="Otro" value="Otro" />
-                </Picker>
+                {/* Género */}
+                <View style={styles.halfContainer}>
+                    <Text style={styles.label}>{textsLeng.RegisterScreen.gender}</Text>
+                    <View style={[
+                        styles.pickerContainer,
+                        { borderColor: isValidGender ? Colors.routes : Colors.primary },
+                    ]}>
+                        <Picker
+                            selectedValue={gender}
+                            style={styles.picker}
+                            onValueChange={(itemValue) => {
+                                setGender(itemValue);
+                                verifyInput("gender", itemValue);
+                            }}
+                        >
+                            <Picker.Item label="Selecciona un género" value="" />
+                            <Picker.Item label="Masculino" value="Masculino" />
+                            <Picker.Item label="Femenino" value="Femenino" />
+                            <Picker.Item label="Otro" value="Otro" />
+                        </Picker>
+                    </View>
+                    {error.gender && <Text style={styles.errorText}>{error.gender}</Text>}
+                </View>
             </View>
         </View>
     );
@@ -114,6 +141,13 @@ const styles = StyleSheet.create({
     container: {
         width: "90%",
         marginBottom: hp('1%'),
+    },
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    halfContainer: {
+        width: "48%",
     },
     label: {
         color: Colors.primary,

@@ -52,6 +52,7 @@ const LanguageProvider = {
       alreadyAccount: "Already have an account?, ",
       nameError: "Name must be at least 4 characters long.",
       lastNameError: "Last name must be at least 4 characters long.",
+      genderError:"Gender is required",
       birthday: "Birthday",
       tel: "Phone",
       enterEmail: {
@@ -184,6 +185,7 @@ const LanguageProvider = {
       alreadyAccount: "¿Ya tienes una cuenta?, ",
       nameError: "El nombre debe tener al menos 4 caracteres.",
       lastNameError: "El apellido debe tener al menos 4 caracteres.",
+      genderError:"El género es requerido",
       birthday: "Cumpleaños",
       tel: "Teléfono",
       enterEmail: {

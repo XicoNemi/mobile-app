@@ -63,7 +63,7 @@ const getUser = async (id, token) => {
   try {
     const response = await api.get(`/api/users/${id}`, {
       headers: {
-        'auth-token': token, 
+        'Authorization': `Bearer ${token}`, 
       },
     });
     return response.data; 

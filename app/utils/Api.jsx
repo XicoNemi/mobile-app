@@ -48,8 +48,8 @@ const signUp = async (userData) => {
 const signIn = async (email, password) => {
   try {
     const response = await api.post('/api/auth/sign-in', { email, password });
-    const token = response.headers['auth-token'];
-    return { user: response.data, token }; 
+    const { user, token } = response.data;
+    return { user, token }; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);

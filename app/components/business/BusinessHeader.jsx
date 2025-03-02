@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const BusinessHeader = ({ business }) => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const textsLeng = useSelector((state) => state.language.texts);
+
+    useEffect(() => {
+        AssignLenguaje(dispatch);
+    }, [dispatch]);
+
+    const { BusinessHeader: texts } = textsLeng;
 
     return (
         <View>
@@ -25,14 +35,14 @@ const BusinessHeader = ({ business }) => {
                 </View>
                 <TouchableOpacity style={styles.itineraryButton}>
                     <Ionicons name="calendar-outline" size={SizeConstants.iconsCH} color={Colors.primary} />
-                    <Text style={styles.itineraryText}>Agregar a mi itinerario</Text>
+                    <Text style={styles.itineraryText}>{texts.addToItinerary}</Text>
                 </TouchableOpacity>
             </View>
             {/* Información debajo de la imagen */}
             <View style={styles.infoContainer}>
                 <Text style={styles.description}>{business.description}</Text>
                 <Text style={styles.address}>{business.address}</Text>
-                <Text style={styles.phone}>Teléfono: {business.tel}</Text>
+                <Text style={styles.phone}>{texts.phone}: {business.tel}</Text>
             </View>
         </View>
     );
@@ -100,7 +110,6 @@ const styles = StyleSheet.create({
     },
     address: {
         fontSize: SizeConstants.subtitles,
-        fontWeight: "bold",
         color: "black",
         textAlign: "center",
         marginBottom: 5,
@@ -109,6 +118,7 @@ const styles = StyleSheet.create({
         fontSize: SizeConstants.textsM,
         color: "black",
         textAlign: "center",
+        fontWeight: "bold",
     },
 });
 

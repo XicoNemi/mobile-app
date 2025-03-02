@@ -130,6 +130,10 @@ const LanguageProvider = {
       loginButton: "Log in",
       cancelButton: "Cancel",
     },
+    BusinessHeader: {
+      addToItinerary: "Add to my itinerary",
+      phone: "Phone",
+    },
   },
 
   // Textos en español
@@ -262,6 +266,10 @@ const LanguageProvider = {
       accessMessage: "Para acceder a perfil debes de iniciar sesión",
       loginButton: "Logearse",
       cancelButton: "Cancelar",
+    },
+    BusinessHeader: {
+      addToItinerary: "Agregar a mi itinerario",
+      phone: "Teléfono",
     },
   },
 };

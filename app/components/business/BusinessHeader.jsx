@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     address: {
-        fontSize: SizeConstants.subtitles,
+        fontSize: SizeConstants.textsM,
         color: "black",
         textAlign: "center",
         marginBottom: 5,

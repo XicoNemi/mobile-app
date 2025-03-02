@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
     phone: {
         fontSize: SizeConstants.textsM,
-        color: "black",
+        color: "gray",
         textAlign: "center",
         fontWeight: "bold",
     },

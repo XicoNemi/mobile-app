@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     },
     overlayContainer: {
         position: "absolute",
-        bottom: 60,
-        left: 20,
+        bottom: hp("7.5%"),
+        left: wp("5%"),
     },
     title: {
         fontSize: SizeConstants.titles,
@@ -82,37 +82,37 @@ const styles = StyleSheet.create({
     category: {
         fontSize: SizeConstants.textsM,
         color: "white",
-        marginBottom: 5,
+        marginBottom: hp("1.25%"),
     },
     itineraryButton: {
         position: "absolute",
-        bottom: 20,
-        left: 20,
+        bottom: hp("2.5%"),
+        left: wp("5%"),
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "#FFF",
-        padding: 8,
+        padding: wp("2%"),
         borderRadius: 5,
     },
     itineraryText: {
         color: "#000",
-        marginLeft: 5,
+        marginLeft: wp("1.25%"),
     },
     infoContainer: {
-        padding: 20,
+        padding: wp("5%"),
         alignItems: "center",
     },
     description: {
         fontSize: SizeConstants.texts,
         textAlign: "center",
         color: "black",
-        marginBottom: 10,
+        marginBottom: hp("1.25%"),
     },
     address: {
         fontSize: SizeConstants.textsM,
         color: "black",
         textAlign: "center",
-        marginBottom: 5,
+        marginBottom: hp("1.25%"),
     },
     phone: {
         fontSize: SizeConstants.textsM,

@@ -13,27 +13,20 @@ const VisitList = ({ loading }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Función para obtener la lista de negocios
     const fetchBusinesses = async () => {
       try {
-        // Si el usuario está logueado, obtener la lista de negocios con token
-        // Si no está logueado, obtener la lista de negocios públicos
         const data = token ? await Api.getBusinesses(token) : await Api.getPublicBusinesses();
-        setBusinesses(data); // Actualizar el estado con la lista de negocios obtenida
+        setBusinesses(data);
       } catch (error) {
-        console.error(error); // Manejar errores en la consola
+        console.error(error);
       }
     };
-    fetchBusinesses(); // Llamar a la función para obtener los negocios
-  }, [token]); // Ejecutar el efecto cuando el token cambie
+    fetchBusinesses();
+  }, [token]);
 
-  // Si está cargando, mapear los negocios para mostrar un esqueleto de carga
-  // Si no está cargando, usar la lista de negocios obtenida
   const data = loading ? businesses.map((item, index) => ({ ...item, id: index + 1 })) : businesses;
 
-  // Función para manejar el evento de presionar un negocio
   const handlePress = (item) => {
-    // Navegar a la pantalla de detalles del negocio con los datos del negocio seleccionado
     navigation.navigate("BusinessDetailScreen", { business: item });
   };
 

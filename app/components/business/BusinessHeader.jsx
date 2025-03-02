@@ -14,6 +14,7 @@ const BusinessHeader = ({ business }) => {
             {/* Imagen de fondo */}
             <View style={styles.imageContainer}>
                 <Image source={{ uri: business.url_image }} style={styles.image} />
+                <View style={styles.imageOverlay} />
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back" size={24} color="#000" />
                 </TouchableOpacity>
@@ -46,11 +47,15 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     },
+    imageOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+    },
     backButton: {
         position: "absolute",
         top: hp("5%"),
         left: wp("2.75%"),
-        backgroundColor: "rgba(128, 128, 128, 0.5)",
+        backgroundColor: "#fff",
         padding: wp('2.3%'),
         borderRadius: 50,
     },
@@ -94,14 +99,14 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     address: {
-        fontSize: SizeConstants.textsM,
+        fontSize: SizeConstants.subtitles,
         fontWeight: "bold",
         color: "black",
         textAlign: "center",
         marginBottom: 5,
     },
     phone: {
-        fontSize: SizeConstants.texts,
+        fontSize: SizeConstants.textsM,
         color: "black",
         textAlign: "center",
     },

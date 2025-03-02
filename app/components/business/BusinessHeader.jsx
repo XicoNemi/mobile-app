@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
+import SizeConstants from "../../utils/SizeConstants";
 
 const BusinessHeader = ({ business }) => {
     const navigation = useNavigation();
@@ -14,7 +15,7 @@ const BusinessHeader = ({ business }) => {
             <View style={styles.imageContainer}>
                 <Image source={{ uri: business.url_image }} style={styles.image} />
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back" size={24} color="white" />
+                    <Ionicons name="arrow-back" size={24} color="#000" />
                 </TouchableOpacity>
                 {/* Contenido sobre la imagen sin tarjeta blanca */}
                 <View style={styles.overlayContainer}>
@@ -22,7 +23,7 @@ const BusinessHeader = ({ business }) => {
                     <Text style={styles.category}>{business.category}</Text>
                 </View>
                 <TouchableOpacity style={styles.itineraryButton}>
-                    <Ionicons name="calendar-outline" size={18} color={Colors.primary} />
+                    <Ionicons name="calendar-outline" size={SizeConstants.iconsCH} color={Colors.primary} />
                     <Text style={styles.itineraryText}>Agregar a mi itinerario</Text>
                 </TouchableOpacity>
             </View>
@@ -48,9 +49,9 @@ const styles = StyleSheet.create({
     backButton: {
         position: "absolute",
         top: hp("5%"),
-        left: wp("5%"),
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        padding: 10,
+        left: wp("2.75%"),
+        backgroundColor: "rgba(128, 128, 128, 0.5)",
+        padding: wp('2.3%'),
         borderRadius: 50,
     },
     overlayContainer: {
@@ -59,13 +60,14 @@ const styles = StyleSheet.create({
         left: 20,
     },
     title: {
-        fontSize: 22,
+        fontSize: SizeConstants.titles,
         fontWeight: "bold",
         color: "white",
     },
     category: {
-        fontSize: 16,
+        fontSize: SizeConstants.textsM,
         color: "white",
+        marginBottom: 5,
     },
     itineraryButton: {
         position: "absolute",
@@ -86,20 +88,20 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     description: {
-        fontSize: 14,
+        fontSize: SizeConstants.texts,
         textAlign: "center",
         color: "black",
         marginBottom: 10,
     },
     address: {
-        fontSize: 18,
+        fontSize: SizeConstants.textsM,
         fontWeight: "bold",
         color: "black",
         textAlign: "center",
         marginBottom: 5,
     },
     phone: {
-        fontSize: 16,
+        fontSize: SizeConstants.texts,
         color: "black",
         textAlign: "center",
     },

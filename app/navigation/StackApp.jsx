@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator();
 const StackApp = () => {
     return (
         <>
-            <StatusBar style="auto" backgroundColor="white" translucent />
+            <StatusBar style="auto" backgroundColor="transparent" translucent />            
             <Stack.Navigator
                 initialRouteName="HomeScreen"
                 screenOptions={{

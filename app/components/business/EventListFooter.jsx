@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.eventsLight,
         borderRadius: 20,
         alignItems: "center",
+        marginTop: hp("1%"),
     },
     viewMoreText: {
         color: Colors.eventsLight,

@@ -26,7 +26,7 @@ const StackApp = () => {
                 initialRouteName="HomeScreen"
                 screenOptions={{
                     headerShown: false,
-                    animation: "simple_push",
+                    animation: "slide_from_bottom", // simple_push, slide_from_right, slide_from_left, slide_from_bottom, fade, none
                 }}
             >
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />

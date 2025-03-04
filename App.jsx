@@ -3,10 +3,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./app/store/store";
 import StackApp from "./app/navigation/StackApp";
-
-// Acciones y utilidades de autenticación
 import { logIn } from "./app/features/authSlice";
 import { getValueFor } from "./app/utils/localStorage";
+import { Linking } from 'react-native';
+
+const linking = {
+  prefixes: ['myapp://'],
+  config: {
+    screens: {
+      VerificationSuccess: 'verification-success',
+    },
+  },
+};
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -29,7 +37,7 @@ function AppContent() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <StackApp />
     </NavigationContainer>
   );

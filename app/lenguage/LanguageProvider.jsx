@@ -137,6 +137,7 @@ const LanguageProvider = {
     EventListFooter: {
       upcomingEvents: "Upcoming Events",
       viewMoreEvents: "View more events",
+      viewLessEvents: "View less events",
     },
   },
 
@@ -278,6 +279,7 @@ const LanguageProvider = {
     EventListFooter: {
       upcomingEvents: "Próximos Eventos",
       viewMoreEvents: "Ver más eventos",
+      viewLessEvents: "Ver menos eventos",
     },
   },
 };

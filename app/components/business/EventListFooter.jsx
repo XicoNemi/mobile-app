@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import EventCard from "./EventCardForBusiness";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -34,12 +34,21 @@ const events = [
 const EventListFooter = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
+    const [visibleEvents, setVisibleEvents] = useState(2);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
     }, [dispatch]);
 
     const { EventListFooter: texts } = textsLeng;
+
+    const handleViewMore = () => {
+        if (visibleEvents >= events.length) {
+            setVisibleEvents(2);
+        } else {
+            setVisibleEvents((prev) => prev + 2);
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -50,15 +59,17 @@ const EventListFooter = () => {
                 </TouchableOpacity>
             </View>
 
-            {events.map((event) => (
+            {events.slice(0, visibleEvents).map((event) => (
                 <View key={event.id}>
                     <EventCard event={event} />
                     <View style={styles.separator} />
                 </View>
             ))}
 
-            <TouchableOpacity style={styles.viewMoreButton}>
-                <Text style={styles.viewMoreText}>{texts.viewMoreEvents}</Text>
+            <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
+                <Text style={styles.viewMoreText}>
+                    {visibleEvents >= events.length ? texts.viewLessEvents : texts.viewMoreEvents}
+                </Text>
             </TouchableOpacity>
         </View>
     );

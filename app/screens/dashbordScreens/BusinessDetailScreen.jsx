@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import BusinessHeader from "../../components/business/BusinessHeader";
 import EventListFooter from "../../components/business/EventListFooter";
 
@@ -7,16 +7,16 @@ const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <BusinessHeader business={business} />
             <EventListFooter />
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: "white",
     },
 });

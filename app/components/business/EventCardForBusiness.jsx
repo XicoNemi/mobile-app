@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         marginLeft: wp("3%"),
     },
     eventTitle: {
-        fontSize: SizeConstants.subtitles,
+        fontSize: SizeConstants.textsM,
         fontWeight: "bold",
     },
     eventDescription: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         color: "gray",
     },
     eventDate: {
-        fontSize: SizeConstants.textsM,
+        fontSize: SizeConstants.texts,
         fontWeight: "bold",
     },
     favoriteButton: {

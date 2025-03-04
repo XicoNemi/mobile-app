@@ -134,6 +134,10 @@ const LanguageProvider = {
       addToItinerary: "Add to my itinerary",
       phone: "Phone",
     },
+    EventListFooter: {
+      upcomingEvents: "Upcoming Events",
+      viewMoreEvents: "View more events",
+    },
   },
 
   // Textos en español
@@ -270,6 +274,10 @@ const LanguageProvider = {
     BusinessHeader: {
       addToItinerary: "Agregar a mi itinerario",
       phone: "Teléfono",
+    },
+    EventListFooter: {
+      upcomingEvents: "Próximos Eventos",
+      viewMoreEvents: "Ver más eventos",
     },
   },
 };

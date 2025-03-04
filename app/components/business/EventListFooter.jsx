@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import EventCard from "./EventCardForBusiness";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const events = [
     {
@@ -30,10 +32,19 @@ const events = [
 ];
 
 const EventListFooter = () => {
+    const dispatch = useDispatch();
+    const textsLeng = useSelector((state) => state.language.texts);
+
+    useEffect(() => {
+        AssignLenguaje(dispatch);
+    }, [dispatch]);
+
+    const { EventListFooter: texts } = textsLeng;
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>Próximos Eventos</Text>
+                <Text style={styles.headerText}>{texts.upcomingEvents}</Text>
                 <TouchableOpacity>
                     <Text style={styles.arrow}>→</Text>
                 </TouchableOpacity>
@@ -47,7 +58,7 @@ const EventListFooter = () => {
             ))}
 
             <TouchableOpacity style={styles.viewMoreButton}>
-                <Text style={styles.viewMoreText}>Ver más eventos</Text>
+                <Text style={styles.viewMoreText}>{texts.viewMoreEvents}</Text>
             </TouchableOpacity>
         </View>
     );

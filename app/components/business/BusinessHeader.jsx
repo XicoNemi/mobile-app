@@ -50,7 +50,7 @@ const BusinessHeader = ({ business }) => {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        height: hp("45%"),
+        height: hp("40%"),
         position: "relative",
     },
     image: {

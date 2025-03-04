@@ -11,21 +11,21 @@ const events = [
         title: "San Valentín y Mucho Rock",
         description: "Ven y festeja con tu pareja y amigos este 14 de febrero. Artista en vivo: BLACK PISTOLS",
         date: "14 de Febrero 9:00PM",
-        image: "https://example.com/event1.jpg",
+        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
     },
     {
         id: 2,
         title: "Festival de Jazz Nocturno",
         description: "Una noche mágica con los mejores exponentes del jazz en vivo.",
         date: "20 de Marzo 8:00PM",
-        image: "https://example.com/event2.jpg",
+        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
     },
     {
         id: 3,
         title: "Feria Gastronómica Internacional",
         description: "Degusta platillos de todo el mundo en un solo lugar.",
         date: "5 de Abril 12:00PM",
-        image: "https://example.com/event3.jpg",
+        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
     },
 ];
 
@@ -55,7 +55,8 @@ const EventListFooter = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: wp("5%"),
+        marginTop: hp("-3%"),
+        padding: wp("3%"),
         backgroundColor: "#FFF",
     },
     headerContainer: {
@@ -69,8 +70,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     arrow: {
-        fontSize: SizeConstants.titles,
-        color: Colors.primary,
+        fontSize: SizeConstants.iconsXG,
+        color: Colors.eventsLight,
     },
     separator: {
         height: hp("2%"),
@@ -78,12 +79,14 @@ const styles = StyleSheet.create({
     viewMoreButton: {
         marginTop: hp("2%"),
         paddingVertical: hp("1.5%"),
-        backgroundColor: Colors.primary,
-        borderRadius: 10,
+        backgroundColor: "white",
+        borderWidth: 1,
+        borderColor: Colors.eventsLight,
+        borderRadius: 20,
         alignItems: "center",
     },
     viewMoreText: {
-        color: "white",
+        color: Colors.eventsLight,
         fontSize: SizeConstants.texts,
         fontWeight: "bold",
     },

@@ -5,17 +5,33 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-nat
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 
+// Función para convertir timestamp a fecha legible
+const formatDate = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    const months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    return `${day} de ${month} ${formattedHours}:${minutes}${period}`;
+};
+
 const EventCardForBusiness = ({ event }) => {
     return (
         <View style={styles.cardContainer}>
             {/* Imagen del evento */}
-            <Image source={{ uri: event.image }} style={styles.eventImage} />
+            <Image source={{ uri: event.url_image || "/assets/Image.png" }} style={styles.eventImage} />
 
             {/* Información del evento */}
             <View style={styles.eventInfo}>
-                <Text style={styles.eventTitle}>{event.title}</Text>
+                <Text style={styles.eventTitle}>{event.name}</Text>
                 <Text style={styles.eventDescription}>{event.description}</Text>
-                <Text style={styles.eventDate}>{event.date}</Text>
+                <Text style={styles.eventDate}>{formatDate(event.startDate)}</Text>
             </View>
 
             {/* Botones de acción */}

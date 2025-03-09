@@ -7,31 +7,7 @@ import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
 
-const events = [
-    {
-        id: 1,
-        title: "San Valentín y Mucho Rock",
-        description: "Ven y festeja con tu pareja y amigos este 14 de febrero. Artista en vivo: BLACK PISTOLS",
-        date: "14 de Febrero 9:00PM",
-        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
-    },
-    {
-        id: 2,
-        title: "Festival de Jazz Nocturno",
-        description: "Una noche mágica con los mejores exponentes del jazz en vivo.",
-        date: "20 de Marzo 8:00PM",
-        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
-    },
-    {
-        id: 3,
-        title: "Feria Gastronómica Internacional",
-        description: "Degusta platillos de todo el mundo en un solo lugar.",
-        date: "5 de Abril 12:00PM",
-        image: "https://raw.githubusercontent.com/XicoNemi/mobile-app/refs/heads/feature/update-app/assets/Image.png",
-    },
-];
-
-const EventListFooter = () => {
+const EventListFooter = ({ events }) => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [visibleEvents, setVisibleEvents] = useState(2);
@@ -60,8 +36,8 @@ const EventListFooter = () => {
             </View>
 
             {events.slice(0, visibleEvents).map((event) => (
-                <View key={event.id}>
-                    <EventCard event={event} />
+                <View key={event.event.id}>
+                    <EventCard event={event.event} />
                     <View style={styles.separator} />
                 </View>
             ))}

@@ -166,14 +166,14 @@ const styles = StyleSheet.create({
   },
   backButton: {
     width: wp('10%'),
+    position: "relative",
     height: wp('10%'),
     borderRadius: wp('5%'),
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    top: hp('4.2%'),
-    left: wp('2.75%'),
+    bottom: hp('7.5%'),
+    right: wp('41%'),
     zIndex: 10,
   },
   title: {

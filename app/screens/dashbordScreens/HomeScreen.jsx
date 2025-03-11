@@ -22,6 +22,7 @@ import SearchInputComponent from "../../components/generals/SearchInputComponent
 import CustomAlertComponent from "../../components/generals/CustomAlertComponent";
 import { logOut } from "../../features/authSlice";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import NoDataComponent from "../../components/generals/NoDataComponent";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const HomeScreen = () => {
   const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
   const [alertVisible, setAlertVisible] = useState(false);
+  const [data, setData] = useState([]); // Suponiendo que los datos se almacenan en este estado
   const navigation = useNavigation();
 
   const toggleMenu = () => {
@@ -152,8 +154,10 @@ const HomeScreen = () => {
               />
             ))}
           </View>
-        ) : (
+        ) : data && data.length > 0 ? (
           <VisitList loading={loading} />
+        ) : (
+          <NoDataComponent />
         )}
 
         <Text style={styles.sectionTitle}>

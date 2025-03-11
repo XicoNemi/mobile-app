@@ -140,6 +140,9 @@ const LanguageProvider = {
       viewMoreEvents: "View more events",
       viewLessEvents: "View less events",
     },
+    NoDataComponent: {
+      noDataMessage: "No data available at the moment",
+    },
   },
 
   // Textos en español
@@ -282,6 +285,9 @@ const LanguageProvider = {
       upcomingEvents: "Próximos Eventos",
       viewMoreEvents: "Ver más eventos",
       viewLessEvents: "Ver menos eventos",
+    },
+    NoDataComponent: {
+      noDataMessage: "No hay datos disponibles por el momento",
     },
   },
 };

@@ -59,9 +59,13 @@ const HomeScreen = () => {
 
   const handleLogout = () => {
     setMenuVisibleProfile(false); // Cerrar el menú inmediatamente
+    setLoading(true); // Activar el estado de carga
     dispatch(logOut());
     setTimeout(() => {
-        navigation.navigate("HomeScreen");
+      navigation.navigate("HomeScreen");
+      setTimeout(() => {
+        setLoading(false); // Desactivar el estado de carga después de un tiempo
+      }, 1300);
     }, 0); // Navegar después de cerrar sesión
   };
 
@@ -100,7 +104,7 @@ const HomeScreen = () => {
       {menuVisibleProfile && (
         <ProfileMenuDropdown
           navigation={navigation}
-          onLogout={handleLogout}
+          onLogout={handleLogout} // Pasar la función handleLogout como prop
         />
       )}
 

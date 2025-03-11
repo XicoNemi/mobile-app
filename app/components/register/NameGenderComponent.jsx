@@ -63,7 +63,7 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                 }));
                 break;
             case "gender":
-                const isValidGender = value !== "" && value !== "Selecciona un género";
+                const isValidGender = value !== "" && value !== textsLeng.RegisterScreen.selectGender;
                 setIsValidGender(isValidGender);
                 setError((prevError) => ({
                     ...prevError,
@@ -126,10 +126,10 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                                 verifyInput("gender", itemValue);
                             }}
                         >
-                            <Picker.Item label="Selecciona un género" value="" />
-                            <Picker.Item label="Masculino" value="Masculino" />
-                            <Picker.Item label="Femenino" value="Femenino" />
-                            <Picker.Item label="Otro" value="Otro" />
+                            <Picker.Item label={textsLeng.RegisterScreen.selectGender} value="" color={Colors.primary} />
+                            <Picker.Item label="Masculino" value="Masculino" color={Colors.primary} />
+                            <Picker.Item label="Femenino" value="Femenino" color={Colors.primary} />
+                            <Picker.Item label="Otro" value="Otro" color={Colors.primary} />
                         </Picker>
                     </View>
                     {error.gender && <Text style={styles.errorText}>{error.gender}</Text>}

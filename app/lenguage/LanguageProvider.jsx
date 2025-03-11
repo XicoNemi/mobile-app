@@ -55,6 +55,7 @@ const LanguageProvider = {
       genderError:"Gender is required",
       birthday: "Birthday",
       tel: "Phone",
+      selectGender: "Select a gender",
       enterEmail: {
         texts: {
           invalidPhone: "Enter a valid phone number.",
@@ -197,6 +198,7 @@ const LanguageProvider = {
       genderError:"El género es requerido",
       birthday: "Cumpleaños",
       tel: "Teléfono",
+      selectGender: "Selecciona un género",
       enterEmail: {
         texts: {
           invalidPhone: "Ingrese un número de teléfono válido.",

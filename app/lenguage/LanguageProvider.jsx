@@ -14,7 +14,7 @@ const LanguageProvider = {
       },
     },
     AlertMessagelogOut: {
-      title: "Log ou",
+      title: "Log out",
       message: "Are you sure you want to log out?",
       confirmButtonTitle: "Yes",
       cancelButtonTitle: "No",

@@ -40,7 +40,7 @@ const HomeScreen = () => {
     if (!menuVisible) {
       setTimeout(() => {
         setMenuVisible(false);
-      }, 10000); // Cierra el menú después de 5 segundos
+      }, 10000); 
     }
   };
 

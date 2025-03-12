@@ -10,7 +10,7 @@ const NoDataComponent = () => {
 
   return (
     <View style={styles.container}>
-      <Ionicons name="alert-circle-outline" size={50} color={Colors.primaryLight} />
+      <Ionicons name="alert-circle-outline" size={50} color={Colors.primary} />
       <Text style={styles.text}>{texts.noDataMessage}</Text>
     </View>
   );
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 10,
     fontSize: 16,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     textAlign: 'center',
   },
 });

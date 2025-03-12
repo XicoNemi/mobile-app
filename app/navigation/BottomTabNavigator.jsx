@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/dashbordScreens/HomeScreen';
 import ProfileScreen from '../screens/dashbordScreens/profile/ProfileScreen';
 import FavoritesScreen from '../screens/dashbordScreens/FavoritesScreen';
-import { Text } from 'react-native';
+import { Text, Platform } from 'react-native';
 import Colors from '../utils/Colors';
 import { useSelector } from 'react-redux';
 import CustomAlertComponent from '../components/generals/CustomAlertComponent';
@@ -24,7 +24,6 @@ const BottomTabNavigator = () => {
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
-
                         if (route.name === 'Home') {
                             iconName = focused ? 'home' : 'home-outline';
                         } else if (route.name === 'Profile') {
@@ -32,7 +31,6 @@ const BottomTabNavigator = () => {
                         } else if (route.name === 'Favorites') {
                             iconName = focused ? 'heart' : 'heart-outline';
                         }
-
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
                     tabBarLabel: ({ focused, color }) => {
@@ -44,7 +42,17 @@ const BottomTabNavigator = () => {
                         } else if (route.name === 'Favorites') {
                             label = 'Favorites';
                         }
-                        return <Text style={{ color }}>{label}</Text>;
+                        return <Text style={{ color, fontSize: 12, marginBottom: 5 }}>{label}</Text>;
+                    },
+                    tabBarStyle: {
+                        backgroundColor: 'white',
+                        borderTopWidth: 1,
+                        borderTopColor: '#ddd',
+                        height: 65,
+                        paddingBottom: Platform.OS === 'ios' ? 20 : 10, 
+                        position: 'absolute',
+                        bottom: 0,
+                        width: '100%',
                     },
                     tabBarActiveTintColor: Colors.primary,
                     tabBarInactiveTintColor: 'gray',
@@ -63,6 +71,7 @@ const BottomTabNavigator = () => {
                 <Tab.Screen name="Profile" component={ProfileScreen} />
                 <Tab.Screen name="Favorites" component={FavoritesScreen} />
             </Tab.Navigator>
+            
             <CustomAlertComponent
                 isVisible={alertVisible}
                 onClose={() => setAlertVisible(false)}

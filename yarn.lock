@@ -2674,6 +2674,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/bottom-tabs@npm:^7.2.1":
+  version: 7.2.1
+  resolution: "@react-navigation/bottom-tabs@npm:7.2.1"
+  dependencies:
+    "@react-navigation/elements": "npm:^2.2.6"
+    color: "npm:^4.2.3"
+  peerDependencies:
+    "@react-navigation/native": ^7.0.15
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 10/2d7489276914dd4be82f8a6a097268bff0bc18b62a879d9056338852df70613b6fa40cccd193033c3e460537106cb51f08db954e4f502461a1f11db68f3eb3a1
+  languageName: node
+  linkType: hard
+
 "@react-navigation/core@npm:^7.4.0":
   version: 7.4.0
   resolution: "@react-navigation/core@npm:7.4.0"
@@ -8350,6 +8366,7 @@ __metadata:
     "@react-native-community/datetimepicker": "npm:8.2.0"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-native-picker/picker": "npm:2.9.0"
+    "@react-navigation/bottom-tabs": "npm:^7.2.1"
     "@react-navigation/native": "npm:^7.0.15"
     "@react-navigation/native-stack": "npm:^7.2.0"
     "@react-navigation/stack": "npm:^7.1.2"

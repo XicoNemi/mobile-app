@@ -1,10 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from 'expo-status-bar';
-import HomeScreen from "../screens/dashbordScreens/HomeScreen";
+import BottomTabNavigator from "./BottomTabNavigator"; // Importa el BottomTabNavigator
 import ItinerariesScreen from "../screens/dashbordScreens/itineraries/ItinerariesScreen";
 import RoutesScreen from "../screens/dashbordScreens/routes/RoutesScreen";
-import ProfileScreen from "../screens/dashbordScreens/profile/ProfileScreen";
 import ItineraryDetailScreen from "../screens/dashbordScreens/itineraries/ItineraryDetailScreen";
 import AccommodationScreen from "../screens/dashbordScreens/accomodation/AccommodationScreen";
 import GastronomyScreen from "../screens/dashbordScreens/gastronomy/GastronomyScreen";
@@ -22,16 +21,15 @@ const Stack = createNativeStackNavigator();
 const StackApp = () => {
     return (
         <>
-            <StatusBar style="auto" backgroundColor="transparent" translucent />            
+            <StatusBar style="auto" backgroundColor="transparent" translucent />
             <Stack.Navigator
                 initialRouteName="HomeScreen"
                 screenOptions={{
                     headerShown: false,
-                    animation: "slide_from_bottom", // simple_push, slide_from_right, slide_from_left, slide_from_bottom, fade, none
+                    animation: "slide_from_bottom",
                 }}
             >
-                <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+                <Stack.Screen name="BottomTabs" component={BottomTabNavigator} />
                 <Stack.Screen name="ItinerariesScreen" component={ItinerariesScreen} />
                 <Stack.Screen name="ItineraryDetailScreen" component={ItineraryDetailScreen} />
                 <Stack.Screen name="CreateItinerariesScreen" component={CreateItinerariesScreen} />

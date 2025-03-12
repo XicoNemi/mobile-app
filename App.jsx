@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./app/store/store";
-import StackApp from "./app/navigation/StackApp";
+import BottomTabNavigator from "./app/navigation/BottomTabNavigator"; 
 import { logIn } from "./app/features/authSlice";
 import { getValueFor } from "./app/utils/localStorage";
-
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -28,8 +27,8 @@ function AppContent() {
   }, []);
 
   return (
-    <NavigationContainer >
-      <StackApp />
+    <NavigationContainer>
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 }

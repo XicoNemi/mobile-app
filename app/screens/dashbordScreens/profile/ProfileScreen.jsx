@@ -56,7 +56,7 @@ const ProfileScreen = ({ navigation }) => {
   const confirmLogout = () => {
     setIsModalVisible(false);
     dispatch(logOut());
-    navigation.navigate("HomeScreen");
+    navigation.navigate("BottomTabs", { screen: "Home" });
   };
 
   const cancelLogout = () => {

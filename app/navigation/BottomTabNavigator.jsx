@@ -36,11 +36,11 @@ const BottomTabNavigator = () => {
                     tabBarLabel: ({ focused, color }) => {
                         let label;
                         if (route.name === 'Home') {
-                            label = 'Home';
+                            label = textsLeng.BottomTabNavigator.home;
                         } else if (route.name === 'Profile') {
-                            label = 'Profile';
+                            label = textsLeng.BottomTabNavigator.profile;
                         } else if (route.name === 'Favorites') {
-                            label = 'Favorites';
+                            label = textsLeng.BottomTabNavigator.favorites;
                         }
                         return <Text style={{ color, fontSize: 12, marginBottom: 5 }}>{label}</Text>;
                     },

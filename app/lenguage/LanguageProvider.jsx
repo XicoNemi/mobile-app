@@ -143,6 +143,11 @@ const LanguageProvider = {
     NoDataComponent: {
       noDataMessage: "No data available at the moment",
     },
+    BottomTabNavigator: {
+      home: "Home",
+      profile: "Profile",
+      favorites: "Favorites",
+    },
   },
 
   // Textos en español
@@ -288,6 +293,11 @@ const LanguageProvider = {
     },
     NoDataComponent: {
       noDataMessage: "No hay datos disponibles por el momento",
+    },
+    BottomTabNavigator: {
+      home: "Inicio",
+      profile: "Perfil",
+      favorites: "Favoritos",
     },
   },
 };

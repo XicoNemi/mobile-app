@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    bottom: hp('6.0%'),
+    bottom: hp('5.5%'),
     right: wp('41%'),
     zIndex: 10,
   },

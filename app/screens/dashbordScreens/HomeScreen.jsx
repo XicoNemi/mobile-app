@@ -27,7 +27,7 @@ const HomeScreen = () => {
   const userName = useSelector((state) => state.auth.name);
   const [menuVisible, setMenuVisible] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]); 
+  const [data, setData] = useState([]);
   const navigation = useNavigation();
 
   const toggleMenu = () => {
@@ -35,7 +35,7 @@ const HomeScreen = () => {
     if (!menuVisible) {
       setTimeout(() => {
         setMenuVisible(false);
-      }, 10000); 
+      }, 10000);
     }
   };
 
@@ -60,14 +60,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
         <Text style={styles.title}>{textsLeng.HomeScreen.start}</Text>
-
-        <TouchableOpacity>
-          <Ionicons
-            name="person-circle-outline"
-            size={SizeConstants.iconsG}
-            color="black"
-          />
-        </TouchableOpacity>
+        <View style={{ width: SizeConstants.iconsG }} /> 
       </View>
 
       {menuVisible && <MenuDropdown navigation={navigation} />}

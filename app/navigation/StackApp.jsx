@@ -15,6 +15,7 @@ import RegisterScreen from "../screens/authScreens/RegisterScreen";
 import PasswordRecoveryScreen from "../screens/authScreens/PasswordRecoveryScreen";
 import BusinessDetailScreen from "../screens/dashbordScreens/BusinessDetailScreen";
 import VerificationSuccessScreen from "../screens/authScreens/VerificationSuccessScreen";
+import HomeScreen from "../screens/dashbordScreens/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const StackApp = () => {
                 }}
             >
                 <Stack.Screen name="BottomTabs" component={BottomTabNavigator} />
+                <Stack.Screen name="HomeScreen" component={HomeScreen} /> 
                 <Stack.Screen name="ItinerariesScreen" component={ItinerariesScreen} />
                 <Stack.Screen name="ItineraryDetailScreen" component={ItineraryDetailScreen} />
                 <Stack.Screen name="CreateItinerariesScreen" component={CreateItinerariesScreen} />

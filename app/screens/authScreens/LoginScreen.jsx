@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
     try {
       const { user, token } = await api.signIn(email, password);
       dispatch(logIn({ id: user.id, name: user.name, token, type: user.type }));
-      navigation.navigate("HomeScreen");
+      navigation.navigate("BottomTabs"); 
     } catch (error) {
       setAlertTitle("Error");
       setAlertMessage(error.message);

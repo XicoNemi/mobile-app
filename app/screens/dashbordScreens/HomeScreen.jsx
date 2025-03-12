@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MenuDropdown from "../../components/menus/MenuDropdownComponent";
-import ProfileMenuDropdown from "../../components/menus/ProfileMenuDropdown";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
@@ -19,8 +18,6 @@ import RoutesList from "../../components/dashbord/RoutesList";
 import VisitList from "../../components/dashbord/VisitList";
 import RecommendationsList from "../../components/dashbord/RecommendationsList";
 import SearchInputComponent from "../../components/generals/SearchInputComponent";
-import CustomAlertComponent from "../../components/generals/CustomAlertComponent";
-import { logOut } from "../../features/authSlice";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import NoDataComponent from "../../components/generals/NoDataComponent";
 
@@ -29,10 +26,8 @@ const HomeScreen = () => {
   const textsLeng = useSelector((state) => state.language.texts);
   const userName = useSelector((state) => state.auth.name);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [data, setData] = useState([]); // Suponiendo que los datos se almacenan en este estado
+  const [data, setData] = useState([]); 
   const navigation = useNavigation();
 
   const toggleMenu = () => {
@@ -42,31 +37,6 @@ const HomeScreen = () => {
         setMenuVisible(false);
       }, 10000); 
     }
-  };
-
-  const toggleMenuProfile = () => {
-    if (!userName) {
-      setAlertVisible(true);
-    } else {
-      setMenuVisibleProfile(!menuVisibleProfile);
-      if (!menuVisibleProfile) {
-        setTimeout(() => {
-          setMenuVisibleProfile(false);
-        }, 10000); 
-      }
-    }
-  };
-
-  const handleLogout = () => {
-    setMenuVisibleProfile(false); // Cerrar el menú inmediatamente
-    setLoading(true); // Activar el estado de carga
-    dispatch(logOut());
-    setTimeout(() => {
-      navigation.navigate("HomeScreen");
-      setTimeout(() => {
-        setLoading(false); // Desactivar el estado de carga después de un tiempo
-      }, 1300);
-    }, 0); // Navegar después de cerrar sesión
   };
 
   useEffect(() => {
@@ -91,7 +61,7 @@ const HomeScreen = () => {
 
         <Text style={styles.title}>{textsLeng.HomeScreen.start}</Text>
 
-        <TouchableOpacity onPress={toggleMenuProfile}>
+        <TouchableOpacity>
           <Ionicons
             name="person-circle-outline"
             size={SizeConstants.iconsG}
@@ -101,12 +71,6 @@ const HomeScreen = () => {
       </View>
 
       {menuVisible && <MenuDropdown navigation={navigation} />}
-      {menuVisibleProfile && (
-        <ProfileMenuDropdown
-          navigation={navigation}
-          onLogout={handleLogout} // Pasar la función handleLogout como prop
-        />
-      )}
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {loading ? (
@@ -174,21 +138,6 @@ const HomeScreen = () => {
 
         <RecommendationsList loading={loading} />
       </ScrollView>
-
-      <CustomAlertComponent
-        isVisible={alertVisible}
-        onClose={() => setAlertVisible(false)}
-        title={textsLeng.CustomAlertComponent.accessRequired}
-        message={textsLeng.CustomAlertComponent.accessMessage}
-        primaryButton={{
-          text: textsLeng.CustomAlertComponent.loginButton,
-          onPress: () => navigation.navigate("LoginScreen"),
-        }}
-        secondaryButton={{
-          text: textsLeng.CustomAlertComponent.cancelButton,
-          onPress: () => setAlertVisible(false),
-        }}
-      />
     </View>
   );
 };

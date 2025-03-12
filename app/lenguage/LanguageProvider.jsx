@@ -125,6 +125,9 @@ const LanguageProvider = {
       title: "Tourism",
       message: "Places to visit →",
     },
+    FavoritesScreen: {
+      title: "Favorites",
+    },
     CustomAlertComponent: {
       accessRequired: "Access required",
       accessMessage: "To access the profile you must log in",
@@ -275,6 +278,9 @@ const LanguageProvider = {
     TourismScreen: {
       title: "Turismo",
       message: "Lugares para visitar →",
+    },
+    FavoritesScreen: {
+      title: "Favoritos",
     },
     CustomAlertComponent: {
       accessRequired: "Acceso requerido",

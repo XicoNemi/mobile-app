@@ -5,16 +5,7 @@ import { store } from "./app/store/store";
 import StackApp from "./app/navigation/StackApp";
 import { logIn } from "./app/features/authSlice";
 import { getValueFor } from "./app/utils/localStorage";
-import { Linking } from 'react-native';
 
-const linking = {
-  prefixes: ['myapp://'],
-  config: {
-    screens: {
-      VerificationSuccess: 'verification-success',
-    },
-  },
-};
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -37,7 +28,7 @@ function AppContent() {
   }, []);
 
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer >
       <StackApp />
     </NavigationContainer>
   );

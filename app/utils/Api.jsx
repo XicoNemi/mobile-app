@@ -95,7 +95,7 @@ const getBusinesses = async (token) => {
 // Función para obtener la lista de negocios públicos (no requiere token)
 const getPublicBusinesses = async () => {
   try {
-    const response = await api.get('api/businesses/public');
+    const response = await api.get('/api/businesses/public');
     return response.data; 
   } catch (error) {
     const { message, status } = handleError(error);

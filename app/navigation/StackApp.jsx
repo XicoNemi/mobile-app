@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from 'expo-status-bar';
-import BottomTabNavigator from "./BottomTabNavigator"; // Importa el BottomTabNavigator
+import BottomTabNavigator from "./BottomTabNavigator"; 
 import ItinerariesScreen from "../screens/dashbordScreens/itineraries/ItinerariesScreen";
 import RoutesScreen from "../screens/dashbordScreens/routes/RoutesScreen";
 import ItineraryDetailScreen from "../screens/dashbordScreens/itineraries/ItineraryDetailScreen";
@@ -23,7 +23,7 @@ const StackApp = () => {
         <>
             <StatusBar style="auto" backgroundColor="transparent" translucent />
             <Stack.Navigator
-                initialRouteName="HomeScreen"
+                initialRouteName="BottomTabs"
                 screenOptions={{
                     headerShown: false,
                     animation: "slide_from_bottom",

@@ -5,6 +5,7 @@ import HomeScreen from '../screens/dashbordScreens/HomeScreen';
 import ProfileScreen from '../screens/dashbordScreens/profile/ProfileScreen';
 import FavoritesScreen from '../screens/dashbordScreens/FavoritesScreen';
 import { Text } from 'react-native';
+import Colors from '../utils/Colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const BottomTabNavigator = () => {
                     }
                     return <Text style={{ color }}>{label}</Text>;
                 },
-                tabBarActiveTintColor: 'tomato',
+                tabBarActiveTintColor: Colors.primary,
                 tabBarInactiveTintColor: 'gray',
                 headerShown: false,
             })}

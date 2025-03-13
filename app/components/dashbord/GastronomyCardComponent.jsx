@@ -5,8 +5,8 @@ import Colors from '../../utils/Colors';
 import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const GastronomyCardComponent = ({ title, description, image, onAddPress }) => {
-    const [isBookmarked, setIsBookmarked] = useState(false); // Estado para alternar el icono
+const GastronomyCardComponent = ({ title, description, image, rating, onAddPress }) => {
+    const [isBookmarked, setIsBookmarked] = useState(false); 
 
     const handleBookmarkToggle = () => {
         setIsBookmarked(!isBookmarked);
@@ -15,6 +15,19 @@ const GastronomyCardComponent = ({ title, description, image, onAddPress }) => {
     return (
         <View style={styles.cardContainer}>
             <Image source={image} style={styles.image} />
+            <View style={styles.ratingContainer}>
+                {[...Array(5)].map((_, index) => {
+                    const isHalfStar = rating - index === 0.5;
+                    return (
+                        <Ionicons
+                            key={index}
+                            name={isHalfStar ? "star-half" : index < rating ? "star" : "star-outline"}
+                            size={SizeConstants.iconsCH}
+                            color="gold"
+                        />
+                    );
+                })}
+            </View>
             <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
                 <Ionicons
                     name={isBookmarked ? "bookmark" : "bookmark-outline"}
@@ -64,6 +77,10 @@ const styles = StyleSheet.create({
         padding: wp('2.2%'),
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    ratingContainer: {
+        flexDirection: 'row',
+        marginBottom: hp('1%'),
     },
     content: {
         alignItems: 'flex-start',

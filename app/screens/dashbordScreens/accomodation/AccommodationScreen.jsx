@@ -28,18 +28,21 @@ const AccommodationScreen = () => {
             title: 'Hotel Villa de Cortez',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/hotel1.jpg'),
+            rating: 4.5, 
         },
         {
             id: '2',
             title: 'Hotel Casablanca',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/hotel2.jpg'),
+            rating: 3.5,
         },
         {
             id: '3',
             title: 'Hotel Cafetalero',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/hotel3.jpg'),
+            rating: 4.0,
         }
     ];
     const skeletonNumber = [1, 2, 3];
@@ -63,6 +66,7 @@ const AccommodationScreen = () => {
                             title={hospedaje.title}
                             description={hospedaje.description}
                             image={hospedaje.image}
+                            rating={hospedaje.rating} // Pasar la nueva propiedad
                             onPress={() => console.log('Hospedaje seleccionado:', hospedaje.title)}
                         />
                     ))

@@ -28,18 +28,21 @@ const GastronomyScreen = () => {
             title: 'Restaurante Aranjuez',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/gastro1.png'),
+            rating: 4.5, 
         },
         {
             id: 2,
             title: 'Parrilladas Don Mundo',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
             image: require('../../../../assets/gastro2.png'),
+            rating: 3.5, 
         },
         {
             id: 3,
             title: 'Mr Cheve',
             description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
             image: require('../../../../assets/gastro3.png'),
+            rating: 4.0, 
         },
     ];
 
@@ -65,6 +68,7 @@ const GastronomyScreen = () => {
                             title={item.title}
                             description={item.description}
                             image={item.image}
+                            rating={item.rating} // Pasar la nueva propiedad
                             onSavePress={() => console.log(`Guardado: ${item.title}`)}
                             onAddPress={() => console.log(`Añadido: ${item.title}`)}
                         />

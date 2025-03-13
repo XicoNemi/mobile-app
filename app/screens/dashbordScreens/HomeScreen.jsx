@@ -19,7 +19,6 @@ import VisitList from "../../components/dashbord/VisitList";
 import RecommendationsList from "../../components/dashbord/RecommendationsList";
 import SearchInputComponent from "../../components/generals/SearchInputComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import NoDataComponent from "../../components/generals/NoDataComponent";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const HomeScreen = () => {
   const userName = useSelector((state) => state.auth.name);
   const [menuVisible, setMenuVisible] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const navigation = useNavigation();
 
   const toggleMenu = () => {
@@ -115,10 +113,8 @@ const HomeScreen = () => {
               />
             ))}
           </View>
-        ) : data && data.length > 0 ? (
-          <VisitList loading={loading} />
         ) : (
-          <NoDataComponent />
+          <VisitList loading={loading} />
         )}
 
         <Text style={styles.sectionTitle}>

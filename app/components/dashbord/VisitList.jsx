@@ -24,17 +24,19 @@ const VisitList = ({ loading }) => {
     fetchBusinesses();
   }, [token]);
 
-  const data = loading ? businesses.map((item, index) => ({ ...item, id: index + 1 })) : businesses;
-
   const handlePress = (item) => {
     navigation.navigate("BusinessDetailScreen", { business: item });
   };
 
+  if (!loading && businesses.length === 0) {
+    return <NoDataComponent />;
+  }
+
   return (
     <FlatList
       horizontal
-      data={data}
-      keyExtractor={(item) => item.id.toString()}
+      data={loading ? [...Array(3)] : businesses}
+      keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => handlePress(item)} style={styles.visitBox}>
           {loading ? (

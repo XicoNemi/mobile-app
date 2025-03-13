@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     skeletonContainer: {
         alignItems: 'center',
-        marginTop: hp('9%'),
+        marginTop: hp('7%'),
 
     },
     skeletonWrapper: {

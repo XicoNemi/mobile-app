@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: wp('5%'),
         overflow: 'hidden',
         marginTop: hp('-1%'),
+        marginBottom: hp('1.6%'),
     }
 });
 

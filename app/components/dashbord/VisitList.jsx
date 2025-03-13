@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { useSelector } from "react-redux";
 import Api from "../../utils/Api";
 import { useNavigation } from "@react-navigation/native";
-
+import NoDataComponent from "../generals/NoDataComponent";
 const VisitList = ({ loading }) => {
   const [businesses, setBusinesses] = useState([]);
   const token = useSelector((state) => state.auth.token);

@@ -19,7 +19,7 @@ const MenuDropdown = ({ navigation }) => {
     { icon: 'bed-outline', label: textsLeng.components.menuItems.bed, screen: 'AccommodationScreen' },
     { icon: 'star-outline', label: textsLeng.components.menuItems.food,  screen: 'GastronomyScreen' },
     { icon: 'calendar-outline', label: textsLeng.components.menuItems.events, screen: 'EventsScreen' },
-    { icon: 'heart-outline', label: textsLeng.components.menuItems.tourism, screen: 'TourismScreen' },
+    { icon: 'earth-outline', label: textsLeng.components.menuItems.tourism, screen: 'TourismScreen' },
     { icon: 'list-outline', label: textsLeng.components.menuItems.itineraries, screen: 'ItinerariesScreen' },
   ];
 

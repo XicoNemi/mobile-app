@@ -46,17 +46,15 @@ const BottomTabNavigator = () => {
                     },
                     tabBarStyle: {
                         backgroundColor: 'white',
-                        borderTopWidth: 1,
-                        borderTopColor: '#ddd',
                         height: 57, 
                         paddingBottom: Platform.OS === 'ios' ? 20 : 15, 
-                        paddingTop: 5, 
+                        paddingTop: 4, 
                         position: 'absolute',
                         bottom: 0,
                         width: '100%',
                     },
                     tabBarActiveTintColor: Colors.primary,
-                    tabBarInactiveTintColor: 'gray',
+                    tabBarInactiveTintColor: 'black',
                     headerShown: false,
                 })}
                 screenListeners={({ route }) => ({

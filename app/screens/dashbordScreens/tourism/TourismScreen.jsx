@@ -28,21 +28,21 @@ const TourismScreen = () => {
             title: 'Museo casa de Carranza',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/museo1.jpeg'),
-            rating: 3.5, // Nueva propiedad
+            rating: 3.5, 
         },
         {
             id: 2,
             title: 'Virgen de Guadalupe',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/virgen.jpg'),
-            rating: 4.5, // Nueva propiedad
+            rating: 4.5, 
         },
         {
             id: 3,
             title: 'Xochipila',
             description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
             image: require('../../../../assets/visit1.jpeg'),
-            rating: 2.5, // Nueva propiedad
+            rating: 2.5, 
         },
     ];
 

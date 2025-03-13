@@ -6,7 +6,7 @@ import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TourismCardComponent = ({ title, description, image, rating, onAddPress }) => {
-    const [isBookmarked, setIsBookmarked] = useState(false); // Estado para alternar el icono
+    const [isBookmarked, setIsBookmarked] = useState(false);
 
     const handleBookmarkToggle = () => {
         setIsBookmarked(!isBookmarked);

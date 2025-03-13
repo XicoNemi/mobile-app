@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import BusinessHeader from "../../components/business/BusinessHeader";
 import EventListFooter from "../../components/business/EventListFooter";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import SkeletonComponent from "../../components/generals/SkeletonComponent"; // Importar SkeletonComponent
-import Colors from "../../utils/Colors"; // Importar Colors
+import SkeletonComponent from "../../components/generals/SkeletonComponent";
 import api from "../../utils/Api";
+import NoDataComponent from "../../components/generals/NoDataComponent";
 
 const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;
     const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const [loading, setLoading] = useState(true);
     const token = useSelector((state) => state.auth.token);
 
     useEffect(() => {
@@ -23,8 +23,8 @@ const BusinessDetailScreen = ({ route }) => {
                 // Manejar el error
             } finally {
                 setTimeout(() => {
-                    setLoading(false); // Finalizar carga después de 5 segundos
-                }, 15000);
+                    setLoading(false); // Finalizar carga después de 3 s
+                }, 3000);
             }
         };
 
@@ -50,7 +50,7 @@ const BusinessDetailScreen = ({ route }) => {
                 events.length > 0 ? (
                     <EventListFooter events={events} />
                 ) : (
-                    <Text style={styles.noEventsText}>Por el momento {business.name} no tiene eventos disponibles</Text>
+                    <NoDataComponent />
                 )
             )}
         </ScrollView>
@@ -80,13 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: wp('5%'),
         overflow: 'hidden',
         marginTop: hp('-1%'),
-    },
-    noEventsText: {
-        textAlign: "center",
-        color: Colors.primary,
-        fontSize: 16,
-        marginTop: hp('2%'),
-    },
+    }
 });
 
 export default BusinessDetailScreen;

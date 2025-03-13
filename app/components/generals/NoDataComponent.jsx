@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from "../../utils/Colors";
 import { useSelector } from 'react-redux';
+import SizeConstants from '../../utils/SizeConstants';
 
 const NoDataComponent = () => {
   const textsLeng = useSelector((state) => state.language.texts);
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
-    fontSize: 16,
+    fontSize: SizeConstants.textsM,
     color: Colors.primary,
     textAlign: 'center',
   },

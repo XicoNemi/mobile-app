@@ -47,7 +47,7 @@ const signUp = async (userData) => {
 // Función para iniciar sesión
 const signIn = async (email, password) => {
   try {
-    const response = await api.post('/api/auth/sign-in', { email, password });
+    const response = await api.post('/api/auth/sign-in-common', { email, password });
     const { user, token } = response.data;
     return { user, token }; 
   } catch (error) {

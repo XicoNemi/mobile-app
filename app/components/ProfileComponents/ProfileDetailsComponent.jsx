@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         marginStart: wp('25%'),
     },
     logoutButtonContainer: {
-        marginTop: hp('8%'),
+        marginTop: hp('4%'),
         width: "50%",
         alignSelf: "center",
     },

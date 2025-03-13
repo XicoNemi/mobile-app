@@ -67,8 +67,8 @@ const BottomTabNavigator = () => {
                 })}
             >
                 <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Profile" component={ProfileScreen} />
                 <Tab.Screen name="Favorites" component={FavoritesScreen} />
+                <Tab.Screen name="Profile" component={ProfileScreen} />
             </Tab.Navigator>
             
             <CustomAlertComponent

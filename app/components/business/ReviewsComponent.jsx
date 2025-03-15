@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CustomAlertComponent from "../generals/CustomAlertComponent";
 import { useNavigation } from "@react-navigation/native";
 import ReviewModal from "./ReviewModal";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const ReviewsComponent = () => {
+    const dispatch = useDispatch();
+    const textsLeng = useSelector((state) => state.language.texts);
     const [expanded, setExpanded] = useState(true);
     const [rating, setRating] = useState(0);
     const [visibleReviews, setVisibleReviews] = useState(2);
     const [alertVisible, setAlertVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const userName = useSelector((state) => state.auth.name);
-    const textsLeng = useSelector((state) => state.language.texts);
     const navigation = useNavigation();
+
+    useEffect(() => {
+        AssignLenguaje(dispatch);
+    }, [dispatch]);
+
+    const { ReviewsComponent: texts } = textsLeng;
 
     const reviews = [
         { rating: 5, text: "¡Excelente servicio!" },
@@ -44,7 +52,7 @@ const ReviewsComponent = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>¿Qué te pareció?</Text>
+            <Text style={styles.title}>{texts.whatDidYouThink}</Text>
             <View style={styles.ratingContainer}>
                 {[1, 2, 3, 4, 5].map((index) => (
                     <TouchableOpacity key={index} onPress={() => handleRating(index)}>
@@ -57,12 +65,12 @@ const ReviewsComponent = () => {
                 ))}
             </View>
             <View style={styles.ratingLabels}>
-                <Text style={styles.ratingLabel}>Malo</Text>
-                <Text style={styles.ratingLabel}>Excelente</Text>
+                <Text style={styles.ratingLabel}>{texts.bad}</Text>
+                <Text style={styles.ratingLabel}>{texts.excellent}</Text>
             </View>
 
             <TouchableOpacity style={styles.header} onPress={toggleAccordion}>
-                <Text style={styles.headerText}>Reseñas</Text>
+                <Text style={styles.headerText}>{texts.title}</Text>
                 <Ionicons name={expanded ? "chevron-up" : "chevron-down"} size={SizeConstants.iconsCH} color="black" />
             </TouchableOpacity>
 
@@ -85,12 +93,12 @@ const ReviewsComponent = () => {
                     ))}
                     {visibleReviews < reviews.length && (
                         <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
-                            <Text style={styles.viewMoreText}>Ver más reseñas</Text>
+                            <Text style={styles.viewMoreText}>{texts.viewMoreReviews}</Text>
                         </TouchableOpacity>
                     )}
                     {visibleReviews > 2 && (
                         <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewLess}>
-                            <Text style={styles.viewMoreText}>Ver menos reseñas</Text>
+                            <Text style={styles.viewMoreText}>{texts.viewLessReviews}</Text>
                         </TouchableOpacity>
                     )}
                 </View>
@@ -99,17 +107,17 @@ const ReviewsComponent = () => {
             <CustomAlertComponent
                 isVisible={alertVisible}
                 onClose={() => setAlertVisible(false)}
-                title="Acceso requerido"
-                message="Debe iniciar sesión para dar su calificación al negocio."
+                title={texts.accessRequired}
+                message={texts.accessMessage}
                 primaryButton={{
-                    text: "Iniciar sesión",
+                    text: texts.loginButton,
                     onPress: () => {
                         setAlertVisible(false);
                         navigation.navigate("LoginScreen");
                     },
                 }}
                 secondaryButton={{
-                    text: "Cancelar",
+                    text: texts.cancelButton,
                     onPress: () => setAlertVisible(false),
                 }}
             />

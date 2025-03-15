@@ -8,16 +8,23 @@ import SizeConstants from "../../utils/SizeConstants";
 const ReviewsComponent = () => {
     const [expanded, setExpanded] = useState(true);
     const [rating, setRating] = useState(0);
+    const [visibleReviews, setVisibleReviews] = useState(2);
 
     const reviews = [
         { rating: 5, text: "¡Excelente servicio!" },
         { rating: 4, text: "Muy bueno, pero puede mejorar." },
-        { rating: 3, text: "Aceptable, pero esperaba más." }
+        { rating: 3, text: "Aceptable, pero esperaba más." },
+        { rating: 2, text: "No me gustó, no lo recomendaría." },
+        { rating: 1, text: "Pésimo, no vuelvo más." },
     ];
 
     const toggleAccordion = () => setExpanded(!expanded);
 
     const handleRating = (value) => setRating(value);
+
+    const handleViewMore = () => setVisibleReviews(visibleReviews + 2);
+
+    const handleViewLess = () => setVisibleReviews(Math.max(2, visibleReviews - 2));
 
     return (
         <View style={styles.container}>
@@ -45,7 +52,7 @@ const ReviewsComponent = () => {
 
             {expanded && (
                 <View style={styles.reviewsContainer}>
-                    {reviews.slice(0, 2).map((review, index) => (
+                    {reviews.slice(0, visibleReviews).map((review, index) => (
                         <View key={index} style={styles.reviewItem}>
                             <View style={styles.reviewRatingContainer}>
                                 {[...Array(5)].map((_, starIndex) => (
@@ -60,9 +67,16 @@ const ReviewsComponent = () => {
                             <Text>{review.text}</Text>
                         </View>
                     ))}
-                    <TouchableOpacity style={styles.viewMoreButton}>
-                        <Text style={styles.viewMoreText}>Ver más reseñas</Text>
-                    </TouchableOpacity>
+                    {visibleReviews < reviews.length && (
+                        <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
+                            <Text style={styles.viewMoreText}>Ver más reseñas</Text>
+                        </TouchableOpacity>
+                    )}
+                    {visibleReviews > 2 && (
+                        <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewLess}>
+                            <Text style={styles.viewMoreText}>Ver menos reseñas</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             )}
         </View>

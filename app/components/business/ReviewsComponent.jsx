@@ -4,11 +4,18 @@ import { Ionicons } from "@expo/vector-icons";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import { useSelector } from "react-redux";
+import CustomAlertComponent from "../generals/CustomAlertComponent";
+import { useNavigation } from "@react-navigation/native";
 
 const ReviewsComponent = () => {
     const [expanded, setExpanded] = useState(true);
     const [rating, setRating] = useState(0);
     const [visibleReviews, setVisibleReviews] = useState(2);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const userName = useSelector((state) => state.auth.name);
+    const textsLeng = useSelector((state) => state.language.texts);
+    const navigation = useNavigation();
 
     const reviews = [
         { rating: 5, text: "¡Excelente servicio!" },
@@ -20,7 +27,13 @@ const ReviewsComponent = () => {
 
     const toggleAccordion = () => setExpanded(!expanded);
 
-    const handleRating = (value) => setRating(value);
+    const handleRating = (value) => {
+        if (!userName) {
+            setAlertVisible(true);
+            return;
+        }
+        setRating(value);
+    };
 
     const handleViewMore = () => setVisibleReviews(visibleReviews + 2);
 
@@ -79,6 +92,24 @@ const ReviewsComponent = () => {
                     )}
                 </View>
             )}
+
+            <CustomAlertComponent
+                isVisible={alertVisible}
+                onClose={() => setAlertVisible(false)}
+                title="Acceso requerido"
+                message="Debe iniciar sesión para dar su calificación al negocio."
+                primaryButton={{
+                    text: "Iniciar sesión",
+                    onPress: () => {
+                        setAlertVisible(false);
+                        navigation.navigate("LoginScreen");
+                    },
+                }}
+                secondaryButton={{
+                    text: "Cancelar",
+                    onPress: () => setAlertVisible(false),
+                }}
+            />
         </View>
     );
 };

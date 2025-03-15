@@ -17,7 +17,7 @@ const BusinessDetailScreen = ({ route }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await api.getEventsByBusiness(business.id, token);
+                const response = await api.getEventsByBusiness(business.id);
                 setEvents(response);
             } catch (error) {
                 // Manejar el error
@@ -29,7 +29,7 @@ const BusinessDetailScreen = ({ route }) => {
         };
 
         fetchEvents();
-    }, [business.id, token]);
+    }, [business.id]);
 
     return (
         <ScrollView contentContainerStyle={styles.container}>

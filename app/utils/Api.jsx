@@ -88,14 +88,10 @@ const getPublicBusinesses = async () => {
   }
 };
 
-// Función para obtener eventos por negocio (requiere token)
-const getEventsByBusiness = async (businessId, token) => {
+// Función para obtener eventos por negocio (no requiere token)
+const getEventsByBusiness = async (businessId) => {
   try {
-    const response = await api.get(`/api/events/business/${businessId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
+    const response = await api.get(`/api/events/business/${businessId}`);
     return response.data; // Retorna la lista de eventos
   } catch (error) {
     const { message, status } = handleError(error);

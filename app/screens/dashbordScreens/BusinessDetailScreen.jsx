@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { useSelector } from "react-redux";
 import BusinessHeader from "../../components/business/BusinessHeader";
 import EventListFooter from "../../components/business/EventListFooter";
+import ReviewsComponent from "../../components/business/ReviewsComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import SkeletonComponent from "../../components/generals/SkeletonComponent";
 import api from "../../utils/Api";
@@ -23,7 +24,7 @@ const BusinessDetailScreen = ({ route }) => {
                 // Manejar el error
             } finally {
                 setTimeout(() => {
-                    setLoading(false); 
+                    setLoading(false);
                 }, 3000);
             }
         };
@@ -53,7 +54,7 @@ const BusinessDetailScreen = ({ route }) => {
                     <NoDataComponent />
                 )
             )}
-            <Text>Lo puse con el fin de depuracion</Text>
+            <ReviewsComponent />
         </ScrollView>
     );
 };

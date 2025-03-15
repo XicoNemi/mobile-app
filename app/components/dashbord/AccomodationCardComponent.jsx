@@ -17,7 +17,7 @@ const AccommodationCardComponent = ({ title, description, image, rating, onPress
                             key={index}
                             name={isHalfStar ? "star-half" : index < rating ? "star" : "star-outline"}
                             size={SizeConstants.iconsCH}
-                            color="gold"
+                            color={Colors.star}
                         />
                     );
                 })}

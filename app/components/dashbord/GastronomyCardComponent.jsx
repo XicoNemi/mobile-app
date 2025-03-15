@@ -23,7 +23,7 @@ const GastronomyCardComponent = ({ title, description, image, rating, onAddPress
                             key={index}
                             name={isHalfStar ? "star-half" : index < rating ? "star" : "star-outline"}
                             size={SizeConstants.iconsCH}
-                            color="gold"
+                            color={Colors.star}
                         />
                     );
                 })}

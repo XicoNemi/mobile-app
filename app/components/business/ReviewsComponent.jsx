@@ -59,7 +59,7 @@ const ReviewsComponent = () => {
                         <Ionicons
                             name={index <= rating ? "star" : "star-outline"}
                             size={SizeConstants.iconsG}
-                            color="gold"
+                            color={Colors.star}
                         />
                     </TouchableOpacity>
                 ))}

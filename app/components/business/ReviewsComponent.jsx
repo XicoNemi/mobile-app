@@ -84,7 +84,7 @@ const ReviewsComponent = () => {
                                         key={starIndex}
                                         name={starIndex < review.rating ? "star" : "star-outline"}
                                         size={SizeConstants.iconsCH}
-                                        color="gold"
+                                        color={Colors.star}
                                     />
                                 ))}
                             </View>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     title: {
-        fontSize: SizeConstants.titles,
+        fontSize: SizeConstants.textsM,
         fontWeight: "bold",
         textAlign: "center",
         marginBottom: hp("1%"),
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         paddingVertical: hp("1%"),
     },
     headerText: {
-        fontSize: SizeConstants.texts,
+        fontSize: SizeConstants.titles,
         fontWeight: "bold",
     },
     reviewsContainer: {

@@ -32,7 +32,7 @@ const ReviewModal = ({ visible, onClose, rating }) => {
                                 key={index}
                                 name={index <= rating ? "star" : "star-outline"}
                                 size={32}
-                                color="gold"
+                                color={Colors.star}
                             />
                         ))}
                     </View>

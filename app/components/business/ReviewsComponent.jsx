@@ -57,8 +57,8 @@ const ReviewsComponent = () => {
                 ))}
             </View>
             <View style={styles.ratingLabels}>
-                <Text>Malo</Text>
-                <Text>Excelente</Text>
+                <Text style={styles.ratingLabel}>Malo</Text>
+                <Text style={styles.ratingLabel}>Excelente</Text>
             </View>
 
             <TouchableOpacity style={styles.header} onPress={toggleAccordion}>
@@ -145,6 +145,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: hp("2%"),
+    },
+    ratingLabel: {
+        flex: 1,
+        textAlign: "center",
     },
     header: {
         flexDirection: "row",

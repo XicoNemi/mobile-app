@@ -75,23 +75,6 @@ const getUser = async (id, token) => {
   }
 };
 
-// Función para obtener la lista de negocios (requiere token)
-const getBusinesses = async (token) => {
-  try {
-    const response = await api.get('/api/businesses', {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    return response.data; // Retorna la lista de negocios
-  } catch (error) {
-    const { message, status } = handleError(error);
-    const customError = new Error(message);
-    customError.status = status;
-    throw customError;
-  }
-};
-
 // Función para obtener la lista de negocios públicos (no requiere token)
 const getPublicBusinesses = async () => {
   try {
@@ -126,7 +109,6 @@ export default {
   signUp,
   signIn,
   getUser,
-  getBusinesses,
   getPublicBusinesses, 
   getEventsByBusiness,
 };

@@ -15,7 +15,7 @@ const VisitList = ({ loading }) => {
   useEffect(() => {
     const fetchBusinesses = async () => {
       try {
-        const data = token ? await Api.getBusinesses(token) : await Api.getPublicBusinesses();
+        const data = await Api.getPublicBusinesses();
         setBusinesses(data);
       } catch (error) {
         console.error(error);

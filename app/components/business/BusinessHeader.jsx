@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -8,7 +8,7 @@ import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
 
-const BusinessHeader = ({ business }) => {
+const BusinessHeader = ({ business, scrollY }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
@@ -19,25 +19,41 @@ const BusinessHeader = ({ business }) => {
 
     const { BusinessHeader: texts } = textsLeng;
 
+    const imageHeight = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [hp("37%"), hp("20%")],
+        extrapolate: "clamp",
+    });
+
+    const imageOpacity = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [1, 0.5],
+        extrapolate: "clamp",
+    });
+
+    const textTranslateY = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [0, -50],
+        extrapolate: "clamp",
+    });
+
     return (
         <View>
-            {/* Imagen de fondo */}
-            <View style={styles.imageContainer}>
-                <Image source={{ uri: business.url_image }} style={styles.image} />
+            <Animated.View style={[styles.imageContainer, { height: imageHeight }]}>
+                <Animated.Image source={{ uri: business.url_image }} style={[styles.image, { opacity: imageOpacity }]} />
                 <View style={styles.imageOverlay} />
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back" size={24} color="#000" />
                 </TouchableOpacity>
-                {/* Contenido sobre la imagen sin tarjeta blanca */}
-                <View style={styles.overlayContainer}>
+                <Animated.View style={[styles.overlayContainer, { transform: [{ translateY: textTranslateY }] }]}>
                     <Text style={styles.title}>{business.name}</Text>
                     <Text style={styles.category}>{business.category}</Text>
-                </View>
+                </Animated.View>
                 <TouchableOpacity style={styles.itineraryButton}>
                     <Ionicons name="calendar-outline" size={SizeConstants.iconsCH} color={Colors.primary} />
                     <Text style={styles.itineraryText}>{texts.addToItinerary}</Text>
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
             {/* Información debajo de la imagen */}
             <View style={styles.infoContainer}>
                 <Text style={styles.description}>{business.description}</Text>

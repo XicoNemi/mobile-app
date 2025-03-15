@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, Animated, Text } from "react-native";
 import { useSelector } from "react-redux";
 import BusinessHeader from "../../components/business/BusinessHeader";
 import EventListFooter from "../../components/business/EventListFooter";
@@ -14,6 +14,7 @@ const BusinessDetailScreen = ({ route }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const token = useSelector((state) => state.auth.token);
+    const scrollY = new Animated.Value(0);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -33,8 +34,15 @@ const BusinessDetailScreen = ({ route }) => {
     }, [business.id]);
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <BusinessHeader business={business} />
+        <Animated.ScrollView
+            contentContainerStyle={styles.container}
+            onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: false }
+            )}
+            scrollEventThrottle={16}
+        >
+            <BusinessHeader business={business} scrollY={scrollY} />
             {loading ? (
                 <View style={styles.skeletonContainer}>
                     <View style={styles.skeletonWrapper}>
@@ -55,7 +63,7 @@ const BusinessDetailScreen = ({ route }) => {
                 )
             )}
             <ReviewsComponent />
-        </ScrollView>
+        </Animated.ScrollView>
     );
 };
 

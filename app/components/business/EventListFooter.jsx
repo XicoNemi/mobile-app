@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginTop: hp("1%"),
     },
     viewMoreText: {
-        color: Colors.eventsLight,
+        color: Colors.primary,
         fontSize: SizeConstants.texts,
         fontWeight: "bold",
     },

@@ -72,7 +72,7 @@ const ReviewsComponent = () => {
 const styles = StyleSheet.create({
     container: {
         padding: wp("4%"),
-        backgroundColor: "#F8F4F9",
+        backgroundColor: "white",
         borderRadius: 10,
     },
     title: {
@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
     },
     ratingContainer: {
         flexDirection: "row",
-        justifyContent: "center", // Mantener centrado
+        justifyContent: "center",
         marginBottom: hp("1%"),
     },
     reviewRatingContainer: {
         flexDirection: "row",
-        justifyContent: "flex-start", // Alinear al inicio
+        justifyContent: "flex-start",
         marginBottom: hp("1%"),
     },
     ratingLabels: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         paddingVertical: hp("1.5%"),
         backgroundColor: "white",
         borderWidth: 1,
-        borderColor: Colors.primary,
+        borderColor: Colors.eventsLight,
         borderRadius: 20,
         alignItems: "center",
     },

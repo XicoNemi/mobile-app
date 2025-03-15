@@ -7,12 +7,14 @@ import SizeConstants from "../../utils/SizeConstants";
 import { useSelector } from "react-redux";
 import CustomAlertComponent from "../generals/CustomAlertComponent";
 import { useNavigation } from "@react-navigation/native";
+import ReviewModal from "./ReviewModal";
 
 const ReviewsComponent = () => {
     const [expanded, setExpanded] = useState(true);
     const [rating, setRating] = useState(0);
     const [visibleReviews, setVisibleReviews] = useState(2);
     const [alertVisible, setAlertVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const userName = useSelector((state) => state.auth.name);
     const textsLeng = useSelector((state) => state.language.texts);
     const navigation = useNavigation();
@@ -33,6 +35,7 @@ const ReviewsComponent = () => {
             return;
         }
         setRating(value);
+        setModalVisible(true);
     };
 
     const handleViewMore = () => setVisibleReviews(visibleReviews + 2);
@@ -110,6 +113,8 @@ const ReviewsComponent = () => {
                     onPress: () => setAlertVisible(false),
                 }}
             />
+
+            <ReviewModal visible={modalVisible} onClose={() => setModalVisible(false)} rating={rating} />
         </View>
     );
 };

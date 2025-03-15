@@ -39,8 +39,8 @@ const EventListFooter = ({ events }) => {
                 <TouchableOpacity onPress={handleToggleAccordion}>
                     <Ionicons 
                         name={expanded ? "chevron-up-outline" : "chevron-down-outline"} 
-                        size={SizeConstants.iconsXG} 
-                        color={Colors.eventsLight} 
+                        size={SizeConstants.iconsCH} 
+                        color={"black"} 
                     />
                 </TouchableOpacity>
             </View>

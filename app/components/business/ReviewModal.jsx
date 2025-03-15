@@ -27,8 +27,8 @@ const ReviewModal = ({ visible, onClose, rating }) => {
                         ))}
                     </View>
                     <View style={styles.ratingLabels}>
-                        <Text>Malo</Text>
-                        <Text>Excelente</Text>
+                        <Text style={styles.ratingLabel}>Malo</Text>
+                        <Text style={styles.ratingLabel}>Excelente</Text>
                     </View>
                     <TextInput
                         style={styles.input}
@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "100%",
         marginBottom: hp("2%"),
+    },
+    ratingLabel: {
+        flex: 1,
+        textAlign: "center",
     },
     input: {
         width: "100%",

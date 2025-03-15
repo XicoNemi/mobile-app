@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, TextInput, Modal, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
+import { useSelector, useDispatch } from "react-redux";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
 
 const ReviewModal = ({ visible, onClose, rating }) => {
+    const dispatch = useDispatch();
+    const textsLeng = useSelector((state) => state.language.texts);
     const [reviewText, setReviewText] = useState("");
+
+    useEffect(() => {
+        AssignLenguaje(dispatch);
+    }, [dispatch]);
+
+    const { ReviewsComponent: texts } = textsLeng;
 
     return (
         <Modal transparent visible={visible} animationType="fade">
@@ -15,7 +25,7 @@ const ReviewModal = ({ visible, onClose, rating }) => {
                     <TouchableOpacity style={styles.closeButton} onPress={onClose}>
                         <Ionicons name="close" size={24} color="black" />
                     </TouchableOpacity>
-                    <Text style={styles.title}>¿Qué te pareció?</Text>
+                    <Text style={styles.title}>{texts.whatDidYouThink}</Text>
                     <View style={styles.ratingContainer}>
                         {[1, 2, 3, 4, 5].map((index) => (
                             <Ionicons
@@ -27,18 +37,18 @@ const ReviewModal = ({ visible, onClose, rating }) => {
                         ))}
                     </View>
                     <View style={styles.ratingLabels}>
-                        <Text style={styles.ratingLabel}>Malo</Text>
-                        <Text style={styles.ratingLabel}>Excelente</Text>
+                        <Text style={styles.ratingLabel}>{texts.bad}</Text>
+                        <Text style={styles.ratingLabel}>{texts.excellent}</Text>
                     </View>
                     <TextInput
                         style={styles.input}
-                        placeholder="Cuéntanos tu experiencia"
+                        placeholder={texts.tellUsYourExperience}
                         value={reviewText}
                         onChangeText={setReviewText}
                         multiline
                     />
                     <TouchableOpacity style={styles.saveButton} onPress={onClose}>
-                        <Text style={styles.saveButtonText}>Guardar</Text>
+                        <Text style={styles.saveButtonText}>{texts.save}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

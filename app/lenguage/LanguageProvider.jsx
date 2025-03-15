@@ -163,6 +163,8 @@ const LanguageProvider = {
       accessMessage: "You must log in to rate the business.",
       loginButton: "Log in",
       cancelButton: "Cancel",
+      tellUsYourExperience: "Tell us your experience",
+      save: "Save",
     },
   },
 
@@ -330,6 +332,8 @@ const LanguageProvider = {
       accessMessage: "Debe iniciar sesión para dar su calificación al negocio.",
       loginButton: "Iniciar sesión",
       cancelButton: "Cancelar",
+      tellUsYourExperience: "Cuéntanos tu experiencia",
+      save: "Guardar",
     },
   },
 };

@@ -23,7 +23,7 @@ const BusinessDetailScreen = ({ route }) => {
                 // Manejar el error
             } finally {
                 setTimeout(() => {
-                    setLoading(false); // Finalizar carga después de 3 s
+                    setLoading(false); 
                 }, 3000);
             }
         };

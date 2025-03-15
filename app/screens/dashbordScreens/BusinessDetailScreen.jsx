@@ -53,6 +53,7 @@ const BusinessDetailScreen = ({ route }) => {
                     <NoDataComponent />
                 )
             )}
+            <Text>Lo puse con el fin de depuracion</Text>
         </ScrollView>
     );
 };

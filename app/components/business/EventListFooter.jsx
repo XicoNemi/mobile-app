@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import EventCard from "./EventCardForBusiness";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
@@ -11,12 +12,17 @@ const EventListFooter = ({ events }) => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [visibleEvents, setVisibleEvents] = useState(2);
+    const [expanded, setExpanded] = useState(true);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
     }, [dispatch]);
 
     const { EventListFooter: texts } = textsLeng;
+
+    const handleToggleAccordion = () => {
+        setExpanded(!expanded);
+    };
 
     const handleViewMore = () => {
         if (visibleEvents >= events.length) {
@@ -30,23 +36,30 @@ const EventListFooter = ({ events }) => {
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>{texts.upcomingEvents}</Text>
-                <TouchableOpacity>
-                    <Text style={styles.arrow}>→</Text>
+                <TouchableOpacity onPress={handleToggleAccordion}>
+                    <Ionicons 
+                        name={expanded ? "chevron-up-outline" : "chevron-down-outline"} 
+                        size={SizeConstants.iconsXG} 
+                        color={Colors.eventsLight} 
+                    />
                 </TouchableOpacity>
             </View>
 
-            {events.slice(0, visibleEvents).map((event) => (
-                <View key={event.event.id}>
-                    <EventCard event={event.event} />
-                    <View style={styles.separator} />
-                </View>
-            ))}
-
-            <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
-                <Text style={styles.viewMoreText}>
-                    {visibleEvents >= events.length ? texts.viewLessEvents : texts.viewMoreEvents}
-                </Text>
-            </TouchableOpacity>
+            {expanded && (
+                <>
+                    {events.slice(0, visibleEvents).map((event) => (
+                        <View key={event.event.id}>
+                            <EventCard event={event.event} />
+                            <View style={styles.separator} />
+                        </View>
+                    ))}
+                    <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
+                        <Text style={styles.viewMoreText}>
+                            {visibleEvents >= events.length ? texts.viewLessEvents : texts.viewMoreEvents}
+                        </Text>
+                    </TouchableOpacity>
+                </>
+            )}
         </View>
     );
 };
@@ -66,10 +79,6 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: SizeConstants.titles,
         fontWeight: "bold",
-    },
-    arrow: {
-        fontSize: SizeConstants.iconsXG,
-        color: Colors.eventsLight,
     },
     separator: {
         height: hp("2%"),

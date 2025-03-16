@@ -166,6 +166,9 @@ const LanguageProvider = {
       tellUsYourExperience: "Tell us your experience",
       save: "Save",
     },
+    BusinessDetailScreen: {
+      noEventsMessage: "At the moment {business.name} has no events for you",
+    },
   },
 
   // Textos en español
@@ -334,6 +337,9 @@ const LanguageProvider = {
       cancelButton: "Cancelar",
       tellUsYourExperience: "Cuéntanos tu experiencia",
       save: "Guardar",
+    },
+    BusinessDetailScreen: {
+      noEventsMessage: "Por el momento {business.name} no tiene eventos para ti",
     },
   },
 };

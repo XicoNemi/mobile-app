@@ -10,6 +10,7 @@ import api from "../../utils/Api";
 import Colors from "../../utils/Colors";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SizeConstants from "../../utils/SizeConstants";
+import LanguageProvider from "../../lenguage/LanguageProvider";
 
 const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;
@@ -17,6 +18,8 @@ const BusinessDetailScreen = ({ route }) => {
     const [loading, setLoading] = useState(true);
     const token = useSelector((state) => state.auth.token);
     const scrollY = new Animated.Value(0);
+    const textsLeng = useSelector((state) => state.language.texts);
+    const { BusinessDetailScreen: texts } = textsLeng;
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -63,7 +66,7 @@ const BusinessDetailScreen = ({ route }) => {
                 ) : (
                     <View style={styles.noEventsContainer}>
                         <Ionicons name="calendar-outline" size={50} color={Colors.primary} />
-                        <Text style={styles.noEventsText}>Por el momento {business.name} no tiene eventos para ti</Text>
+                        <Text style={styles.noEventsText}>{texts.noEventsMessage.replace("{business.name}", business.name)}</Text>
                     </View>
                 )
             )}

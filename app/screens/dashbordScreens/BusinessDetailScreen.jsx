@@ -9,6 +9,7 @@ import SkeletonComponent from "../../components/generals/SkeletonComponent";
 import api from "../../utils/Api";
 import Colors from "../../utils/Colors";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SizeConstants from "../../utils/SizeConstants";
 
 const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
         padding: wp('5%'),
     },
     noEventsText: {
-        fontSize: wp('4%'),
+        fontSize: SizeConstants.texts,
         color: Colors.primary,
         textAlign: 'center',
         marginTop: hp('1%'),

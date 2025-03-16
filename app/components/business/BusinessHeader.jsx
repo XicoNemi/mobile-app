@@ -59,6 +59,16 @@ const BusinessHeader = ({ business, scrollY }) => {
                 <Text style={styles.description}>{business.description}</Text>
                 <Text style={styles.address}>{business.address}</Text>
                 <Text style={styles.phone}>{texts.phone}: {business.tel}</Text>
+                <View style={styles.ratingContainer}>
+                    {[1, 2, 3, 4, 5].map((index) => (
+                        <Ionicons
+                            key={index}
+                            name={index <= Math.round(business.averageRating) ? "star" : "star-outline"}
+                            size={SizeConstants.iconsCH}
+                            color={Colors.star}
+                        />
+                    ))}
+                </View>
             </View>
         </View>
     );
@@ -135,6 +145,12 @@ const styles = StyleSheet.create({
         color: "gray",
         textAlign: "center",
         fontWeight: "bold",
+    },
+    ratingContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: hp("1.25%"),
+        marginBottom: hp("1%"),
     },
 });
 

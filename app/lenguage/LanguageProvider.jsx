@@ -149,6 +149,7 @@ const LanguageProvider = {
     BottomTabNavigator: {
       home: "Home",
       profile: "Profile",
+      routes: "Routes",
       favorites: "Favorites",
     },
     ReviewsComponent: {
@@ -321,6 +322,7 @@ const LanguageProvider = {
     BottomTabNavigator: {
       home: "Inicio",
       profile: "Perfil",
+      routes: "Rutas",
       favorites: "Favoritos",
     },
     ReviewsComponent: {

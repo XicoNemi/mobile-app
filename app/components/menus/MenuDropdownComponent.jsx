@@ -15,7 +15,7 @@ const MenuDropdown = ({ navigation }) => {
   }, [dispatch]);
 
   const menuItems = [
-    { icon: 'map-outline', label: textsLeng.components.menuItems.routes, screen: 'RoutesScreen' },
+   // { icon: 'map-outline', label: textsLeng.components.menuItems.routes, screen: 'RoutesScreen' },
     { icon: 'bed-outline', label: textsLeng.components.menuItems.bed, screen: 'AccommodationScreen' },
     { icon: 'star-outline', label: textsLeng.components.menuItems.food,  screen: 'GastronomyScreen' },
     { icon: 'calendar-outline', label: textsLeng.components.menuItems.events, screen: 'EventsScreen' },

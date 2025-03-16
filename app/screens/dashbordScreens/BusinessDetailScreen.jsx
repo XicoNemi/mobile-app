@@ -10,7 +10,6 @@ import api from "../../utils/Api";
 import Colors from "../../utils/Colors";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SizeConstants from "../../utils/SizeConstants";
-import LanguageProvider from "../../lenguage/LanguageProvider";
 
 const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;

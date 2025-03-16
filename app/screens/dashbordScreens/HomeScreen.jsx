@@ -51,7 +51,7 @@ const HomeScreen = () => {
       <View style={styles.topBar}>
         <TouchableOpacity onPress={toggleMenu}>
           <Ionicons
-            name="menu-outline"
+            name={menuVisible ? "close-outline" : "menu-outline"}
             size={SizeConstants.iconsG}
             color="black"
           />
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: wp('4%'),
     marginTop: hp('3%'),
-    marginBottom: hp('3.1%'),
+    marginBottom: hp('5%'),
   },
   topBar: {
     flexDirection: "row",

@@ -28,11 +28,11 @@ const ReviewsComponent = () => {
     const { ReviewsComponent: texts } = textsLeng;
 
     const reviews = [
-        { rating: 5, text: "¡Excelente servicio!" },
-        { rating: 4, text: "Muy bueno, pero puede mejorar." },
-        { rating: 3, text: "Aceptable, pero esperaba más." },
-        { rating: 2, text: "No me gustó, no lo recomendaría." },
-        { rating: 1, text: "Pésimo, no vuelvo más." },
+        { rating: 5, text: "¡Excelente servicio!, el lugar es increíble y el personal muy amable. Definitivamente volveré." },
+        { rating: 4, text: "Muy bueno, pero puede mejorar en algunos aspectos. La comida estaba deliciosa." },
+        { rating: 3, text: "Aceptable, pero esperaba más. El ambiente es agradable, pero el servicio fue lento." },
+        { rating: 2, text: "No me gustó, no lo recomendaría. La limpieza del lugar deja mucho que desear." },
+        { rating: 1, text: "Pésimo, no vuelvo más. La atención al cliente fue terrible y la comida estaba fría." },
     ];
 
     const toggleAccordion = () => setExpanded(!expanded);

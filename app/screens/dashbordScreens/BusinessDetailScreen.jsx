@@ -7,7 +7,8 @@ import ReviewsComponent from "../../components/business/ReviewsComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import SkeletonComponent from "../../components/generals/SkeletonComponent";
 import api from "../../utils/Api";
-import NoDataComponent from "../../components/generals/NoDataComponent";
+import Colors from "../../utils/Colors";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const BusinessDetailScreen = ({ route }) => {
     const { business } = route.params;
@@ -59,7 +60,10 @@ const BusinessDetailScreen = ({ route }) => {
                 events.length > 0 ? (
                     <EventListFooter events={events} />
                 ) : (
-                    <NoDataComponent />
+                    <View style={styles.noEventsContainer}>
+                        <Ionicons name="calendar-outline" size={50} color={Colors.primary} />
+                        <Text style={styles.noEventsText}>Por el momento {business.name} no tiene eventos para ti</Text>
+                    </View>
                 )
             )}
             <ReviewsComponent />
@@ -75,7 +79,6 @@ const styles = StyleSheet.create({
     skeletonContainer: {
         alignItems: 'center',
         marginTop: hp('7%'),
-
     },
     skeletonWrapper: {
         width: wp('90%'),
@@ -91,7 +94,19 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         marginTop: hp('-1%'),
         marginBottom: hp('1.6%'),
-    }
+    },
+    noEventsContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: hp('1%'),
+        padding: wp('5%'),
+    },
+    noEventsText: {
+        fontSize: wp('4%'),
+        color: Colors.primary,
+        textAlign: 'center',
+        marginTop: hp('1%'),
+    },
 });
 
 export default BusinessDetailScreen;

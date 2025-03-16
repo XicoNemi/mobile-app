@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
     addButton: {
         backgroundColor: Colors.accommodation,
         borderRadius: wp('3%'),
-        padding: wp('2.5%'),
+        padding: wp('1.5%'),
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
         bottom: hp('1.2%'),
-        right: wp('3.5%'),
+        right: wp('2%'),
     },
 });
 

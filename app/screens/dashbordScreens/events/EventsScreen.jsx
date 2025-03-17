@@ -22,9 +22,11 @@ const EventsScreen = () => {
         const fetchData = async () => {
             try {
                 const data = await api.getPublicBusinesses('Eventos');
-                setEventsData(data);
+                setEventsData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
             } catch (error) {
                 console.error(error);
+                setEventsData([]);// Se agregó setEventsData([]) para evitar errores en la vista, esto ayuda a que si
+                // hay un error, se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
             } finally {
                 setTimeout(() => {
                     setLoading(false);
@@ -35,10 +37,6 @@ const EventsScreen = () => {
     }, [dispatch]);
 
     const skeletonNumber = [1, 2, 3];
-
-    if (!loading && eventsData.length === 0) {
-        return <NoDataComponent name="eventos" icon="calendar-outline" />;
-    }
 
     return (
         <View style={styles.container}>
@@ -53,6 +51,10 @@ const EventsScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35.8%')} />
                         </View>
                     ))
+                ) : eventsData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="eventos" icon="calendar-outline" />
+                    </View>
                 ) : (
                     eventsData.map((item) => (
                         <EventsCardComponent
@@ -83,6 +85,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

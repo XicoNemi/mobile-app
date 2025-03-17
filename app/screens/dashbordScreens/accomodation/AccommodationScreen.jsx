@@ -24,9 +24,11 @@ const AccommodationScreen = () => {
         const fetchData = async () => {
             try {
                 const data = await api.getPublicBusinesses('Hospedaje');
-                setHospedajes(data);
+                setHospedajes(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
             } catch (error) {
                 console.error(error);
+                setHospedajes([]); // Se agregó setHospedajes([]) para evitar errores en la vista, esto ayuda a que si hay un error, 
+                // se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
             } finally {
                 setTimeout(() => {
                     setLoading(false);
@@ -42,10 +44,6 @@ const AccommodationScreen = () => {
 
     const skeletonNumber = [1, 2, 3];
 
-    if (!loading && hospedajes.length === 0) {
-        return <NoDataComponent name="hospedajes" icon="bed-outline" />;
-    }
-
     return (
         <View style={styles.container}>
             <HeaderComponent title={textsLeng.AccommodationScreen.title} rightIcon="menu-outline" />
@@ -59,6 +57,10 @@ const AccommodationScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35.8%')} />
                         </View>
                     ))
+                ) : hospedajes.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="hospedajes" icon="bed-outline" />
+                    </View>
                 ) : (
                     hospedajes.map((hospedaje) => (
                         <AccommodationCardComponent
@@ -90,6 +92,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

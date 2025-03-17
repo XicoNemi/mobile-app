@@ -24,9 +24,11 @@ const GastronomyScreen = () => {
         const fetchData = async () => {
             try {
                 const data = await api.getPublicBusinesses('Gastronomia');
-                setGastronomyData(data);
+                setGastronomyData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
             } catch (error) {
                 console.error(error);
+                setGastronomyData([]); // Se agregó setGastronomyData([]) para evitar errores en la vista, esto ayuda a que si hay un error,
+                // se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
             } finally {
                 setTimeout(() => {
                     setLoading(false);
@@ -42,10 +44,6 @@ const GastronomyScreen = () => {
 
     const skeletonNumber = [1, 2, 3];
 
-    if (!loading && gastronomyData.length === 0) {
-        return <NoDataComponent name="gastronomía" icon="restaurant-outline" />;
-    }
-
     return (
         <View style={styles.container}>
             <HeaderComponent title={textsLeng.GastronomyScreen.title} rightIcon="menu-outline" />
@@ -59,6 +57,10 @@ const GastronomyScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35%')} />
                         </View>
                     ))
+                ) : gastronomyData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="gastronomía" icon="restaurant-outline" />
+                    </View>
                 ) : (
                     gastronomyData.map((item) => (
                         <GastronomyCardComponent
@@ -90,6 +92,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

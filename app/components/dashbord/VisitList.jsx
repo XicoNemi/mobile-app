@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Api from "../../utils/Api";
 import { useNavigation } from "@react-navigation/native";
 import NoDataComponent from "../generals/NoDataComponent";
+
 const VisitList = ({ loading }) => {
   const [businesses, setBusinesses] = useState([]);
   const token = useSelector((state) => state.auth.token);
@@ -29,7 +30,7 @@ const VisitList = ({ loading }) => {
   };
 
   if (!loading && businesses.length === 0) {
-    return <NoDataComponent name="visitas" icon="eye-off-outline" />;
+    return <NoDataComponent name="negocios" icon="business" />;
   }
 
   return (

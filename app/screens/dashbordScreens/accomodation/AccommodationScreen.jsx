@@ -10,6 +10,7 @@ import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
 import { useNavigation } from '@react-navigation/native';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const AccommodationScreen = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const AccommodationScreen = () => {
             } catch (error) {
                 console.error(error);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             }
         };
         fetchData();
@@ -38,6 +41,11 @@ const AccommodationScreen = () => {
     };
 
     const skeletonNumber = [1, 2, 3];
+
+    if (!loading && hospedajes.length === 0) {
+        return <NoDataComponent name="hospedajes" icon="bed-outline" />;
+    }
+
     return (
         <View style={styles.container}>
             <HeaderComponent title={textsLeng.AccommodationScreen.title} rightIcon="menu-outline" />

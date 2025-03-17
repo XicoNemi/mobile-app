@@ -10,6 +10,7 @@ import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
 import { useNavigation } from '@react-navigation/native';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const GastronomyScreen = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const GastronomyScreen = () => {
             } catch (error) {
                 console.error(error);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             }
         };
         fetchData();
@@ -38,6 +41,10 @@ const GastronomyScreen = () => {
     };
 
     const skeletonNumber = [1, 2, 3];
+
+    if (!loading && gastronomyData.length === 0) {
+        return <NoDataComponent name="gastronomía" icon="restaurant-outline" />;
+    }
 
     return (
         <View style={styles.container}>

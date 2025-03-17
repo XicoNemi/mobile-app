@@ -9,6 +9,7 @@ import EventsCardComponent from '../../../components/dashbord/EventsCardComponen
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const EventsScreen = () => {
     const dispatch = useDispatch();
@@ -25,13 +26,19 @@ const EventsScreen = () => {
             } catch (error) {
                 console.error(error);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             }
         };
         fetchData();
     }, [dispatch]);
 
     const skeletonNumber = [1, 2, 3];
+
+    if (!loading && eventsData.length === 0) {
+        return <NoDataComponent name="eventos" icon="calendar-outline" />;
+    }
 
     return (
         <View style={styles.container}>

@@ -9,12 +9,14 @@ import SizeConstants from '../../../utils/SizeConstants';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
+import { useNavigation } from '@react-navigation/native';
 
 const AccommodationScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
     const [hospedajes, setHospedajes] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         AssignLenguaje(dispatch);
@@ -30,6 +32,10 @@ const AccommodationScreen = () => {
         };
         fetchData();
     }, [dispatch]);
+
+    const handlePress = (hospedaje) => {
+        navigation.navigate("BusinessDetailScreen", { business: hospedaje });
+    };
 
     const skeletonNumber = [1, 2, 3];
     return (
@@ -53,7 +59,7 @@ const AccommodationScreen = () => {
                             description={hospedaje.description}
                             url_image={hospedaje.url_image}
                             averageRating={hospedaje.averageRating}
-                            onPress={() => console.log('Hospedaje seleccionado:', hospedaje.name)}
+                            onPress={() => handlePress(hospedaje)}
                         />
                     ))
                 )}

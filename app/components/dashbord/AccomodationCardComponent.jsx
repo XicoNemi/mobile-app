@@ -7,7 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const AccommodationCardComponent = ({ name, description, url_image, averageRating, onPress }) => {
     return (
-        <View style={styles.cardContainer}>
+        <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
             <Image source={{ uri: url_image }} style={styles.image} />
             <View style={styles.ratingContainer}>
                 {[...Array(5)].map((_, index) => {
@@ -26,10 +26,10 @@ const AccommodationCardComponent = ({ name, description, url_image, averageRatin
                 <Text style={styles.title} numberOfLines={1}>{name}</Text>
                 <Text style={styles.description} numberOfLines={2}>{description}</Text>
             </View>
-            <TouchableOpacity style={styles.addButton} onPress={onPress}>
+            <TouchableOpacity style={styles.addButton} onPress={() => console.log('Add button pressed')}>
                 <Ionicons name="add" size={SizeConstants.iconsCH} color="white" />
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 };
 

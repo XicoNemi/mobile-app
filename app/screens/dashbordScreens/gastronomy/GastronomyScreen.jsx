@@ -9,12 +9,14 @@ import GastronomyCardComponent from '../../../components/dashbord/GastronomyCard
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
+import { useNavigation } from '@react-navigation/native';
 
 const GastronomyScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
     const [gastronomyData, setGastronomyData] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         AssignLenguaje(dispatch);
@@ -30,6 +32,10 @@ const GastronomyScreen = () => {
         };
         fetchData();
     }, [dispatch]);
+
+    const handlePress = (item) => {
+        navigation.navigate("BusinessDetailScreen", { business: item });
+    };
 
     const skeletonNumber = [1, 2, 3];
 
@@ -54,7 +60,7 @@ const GastronomyScreen = () => {
                             description={item.description}
                             url_image={item.url_image}
                             averageRating={item.averageRating}
-                            onAddPress={() => console.log(`Añadido: ${item.name}`)}
+                            onPress={() => handlePress(item)}
                         />
                     ))
                 )}

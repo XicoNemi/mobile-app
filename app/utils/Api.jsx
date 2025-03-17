@@ -78,7 +78,8 @@ const getUser = async (id, token) => {
 // Función para obtener la lista de negocios públicos (no requiere token)
 const getPublicBusinesses = async (category) => {
   try {
-    const response = await api.get(`/api/businesses/public?category=${category}`);
+    const url = category ? `/api/businesses/public?category=${category}` : '/api/businesses/public'; // URL con o sin categoría, si si se especifica la categoría se filtran los negocios por ella, si no se obtienen todos los negocios públicos existentes
+    const response = await api.get(url);
     return response.data; 
   } catch (error) {
     const { message, status } = handleError(error);

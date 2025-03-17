@@ -29,7 +29,7 @@ const VisitList = ({ loading }) => {
   };
 
   if (!loading && businesses.length === 0) {
-    return <NoDataComponent />;
+    return <NoDataComponent name="visitas" icon="eye-off-outline" />;
   }
 
   return (

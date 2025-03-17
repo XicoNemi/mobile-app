@@ -5,7 +5,7 @@ import Colors from '../../utils/Colors';
 import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const GastronomyCardComponent = ({ title, description, image, rating, onAddPress }) => {
+const GastronomyCardComponent = ({ name, description, url_image, averageRating, onAddPress }) => {
     const [isBookmarked, setIsBookmarked] = useState(false); 
 
     const handleBookmarkToggle = () => {
@@ -14,14 +14,14 @@ const GastronomyCardComponent = ({ title, description, image, rating, onAddPress
 
     return (
         <View style={styles.cardContainer}>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: url_image }} style={styles.image} />
             <View style={styles.ratingContainer}>
                 {[...Array(5)].map((_, index) => {
-                    const isHalfStar = rating - index === 0.5;
+                    const isHalfStar = averageRating - index === 0.5;
                     return (
                         <Ionicons
                             key={index}
-                            name={isHalfStar ? "star-half" : index < rating ? "star" : "star-outline"}
+                            name={isHalfStar ? "star-half" : index < averageRating ? "star" : "star-outline"}
                             size={SizeConstants.iconsCH}
                             color={Colors.star}
                         />
@@ -36,7 +36,7 @@ const GastronomyCardComponent = ({ title, description, image, rating, onAddPress
                 />
             </TouchableOpacity>
             <View style={styles.content}>
-                <Text style={styles.title} numberOfLines={1}>{title}</Text>
+                <Text style={styles.title} numberOfLines={1}>{name}</Text>
                 <Text style={styles.description} numberOfLines={2}>{description}</Text>
             </View>
             <TouchableOpacity style={styles.addButton} onPress={onAddPress}>

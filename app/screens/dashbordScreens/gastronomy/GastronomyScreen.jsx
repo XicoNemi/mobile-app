@@ -8,43 +8,28 @@ import SearchInputComponent from '../../../components/generals/SearchInputCompon
 import GastronomyCardComponent from '../../../components/dashbord/GastronomyCardComponent';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
 
 const GastronomyScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [gastronomyData, setGastronomyData] = useState([]);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Gastronomia');
+                setGastronomyData(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, [dispatch]);
-
-    const tourismData = [
-        {
-            id: 1,
-            title: 'Restaurante Aranjuez',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/gastro1.png'),
-            rating: 4.5, 
-        },
-        {
-            id: 2,
-            title: 'Parrilladas Don Mundo',
-            description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../../assets/gastro2.png'),
-            rating: 3.5, 
-        },
-        {
-            id: 3,
-            title: 'Mr Cheve',
-            description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../../assets/gastro3.png'),
-            rating: 4.0, 
-        },
-    ];
 
     const skeletonNumber = [1, 2, 3];
 
@@ -62,15 +47,14 @@ const GastronomyScreen = () => {
                         </View>
                     ))
                 ) : (
-                    tourismData.map((item) => (
+                    gastronomyData.map((item) => (
                         <GastronomyCardComponent
                             key={item.id}
-                            title={item.title}
+                            name={item.name}
                             description={item.description}
-                            image={item.image}
-                            rating={item.rating} // Pasar la nueva propiedad
-                            onSavePress={() => console.log(`Guardado: ${item.title}`)}
-                            onAddPress={() => console.log(`Añadido: ${item.title}`)}
+                            url_image={item.url_image}
+                            averageRating={item.averageRating}
+                            onAddPress={() => console.log(`Añadido: ${item.name}`)}
                         />
                     ))
                 )}

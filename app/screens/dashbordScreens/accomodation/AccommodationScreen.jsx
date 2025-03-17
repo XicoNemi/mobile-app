@@ -2,49 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderComponent from '../../../components/generals/HeaderComponent';
-import AccomodationCardComponent from '../../../components/dashbord/AccomodationCardComponent';
+import AccommodationCardComponent from '../../../components/dashbord/AccomodationCardComponent';
 import SearchInputComponent from '../../../components/generals/SearchInputComponent';
 import AssignLenguaje from '../../../lenguage/AssignLenguage';
 import SizeConstants from '../../../utils/SizeConstants';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
 
 const AccommodationScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [hospedajes, setHospedajes] = useState([]);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Hospedaje');
+                setHospedajes(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, [dispatch]);
 
-    const hospedajes = [
-        {
-            id: '1',
-            title: 'Hotel Villa de Cortez',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/hotel1.jpg'),
-            rating: 4.5, 
-        },
-        {
-            id: '2',
-            title: 'Hotel Casablanca',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/hotel2.jpg'),
-            rating: 3.5,
-        },
-        {
-            id: '3',
-            title: 'Hotel Cafetalero',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/hotel3.jpg'),
-            rating: 4.0,
-        }
-    ];
     const skeletonNumber = [1, 2, 3];
     return (
         <View style={styles.container}>
@@ -61,13 +47,13 @@ const AccommodationScreen = () => {
                     ))
                 ) : (
                     hospedajes.map((hospedaje) => (
-                        <AccomodationCardComponent
+                        <AccommodationCardComponent
                             key={hospedaje.id}
-                            title={hospedaje.title}
+                            name={hospedaje.name}
                             description={hospedaje.description}
-                            image={hospedaje.image}
-                            rating={hospedaje.rating} // Pasar la nueva propiedad
-                            onPress={() => console.log('Hospedaje seleccionado:', hospedaje.title)}
+                            url_image={hospedaje.url_image}
+                            averageRating={hospedaje.averageRating}
+                            onPress={() => console.log('Hospedaje seleccionado:', hospedaje.name)}
                         />
                     ))
                 )}

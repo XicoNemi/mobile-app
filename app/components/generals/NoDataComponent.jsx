@@ -5,14 +5,14 @@ import Colors from "../../utils/Colors";
 import { useSelector } from 'react-redux';
 import SizeConstants from '../../utils/SizeConstants';
 
-const NoDataComponent = () => {
+const NoDataComponent = ({ name = "datos", icon = "alert-circle-outline" }) => {
   const textsLeng = useSelector((state) => state.language.texts);
   const { NoDataComponent: texts } = textsLeng;
 
   return (
     <View style={styles.container}>
-      <Ionicons name="alert-circle-outline" size={50} color={Colors.primary} />
-      <Text style={styles.text}>{texts.noDataMessage}</Text>
+      <Ionicons name={icon} size={50} color={Colors.primary} />
+      <Text style={styles.text}>{texts.noDataMessage.replace("{name}", name)}</Text>
     </View>
   );
 };

@@ -144,7 +144,7 @@ const LanguageProvider = {
       viewLessEvents: "View less events",
     },
     NoDataComponent: {
-      noDataMessage: "At the moment, there is no data available for this section.",
+      noDataMessage: "At the moment, there are no {name} available.",
     },
     BottomTabNavigator: {
       home: "Home",
@@ -317,7 +317,7 @@ const LanguageProvider = {
       viewLessEvents: "Ver menos eventos",
     },
     NoDataComponent: {
-      noDataMessage: "Por el momento, no hay datos disponibles para esta sección.",
+      noDataMessage: "Por el momento, no hay {name} disponibles.",
     },
     BottomTabNavigator: {
       home: "Inicio",

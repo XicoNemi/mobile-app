@@ -170,6 +170,9 @@ const LanguageProvider = {
     BusinessDetailScreen: {
       noEventsMessage: "At the moment {business.name} has no events for you",
     },
+    AddFavorites: {
+      addToFavoritesMessage: "To add to favorites, you must log in.",
+    },
   },
 
   // Textos en español
@@ -342,6 +345,9 @@ const LanguageProvider = {
     },
     BusinessDetailScreen: {
       noEventsMessage: "Por el momento {business.name} no tiene eventos para ti",
+    },
+    AddFavorites: {
+      addToFavoritesMessage: "Para añadir a favoritos, debes iniciar sesión.",
     },
   },
 };

@@ -30,7 +30,7 @@ const GastronomyCardComponent = ({ name, description, url_image, averageRating, 
             </View>
             <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
                 <Ionicons
-                    name={isBookmarked ? "bookmark" : "bookmark-outline"}
+                    name={isBookmarked ? "heart" : "heart-outline"}
                     size={SizeConstants.iconsCH}
                     color={isBookmarked ? Colors.meal : Colors.meal}
                 />

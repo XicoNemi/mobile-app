@@ -5,7 +5,7 @@ import Colors from '../../utils/Colors';
 import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const EventsCardComponent = ({ title, description, image, onAddPress }) => {
+const EventsCardComponent = ({ name, description, url_image, onAddPress }) => {
     const [isBookmarked, setIsBookmarked] = useState(false); // Estado para alternar el icono
 
     const handleBookmarkToggle = () => {
@@ -14,16 +14,16 @@ const EventsCardComponent = ({ title, description, image, onAddPress }) => {
 
     return (
         <View style={styles.cardContainer}>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: url_image }} style={styles.image} />
             <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
                 <Ionicons
-                    name={isBookmarked ? "bookmark" : "bookmark-outline"}
+                    name={isBookmarked ? "heart" : "heart-outline"}
                     size={SizeConstants.iconsCH}
                     color={isBookmarked ? Colors.events : Colors.events}
                 />
             </TouchableOpacity>
             <View style={styles.content}>
-                <Text style={styles.title} numberOfLines={1}>{title}</Text>
+                <Text style={styles.title} numberOfLines={1}>{name}</Text>
                 <Text style={styles.description} numberOfLines={2}>{description}</Text>
             </View>
             <TouchableOpacity style={styles.addButton} onPress={onAddPress}>

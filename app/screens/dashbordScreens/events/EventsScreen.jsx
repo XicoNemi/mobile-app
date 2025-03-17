@@ -8,40 +8,28 @@ import SearchInputComponent from '../../../components/generals/SearchInputCompon
 import EventsCardComponent from '../../../components/dashbord/EventsCardComponent';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
 
 const EventsScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [eventsData, setEventsData] = useState([]);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Eventos');
+                setEventsData(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, [dispatch]);
-
-    const tourismData = [
-        {
-            id: 1,
-            title: 'Feria de la Primavera',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/feria.png'),
-        },
-        {
-            id: 2,
-            title: '1 Molotiza',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/molotisa.png'),
-        },
-        {
-            id: 3,
-            title: 'Tour del cafe y catacion',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/tourCafe.png'),
-        },
-    ];
 
     const skeletonNumber = [1, 2, 3];
 
@@ -59,14 +47,13 @@ const EventsScreen = () => {
                         </View>
                     ))
                 ) : (
-                    tourismData.map((item) => (
+                    eventsData.map((item) => (
                         <EventsCardComponent
                             key={item.id}
-                            title={item.title}
+                            name={item.name}
                             description={item.description}
-                            image={item.image}
-                            onSavePress={() => console.log(`Guardado: ${item.title}`)}
-                            onAddPress={() => console.log(`Añadido: ${item.title}`)}
+                            url_image={item.url_image}
+                            onAddPress={() => console.log(`Añadido: ${item.name}`)}
                         />
                     ))
                 )}

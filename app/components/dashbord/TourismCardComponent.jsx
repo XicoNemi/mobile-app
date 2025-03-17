@@ -30,7 +30,7 @@ const TourismCardComponent = ({ title, description, image, rating, onAddPress })
             </View>
             <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
                 <Ionicons
-                    name={isBookmarked ? "bookmark" : "bookmark-outline"}
+                    name={isBookmarked ? "heart" : "heart-outline"}
                     size={SizeConstants.iconsCH}
                     color={isBookmarked ? Colors.primary : Colors.primary}
                 />

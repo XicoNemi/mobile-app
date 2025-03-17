@@ -5,7 +5,7 @@ import Colors from '../../utils/Colors';
 import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const TourismCardComponent = ({ title, description, image, rating, onAddPress }) => {
+const TourismCardComponent = ({ title, description, image, rating, onPress }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
 
     const handleBookmarkToggle = () => {
@@ -13,7 +13,7 @@ const TourismCardComponent = ({ title, description, image, rating, onAddPress })
     };
 
     return (
-        <View style={styles.cardContainer}>
+        <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
             <Image source={image} style={styles.image} />
             <View style={styles.ratingContainer}>
                 {[...Array(5)].map((_, index) => {
@@ -39,10 +39,10 @@ const TourismCardComponent = ({ title, description, image, rating, onAddPress })
                 <Text style={styles.title} numberOfLines={1}>{title}</Text>
                 <Text style={styles.description} numberOfLines={2}>{description}</Text>
             </View>
-            <TouchableOpacity style={styles.addButton} onPress={onAddPress}>
+            <TouchableOpacity style={styles.addButton} onPress={() => console.log('Add button pressed')}>
                 <Ionicons name="add" size={SizeConstants.iconsCH} color="white" />
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 };
 

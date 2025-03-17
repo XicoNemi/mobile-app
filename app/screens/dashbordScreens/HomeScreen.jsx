@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MenuDropdown from "../../components/menus/MenuDropdownComponent";
-import ProfileMenuDropdown from "../../components/menus/ProfileMenuDropdown";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
@@ -26,12 +25,17 @@ const HomeScreen = () => {
   const textsLeng = useSelector((state) => state.language.texts);
   const userName = useSelector((state) => state.auth.name);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [menuVisibleProfile, setMenuVisibleProfile] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const toggleMenu = () => setMenuVisible(!menuVisible);
-  const toggleMenuProfile = () => setMenuVisibleProfile(!menuVisibleProfile);
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+    if (!menuVisible) {
+      setTimeout(() => {
+        setMenuVisible(false);
+      }, 10000);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,49 +51,41 @@ const HomeScreen = () => {
       <View style={styles.topBar}>
         <TouchableOpacity onPress={toggleMenu}>
           <Ionicons
-            name="menu-outline"
+            name={menuVisible ? "close-outline" : "menu-outline"}
             size={SizeConstants.iconsG}
             color="black"
           />
         </TouchableOpacity>
 
         <Text style={styles.title}>{textsLeng.HomeScreen.start}</Text>
-
-        <TouchableOpacity onPress={toggleMenuProfile}>
-          <Ionicons
-            name="person-circle-outline"
-            size={SizeConstants.iconsG}
-            color="black"
-          />
-        </TouchableOpacity>
+        <View style={{ width: SizeConstants.iconsG }} /> 
       </View>
 
       {menuVisible && <MenuDropdown navigation={navigation} />}
-      {menuVisibleProfile && <ProfileMenuDropdown navigation={navigation} />}
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {loading ? (
           <View style={{ width: wp('90%'), height: hp('7%'), borderRadius: wp('3%'), overflow: 'hidden' }}>
-            <SkeletonComponent />
+            <SkeletonComponent width={wp('90%')} height={hp('7%')} />
           </View>) : (
           <SearchInputComponent />
         )}
 
-        <Text style={styles.welcomeText}>
+        <View style={styles.welcomeTextContainer}>
           {loading ? (
             <View style={{ width: wp('90%'), height: hp('6%'), borderRadius: wp('1%'), overflow: 'hidden' }}>
-              <SkeletonComponent />
+              <SkeletonComponent width={wp('90%')} height={hp('6%')} />
             </View>) : (
-            <>
+            <Text style={styles.welcomeText}>
               {textsLeng.HomeScreen.welcomeText}{" "}
-              <Text style={styles.userName}>{userName}</Text>
-            </>
+              <Text style={styles.userName}>{userName ? userName : "a XicoNemi"}</Text>
+            </Text>
           )}
-        </Text>
+        </View>
 
         <Text style={styles.sectionTitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={hp('3.75%')} />
+            <SkeletonComponent width={wp('70%')} height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionTitleItineraries
           )}
@@ -99,17 +95,31 @@ const HomeScreen = () => {
 
         <Text style={styles.sectionSubtitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={hp('3.75%')} />
+            <SkeletonComponent width={wp('70%')} height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionSubtitleVisit
           )}
         </Text>
 
-        <VisitList loading={loading} />
+        {loading ? (
+          <View style={styles.skeletonVisitList}>
+            {[...Array(3)].map((_, index) => (
+              <SkeletonComponent
+                key={index}
+                width={wp('30%')}
+                height={wp('30%')}
+                borderRadius={wp('15%')}
+                style={styles.skeletonVisitItem}
+              />
+            ))}
+          </View>
+        ) : (
+          <VisitList loading={loading} />
+        )}
 
         <Text style={styles.sectionTitle}>
           {loading ? (
-            <SkeletonComponent width="70%" height={hp('3.75%')} />
+            <SkeletonComponent width={wp('70%')} height={hp('3.75%')} />
           ) : (
             textsLeng.HomeScreen.sectionTitleContinue
           )}
@@ -127,6 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: wp('4%'),
     marginTop: hp('3%'),
+    marginBottom: hp('5%'),
   },
   topBar: {
     flexDirection: "row",
@@ -138,10 +149,13 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     fontWeight: "bold",
   },
+  welcomeTextContainer: {
+    alignItems: 'center',
+    marginVertical: hp('2.5%'),
+  },
   welcomeText: {
     fontSize: SizeConstants.titles,
     fontWeight: "bold",
-    marginVertical: hp('2.5%'),
     textAlign: "center",
   },
   userName: {
@@ -159,6 +173,14 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.subtitles,
     marginVertical: hp('1.25%'),
     fontWeight: "bold"
+  },
+  skeletonVisitList: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: hp('3.75%'),
+  },
+  skeletonVisitItem: {
+    marginRight: wp('5%'),
   },
 });
 

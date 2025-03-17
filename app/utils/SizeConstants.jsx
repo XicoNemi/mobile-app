@@ -3,6 +3,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const SizeConstants = {
     titles: wp('8%'), // 32
     subtitles: wp('6.25%'), // 25
+    smallTexts: wp('3%'), // 10
     texts: wp('3.8%'), // 16
     textsM: wp('4.5%'), // 18
     iconsXG: wp('12.5%'), // 50

@@ -8,40 +8,38 @@ import SearchInputComponent from '../../../components/generals/SearchInputCompon
 import TourismCardComponent from '../../../components/dashbord/TourismCardComponent';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
+import { useNavigation } from '@react-navigation/native';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const TourismScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [tourismData, setTourismData] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Turismo');
+                setTourismData(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error(error);
+                setTourismData([]);
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+            }
+        };
+        fetchData();
     }, [dispatch]);
 
-    const tourismData = [
-        {
-            id: 1,
-            title: 'Museo casa de Carranza',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/museo1.jpeg'),
-        },
-        {
-            id: 2,
-            title: 'Virgen de Guadalupe',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/virgen.jpg'),
-        },
-        {
-            id: 3,
-            title: 'Xochipila',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/visit1.jpeg'),
-        },
-    ];
+    const handlePress = (item) => {
+        navigation.navigate("BusinessDetailScreen", { business: item });
+    };
 
     const skeletonNumber = [1, 2, 3];
 
@@ -58,15 +56,19 @@ const TourismScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35.8%')} />
                         </View>
                     ))
+                ) : tourismData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="turismo" icon="map-outline" />
+                    </View>
                 ) : (
                     tourismData.map((item) => (
                         <TourismCardComponent
                             key={item.id}
-                            title={item.title}
+                            title={item.name}
                             description={item.description}
-                            image={item.image}
-                            onSavePress={() => console.log(`Guardado: ${item.title}`)}
-                            onAddPress={() => console.log(`Añadido: ${item.title}`)}
+                            image={{ uri: item.url_image }}
+                            rating={item.averageRating}
+                            onPress={() => handlePress(item)}
                         />
                     ))
                 )}
@@ -89,6 +91,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

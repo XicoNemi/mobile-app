@@ -14,7 +14,7 @@ const LanguageProvider = {
       },
     },
     AlertMessagelogOut: {
-      title: "Log ou",
+      title: "Log out",
       message: "Are you sure you want to log out?",
       confirmButtonTitle: "Yes",
       cancelButtonTitle: "No",
@@ -47,12 +47,15 @@ const LanguageProvider = {
       createAccount: "Create your account",
       name: "Name/s",
       lastName: "Last name/s",
+      gender: "Gender",
       register: "Register",
       alreadyAccount: "Already have an account?, ",
       nameError: "Name must be at least 4 characters long.",
       lastNameError: "Last name must be at least 4 characters long.",
+      genderError:"Gender is required",
       birthday: "Birthday",
       tel: "Phone",
+      selectGender: "Select a gender",
       enterEmail: {
         texts: {
           invalidPhone: "Enter a valid phone number.",
@@ -68,7 +71,7 @@ const LanguageProvider = {
         "Please check your spam folder if you haven't received it.",
     },
     HomeScreen: {
-      start: "Start",
+      start: "Home",
       welcomeText: "Welcome",
       search: "Search",
       sectionTitleItineraries: "Try Our Itineraries",
@@ -122,6 +125,54 @@ const LanguageProvider = {
       title: "Tourism",
       message: "Places to visit →",
     },
+    FavoritesScreen: {
+      title: "Favorites",
+    },
+    CustomAlertComponent: {
+      accessRequired: "Access required",
+      accessMessage: "To access the profile you must log in",
+      loginButton: "Log in",
+      cancelButton: "Cancel",
+    },
+    BusinessHeader: {
+      addToItinerary: "Add to my itinerary",
+      phone: "Phone",
+    },
+    EventListFooter: {
+      upcomingEvents: "Upcoming Events",
+      viewMoreEvents: "View more events",
+      viewLessEvents: "View less events",
+    },
+    NoDataComponent: {
+      noDataMessage: "At the moment, there is no {name} data available.",
+    },
+    BottomTabNavigator: {
+      home: "Home",
+      profile: "Profile",
+      routes: "Routes",
+      favorites: "Favorites",
+    },
+    ReviewsComponent: {
+      title: "Reviews",
+      viewMoreReviews: "View more reviews",
+      viewLessReviews: "View less reviews",
+      noReviewsMessage: "No reviews available at the moment.",
+      whatDidYouThink: "What did you think?",
+      bad: "Bad",
+      excellent: "Excellent",
+      accessRequired: "Access required",
+      accessMessage: "You must log in to rate the business.",
+      loginButton: "Log in",
+      cancelButton: "Cancel",
+      tellUsYourExperience: "Tell us your experience",
+      save: "Save",
+    },
+    BusinessDetailScreen: {
+      noEventsMessage: "At the moment {business.name} has no events for you",
+    },
+    AddFavorites: {
+      addToFavoritesMessage: "To add to favorites, you must log in.",
+    },
   },
 
   // Textos en español
@@ -172,12 +223,15 @@ const LanguageProvider = {
       createAccount: "Crea tu Cuenta",
       name: "Nombre/s",
       lastName: "Apellido/s",
+      gender: "Género",
       register: "Regístrate",
       alreadyAccount: "¿Ya tienes una cuenta?, ",
       nameError: "El nombre debe tener al menos 4 caracteres.",
       lastNameError: "El apellido debe tener al menos 4 caracteres.",
+      genderError:"El género es requerido",
       birthday: "Cumpleaños",
       tel: "Teléfono",
+      selectGender: "Selecciona un género",
       enterEmail: {
         texts: {
           invalidPhone: "Ingrese un número de teléfono válido.",
@@ -246,6 +300,54 @@ const LanguageProvider = {
     TourismScreen: {
       title: "Turismo",
       message: "Lugares para visitar →",
+    },
+    FavoritesScreen: {
+      title: "Favoritos",
+    },
+    CustomAlertComponent: {
+      accessRequired: "Acceso requerido",
+      accessMessage: "Para acceder a perfil debes de iniciar sesión",
+      loginButton: "Iniciar Sesión",
+      cancelButton: "Cancelar",
+    },
+    BusinessHeader: {
+      addToItinerary: "Agregar a mi itinerario",
+      phone: "Teléfono",
+    },
+    EventListFooter: {
+      upcomingEvents: "Próximos Eventos",
+      viewMoreEvents: "Ver más eventos",
+      viewLessEvents: "Ver menos eventos",
+    },
+    NoDataComponent: {
+      noDataMessage: "Por el momento, no hay datos de {name} disponibles.",
+    },
+    BottomTabNavigator: {
+      home: "Inicio",
+      profile: "Perfil",
+      routes: "Rutas",
+      favorites: "Favoritos",
+    },
+    ReviewsComponent: {
+      title: "Reseñas",
+      viewMoreReviews: "Ver más reseñas",
+      viewLessReviews: "Ver menos reseñas",
+      noReviewsMessage: "No hay reseñas disponibles por el momento.",
+      whatDidYouThink: "¿Qué te pareció?",
+      bad: "Malo",
+      excellent: "Excelente",
+      accessRequired: "Acceso requerido",
+      accessMessage: "Debe iniciar sesión para dar su calificación al negocio.",
+      loginButton: "Iniciar sesión",
+      cancelButton: "Cancelar",
+      tellUsYourExperience: "Cuéntanos tu experiencia",
+      save: "Guardar",
+    },
+    BusinessDetailScreen: {
+      noEventsMessage: "Por el momento {business.name} no tiene eventos para ti",
+    },
+    AddFavorites: {
+      addToFavoritesMessage: "Para añadir a favoritos, debes iniciar sesión.",
     },
   },
 };

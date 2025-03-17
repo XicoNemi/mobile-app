@@ -1,37 +1,56 @@
-import React from "react";
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from "react-native";
 import SkeletonComponent from "../generals/SkeletonComponent";
 import SizeConstants from "../../utils/SizeConstants";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
-const visitData = [
-  { id: 1, image: require("../../../assets/recommendation1.jpeg"), name: "Mr Cheve" },
-  { id: 2, image: require("../../../assets/recommendation2.jpeg"), name: "Parrilladas Don Mundo" },
-  { id: 3, image: require("../../../assets/recommendation3.jpeg"), name: "Restaurant Aranjuez" },
-];
+import { useSelector } from "react-redux";
+import Api from "../../utils/Api";
+import { useNavigation } from "@react-navigation/native";
+import NoDataComponent from "../generals/NoDataComponent";
 
 const VisitList = ({ loading }) => {
-  const data = loading ? visitData.map((item, index) => ({ ...item, id: index + 1 })) : visitData;
+  const [businesses, setBusinesses] = useState([]);
+  const token = useSelector((state) => state.auth.token);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchBusinesses = async () => {
+      try {
+        const data = await Api.getPublicBusinesses();
+        setBusinesses(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBusinesses();
+  }, [token]);
+
+  const handlePress = (item) => {
+    navigation.navigate("BusinessDetailScreen", { business: item });
+  };
+
+  if (!loading && businesses.length === 0) {
+    return <NoDataComponent name="negocios" icon="business" />;
+  }
 
   return (
     <FlatList
       horizontal
-      data={data}
-      keyExtractor={(item) => item.id.toString()}
+      data={loading ? [...Array(3)] : businesses}
+      keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()}
       renderItem={({ item }) => (
-        <View style={styles.visitBox}>
+        <TouchableOpacity onPress={() => handlePress(item)} style={styles.visitBox}>
           {loading ? (
             <SkeletonComponent width={wp('30%')} height={wp('30%')} borderRadius={wp('15%')} />
           ) : (
             <>
-              <Image source={item.image} style={styles.visitImage} />
+              <Image source={{ uri: item.url_image }} style={styles.visitImage} />
               <Text style={styles.visitText}>{item.name}</Text>
             </>
           )}
-        </View>
+        </TouchableOpacity>
       )}
       showsHorizontalScrollIndicator={false}
-      style={styles.visitList}
     />
   );
 };

@@ -22,6 +22,7 @@ import LanguageProvider from "../../../lenguage/LanguageProvider";
 import SkeletonComponent from "../../../components/generals/SkeletonComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import api from '../../../utils/Api';
+import AvatarComponent from "../../../components/generals/AvatarComponent";
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -55,6 +56,7 @@ const ProfileScreen = ({ navigation }) => {
   const confirmLogout = () => {
     setIsModalVisible(false);
     dispatch(logOut());
+    navigation.navigate("BottomTabs", { screen: "Home" });
   };
 
   const cancelLogout = () => {
@@ -95,10 +97,14 @@ const ProfileScreen = ({ navigation }) => {
               <SkeletonComponent width={wp('45%')} height={wp('45%')} borderRadius={wp('22.5%')} />
             </View>
           ) : (
-            <Image
-              source={require("../../../../assets/avatar.png")}
-              style={styles.avatar}
-            />
+            userData?.url_image ? (
+              <Image
+                source={{ uri: userData.url_image }}
+                style={styles.avatar}
+              />
+            ) : (
+              <AvatarComponent name={userData?.name} />
+            )
           )}
           {loading ? (
             <View style={{ width: wp('62.5%'), height: hp('4%'), borderRadius: wp('2.5%'), overflow: 'hidden', marginTop: hp('1%') }}>
@@ -254,5 +260,6 @@ const styles = StyleSheet.create({
   },
   icon: { marginRight: wp('1.25%') },
 });
+
 
 export default ProfileScreen;

@@ -1,0 +1,157 @@
+import React, { useEffect } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "../../utils/Colors";
+import SizeConstants from "../../utils/SizeConstants";
+import AssignLenguaje from "../../lenguage/AssignLenguage";
+
+const BusinessHeader = ({ business, scrollY }) => {
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const textsLeng = useSelector((state) => state.language.texts);
+
+    useEffect(() => {
+        AssignLenguaje(dispatch);
+    }, [dispatch]);
+
+    const { BusinessHeader: texts } = textsLeng;
+
+    const imageHeight = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [hp("37%"), hp("20%")],
+        extrapolate: "clamp",
+    });
+
+    const imageOpacity = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [1, 0.5],
+        extrapolate: "clamp",
+    });
+
+    const textTranslateY = scrollY.interpolate({
+        inputRange: [0, 200],
+        outputRange: [0, -50],
+        extrapolate: "clamp",
+    });
+
+    return (
+        <View>
+            <Animated.View style={[styles.imageContainer, { height: imageHeight }]}>
+                <Animated.Image source={{ uri: business.url_image }} style={[styles.image, { opacity: imageOpacity }]} />
+                <View style={styles.imageOverlay} />
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <Ionicons name="arrow-back" size={24} color="#000" />
+                </TouchableOpacity>
+                <Animated.View style={[styles.overlayContainer, { transform: [{ translateY: textTranslateY }] }]}>
+                    <Text style={styles.title}>{business.name}</Text>
+                    <Text style={styles.category}>{business.category}</Text>
+                </Animated.View>
+                <TouchableOpacity style={styles.itineraryButton}>
+                    <Ionicons name="calendar-outline" size={SizeConstants.iconsCH} color={Colors.primary} />
+                    <Text style={styles.itineraryText}>{texts.addToItinerary}</Text>
+                </TouchableOpacity>
+            </Animated.View>
+            {/* Información debajo de la imagen */}
+            <View style={styles.infoContainer}>
+                <Text style={styles.description}>{business.description}</Text>
+                <Text style={styles.address}>{business.address}</Text>
+                <Text style={styles.phone}>{texts.phone}: {business.tel}</Text>
+                <View style={styles.ratingContainer}>
+                    {[1, 2, 3, 4, 5].map((index) => (
+                        <Ionicons
+                            key={index}
+                            name={index <= Math.round(business.averageRating) ? "star" : "star-outline"}
+                            size={SizeConstants.iconsCH}
+                            color={Colors.star}
+                        />
+                    ))}
+                </View>
+            </View>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    imageContainer: {
+        height: hp("37%"),
+        position: "relative",
+    },
+    image: {
+        width: "100%",
+        height: "100%",
+    },
+    imageOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+    },
+    backButton: {
+        position: "absolute",
+        top: hp("5%"),
+        left: wp("2.75%"),
+        backgroundColor: "#fff",
+        padding: wp('2.3%'),
+        borderRadius: 50,
+    },
+    overlayContainer: {
+        position: "absolute",
+        bottom: hp("7.5%"),
+        left: wp("5%"),
+    },
+    title: {
+        fontSize: SizeConstants.titles,
+        fontWeight: "bold",
+        color: "white",
+    },
+    category: {
+        fontSize: SizeConstants.textsM,
+        color: "white",
+        marginBottom: hp("1.25%"),
+    },
+    itineraryButton: {
+        position: "absolute",
+        bottom: hp("2.5%"),
+        left: wp("5%"),
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "#FFF",
+        padding: wp("2%"),
+        borderRadius: 5,
+    },
+    itineraryText: {
+        color: "#000",
+        marginLeft: wp("1.25%"),
+    },
+    infoContainer: {
+        padding: wp("5%"),
+        alignItems: "center",
+    },
+    description: {
+        fontSize: SizeConstants.texts,
+        textAlign: "center",
+        color: "black",
+        marginBottom: hp("1.25%"),
+    },
+    address: {
+        fontSize: SizeConstants.textsM,
+        color: "black",
+        textAlign: "center",
+        marginBottom: hp("1.25%"),
+    },
+    phone: {
+        fontSize: SizeConstants.textsM,
+        color: "gray",
+        textAlign: "center",
+        fontWeight: "bold",
+    },
+    ratingContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: hp("1.25%"),
+        marginBottom: hp("1%"),
+    },
+});
+
+export default BusinessHeader;

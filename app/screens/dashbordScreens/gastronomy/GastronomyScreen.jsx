@@ -8,40 +8,39 @@ import SearchInputComponent from '../../../components/generals/SearchInputCompon
 import GastronomyCardComponent from '../../../components/dashbord/GastronomyCardComponent';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
+import { useNavigation } from '@react-navigation/native';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const GastronomyScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [gastronomyData, setGastronomyData] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Gastronomia');
+                setGastronomyData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
+            } catch (error) {
+                console.error(error);
+                setGastronomyData([]); // Se agregó setGastronomyData([]) para evitar errores en la vista, esto ayuda a que si hay un error,
+                // se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+            }
+        };
+        fetchData();
     }, [dispatch]);
 
-    const tourismData = [
-        {
-            id: 1,
-            title: 'Restaurante Aranjuez',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/gastro1.png'),
-        },
-        {
-            id: 2,
-            title: 'Parrilladas Don Mundo',
-            description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../../assets/gastro2.png'),
-        },
-        {
-            id: 3,
-            title: 'Mr Cheve',
-            description: 'Ruta base de la competecion, con preciosas vistas de Xicotepec de Juarez. ',
-            image: require('../../../../assets/gastro3.png'),
-        },
-    ];
+    const handlePress = (item) => {
+        navigation.navigate("BusinessDetailScreen", { business: item });
+    };
 
     const skeletonNumber = [1, 2, 3];
 
@@ -58,15 +57,19 @@ const GastronomyScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35%')} />
                         </View>
                     ))
+                ) : gastronomyData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="gastronomía" icon="restaurant-outline" />
+                    </View>
                 ) : (
-                    tourismData.map((item) => (
+                    gastronomyData.map((item) => (
                         <GastronomyCardComponent
                             key={item.id}
-                            title={item.title}
+                            name={item.name}
                             description={item.description}
-                            image={item.image}
-                            onSavePress={() => console.log(`Guardado: ${item.title}`)}
-                            onAddPress={() => console.log(`Añadido: ${item.title}`)}
+                            url_image={item.url_image}
+                            averageRating={item.averageRating}
+                            onPress={() => handlePress(item)}
                         />
                     ))
                 )}
@@ -89,6 +92,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

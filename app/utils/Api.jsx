@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://backend-app-or4g.onrender.com',
+  baseURL: 'https://available-karlotta-ethdev11-59ebf81c.koyeb.app',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -35,7 +35,7 @@ const signUp = async (userData) => {
   try {
     const response = await api.post('/api/auth/sign-up', userData);
     console.log(response.data); // Si todo es correcto, mostrar la data (usuario creado) con fines de depuracion por el momento
-    return response.data; // Retorna la información del usuario creado
+    return response.data; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);
@@ -47,9 +47,9 @@ const signUp = async (userData) => {
 // Función para iniciar sesión
 const signIn = async (email, password) => {
   try {
-    const response = await api.post('/api/auth/sign-in', { email, password });
-    const token = response.headers['auth-token'];
-    return { user: response.data, token }; 
+    const response = await api.post('/api/auth/sign-in-common', { email, password });
+    const { user, token } = response.data;
+    return { user, token }; 
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);
@@ -63,7 +63,7 @@ const getUser = async (id, token) => {
   try {
     const response = await api.get(`/api/users/${id}`, {
       headers: {
-        'auth-token': token, 
+        'Authorization': `Bearer ${token}`, 
       },
     });
     return response.data; 
@@ -75,8 +75,37 @@ const getUser = async (id, token) => {
   }
 };
 
+// Función para obtener la lista de negocios públicos (no requiere token)
+const getPublicBusinesses = async (category) => {
+  try {
+    const url = category ? `/api/businesses/public?category=${category}` : '/api/businesses/public'; // URL con o sin categoría, si si se especifica la categoría se filtran los negocios por ella, si no se obtienen todos los negocios públicos existentes
+    const response = await api.get(url);
+    return response.data; 
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+};
+
+// Función para obtener eventos por negocio (no requiere token)
+const getEventsByBusiness = async (businessId) => {
+  try {
+    const response = await api.get(`/api/events/business/${businessId}`);
+    return response.data; // Retorna la lista de eventos
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+};
+
 export default {
   signUp,
   signIn,
-  getUser, 
+  getUser,
+  getPublicBusinesses, 
+  getEventsByBusiness,
 };

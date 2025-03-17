@@ -8,40 +8,33 @@ import SearchInputComponent from '../../../components/generals/SearchInputCompon
 import EventsCardComponent from '../../../components/dashbord/EventsCardComponent';
 import SkeletonComponent from '../../../components/generals/SkeletonComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import api from '../../../utils/Api';
+import NoDataComponent from '../../../components/generals/NoDataComponent';
 
 const EventsScreen = () => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [loading, setLoading] = useState(true);
+    const [eventsData, setEventsData] = useState([]);
 
     useEffect(() => {
         AssignLenguaje(dispatch);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1200);
-        return () => clearTimeout(timer);
+        const fetchData = async () => {
+            try {
+                const data = await api.getPublicBusinesses('Eventos');
+                setEventsData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
+            } catch (error) {
+                console.error(error);
+                setEventsData([]);// Se agregó setEventsData([]) para evitar errores en la vista, esto ayuda a que si
+                // hay un error, se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+            }
+        };
+        fetchData();
     }, [dispatch]);
-
-    const tourismData = [
-        {
-            id: 1,
-            title: 'Feria de la Primavera',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/feria.png'),
-        },
-        {
-            id: 2,
-            title: '1 Molotiza',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/molotisa.png'),
-        },
-        {
-            id: 3,
-            title: 'Tour del cafe y catacion',
-            description: 'Ruta base de la competencia, con preciosas vistas de Xicotepec de Juarez.',
-            image: require('../../../../assets/tourCafe.png'),
-        },
-    ];
 
     const skeletonNumber = [1, 2, 3];
 
@@ -58,15 +51,18 @@ const EventsScreen = () => {
                             <SkeletonComponent width={wp('90%')} height={hp('35.8%')} />
                         </View>
                     ))
+                ) : eventsData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                        <NoDataComponent name="eventos" icon="calendar-outline" />
+                    </View>
                 ) : (
-                    tourismData.map((item) => (
+                    eventsData.map((item) => (
                         <EventsCardComponent
                             key={item.id}
-                            title={item.title}
+                            name={item.name}
                             description={item.description}
-                            image={item.image}
-                            onSavePress={() => console.log(`Guardado: ${item.title}`)}
-                            onAddPress={() => console.log(`Añadido: ${item.title}`)}
+                            url_image={item.url_image}
+                            onAddPress={() => console.log(`Añadido: ${item.name}`)}
                         />
                     ))
                 )}
@@ -89,6 +85,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         paddingHorizontal: wp('3.75%'),
+    },
+    noDataContainer: {
+        marginTop: hp('20%'), // Ajusta este valor según sea necesario
     },
 });
 

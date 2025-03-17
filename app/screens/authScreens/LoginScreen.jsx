@@ -20,6 +20,7 @@ import GoogleButtonComponent from "../../components/login/GoogleButtonComponent"
 import FacebookButtonComponent from "../../components/login/FacebookButtonComponent";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -51,8 +52,8 @@ const LoginScreen = ({ navigation }) => {
     setIsLoading(true);
     try {
       const { user, token } = await api.signIn(email, password);
-      dispatch(logIn({ id: user.id, name: user.name, token }));
-      navigation.navigate("HomeScreen");
+      dispatch(logIn({ id: user.id, name: user.name, token, type: user.type }));
+      navigation.navigate("BottomTabs"); 
     } catch (error) {
       setAlertTitle("Error");
       setAlertMessage(error.message);
@@ -69,6 +70,13 @@ const LoginScreen = ({ navigation }) => {
         isVisible={isLoading}
         text={textsLeng.LoginScreen.messageLog}
       />
+
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Ionicons name="arrow-back" size={SizeConstants.iconsCH} color="#FFF" />
+      </TouchableOpacity>
 
       <View style={styles.languageSwitcher}>
         <LanguageSwitcher />
@@ -156,6 +164,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: hp('1%'),
   },
+  backButton: {
+    width: wp('10%'),
+    position: "relative",
+    height: wp('10%'),
+    borderRadius: wp('5%'),
+    backgroundColor: Colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: hp('5.5%'),
+    right: wp('41%'),
+    zIndex: 10,
+  },
   title: {
     fontSize: SizeConstants.subtitles,
     color: Colors.primaryText,
@@ -212,14 +232,14 @@ const styles = StyleSheet.create({
   },
   footerText: {
     position: "absolute",
-    bottom: hp('4%'), 
+    bottom: hp('4%'),
     color: "black",
     fontSize: SizeConstants.texts - 3,
   },
   languageSwitcher: {
-    position: "absolute",
-    top: hp('5.2%'), 
-    right: wp('5%'),
+    position: "relative",
+    bottom: hp('6.2%'),
+    left: wp('25%'),
     zIndex: 1,
   },
 });

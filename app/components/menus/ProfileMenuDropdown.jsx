@@ -10,7 +10,7 @@ import { logOut } from "../../features/authSlice";
 import CustomAlert from "../../components/generals/CustomAlertComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const ProfileMenuDropdown = () => {
+const ProfileMenuDropdown = ({ onLogout }) => {
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,7 +26,7 @@ const ProfileMenuDropdown = () => {
 
   const confirmLogout = () => {
     setIsModalVisible(false);
-    dispatch(logOut());
+    onLogout(); // Llamar a la función onLogout pasada como prop
   };
 
   const cancelLogout = () => {

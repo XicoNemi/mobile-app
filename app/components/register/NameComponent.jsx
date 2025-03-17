@@ -66,31 +66,37 @@ const NameComponent = ({ name, setName, lastName, setLastName }) => {
 
   return (
     <View style={styles.container}>
-      {/* Nombre */}
-      <Text style={styles.label}>{textsLeng.RegisterScreen.name}</Text>
-      <TextInput
-        style={[
-          styles.input,
-          { borderColor: isValidName ? Colors.routes : Colors.primary },
-        ]}
-        placeholderTextColor="#AAAAAA"
-        value={name}
-        onChangeText={(value) => handleInputChange("name", value)}
-      />
-      {error.name && <Text style={styles.errorText}>{error.name}</Text>}
+      <View style={styles.rowContainer}>
+        {/* Nombre */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>{textsLeng.RegisterScreen.name}</Text>
+          <TextInput
+            style={[
+              styles.input,
+              { borderColor: isValidName ? Colors.routes : Colors.primary },
+            ]}
+            placeholderTextColor="#AAAAAA"
+            value={name}
+            onChangeText={(value) => handleInputChange("name", value)}
+          />
+          {error.name && <Text style={styles.errorText}>{error.name}</Text>}
+        </View>
 
-      {/* Apellido */}
-      <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
-      <TextInput
-        style={[
-          styles.input,
-          { borderColor: isValidLastName ? Colors.routes : Colors.primary },
-        ]}
-        placeholderTextColor="#AAAAAA"
-        value={lastName}
-        onChangeText={(value) => handleInputChange("lastName", value)}
-      />
-      {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
+        {/* Apellido */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>{textsLeng.RegisterScreen.lastName}</Text>
+          <TextInput
+            style={[
+              styles.input,
+              { borderColor: isValidLastName ? Colors.routes : Colors.primary },
+            ]}
+            placeholderTextColor="#AAAAAA"
+            value={lastName}
+            onChangeText={(value) => handleInputChange("lastName", value)}
+          />
+          {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
+        </View>
+      </View>
     </View>
   );
 };
@@ -99,6 +105,14 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     marginBottom: hp('1%'),
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  inputContainer: {
+    width: "48%", 
   },
   label: {
     color: Colors.primary,

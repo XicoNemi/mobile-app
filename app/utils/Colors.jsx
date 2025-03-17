@@ -8,7 +8,8 @@ const Colors = {
     primaryLight:'#F09BC0',
     routesLight:'#AFD196',
     eventsLight:'#AB85B5',
-    accommodationLight:'#00CFF7'
+    accommodationLight:'#00CFF7',
+    star:'#FFD700'
 
 }
 

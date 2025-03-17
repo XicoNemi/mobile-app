@@ -4,32 +4,76 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../../utils/Colors';
 import SizeConstants from '../../utils/SizeConstants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useSelector } from 'react-redux';
+import CustomAlertComponent from '../generals/CustomAlertComponent';
+import { useNavigation } from '@react-navigation/native';
 
-const GastronomyCardComponent = ({ title, description, image, onAddPress }) => {
-    const [isBookmarked, setIsBookmarked] = useState(false); // Estado para alternar el icono
+const GastronomyCardComponent = ({ name, description, url_image, averageRating, onPress }) => {
+    const [isBookmarked, setIsBookmarked] = useState(false);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const userName = useSelector((state) => state.auth.name);
+    const textsLeng = useSelector((state) => state.language.texts);
+    const navigation = useNavigation();
 
     const handleBookmarkToggle = () => {
-        setIsBookmarked(!isBookmarked);
+        if (!userName) {
+            setAlertVisible(true);
+        } else {
+            setIsBookmarked(!isBookmarked);
+        }
     };
 
     return (
-        <View style={styles.cardContainer}>
-            <Image source={image} style={styles.image} />
-            <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
-                <Ionicons
-                    name={isBookmarked ? "bookmark" : "bookmark-outline"}
-                    size={SizeConstants.iconsCH}
-                    color={isBookmarked ? Colors.meal : Colors.meal}
-                />
+        <>
+            <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
+                <Image source={{ uri: url_image }} style={styles.image} />
+                <View style={styles.ratingContainer}>
+                    {[...Array(5)].map((_, index) => {
+                        const isHalfStar = averageRating - index === 0.5;
+                        return (
+                            <Ionicons
+                                key={index}
+                                name={isHalfStar ? "star-half" : index < averageRating ? "star" : "star-outline"}
+                                size={SizeConstants.iconsCH}
+                                color={Colors.star}
+                            />
+                        );
+                    })}
+                </View>
+                <TouchableOpacity style={styles.saveButton} onPress={handleBookmarkToggle}>
+                    <Ionicons
+                        name={isBookmarked ? "heart" : "heart-outline"}
+                        size={SizeConstants.iconsCH}
+                        color={isBookmarked ? Colors.meal : Colors.meal}
+                    />
+                </TouchableOpacity>
+                <View style={styles.content}>
+                    <Text style={styles.title} numberOfLines={1}>{name}</Text>
+                    <Text style={styles.description} numberOfLines={2}>{description}</Text>
+                </View>
+                <TouchableOpacity style={styles.addButton} onPress={() => console.log('Add button pressed')}>
+                    <Ionicons name="add" size={SizeConstants.iconsCH} color="white" />
+                </TouchableOpacity>
             </TouchableOpacity>
-            <View style={styles.content}>
-                <Text style={styles.title} numberOfLines={1}>{title}</Text>
-                <Text style={styles.description} numberOfLines={2}>{description}</Text>
-            </View>
-            <TouchableOpacity style={styles.addButton} onPress={onAddPress}>
-                <Ionicons name="add" size={SizeConstants.iconsCH} color="white" />
-            </TouchableOpacity>
-        </View>
+
+            <CustomAlertComponent
+                isVisible={alertVisible}
+                onClose={() => setAlertVisible(false)}
+                title={textsLeng.CustomAlertComponent.accessRequired}
+                message={textsLeng.AddFavorites.addToFavoritesMessage}
+                primaryButton={{
+                    text: textsLeng.CustomAlertComponent.loginButton,
+                    onPress: () => {
+                        setAlertVisible(false);
+                        navigation.navigate("LoginScreen");
+                    },
+                }}
+                secondaryButton={{
+                    text: textsLeng.CustomAlertComponent.cancelButton,
+                    onPress: () => setAlertVisible(false),
+                }}
+            />
+        </>
     );
 };
 
@@ -65,6 +109,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    ratingContainer: {
+        flexDirection: 'row',
+        marginBottom: hp('1%'),
+    },
     content: {
         alignItems: 'flex-start',
         marginBottom: hp('1%'),
@@ -84,12 +132,12 @@ const styles = StyleSheet.create({
     addButton: {
         backgroundColor: Colors.meal,
         borderRadius: wp('3%'),
-        padding: wp('2.5%'),
+        padding: wp('1.5%'),
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
         bottom: hp('1.2%'),
-        right: wp('3.5%'),
+        right: wp('2%'),
     },
 });
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Animated, Text } from "react-native";
 import { useSelector } from "react-redux";
-import BusinessHeader from "../../components/business/BusinessHeader";
-import EventListFooter from "../../components/business/EventListFooter";
-import ReviewsComponent from "../../components/business/ReviewsComponent";
+import BusinessHeader from "../../components/businessEvents/BusinessHeader";
+import EventListFooter from "../../components/businessEvents/EventListFooter";
+import ReviewsComponent from "../../components/businessEvents/ReviewsComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import SkeletonComponent from "../../components/generals/SkeletonComponent";
 import api from "../../utils/Api";

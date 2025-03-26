@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import Colors from "../utils/Colors";
-import { useSelector } from "react-redux"; // Importar useSelector
+import { useSelector } from "react-redux";
 
 const InternetStatusBar = () => {
     const textsLeng = useSelector((state) => state.language.texts); 

@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./app/store/store";
-import StackApp from "./app/navigation/StackApp"; 
+import StackApp from "./app/navigation/StackApp";
 import { logIn } from "./app/features/authSlice";
 import { getValueFor } from "./app/utils/localStorage";
+import InternetStatusBar from "./app/components/InternetStatusBar";
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function AppContent() {
   return (
     <NavigationContainer>
       <StackApp />
+      <InternetStatusBar />
     </NavigationContainer>
   );
 }

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import Colors from "../utils/Colors";
+import { useSelector } from "react-redux"; // Importar useSelector
 
 const InternetStatusBar = () => {
+    const textsLeng = useSelector((state) => state.language.texts); 
     const [isConnected, setIsConnected] = useState(true);
     const [showReconnectMessage, setShowReconnectMessage] = useState(false);
     const fadeAnim = new Animated.Value(1);
@@ -37,17 +39,17 @@ const InternetStatusBar = () => {
         <>
             {!isConnected && (
                 <View style={[styles.container, { backgroundColor: Colors.primary }]}>
-                    <Text style={styles.text}>No tienes conexión a Internet</Text>
+                    <Text style={styles.text}>{textsLeng.InternetStatusBar.noConnection}</Text>
                 </View>
             )}
             {showReconnectMessage && (
                 <Animated.View
                     style={[
                         styles.container,
-                        { backgroundColor:Colors.accommodation, opacity: fadeAnim },
+                        { backgroundColor: Colors.accommodation, opacity: fadeAnim },
                     ]}
                 >
-                    <Text style={styles.text}>Recuperaste la conexión a Internet</Text>
+                    <Text style={styles.text}>{textsLeng.InternetStatusBar.reconnected}</Text>
                 </Animated.View>
             )}
         </>
@@ -57,7 +59,7 @@ const InternetStatusBar = () => {
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: 50, // 📌 Justo encima de la barra de navegación
+        bottom: 50, 
         width: "100%",
         paddingVertical: 10,
         alignItems: "center",

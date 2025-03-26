@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     skeletonWrapperReviews: {
         width: wp('90%'),
         height: hp('20%'),
+        borderRadius: wp('1.5%'),
         overflow: 'hidden',
         marginTop: hp('-2%'),
     },

@@ -102,10 +102,24 @@ const getEventsByBusiness = async (businessId) => {
   }
 };
 
+// Función para obtener reseñas por negocio (no requiere token)
+const getReviewsByBusiness = async (businessId) => {
+  try {
+    const response = await api.get(`/api/reviews/business/${businessId}`);
+    return response.data; 
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+};
+
 export default {
   signUp,
   signIn,
   getUser,
   getPublicBusinesses, 
   getEventsByBusiness,
+  getReviewsByBusiness,
 };

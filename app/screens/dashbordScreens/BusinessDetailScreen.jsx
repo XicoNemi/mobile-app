@@ -69,7 +69,18 @@ const BusinessDetailScreen = ({ route }) => {
                     </View>
                 )
             )}
-            <ReviewsComponent />
+            {loading ? (
+                <View style={styles.skeletonContainer}>
+                    <View style={styles.skeletonWrapperReviews}>
+                        <SkeletonComponent />
+                    </View>
+                    <View style={styles.skeletonWrapperReviews}>
+                        <SkeletonComponent />
+                    </View>
+                </View>
+            ) : (
+                <ReviewsComponent businessId={business.id} />
+            )}
         </Animated.ScrollView>
     );
 };
@@ -97,6 +108,12 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         marginTop: hp('-1%'),
         marginBottom: hp('1.6%'),
+    },
+    skeletonWrapperReviews: {
+        width: wp('90%'),
+        height: hp('20%'),
+        overflow: 'hidden',
+        marginTop: hp('-2%'),
     },
     noEventsContainer: {
         alignItems: 'center',

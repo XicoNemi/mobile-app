@@ -173,6 +173,10 @@ const LanguageProvider = {
     AddFavorites: {
       addToFavoritesMessage: "To add to favorites, you must log in.",
     },
+    InternetStatusBar: {
+      noConnection: "No Internet connection",
+      reconnected: "You have regained Internet connection",
+    },
   },
 
   // Textos en español
@@ -348,6 +352,10 @@ const LanguageProvider = {
     },
     AddFavorites: {
       addToFavoritesMessage: "Para añadir a favoritos, debes iniciar sesión.",
+    },
+    InternetStatusBar: {
+      noConnection: "No tienes conexión a Internet",
+      reconnected: "Recuperaste la conexión a Internet",
     },
   },
 };

@@ -10,6 +10,7 @@ import Colors from '../utils/Colors';
 import { useSelector } from 'react-redux';
 import CustomAlertComponent from '../components/generals/CustomAlertComponent';
 import { useNavigation } from '@react-navigation/native';
+import InternetStatusBar from '../components/InternetStatusBar'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ const BottomTabNavigator = () => {
 
     return (
         <>
+            <InternetStatusBar />
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {

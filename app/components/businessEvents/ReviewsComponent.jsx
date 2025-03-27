@@ -9,8 +9,9 @@ import CustomAlertComponent from "../generals/CustomAlertComponent";
 import { useNavigation } from "@react-navigation/native";
 import ReviewModal from "./ReviewModal";
 import AssignLenguaje from "../../lenguage/AssignLenguage";
+import api from "../../utils/Api";
 
-const ReviewsComponent = () => {
+const ReviewsComponent = ({ businessId }) => {
     const dispatch = useDispatch();
     const textsLeng = useSelector((state) => state.language.texts);
     const [expanded, setExpanded] = useState(true);
@@ -18,6 +19,8 @@ const ReviewsComponent = () => {
     const [visibleReviews, setVisibleReviews] = useState(2);
     const [alertVisible, setAlertVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const [loadingReviews, setLoadingReviews] = useState(true);
     const userName = useSelector((state) => state.auth.name);
     const navigation = useNavigation();
 
@@ -25,15 +28,21 @@ const ReviewsComponent = () => {
         AssignLenguaje(dispatch);
     }, [dispatch]);
 
-    const { ReviewsComponent: texts } = textsLeng;
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await api.getReviewsByBusiness(businessId);
+                setReviews(response);
+            } catch (error) {
+            } finally {
+                setLoadingReviews(false);
+            }
+        };
 
-    const reviews = [
-        { rating: 5, text: "¡Excelente servicio!, el lugar es increíble y el personal muy amable. Definitivamente volveré." },
-        { rating: 4, text: "Muy bueno, pero puede mejorar en algunos aspectos. La comida estaba deliciosa." },
-        { rating: 3, text: "Aceptable, pero esperaba más. El ambiente es agradable, pero el servicio fue lento." },
-        { rating: 2, text: "No me gustó, no lo recomendaría. La limpieza del lugar deja mucho que desear." },
-        { rating: 1, text: "Pésimo, no vuelvo más. La atención al cliente fue terrible y la comida estaba fría." },
-    ];
+        fetchReviews();
+    }, [businessId]);
+
+    const { ReviewsComponent: texts } = textsLeng;
 
     const toggleAccordion = () => setExpanded(!expanded);
 
@@ -76,30 +85,41 @@ const ReviewsComponent = () => {
 
             {expanded && (
                 <View style={styles.reviewsContainer}>
-                    {reviews.slice(0, visibleReviews).map((review, index) => (
-                        <View key={index} style={styles.reviewItem}>
-                            <View style={styles.reviewRatingContainer}>
-                                {[...Array(5)].map((_, starIndex) => (
-                                    <Ionicons
-                                        key={starIndex}
-                                        name={starIndex < review.rating ? "star" : "star-outline"}
-                                        size={SizeConstants.iconsCH}
-                                        color={Colors.star}
-                                    />
-                                ))}
-                            </View>
-                            <Text>{review.text}</Text>
+                    {loadingReviews ? (
+                        <Text>{texts.loadingReviews}</Text>
+                    ) : reviews.length > 0 ? (
+                        <View style={styles.reviewsContainer}>
+                            {reviews.slice(0, visibleReviews).map((review, index) => (
+                                <View key={index} style={styles.reviewItem}>
+                                    <View style={styles.reviewRatingContainer}>
+                                        {[...Array(5)].map((_, starIndex) => (
+                                            <Ionicons
+                                                key={starIndex}
+                                                name={starIndex < Math.round(review.rating) ? "star" : "star-outline"}
+                                                size={SizeConstants.iconsCH}
+                                                color={Colors.star}
+                                            />
+                                        ))}
+                                    </View>
+                                    <Text>{review.comment}</Text>
+                                </View>
+                            ))}
+                            {visibleReviews < reviews.length && (
+                                <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
+                                    <Text style={styles.viewMoreText}>{texts.viewMoreReviews}</Text>
+                                </TouchableOpacity>
+                            )}
+                            {visibleReviews > 2 && (
+                                <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewLess}>
+                                    <Text style={styles.viewMoreText}>{texts.viewLessReviews}</Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
-                    ))}
-                    {visibleReviews < reviews.length && (
-                        <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
-                            <Text style={styles.viewMoreText}>{texts.viewMoreReviews}</Text>
-                        </TouchableOpacity>
-                    )}
-                    {visibleReviews > 2 && (
-                        <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewLess}>
-                            <Text style={styles.viewMoreText}>{texts.viewLessReviews}</Text>
-                        </TouchableOpacity>
+                    ) : (
+                        <View style={styles.noEventsContainer}>
+                            <Ionicons name="chatbubble-ellipses-outline" size={50} color={Colors.primary} />
+                            <Text style={styles.noEventsText}>{texts.noReviewsMessage}</Text>
+                        </View>
                     )}
                 </View>
             )}
@@ -189,6 +209,18 @@ const styles = StyleSheet.create({
         color: Colors.primary,
         fontSize: SizeConstants.texts,
         fontWeight: "bold",
+    },
+    noEventsContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: hp('1%'),
+        padding: wp('5%'),
+    },
+    noEventsText: {
+        fontSize: SizeConstants.texts,
+        color: Colors.primary,
+        textAlign: 'center',
+        marginTop: hp('1%'),
     },
 });
 

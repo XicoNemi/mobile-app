@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@mapbox/polyline": "^1.2.1",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/datetimepicker": "8.2.0",
     "@react-native-community/netinfo": "^11.4.1",
@@ -39,6 +40,7 @@
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-ionicons": "^4.6.5",
+    "react-native-maps": "^1.20.1",
     "react-native-modal": "^13.0.1",
     "react-native-reanimated": "3.16.7",
     "react-native-responsive-screen": "^1.4.2",

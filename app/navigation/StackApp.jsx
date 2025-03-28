@@ -16,6 +16,8 @@ import PasswordRecoveryScreen from "../screens/authScreens/PasswordRecoveryScree
 import BusinessDetailScreen from "../screens/dashbordScreens/BusinessDetailScreen";
 import VerificationSuccessScreen from "../screens/authScreens/VerificationSuccessScreen";
 import HomeScreen from "../screens/dashbordScreens/HomeScreen";
+import InfoRoute from "../screens/dashbordScreens/routes/InfoRoute";
+import MapNavigate from "../screens/dashbordScreens/routes/MapNavigate"
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +38,8 @@ const StackApp = () => {
                 <Stack.Screen name="ItineraryDetailScreen" component={ItineraryDetailScreen} />
                 <Stack.Screen name="CreateItinerariesScreen" component={CreateItinerariesScreen} />
                 <Stack.Screen name="RoutesScreen" component={RoutesScreen} />
+                <Stack.Screen name="InfoRoute" component={InfoRoute} />
+                <Stack.Screen name="MapNavigate" component={MapNavigate} />
                 <Stack.Screen name="AccommodationScreen" component={AccommodationScreen} />
                 <Stack.Screen name="GastronomyScreen" component={GastronomyScreen} />
                 <Stack.Screen name="EventsScreen" component={EventsScreen} />

@@ -117,7 +117,7 @@ const getReviewsByBusiness = async (businessId) => {
 
 const saveExpoToken = async (token) => {
   try {
-    const response = await api.post('/api/users/expo-token', { token });
+    const response = await api.post('/api/expo-token', { token });
     return response.data; // Retorna la respuesta de la API
   } catch (error) {
     const { message, status } = handleError(error);

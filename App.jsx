@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
@@ -47,9 +47,10 @@ function AppContent() {
                   });
                   console.log("🎉 Token de Expo Push generado correctamente:", token.data);
                   dispatch(setExpoToken(token.data)); // Guardar el token en el estado global
-                  const result = await Api.saveExpoToken(token.data); // Guardar el token en la API
+
+                  // Guardar el token en la API
+                  const result = await Api.saveExpoToken({ token: token.data });
                   console.log("✅ Token guardado en la API:", result);
-                  Api.saveExpoToken(token.data); // Guardar el token en el almacenamiento local
                 } else {
                   console.error("🚨 Permisos de notificación no otorgados");
                 }

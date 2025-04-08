@@ -115,6 +115,18 @@ const getReviewsByBusiness = async (businessId) => {
   }
 };
 
+const saveExpoToken = async (token) => {
+  try {
+    const response = await api.post('/api/users/expo-token', { token });
+    return response.data; // Retorna la respuesta de la API
+  } catch (error) {
+    const { message, status } = handleError(error);
+    const customError = new Error(message);
+    customError.status = status;
+    throw customError;
+  }
+}
+
 export default {
   signUp,
   signIn,
@@ -122,4 +134,5 @@ export default {
   getPublicBusinesses, 
   getEventsByBusiness,
   getReviewsByBusiness,
+  saveExpoToken,
 };

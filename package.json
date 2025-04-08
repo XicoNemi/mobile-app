@@ -28,6 +28,7 @@
     "expo-crypto": "14.0.2",
     "expo-linear-gradient": "~14.0.2",
     "expo-module-scripts": "^4.0.3",
+    "expo-notifications": "^0.29.14",
     "expo-secure-store": "~14.0.1",
     "expo-status-bar": "~2.0.1",
     "expo-system-ui": "~4.0.9",

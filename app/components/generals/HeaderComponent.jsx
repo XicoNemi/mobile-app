@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import SizeConstants from '../../utils/SizeConstants';
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 0.3,
     borderBottomColor: '#ddd',
-    marginTop: hp('3%'),
+    marginTop: Platform.OS === 'ios' ? hp('5%') : hp('3%'),
   },
   backButton: {
     marginRight: wp('5%'),

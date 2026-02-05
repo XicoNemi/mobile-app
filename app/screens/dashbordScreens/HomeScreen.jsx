@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Platform,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MenuDropdown from "../../components/menus/MenuDropdownComponent";
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     padding: wp('4%'),
-    marginTop: hp('3%'),
+    marginTop: Platform.OS === 'ios' ? hp('5%') : hp('3%'),
     marginBottom: hp('5%'),
   },
   topBar: {

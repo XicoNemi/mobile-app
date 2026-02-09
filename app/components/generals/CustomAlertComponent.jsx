@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Modal from "react-native-modal";
+import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Modal } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
@@ -23,53 +22,58 @@ const CustomAlertComponent = ({
 
   return (
     <Modal
-      isVisible={isVisible}
-      onBackdropPress={onClose}
-      onBackButtonPress={onClose}
-      animationIn="fadeIn"
-      animationOut="fadeOut"
-      backdropOpacity={0.4}
-      style={styles.modal}
+      visible={isVisible}
+      transparent={true}
+      animationType="fade"
+      onRequestClose={onClose}
     >
-      <View style={styles.alertContainer}>
-        <Ionicons
-          name={iconName}
-          size={SizeConstants.iconsXG}
-          color={iconColor}
-          style={styles.icon}
-        />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.message}>{message}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={buttonStyle}
-            onPress={() => {
-              primaryButton.onPress();
-              onClose();
-            }}
-          >
-            <Text style={styles.buttonText}>{primaryButton.text}</Text>
-          </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View style={styles.overlay}>
+          <TouchableWithoutFeedback onPress={() => {}}>
+            <View style={styles.alertContainer}>
+              <Ionicons
+                name={iconName}
+                size={SizeConstants.iconsXG}
+                color={iconColor}
+                style={styles.icon}
+              />
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.message}>{message}</Text>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={buttonStyle}
+                  onPress={() => {
+                    primaryButton.onPress();
+                    onClose();
+                  }}
+                >
+                  <Text style={styles.buttonText}>{primaryButton.text}</Text>
+                </TouchableOpacity>
 
-          {showCancelButton && (
-            <TouchableOpacity
-              style={styles.buttonCancel}
-              onPress={() => {
-                secondaryButton.onPress();
-                onClose();
-              }}
-            >
-              <Text style={styles.buttonText}>{secondaryButton.text}</Text>
-            </TouchableOpacity>
-          )}
+                {showCancelButton && (
+                  <TouchableOpacity
+                    style={styles.buttonCancel}
+                    onPress={() => {
+                      secondaryButton.onPress();
+                      onClose();
+                    }}
+                  >
+                    <Text style={styles.buttonText}>{secondaryButton.text}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  modal: {
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: SizeConstants.smallTexts, 
+    fontSize: SizeConstants.smallTexts,
   },
 });
 

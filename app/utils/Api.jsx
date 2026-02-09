@@ -1,4 +1,6 @@
 import axios from 'axios';
+import * as Crypto from 'expo-crypto';
+import LocalDatabase from './LocalDatabase';
 
 const api = axios.create({
   baseURL: 'https://available-karlotta-ethdev11-59ebf81c.koyeb.app',
@@ -10,19 +12,16 @@ const api = axios.create({
 // Función para manejar las respuestas de error
 const handleError = (error) => {
   if (error.response) {
-    // Error con la respuesta de la API, devolvemos el mensaje de error específico
     return {
       message: error.response.data.message || 'Algo salió mal',
-      status: error.response.status || 500, // Código de estado del error
+      status: error.response.status || 500,
     };
   } else if (error.request) {
-    // No se recibió respuesta, retornamos un mensaje de error genérico
     return {
       message: 'No se pudo conectar con el servidor',
-      status: 503, // Error de servicio no disponible
+      status: 503,
     };
   } else {
-    // Otro tipo de error, retornamos el mensaje del error
     return {
       message: error.message || 'Error desconocido',
       status: 500,
@@ -30,47 +29,60 @@ const handleError = (error) => {
   }
 };
 
-// Función para registrar un nuevo usuario
+// Función para registrar un nuevo usuario (local)
 const signUp = async (userData) => {
   try {
-    const response = await api.post('/api/auth/sign-up', userData);
-    console.log(response.data); // Si todo es correcto, mostrar la data (usuario creado) con fines de depuracion por el momento
-    return response.data; 
+    const newUser = await LocalDatabase.addUser(userData);
+    const { password, ...userWithoutPassword } = newUser;
+    return { message: 'Cuenta creada con éxito', user: userWithoutPassword };
   } catch (error) {
-    const { message, status } = handleError(error);
-    const customError = new Error(message);
-    customError.status = status;
+    const customError = new Error(error.message);
+    customError.status = 400;
     throw customError;
   }
 };
 
-// Función para iniciar sesión
+// Función para iniciar sesión (local)
 const signIn = async (email, password) => {
   try {
-    const response = await api.post('/api/auth/sign-in-common', { email, password });
-    const { user, token } = response.data;
-    return { user, token }; 
+    const user = await LocalDatabase.findUserByEmail(email);
+    if (!user) {
+      const err = new Error('Credenciales incorrectas');
+      err.status = 401;
+      throw err;
+    }
+    const hashedPassword = await LocalDatabase.hashPassword(password);
+    if (hashedPassword !== user.password) {
+      const err = new Error('Credenciales incorrectas');
+      err.status = 401;
+      throw err;
+    }
+    const token = Crypto.randomUUID();
+    const { password: _, ...userWithoutPassword } = user;
+    return { user: userWithoutPassword, token };
   } catch (error) {
-    const { message, status } = handleError(error);
-    const customError = new Error(message);
-    customError.status = status;
+    if (error.status) throw error;
+    const customError = new Error(error.message || 'Error desconocido');
+    customError.status = 500;
     throw customError;
   }
 };
 
-// Función para obtener un usuario por ID (requiere token)
+// Función para obtener un usuario por ID (local)
 const getUser = async (id, token) => {
   try {
-    const response = await api.get(`/api/users/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`, 
-      },
-    });
-    return response.data; 
+    const user = await LocalDatabase.getUserById(id);
+    if (!user) {
+      const err = new Error('Usuario no encontrado');
+      err.status = 404;
+      throw err;
+    }
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   } catch (error) {
-    const { message, status } = handleError(error);
-    const customError = new Error(message);
-    customError.status = status;
+    if (error.status) throw error;
+    const customError = new Error(error.message || 'Error desconocido');
+    customError.status = 500;
     throw customError;
   }
 };

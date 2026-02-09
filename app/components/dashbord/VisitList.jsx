@@ -19,7 +19,7 @@ const VisitList = ({ loading }) => {
         const data = await Api.getPublicBusinesses();
         setBusinesses(data);
       } catch (error) {
-        console.error(error);
+        console.warn("No se pudieron cargar negocios:", error.message);
       }
     };
     fetchBusinesses();

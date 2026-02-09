@@ -5,6 +5,7 @@ import { store } from "./app/store/store";
 import StackApp from "./app/navigation/StackApp";
 import { logIn } from "./app/features/authSlice";
 import { getValueFor } from "./app/utils/localStorage";
+import LocalDatabase from "./app/utils/LocalDatabase";
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -14,8 +15,14 @@ function AppContent() {
     try {
       const tokenUser = await getValueFor("tokenUser");
       if (tokenUser) {
-        const userData = JSON.parse(tokenUser);
-        dispatch(logIn(userData));
+        try {
+          const userData = JSON.parse(tokenUser);
+          dispatch(logIn(userData));
+        } catch (parseError) {
+          console.warn("Datos de sesión corruptos, limpiando...");
+          const { deleteValue } = await import("./app/utils/localStorage");
+          await deleteValue("tokenUser");
+        }
       }
     } catch (error) {
       console.error("Error al verificar el login:", error);
@@ -23,7 +30,7 @@ function AppContent() {
   };
 
   useEffect(() => {
-    verifyLogin();
+    LocalDatabase.initialize().then(() => verifyLogin());
   }, []);
 
   return (

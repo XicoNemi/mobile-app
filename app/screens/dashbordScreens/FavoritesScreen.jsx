@@ -7,10 +7,12 @@ import SkeletonComponent from '../../components/generals/SkeletonComponent';
 import NoDataComponent from '../../components/generals/NoDataComponent';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+const EMPTY_FAVORITES = [];
+
 const FavoritesScreen = () => {
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
-  const favoritesData = useSelector((state) => state.favorites?.items || []);
+  const favoritesData = useSelector((state) => state.favorites?.items) ?? EMPTY_FAVORITES;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

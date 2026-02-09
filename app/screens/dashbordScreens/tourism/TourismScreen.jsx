@@ -26,7 +26,7 @@ const TourismScreen = () => {
                 const data = await api.getPublicBusinesses('Turismo');
                 setTourismData(Array.isArray(data) ? data : []);
             } catch (error) {
-                console.error(error);
+                console.warn("No se pudieron cargar datos de turismo:", error.message);
                 setTourismData([]);
             } finally {
                 setTimeout(() => {

@@ -26,7 +26,7 @@ const GastronomyScreen = () => {
                 const data = await api.getPublicBusinesses('Gastronomia');
                 setGastronomyData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
             } catch (error) {
-                console.error(error);
+                console.warn("No se pudieron cargar datos de gastronomía:", error.message);
                 setGastronomyData([]); // Se agregó setGastronomyData([]) para evitar errores en la vista, esto ayuda a que si hay un error,
                 // se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
             } finally {

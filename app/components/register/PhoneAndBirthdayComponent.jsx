@@ -5,8 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Modal from "react-native-modal";
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
@@ -22,6 +24,7 @@ const PhoneAndBirthdayComponent = ({
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [tempDate, setTempDate] = useState(new Date());
   const [error, setError] = useState({});
   const [isValidTel, setIsValidTel] = useState(false);
   const [isValidBirthday, setIsValidBirthday] = useState(false);
@@ -114,15 +117,25 @@ const PhoneAndBirthdayComponent = ({
     }
   };
 
+  const applyDate = (selectedDate) => {
+    const formattedDate = `${selectedDate.getDate()}-${
+      selectedDate.getMonth() + 1
+    }-${selectedDate.getFullYear()}`;
+    const unixDate = Math.floor(selectedDate.getTime() / 1000);
+    setBirthday(unixDate);
+    verifyInput("birthday", formattedDate);
+  };
+
   const handleDateChange = (event, selectedDate) => {
-    setShowDatePicker(false);
-    if (selectedDate) {
-      const formattedDate = `${selectedDate.getDate()}-${
-        selectedDate.getMonth() + 1
-      }-${selectedDate.getFullYear()}`;
-      const unixDate = Math.floor(selectedDate.getTime() / 1000); // Convertir a UNIX
-      setBirthday(unixDate); // Guardar la fecha en formato UNIX
-      verifyInput("birthday", formattedDate);
+    if (Platform.OS === "android") {
+      setShowDatePicker(false);
+      if (event.type === "set" && selectedDate) {
+        applyDate(selectedDate);
+      }
+    } else {
+      if (selectedDate) {
+        setTempDate(selectedDate);
+      }
     }
   };
 
@@ -150,16 +163,21 @@ const PhoneAndBirthdayComponent = ({
         {/* Fecha de Nacimiento */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>{textsLeng.RegisterScreen.birthday}</Text>
-          <TouchableOpacity onPress={() => setShowDatePicker(true)}>
-            <TextInput
-              style={[
-                styles.input,
-                { borderColor: isValidBirthday ? Colors.routes : Colors.primary },
-              ]}
-              placeholderTextColor="#AAAAAA"
-              value={birthday ? new Date(birthday * 1000).toLocaleDateString() : ""} 
-              editable={false}
-            />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={[
+              styles.input,
+              styles.dateButton,
+              { borderColor: isValidBirthday ? Colors.routes : Colors.primary },
+            ]}
+            onPress={() => {
+              setTempDate(birthday ? new Date(birthday * 1000) : new Date());
+              setShowDatePicker(true);
+            }}
+          >
+            <Text style={birthday ? styles.dateText : styles.datePlaceholder}>
+              {birthday ? new Date(birthday * 1000).toLocaleDateString() : "dd/mm/aaaa"}
+            </Text>
           </TouchableOpacity>
           {error.birthday && (
             <Text style={styles.errorText}>{error.birthday}</Text>
@@ -167,13 +185,44 @@ const PhoneAndBirthdayComponent = ({
         </View>
       </View>
 
-      {showDatePicker && (
+      {showDatePicker && Platform.OS === "android" && (
         <DateTimePicker
-          value={new Date()}
+          value={tempDate}
           mode="date"
           display="calendar"
+          maximumDate={new Date()}
           onChange={handleDateChange}
         />
+      )}
+
+      {Platform.OS === "ios" && (
+        <Modal
+          isVisible={showDatePicker}
+          onBackdropPress={() => setShowDatePicker(false)}
+          style={styles.iosModal}
+        >
+          <View style={styles.iosModalContent}>
+            <View style={styles.iosModalHeader}>
+              <TouchableOpacity onPress={() => setShowDatePicker(false)}>
+                <Text style={styles.iosModalCancel}>Cancelar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                applyDate(tempDate);
+                setShowDatePicker(false);
+              }}>
+                <Text style={styles.iosModalDone}>Listo</Text>
+              </TouchableOpacity>
+            </View>
+            <DateTimePicker
+              value={tempDate}
+              mode="date"
+              display="spinner"
+              maximumDate={new Date()}
+              onChange={handleDateChange}
+              style={{ height: hp('25%') }}
+            />
+          </View>
+        </Modal>
       )}
     </View>
   );
@@ -209,6 +258,33 @@ const styles = StyleSheet.create({
     fontSize: SizeConstants.texts - 5,
     marginTop: hp('-1.25%'),
     marginBottom: hp('1.25%'),
+  },
+  iosModal: {
+    justifyContent: "flex-end",
+    margin: 0,
+  },
+  iosModalContent: {
+    backgroundColor: "white",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: hp('3%'),
+  },
+  iosModalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('1.5%'),
+    borderBottomWidth: 1,
+    borderBottomColor: "#E0E0E0",
+  },
+  iosModalCancel: {
+    fontSize: SizeConstants.texts,
+    color: "#999",
+  },
+  iosModalDone: {
+    fontSize: SizeConstants.texts,
+    color: Colors.primary,
+    fontWeight: "bold",
   },
 });
 

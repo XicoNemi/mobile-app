@@ -24,7 +24,7 @@ const EventsScreen = () => {
                 const data = await api.getPublicBusinesses('Eventos');
                 setEventsData(Array.isArray(data) ? data : []); // Se agregó el Array.isArray(data) ? data : [] para evitar errores en la vista, esto ayuda a que si data no es un array, se muestre un array vacío
             } catch (error) {
-                console.error(error);
+                console.warn("No se pudieron cargar eventos:", error.message);
                 setEventsData([]);// Se agregó setEventsData([]) para evitar errores en la vista, esto ayuda a que si
                 // hay un error, se muestre un array vacío y si no hay datos, se muestre un array vacío y si si hay datos, se muestren los datos
             } finally {

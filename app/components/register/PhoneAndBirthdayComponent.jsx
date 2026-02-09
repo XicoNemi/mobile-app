@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   StyleSheet,
   Platform,
+  Modal,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import Modal from "react-native-modal";
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
@@ -24,7 +25,9 @@ const PhoneAndBirthdayComponent = ({
   const dispatch = useDispatch();
   const textsLeng = useSelector((state) => state.language.texts);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [tempDate, setTempDate] = useState(new Date());
+  const [initialPickerDate, setInitialPickerDate] = useState(new Date());
+  const iosDateRef = useRef(new Date());
+  const [maxDate] = useState(() => new Date());
   const [error, setError] = useState({});
   const [isValidTel, setIsValidTel] = useState(false);
   const [isValidBirthday, setIsValidBirthday] = useState(false);
@@ -45,7 +48,7 @@ const PhoneAndBirthdayComponent = ({
 
     setError((prevError) => ({
       ...prevError,
-      [field]: "", // Elimina el mensaje de error al escribir
+      [field]: "",
     }));
 
     setTypingTimeout(
@@ -69,20 +72,11 @@ const PhoneAndBirthdayComponent = ({
         }));
         break;
       case "birthday":
-        let formattedDate = value;
-        const [day, month, year] = value.split("-");
-        if (day && day.length === 1) {
-          formattedDate = `0${day}-${month}-${year}`;
-        }
-        if (month && month.length === 1) {
-          formattedDate = `${day}-${"0" + month}-${year}`;
-        }
-
-        const datePattern = /^\d{2}-\d{2}-\d{4}$/; // Cambiado a \d{2} para día y mes
-        const isValidBirthday = formattedDate && datePattern.test(formattedDate);
+        const datePattern = /^\d{2}-\d{2}-\d{4}$/;
+        const isValidBirthday = value && datePattern.test(value);
 
         if (isValidBirthday) {
-          const [formattedDay, formattedMonth, formattedYear] = formattedDate
+          const [formattedDay, formattedMonth, formattedYear] = value
             .split("-")
             .map((num) => parseInt(num, 10));
           const enteredDate = new Date(
@@ -118,9 +112,9 @@ const PhoneAndBirthdayComponent = ({
   };
 
   const applyDate = (selectedDate) => {
-    const formattedDate = `${selectedDate.getDate()}-${
-      selectedDate.getMonth() + 1
-    }-${selectedDate.getFullYear()}`;
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const formattedDate = `${day}-${month}-${selectedDate.getFullYear()}`;
     const unixDate = Math.floor(selectedDate.getTime() / 1000);
     setBirthday(unixDate);
     verifyInput("birthday", formattedDate);
@@ -134,14 +128,20 @@ const PhoneAndBirthdayComponent = ({
       }
     } else {
       if (selectedDate) {
-        setTempDate(selectedDate);
+        iosDateRef.current = selectedDate;
       }
     }
   };
 
+  const openDatePicker = () => {
+    const date = birthday ? new Date(birthday * 1000) : new Date();
+    setInitialPickerDate(date);
+    iosDateRef.current = date;
+    setShowDatePicker(true);
+  };
+
   return (
     <View style={styles.container}>
-      {/* Contenedor para teléfono y fecha de nacimiento */}
       <View style={styles.rowContainer}>
         {/* Teléfono */}
         <View style={styles.inputContainer}>
@@ -170,10 +170,7 @@ const PhoneAndBirthdayComponent = ({
               styles.dateButton,
               { borderColor: isValidBirthday ? Colors.routes : Colors.primary },
             ]}
-            onPress={() => {
-              setTempDate(birthday ? new Date(birthday * 1000) : new Date());
-              setShowDatePicker(true);
-            }}
+            onPress={openDatePicker}
           >
             <Text style={birthday ? styles.dateText : styles.datePlaceholder}>
               {birthday ? new Date(birthday * 1000).toLocaleDateString() : "dd/mm/aaaa"}
@@ -187,37 +184,41 @@ const PhoneAndBirthdayComponent = ({
 
       {showDatePicker && Platform.OS === "android" && (
         <DateTimePicker
-          value={tempDate}
+          value={initialPickerDate}
           mode="date"
           display="calendar"
-          maximumDate={new Date()}
+          maximumDate={maxDate}
           onChange={handleDateChange}
         />
       )}
 
       {Platform.OS === "ios" && (
         <Modal
-          isVisible={showDatePicker}
-          onBackdropPress={() => setShowDatePicker(false)}
-          style={styles.iosModal}
+          visible={showDatePicker}
+          transparent={true}
+          animationType="slide"
         >
+          <TouchableWithoutFeedback onPress={() => setShowDatePicker(false)}>
+            <View style={styles.iosOverlay} />
+          </TouchableWithoutFeedback>
           <View style={styles.iosModalContent}>
             <View style={styles.iosModalHeader}>
               <TouchableOpacity onPress={() => setShowDatePicker(false)}>
                 <Text style={styles.iosModalCancel}>Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
-                applyDate(tempDate);
+                applyDate(iosDateRef.current);
                 setShowDatePicker(false);
               }}>
                 <Text style={styles.iosModalDone}>Listo</Text>
               </TouchableOpacity>
             </View>
             <DateTimePicker
-              value={tempDate}
+              value={initialPickerDate}
               mode="date"
               display="spinner"
-              maximumDate={new Date()}
+              maximumDate={maxDate}
+              locale="es"
               onChange={handleDateChange}
               style={{ height: hp('25%') }}
             />
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inputContainer: {
-    width: "48%", 
+    width: "48%",
   },
   label: {
     color: Colors.primary,
@@ -253,15 +254,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('2.5%'),
     marginBottom: hp('1.875%'),
   },
+  dateButton: {
+    justifyContent: "center",
+  },
+  dateText: {
+    fontSize: SizeConstants.texts,
+    color: "#000",
+  },
+  datePlaceholder: {
+    fontSize: SizeConstants.texts,
+    color: "#AAAAAA",
+  },
   errorText: {
     color: "red",
     fontSize: SizeConstants.texts - 5,
     marginTop: hp('-1.25%'),
     marginBottom: hp('1.25%'),
   },
-  iosModal: {
-    justifyContent: "flex-end",
-    margin: 0,
+  iosOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
   },
   iosModalContent: {
     backgroundColor: "white",

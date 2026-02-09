@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, Platform, TouchableOpacity, TouchableWithoutFeedback, Modal } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import Modal from "react-native-modal";
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../utils/Colors";
 import SizeConstants from "../../utils/SizeConstants";
@@ -142,10 +141,13 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                                 </Text>
                             </TouchableOpacity>
                             <Modal
-                                isVisible={showGenderModal}
-                                onBackdropPress={() => setShowGenderModal(false)}
-                                style={styles.iosModal}
+                                visible={showGenderModal}
+                                transparent={true}
+                                animationType="slide"
                             >
+                                <TouchableWithoutFeedback onPress={() => setShowGenderModal(false)}>
+                                    <View style={styles.iosOverlay} />
+                                </TouchableWithoutFeedback>
                                 <View style={styles.iosModalContent}>
                                     <View style={styles.iosModalHeader}>
                                         <TouchableOpacity onPress={() => setShowGenderModal(false)}>
@@ -253,9 +255,9 @@ const styles = StyleSheet.create({
     iosPickerPlaceholder: {
         color: "#AAAAAA",
     },
-    iosModal: {
-        justifyContent: "flex-end",
-        margin: 0,
+    iosOverlay: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.4)",
     },
     iosModalContent: {
         backgroundColor: "white",

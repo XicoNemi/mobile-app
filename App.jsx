@@ -1,4 +1,14 @@
 import React, { useEffect } from "react";
+import { BackHandler } from "react-native";
+
+// Polyfill: react-native-modal usa BackHandler.removeEventListener
+// que fue eliminado en React Native 0.75+
+if (!BackHandler.removeEventListener) {
+  BackHandler.removeEventListener = (eventName, handler) => {
+    // No-op: en RN moderno se usa .remove() del subscription
+  };
+}
+
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./app/store/store";

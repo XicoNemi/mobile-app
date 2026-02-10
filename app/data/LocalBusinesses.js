@@ -1,4 +1,37 @@
-const BASE_IMAGE_URL = "https://available-karlotta-ethdev11-59ebf81c.koyeb.app";
+// Imágenes locales de Gastronomía
+const imgLaTostadora1 = require("../../assets/FotosXicotepec/01LaTostadora.jpg");
+const imgLaTostadora2 = require("../../assets/FotosXicotepec/LaTostadora2.jpg");
+const imgLaTostadora3 = require("../../assets/FotosXicotepec/LaTostadora3.jpg");
+const imgCaffeteo1 = require("../../assets/FotosXicotepec/001Caffeteo.jpg");
+const imgCaffeteo2 = require("../../assets/FotosXicotepec/Caffeteo2.jpg");
+const imgCaffeteo3 = require("../../assets/FotosXicotepec/Caffeteo3.jpg");
+const imgColibri1 = require("../../assets/FotosXicotepec/01Colibry.jpg");
+const imgColibri2 = require("../../assets/FotosXicotepec/Colibry2.jpg");
+const imgColibri3 = require("../../assets/FotosXicotepec/Colibry3.jpg");
+const imgElBosco1 = require("../../assets/FotosXicotepec/001ElBosco.jpg");
+const imgElBosco2 = require("../../assets/FotosXicotepec/ElBosco2.jpg");
+const imgElBosco3 = require("../../assets/FotosXicotepec/ElBosco3.jpg");
+const imgPoema1 = require("../../assets/FotosXicotepec/01PemaR.jpg");
+const imgPoema2 = require("../../assets/FotosXicotepec/PoemaR2.jpg");
+const imgPoema3 = require("../../assets/FotosXicotepec/PoemaR3.jpg");
+
+// Imágenes locales de Hospedaje
+const imgXochitl1 = require("../../assets/FotosXicotepec/001HXochilt.jpg");
+const imgXochitl2 = require("../../assets/FotosXicotepec/HXochilt2.jpg");
+const imgXochitl3 = require("../../assets/FotosXicotepec/HXochilt3.jpg");
+const imgKhe1 = require("../../assets/FotosXicotepec/01HKhe.jpg");
+const imgKhe2 = require("../../assets/FotosXicotepec/HKhe2.jpg");
+const imgKhe3 = require("../../assets/FotosXicotepec/HKhe3.jpg");
+const imgCasablanca1 = require("../../assets/FotosXicotepec/01HCasaBlanca.jpg");
+const imgCasablanca2 = require("../../assets/FotosXicotepec/HCasaBlanca2.jpg");
+const imgCasablanca3 = require("../../assets/FotosXicotepec/HCasaBlanca3.jpg");
+
+// Imágenes locales adicionales de Gastronomía
+const imgCreppycaff = require("../../assets/FotosXicotepec/cafeteriaCreppycaff.webp");
+const imgAzotea = require("../../assets/FotosXicotepec/Azotea116Gonri.webp");
+
+// URL base para imágenes remotas (hoteles sin foto local)
+const GH = "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec";
 
 const gastronomyBusinesses = [
   {
@@ -6,7 +39,7 @@ const gastronomyBusinesses = [
     slug: "la-tostadora-cafe",
     name: "La Tostadora Caf\u00e9",
     description: "Desde 1979, somos expertos en caf\u00e9 y en hacer que cada visita se sienta como un abrazo al alma. Nuestra comida es deliciosa, casera y preparada con los mejores ingredientes.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/01LaTostadora.jpg`,
+    url_image: imgLaTostadora1,
     category: "Gastronom\u00eda",
     address: "Avenida Zaragoza #168, Col Centro. Xicotepec de Ju\u00e1rez, Puebla. C.P.73080",
     tel: "7641219984",
@@ -26,18 +59,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Facebook: La Tostadora XICO", "Instagram: @latostadoraxico", "TikTok: @latostadoraxico"],
     ambiente: ["Familiar", "Acogedor", "Para trabajar", "Pet friendly"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/01LaTostadora.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/LaTostadora2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/LaTostadora3.jpg`,
-    ],
+    galeria: [imgLaTostadora1, imgLaTostadora2, imgLaTostadora3],
   },
   {
     id: 2,
     slug: "caffeteo",
     name: "Caffeteo",
     description: "Brindamos un servicio de calidad en cada uno de nuestros productos. Servicio al mostrador con caf\u00e9 de la regi\u00f3n, orgullo Xicotepequense, sin duda uno de los mejores caf\u00e9s del pa\u00eds.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/001Caffeteo.jpg`,
+    url_image: imgCaffeteo1,
     category: "Gastronom\u00eda",
     address: "Calle Hidalgo #1, Colonia Centro, C.P. 73080 Xicotepec de Juarez, Puebla",
     tel: "7641321656",
@@ -57,18 +86,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Facebook: Caffeteo", "Instagram: @caffeteo_xico"],
     ambiente: ["Casual", "Para amigos", "Familiar", "Para trabajar"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/001Caffeteo.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Caffeteo2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Caffeteo3.jpg`,
-    ],
+    galeria: [imgCaffeteo1, imgCaffeteo2, imgCaffeteo3],
   },
   {
     id: 5,
     slug: "colibri-la-casa-de-piedra",
     name: "Colibr\u00ed La Casa de Piedra",
     description: "Restaurante de autor en Xicotepec. Creemos en el poder de compartir y celebrar lo que crece cerca. Nuestro men\u00fa va del huerto a tu mesa, con ingredientes locales como quesos artesanales y flores comestibles.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/01Colibry.jpg`,
+    url_image: imgColibri1,
     category: "Gastronom\u00eda",
     address: "17 de junio norte 111 col centro. Xicotepec de Ju\u00e1rez, Puebla. 73080",
     tel: "7717739832",
@@ -88,18 +113,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Instagram: @colibrilacasadepiedra", "Facebook: Colibr\u00ed La Casa de Piedra"],
     ambiente: ["Rom\u00e1ntico", "Acogedor", "Elegante", "Para trabajar"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/01Colibry.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Colibry2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Colibry3.jpg`,
-    ],
+    galeria: [imgColibri1, imgColibri2, imgColibri3],
   },
   {
     id: 1,
     slug: "el-bosco-restaurant-cafe",
     name: "El Bosco Restaurant Caf\u00e9",
     description: "Empresa dedicada a la elaboraci\u00f3n de Alimentos T\u00edpicos de Xicotepec, donde podr\u00e1s encontrar una amplia variedad de sabores con Historias de Xicotepec: su Caf\u00e9, su Cultura, su Gente y sus Tradiciones.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/001ElBosco.jpg`,
+    url_image: imgElBosco1,
     category: "Gastronom\u00eda",
     address: "Plaza de la constituci\u00f3n #106, Centro Xicotepec, 73080",
     tel: "7761398490",
@@ -119,18 +140,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Facebook: El Bosco Restaurant Caf\u00e9", "Instagram: @restaurante_el_bosco"],
     ambiente: ["Familiar", "Acogedor", "Tradicional"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/001ElBosco.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/ElBosco2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/ElBosco3.jpg`,
-    ],
+    galeria: [imgElBosco1, imgElBosco2, imgElBosco3],
   },
   {
     id: 8,
     slug: "poema-meson-xicotepec",
     name: "Poema Mes\u00f3n Xicotepec",
     description: "Ubicado en un espacio hist\u00f3rico lleno de encanto, ofrece una experiencia \u00fanica para los amantes de la buena comida, el vino y la m\u00fasica. Men\u00fa inspirado en la tradici\u00f3n culinaria espa\u00f1ola con tapas y platillos emblem\u00e1ticos.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/01PemaR.jpg`,
+    url_image: imgPoema1,
     category: "Gastronom\u00eda",
     address: "Hidalgo 107 Col. Centro de Xicotepec, Xicotepec de Ju\u00e1rez, Puebla CP 73080",
     tel: "5543595714",
@@ -150,18 +167,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Instagram: @poema_meson_xicotepec", "Facebook: Poema Mes\u00f3n"],
     ambiente: ["Rom\u00e1ntico", "Elegante", "M\u00fasica en vivo", "Para parejas"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/01PemaR.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/PoemaR2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/PoemaR3.jpg`,
-    ],
+    galeria: [imgPoema1, imgPoema2, imgPoema3],
   },
   {
     id: 14,
     slug: "cafeteria-creppycaff",
     name: "Cafeter\u00eda Creppycaff",
     description: "Terraza y cafeter\u00eda \"Un lugar cerca del cielo\". Lugar donde pasar\u00e1s momentos muy relajantes con una bella vista panor\u00e1mica. Desayunos tradicionales, caf\u00e9, postres y bebidas. Pet friendly con Wi-fi y m\u00fasica en vivo.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/01Creppycaff.jpg`,
+    url_image: imgCreppycaff,
     category: "Gastronom\u00eda",
     address: "Calle ni\u00f1os h\u00e9roes n\u00famero 10 colonia el tabacal",
     tel: "7761980794",
@@ -181,14 +194,14 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Facebook: Creppycaff", "Instagram: @creppy_caff"],
     ambiente: ["Rom\u00e1ntico", "Con vista panor\u00e1mica", "Pet friendly", "M\u00fasica en vivo"],
-    galeria: [],
+    galeria: [imgCreppycaff],
   },
   {
     id: 9,
     slug: "azotea-116",
     name: "Azotea 116 Gonri",
     description: "Terraza con una vista inigualable del centro de Xicotepec, rodeada por el majestuoso paisaje de cerros y atardeceres. Espacio abierto, acogedor y lleno de encanto, perfecto para disfrutar una tarde tranquila.",
-    url_image: `${BASE_IMAGE_URL}/FotosXicotepec/001Azotea.jpg`,
+    url_image: imgAzotea,
     category: "Gastronom\u00eda",
     address: "Plaza de la Constituci\u00f3n No. 116 Planta Alta, Col. Centro, Xicotepec de Ju\u00e1rez",
     tel: "2226676142",
@@ -208,11 +221,7 @@ const gastronomyBusinesses = [
     metodos_pago: ["Efectivo", "Tarjeta de cr\u00e9dito", "Tarjeta de d\u00e9bito"],
     redes_sociales: ["Instagram: @azotea_116", "Facebook: Azotea 116"],
     ambiente: ["Rom\u00e1ntico", "Con vista panor\u00e1mica", "Pet friendly", "Para eventos"],
-    galeria: [
-      `${BASE_IMAGE_URL}/FotosXicotepec/001Azotea.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Azotea2.jpg`,
-      `${BASE_IMAGE_URL}/FotosXicotepec/Azotea3.jpg`,
-    ],
+    galeria: [imgAzotea],
   },
 ];
 
@@ -222,7 +231,7 @@ const accommodationBusinesses = [
     slug: "hotel-bugambilias",
     name: "Hotel Bugambilias",
     description: "Brindamos servicios b\u00e1sicos de hospedaje: TV, agua caliente y WiFi. Habitaciones limpias y sanitizadas. Ubicado cerca del centro y la terminal de autobuses con costo accesible.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001Hotel%20Bugambilias.jpg",
+    url_image: `${GH}/001Hotel%20Bugambilias.jpg`,
     category: "Hotel Econ\u00f3mico",
     address: "Guerrero #130, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7647643681",
@@ -237,8 +246,8 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Facebook: hotelbugambilias", "Instagram: hotelbugambilias"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001Hotel%20Bugambilias.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HotelBugambilias2.jpg",
+      `${GH}/001Hotel%20Bugambilias.jpg`,
+      `${GH}/HotelBugambilias2.jpg`,
     ],
   },
   {
@@ -246,7 +255,7 @@ const accommodationBusinesses = [
     slug: "xochitl",
     name: "Xochitl",
     description: "Espacio para conectar con la naturaleza y tu yo interior. La mejor vista de Xicotepec y la regi\u00f3n. Recorridos de senderismo con gu\u00edas profesionales certificados.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001HXochilt.jpg",
+    url_image: imgXochitl1,
     category: "Hotel Vista Panor\u00e1mica",
     address: "Estacionamiento de la cruz celestial, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7641110388",
@@ -259,18 +268,14 @@ const accommodationBusinesses = [
     checkOut: "13:00",
     tipos_habitacion: ["Sencilla", "Doble"],
     metodos_pago: ["Efectivo", "Transferencia"],
-    galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001HXochilt.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HXochilt2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HXochilt3.jpg",
-    ],
+    galeria: [imgXochitl1, imgXochitl2, imgXochitl3],
   },
   {
     id: 103,
     slug: "hotel-villa-de-cortez",
     name: "Hotel Villa de Cortez",
     description: "M\u00e1s de 3 d\u00e9cadas ofreciendo calidez y confort. Contamos con Restaurant Aranjuez con vista panor\u00e1mica y capacidad de 100 comensales con comida t\u00edpica regional.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/hotelvilladecortez2.webp",
+    url_image: `${GH}/hotelvilladecortez2.webp`,
     category: "Hotel Tradicional",
     address: "Miguel Negrete No.105 Col. Centro, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7647641399",
@@ -285,9 +290,9 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria"],
     redes_sociales: ["Facebook: Hotel Villa de Cortez"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/hotelvilladecortez2.webp",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/hotelvilladecortez3.webp",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001hotelvilladecortez.jpg",
+      `${GH}/hotelvilladecortez2.webp`,
+      `${GH}/hotelvilladecortez3.webp`,
+      `${GH}/001hotelvilladecortez.jpg`,
     ],
   },
   {
@@ -295,7 +300,7 @@ const accommodationBusinesses = [
     slug: "khe-xicotepec",
     name: "Kh\u00e9 Xicotepec",
     description: "Alojamiento en el centro de Xicotepec con vista a la Sierra y al parque central desde balcones. Edificio de casi 100 a\u00f1os respetuosamente remodelado para conservar su esencia e historia.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/01HKhe.jpg",
+    url_image: imgKhe1,
     category: "Airbnb Boutique",
     address: "Plaza de la Constituci\u00f3n 120 Altos 2, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7641099229",
@@ -309,18 +314,14 @@ const accommodationBusinesses = [
     tipos_habitacion: ["Doble", "Suite", "Con ba\u00f1o compartido", "Con ba\u00f1o privado"],
     metodos_pago: ["Efectivo", "Transferencia", "Airbnb"],
     redes_sociales: ["Instagram: @khe.xicotepec"],
-    galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/01HKhe.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HKhe2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HKhe3.jpg",
-    ],
+    galeria: [imgKhe1, imgKhe2, imgKhe3],
   },
   {
     id: 105,
     slug: "casa-emilia-hotel-boutique",
     name: "Casa Emilia Hotel Boutique",
     description: "Casona antigua de m\u00e1s de 70 a\u00f1os en el coraz\u00f3n cafetalero de Xicotepec, transformada en un hotel con alma. Conserva su imponente estructura de piedra original.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HcasaEBou1.jpg",
+    url_image: `${GH}/HcasaEBou1.jpg`,
     category: "Hotel Boutique Hist\u00f3rico",
     address: "5 de mayo #141 col centro, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7646893176",
@@ -335,8 +336,8 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Instagram: @casaemiliaboutique"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HcasaEBou1.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HcasaEBou2.jpg",
+      `${GH}/HcasaEBou1.jpg`,
+      `${GH}/HcasaEBou2.jpg`,
     ],
   },
   {
@@ -344,7 +345,7 @@ const accommodationBusinesses = [
     slug: "hotel-casablanca-xicotepec",
     name: "Hotel Casablanca Xicotepec",
     description: "Confort, Sabor y Ubicaci\u00f3n Ideal. Habitaciones amplias y c\u00f3modas, alberca techada y climatizada, aut\u00e9ntica cocina mexicana contempor\u00e1nea y estacionamiento privado.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/01HCasaBlanca.jpg",
+    url_image: imgCasablanca1,
     category: "Hotel Premium",
     address: "Av. Ju\u00e1rez sur 264, Col. La Rivera, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7647641709",
@@ -358,18 +359,14 @@ const accommodationBusinesses = [
     tipos_habitacion: ["Sencilla", "Doble", "Triple", "Matrimonial", "Familiar"],
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Facebook: Hotel Casablanca Xicotepec"],
-    galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/01HCasaBlanca.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HCasaBlanca2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HCasaBlanca3.jpg",
-    ],
+    galeria: [imgCasablanca1, imgCasablanca2, imgCasablanca3],
   },
   {
     id: 107,
     slug: "glamping-xicotepec",
     name: "Glamping Xicotepec",
     description: "Vive la experiencia Glamping y conecta con la naturaleza a tan solo 10 minutos del centro. Incluye desayuno, fogatero nocturno con bombones y cine al aire libre.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001GLAMPIN.jpg",
+    url_image: `${GH}/001GLAMPIN.jpg`,
     category: "Experiencia Premium en Naturaleza",
     address: "Loma alta col los perales, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7767689505",
@@ -384,9 +381,9 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Facebook: Glamping Xicotepec", "Instagram: Glamping Xicotepec", "TikTok: Glamping Xicotepec"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001GLAMPIN.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/GLAMPIN2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/GLAMPIN3.jpg",
+      `${GH}/001GLAMPIN.jpg`,
+      `${GH}/GLAMPIN2.jpg`,
+      `${GH}/GLAMPIN3.jpg`,
     ],
   },
   {
@@ -394,7 +391,7 @@ const accommodationBusinesses = [
     slug: "aroma-xicotepec-cabanas-camping",
     name: "Aroma Xicotepec Caba\u00f1as y Camping",
     description: "Caba\u00f1as ubicadas dentro de una zona cafetalera y un beneficio de caf\u00e9, a 3 minutos del centro. Lugar cerrado y seguro con acceso a hamacas, asadores y vista al lago privado.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001Aroma.jpg",
+    url_image: `${GH}/001Aroma.jpg`,
     category: "Caba\u00f1as Premium en Cafetales",
     address: "Camino a San Antonio 106, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "2221257659",
@@ -409,9 +406,9 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Facebook: Aroma Xicotepec"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001Aroma.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/Aroma2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/Aroma3.jpg",
+      `${GH}/001Aroma.jpg`,
+      `${GH}/Aroma2.jpg`,
+      `${GH}/Aroma3.jpg`,
     ],
   },
   {
@@ -419,7 +416,7 @@ const accommodationBusinesses = [
     slug: "casa-don-laureano",
     name: "Casa Don Laureano",
     description: "Hotel creado para brindar hospitalidad, descanso y calidez en el Pueblo M\u00e1gico de Xicotepec. 15 habitaciones confortables en el coraz\u00f3n del centro, ideal para explorar caminando.",
-    url_image: "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001HotelDonLau.jpg",
+    url_image: `${GH}/001HotelDonLau.jpg`,
     category: "Hotel Boutique Centro",
     address: "Plaza de la Constituci\u00f3n No. 116, Colonia Centro, Xicotepec de Ju\u00e1rez, Puebla",
     tel: "7641000548",
@@ -434,9 +431,9 @@ const accommodationBusinesses = [
     metodos_pago: ["Efectivo", "Transferencia", "Tarjeta bancaria", "Dep\u00f3sito"],
     redes_sociales: ["Instagram: @hotelcasadonlaureano"],
     galeria: [
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/001HotelDonLau.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HotelDonLau2.jpg",
-      "https://raw.githubusercontent.com/Nefta11/AdventyTravels-web/refs/heads/main/src/assets/FotosXicotepec/HotelDonLau3.jpg",
+      `${GH}/001HotelDonLau.jpg`,
+      `${GH}/HotelDonLau2.jpg`,
+      `${GH}/HotelDonLau3.jpg`,
     ],
   },
 ];

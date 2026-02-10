@@ -26,7 +26,7 @@ const GastronomyCardComponent = ({ name, description, url_image, averageRating, 
     return (
         <>
             <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
-                <Image source={{ uri: url_image }} style={styles.image} />
+                <Image source={typeof url_image === 'string' ? { uri: url_image } : url_image} style={styles.image} />
                 <View style={styles.ratingContainer}>
                     {[...Array(5)].map((_, index) => {
                         const isHalfStar = averageRating - index === 0.5;

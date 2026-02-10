@@ -40,7 +40,7 @@ const BusinessHeader = ({ business, scrollY }) => {
     return (
         <View>
             <Animated.View style={[styles.imageContainer, { height: imageHeight }]}>
-                <Animated.Image source={{ uri: business.url_image }} style={[styles.image, { opacity: imageOpacity }]} />
+                <Animated.Image source={typeof business.url_image === 'string' ? { uri: business.url_image } : business.url_image} style={[styles.image, { opacity: imageOpacity }]} />
                 <View style={styles.imageOverlay} />
                 <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back" size={24} color="#000" />

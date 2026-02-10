@@ -145,31 +145,34 @@ const NameGenderComponent = ({ name, setName, lastName, setLastName, gender, set
                                 transparent={true}
                                 animationType="slide"
                             >
-                                <TouchableWithoutFeedback onPress={() => setShowGenderModal(false)}>
-                                    <View style={styles.iosOverlay} />
-                                </TouchableWithoutFeedback>
-                                <View style={styles.iosModalContent}>
-                                    <View style={styles.iosModalHeader}>
-                                        <TouchableOpacity onPress={() => setShowGenderModal(false)}>
-                                            <Text style={styles.iosModalCancel}>Cancelar</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => {
-                                            setGender(tempGender);
-                                            setHasInteractedWithGender(true);
-                                            verifyInput("gender", tempGender);
-                                            setShowGenderModal(false);
-                                        }}>
-                                            <Text style={styles.iosModalDone}>Listo</Text>
-                                        </TouchableOpacity>
+                                <View style={styles.iosModalWrapper}>
+                                    <TouchableWithoutFeedback onPress={() => setShowGenderModal(false)}>
+                                        <View style={styles.iosOverlay} />
+                                    </TouchableWithoutFeedback>
+                                    <View style={styles.iosModalContent}>
+                                        <View style={styles.iosModalHeader}>
+                                            <TouchableOpacity onPress={() => setShowGenderModal(false)}>
+                                                <Text style={styles.iosModalCancel}>Cancelar</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => {
+                                                setGender(tempGender);
+                                                setHasInteractedWithGender(true);
+                                                verifyInput("gender", tempGender);
+                                                setShowGenderModal(false);
+                                            }}>
+                                                <Text style={styles.iosModalDone}>Listo</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <Picker
+                                            selectedValue={tempGender}
+                                            onValueChange={(itemValue) => setTempGender(itemValue)}
+                                            itemStyle={{ color: "#000", fontSize: 18, height: 216 }}
+                                        >
+                                            {GENDER_OPTIONS.map((opt) => (
+                                                <Picker.Item key={opt.value} label={opt.label} value={opt.value} color="#000" />
+                                            ))}
+                                        </Picker>
                                     </View>
-                                    <Picker
-                                        selectedValue={tempGender}
-                                        onValueChange={(itemValue) => setTempGender(itemValue)}
-                                    >
-                                        {GENDER_OPTIONS.map((opt) => (
-                                            <Picker.Item key={opt.value} label={opt.label} value={opt.value} />
-                                        ))}
-                                    </Picker>
                                 </View>
                             </Modal>
                         </>
@@ -250,13 +253,17 @@ const styles = StyleSheet.create({
     },
     iosPickerText: {
         fontSize: SizeConstants.texts,
-        color: Colors.primary,
+        color: "#000",
     },
     iosPickerPlaceholder: {
         color: "#AAAAAA",
     },
-    iosOverlay: {
+    iosModalWrapper: {
         flex: 1,
+        justifyContent: "flex-end",
+    },
+    iosOverlay: {
+        ...StyleSheet.absoluteFillObject,
         backgroundColor: "rgba(0,0,0,0.4)",
     },
     iosModalContent: {

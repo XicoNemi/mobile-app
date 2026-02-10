@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as Crypto from 'expo-crypto';
 import LocalDatabase from './LocalDatabase';
+import { getLocalBusinesses } from '../data/LocalBusinesses';
 
 const api = axios.create({
   baseURL: 'https://available-karlotta-ethdev11-59ebf81c.koyeb.app',
@@ -87,12 +88,18 @@ const getUser = async (id, token) => {
   }
 };
 
-// Función para obtener la lista de negocios públicos (no requiere token)
+// Función para obtener la lista de negocios públicos
 const getPublicBusinesses = async (category) => {
+  // Primero intentar datos locales
+  const localData = getLocalBusinesses(category);
+  if (localData.length > 0) {
+    return localData;
+  }
+  // Si no hay datos locales, intentar el servidor remoto
   try {
-    const url = category ? `/api/businesses/public?category=${category}` : '/api/businesses/public'; // URL con o sin categoría, si si se especifica la categoría se filtran los negocios por ella, si no se obtienen todos los negocios públicos existentes
+    const url = category ? `/api/businesses/public?category=${category}` : '/api/businesses/public';
     const response = await api.get(url);
-    return response.data; 
+    return response.data;
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);

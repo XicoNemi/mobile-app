@@ -16,14 +16,19 @@ export const authSlice = createSlice({
   initialState: initState,
   reducers: {
     logIn: (state, action) => {
-      // Actualiza el estado con los valores pasados
       const newState = { ...state, ...action.payload, session: true };
-      saveValue("token", newState.token); // Guarda el token en el almacenamiento seguro
+      // Guarda los datos completos del usuario en almacenamiento seguro
+      saveValue("tokenUser", JSON.stringify({
+        id: newState.id,
+        name: newState.name,
+        token: newState.token,
+        type: newState.type,
+      }));
       return newState;
     },
     logOut: () => {
-      deleteValue("token"); // Elimina el token del almacenamiento seguro
-      return initState; // Restaura el estado inicial
+      deleteValue("tokenUser");
+      return initState;
     },
   },
 });

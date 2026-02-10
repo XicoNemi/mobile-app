@@ -486,6 +486,68 @@ const localReviews = {
     { rating: 4, comment: "La González Special está muy buena. La terraza tiene una vista increíble al centro de Xicotepec y los cerros." },
     { rating: 5, comment: "La tarta de maracuyá es lo mejor que he probado. El ambiente es súper acogedor y pet friendly." },
   ],
+  // Hotel Bugambilias
+  101: [
+    { rating: 4, comment: "Muy buena opción económica. Las habitaciones están limpias y el WiFi funciona bien. Cerca del centro y la terminal." },
+    { rating: 3, comment: "Básico pero cumple. El desayuno incluido es un plus. No tiene estacionamiento, eso hay que tenerlo en cuenta." },
+    { rating: 4, comment: "Relación calidad-precio excelente. El personal es muy amable y el recorrido por los senderos en los perales es bonito." },
+  ],
+  // Xochitl
+  102: [
+    { rating: 5, comment: "La vista panorámica es simplemente espectacular. Despertar con ese paisaje no tiene precio. Muy recomendado." },
+    { rating: 5, comment: "Hicimos un recorrido de senderismo con los guías certificados y fue una experiencia increíble. El hotel es muy tranquilo." },
+    { rating: 4, comment: "Perfecto para desconectarte de todo. Pet friendly y con un restaurante interno muy bueno. Volveremos sin duda." },
+    { rating: 5, comment: "El mejor lugar para conectar con la naturaleza en Xicotepec. Las habitaciones con vista panorámica son hermosas." },
+  ],
+  // Hotel Villa de Cortez
+  103: [
+    { rating: 4, comment: "Más de 30 años de experiencia se notan. El Restaurant Aranjuez tiene una vista panorámica increíble y la comida típica es deliciosa." },
+    { rating: 4, comment: "Habitaciones amplias y cómodas. Tiene estacionamiento y está en el centro, perfecto para recorrer Xicotepec a pie." },
+    { rating: 5, comment: "Excelente hotel con mucha historia. La atención es de primera y los paquetes para grupos son muy convenientes." },
+    { rating: 4, comment: "El servicio a la habitación es muy bueno. Las instalaciones están bien cuidadas. Recomendado para familias." },
+  ],
+  // Khé Xicotepec
+  104: [
+    { rating: 5, comment: "El edificio de casi 100 años es una joya. Los balcones con vista al parque central y la Sierra son impresionantes." },
+    { rating: 5, comment: "El coffee bar 24/7 es un detalle increíble. Desde la terraza se ve la Virgen Monumental y la Cruz Celestial. Mágico." },
+    { rating: 4, comment: "Ubicación inmejorable en el centro. Las habitaciones tienen mucho encanto y conservan la esencia histórica del edificio." },
+    { rating: 5, comment: "Una experiencia única. Se siente como viajar en el tiempo pero con todas las comodidades modernas. Muy recomendado." },
+  ],
+  // Casa Emilia Hotel Boutique
+  105: [
+    { rating: 5, comment: "La casona de piedra es impresionante. Cada rincón tiene historia y el aroma a café recién tostado por las mañanas es un sueño." },
+    { rating: 5, comment: "El mejor hotel boutique de Xicotepec. La estructura de piedra original le da un encanto único. Pet friendly y con restaurante." },
+    { rating: 5, comment: "No es un hotel convencional, es una experiencia. La reconstrucción respeta la historia y se siente la calidez en cada detalle." },
+    { rating: 4, comment: "Hermoso lugar con mucha personalidad. Las habitaciones son cómodas y el personal muy atento. Vale cada peso." },
+  ],
+  // Hotel Casablanca Xicotepec
+  106: [
+    { rating: 5, comment: "La alberca techada y climatizada es perfecta. Las habitaciones son amplias y el restaurante de cocina mexicana contemporánea es excelente." },
+    { rating: 4, comment: "Muy buen hotel con todas las comodidades. El estacionamiento privado es un gran plus. Ideal para familias." },
+    { rating: 5, comment: "El confort y la ubicación son ideales. Desayunamos en el restaurante y la comida estaba deliciosa. Muy recomendado." },
+    { rating: 4, comment: "Excelente relación calidad-precio. Las instalaciones están impecables y el servicio es de primera categoría." },
+  ],
+  // Glamping Xicotepec
+  107: [
+    { rating: 5, comment: "Dormir en medio de la naturaleza con todas las comodidades es una experiencia única. El fogatero con bombones por la noche es mágico." },
+    { rating: 5, comment: "El desayuno incluido con fruta, pan y jugo es perfecto. La Ruta del café Santa Lucía es un imperdible. Volveremos." },
+    { rating: 5, comment: "A solo 10 minutos del centro pero se siente como otro mundo. Las cabañas son hermosas y el cine al aire libre es genial." },
+    { rating: 4, comment: "Experiencia increíble para parejas y familias. Pet friendly y muy seguro. El contacto con la naturaleza es total." },
+  ],
+  // Aroma Xicotepec Cabañas y Camping
+  108: [
+    { rating: 5, comment: "Las cabañas en zona cafetalera son una maravilla. La vista al lago privado es impresionante. Muy tranquilo y seguro." },
+    { rating: 4, comment: "Excelente lugar a solo 3 minutos del centro. Las hamacas y los asadores hacen la estancia muy relajante." },
+    { rating: 5, comment: "El beneficio de café dentro del lugar es un plus único. Las cabañas son cómodas y el entorno natural es hermoso." },
+    { rating: 4, comment: "Muy buena opción para grupos. La cabaña para 8 personas es espaciosa. Solo tener en cuenta que mascotas menores a 6kg." },
+  ],
+  // Casa Don Laureano
+  109: [
+    { rating: 4, comment: "Ubicación perfecta en el centro de Xicotepec. Las habitaciones son confortables y el personal es muy hospitalario." },
+    { rating: 4, comment: "Ideal para explorar el pueblo caminando. Cerca de todo: museo Carranza, iglesia, antojitos y dulces típicos." },
+    { rating: 5, comment: "El hotel transmite la calidez del Pueblo Mágico. Las 15 habitaciones están bien equipadas y el servicio es excelente." },
+    { rating: 4, comment: "Buena relación calidad-precio. La recepción 24 horas y el WiFi funcionan perfecto. Muy recomendado para familias." },
+  ],
 };
 
 export function getLocalReviews(businessId) {

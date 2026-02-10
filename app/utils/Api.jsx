@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as Crypto from 'expo-crypto';
 import LocalDatabase from './LocalDatabase';
-import { getLocalBusinesses } from '../data/LocalBusinesses';
+import { getLocalBusinesses, getLocalReviews } from '../data/LocalBusinesses';
 
 const api = axios.create({
   baseURL: 'https://available-karlotta-ethdev11-59ebf81c.koyeb.app',
@@ -121,11 +121,17 @@ const getEventsByBusiness = async (businessId) => {
   }
 };
 
-// Función para obtener reseñas por negocio (no requiere token)
+// Función para obtener reseñas por negocio
 const getReviewsByBusiness = async (businessId) => {
+  // Primero intentar reseñas locales
+  const localReviews = getLocalReviews(businessId);
+  if (localReviews.length > 0) {
+    return localReviews;
+  }
+  // Si no hay reseñas locales, intentar el servidor remoto
   try {
     const response = await api.get(`/api/reviews/business/${businessId}`);
-    return response.data; 
+    return response.data;
   } catch (error) {
     const { message, status } = handleError(error);
     const customError = new Error(message);

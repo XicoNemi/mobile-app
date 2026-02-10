@@ -438,6 +438,60 @@ const accommodationBusinesses = [
   },
 ];
 
+const localReviews = {
+  // La Tostadora Café
+  7: [
+    { rating: 5, comment: "La concha con nata es una delicia, sin duda el mejor desayuno de Xicotepec. El café de especialidad es increíble." },
+    { rating: 5, comment: "Llevamos viniendo desde hace años y nunca decepciona. El ambiente es muy acogedor y la atención siempre es excelente." },
+    { rating: 4, comment: "Los tacos de cochinita están buenísimos. El único detalle es que los martes está cerrado, llegamos y no sabíamos." },
+    { rating: 5, comment: "El Desayuno Tostadora es espectacular, muy completo. El lugar tiene una vibra muy bonita, se siente como en casa." },
+  ],
+  // Caffeteo
+  2: [
+    { rating: 4, comment: "El café es muy rico y los precios son accesibles. Los paninos son mi favorito, siempre frescos." },
+    { rating: 4, comment: "Buen lugar para ir con amigos. La hamburguesa Caffeteo está muy buena y el servicio es rápido." },
+    { rating: 5, comment: "El mejor café de Xicotepec a precio justo. Me encanta el concepto de servicio al mostrador, es muy práctico." },
+    { rating: 3, comment: "Está bien para una comida rápida. Los lunes abre un poco tarde pero entre semana el horario es amplio." },
+  ],
+  // Colibrí La Casa de Piedra
+  5: [
+    { rating: 5, comment: "Una experiencia gastronómica única. El salmón en reducción de acachul es una obra de arte. Vale cada peso." },
+    { rating: 5, comment: "El concepto del huerto a la mesa se siente real. Las flores comestibles en los platillos le dan un toque mágico." },
+    { rating: 5, comment: "Sin duda el mejor restaurante de Xicotepec. La pasta pesto del huerto es fresca y deliciosa. Ambiente romántico perfecto." },
+    { rating: 4, comment: "Excelente comida gourmet. Los cócteles de acachul son muy originales. Solo un poco caro pero vale la pena para ocasiones especiales." },
+  ],
+  // El Bosco Restaurant Café
+  1: [
+    { rating: 4, comment: "El mole poblano está riquísimo, se nota que es receta tradicional. El café de especialidad es de los mejores que he probado." },
+    { rating: 5, comment: "Nos encantó el pollo a la naranja, tiene un sabor único. El lugar es muy familiar y la atención muy buena." },
+    { rating: 4, comment: "Las picaditas están deliciosas, auténtica comida de Xicotepec. El ambiente es acogedor y tradicional." },
+    { rating: 5, comment: "Excelente lugar para probar la gastronomía típica de la región. La Burguer Bosco es sorprendentemente buena." },
+  ],
+  // Poema Mesón Xicotepec
+  8: [
+    { rating: 5, comment: "La paella valenciana es espectacular, perfecta para compartir. El ambiente con música en vivo hace la experiencia inolvidable." },
+    { rating: 5, comment: "Las tapas españolas son auténticas y la selección de vinos es excelente. Perfecto para una cena romántica." },
+    { rating: 4, comment: "Muy buen lugar, la sangría de la casa es deliciosa. El espacio histórico le da un encanto especial." },
+    { rating: 5, comment: "De los mejores restaurantes que he visitado. El jamón ibérico es de calidad y el servicio es impecable." },
+  ],
+  // Cafetería Creppycaff
+  14: [
+    { rating: 5, comment: "La vista panorámica es impresionante, realmente se siente como un lugar cerca del cielo. El café es muy bueno." },
+    { rating: 4, comment: "La molletipizza es una creación genial, muy original. El lugar es pet friendly y eso se agradece mucho." },
+    { rating: 4, comment: "Excelente para ir a relajarse con la vista y un buen café. La música en vivo los fines de semana está muy bien." },
+  ],
+  // Azotea 116 Gonri
+  9: [
+    { rating: 5, comment: "Los atardeceres desde aquí son mágicos. La cazuelita de queso con chistorra es adictiva. Lugar perfecto para una cita." },
+    { rating: 4, comment: "La González Special está muy buena. La terraza tiene una vista increíble al centro de Xicotepec y los cerros." },
+    { rating: 5, comment: "La tarta de maracuyá es lo mejor que he probado. El ambiente es súper acogedor y pet friendly." },
+  ],
+};
+
+export function getLocalReviews(businessId) {
+  return localReviews[businessId] || [];
+}
+
 export function getLocalBusinesses(category) {
   if (category === "Gastronomia") {
     return gastronomyBusinesses;

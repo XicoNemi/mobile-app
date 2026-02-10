@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../utils/Colors";
@@ -18,7 +19,6 @@ import EnterEmailComponent from "../../components/login/EnterEmailComponent";
 import EnterPasswordComponent from "../../components/login/EnterPasswordComponent";
 import PhoneAndBirthdayComponent from "../../components/register/PhoneAndBirthdayComponent";
 import LoaderComponent from "../../components/generals/LoaderComponent";
-import CustomAlert from "../../components/generals/CustomAlertComponent";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const RegisterScreen = ({ navigation }) => {
@@ -28,88 +28,62 @@ const RegisterScreen = ({ navigation }) => {
   // Estados para los datos del usuario
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState(""); // Nuevo estado para género
+  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
   const [birthday, setBirthday] = useState("");
   // Estado para mostrar el loader
   const [isLoading, setIsLoading] = useState(false);
-  // Estado para mostrar el mensaje de alerta de éxito o error
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [alertTitle, setAlertTitle] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertIcon, setAlertIcon] = useState("checkmark-circle-outline");
 
   useEffect(() => {
     AssignLenguaje(dispatch);
   }, [dispatch]);
 
   const handleRegister = async () => {
-    // Validaciones de los campos
     if (!name || !lastName || !gender || !email || !password || !tel || !birthday) {
-      setAlertTitle("Error");
-      setAlertMessage("Por favor, complete todos los campos");
-      setAlertIcon("close-circle-outline");
-      setAlertVisible(true); // Mostrar alerta de error
+      Alert.alert("Error", "Por favor, complete todos los campos");
       return;
     }
 
-    setIsLoading(true); 
+    setIsLoading(true);
     try {
-      // Preparar los datos para el registro
       const userData = {
         name,
         lastname: lastName,
-        gender, 
+        gender,
         email,
         password,
         tel,
         birthday,
-        type: "Common" 
+        type: "Common"
       };
       console.log(userData);
-      // Llamada al API para crear la cuenta
       const response = await api.signUp(userData);
 
       if (
         response.message &&
         response.message.includes("El correo ya existe")
       ) {
-        // Si hay error (correo ya existe)
-        throw new Error(response.message); 
+        throw new Error(response.message);
       }
 
-      // Si la cuenta fue creada correctamente
-      setAlertTitle("Éxito");
-      setAlertMessage(
-        response.message ||
-          "Cuenta creada con éxito. Revisa tu correo para verificar la cuenta."
+      setIsLoading(false);
+      Alert.alert(
+        "Éxito",
+        response.message || "Cuenta creada con éxito.",
+        [{ text: "OK", onPress: () => navigation.navigate("LoginScreen") }]
       );
-      setAlertIcon("checkmark-circle-outline");
-      setAlertVisible(true);
-
-      setName("");
-      setLastName("");
-      setGender(""); 
-      setEmail("");
-      setPassword("");
-      setTel("");
-      setBirthday("");
     } catch (error) {
-      // Manejo de errores
+      setIsLoading(false);
       const errorMessage = error.response
         ? error.response.data.message
         : error.message;
 
-      setAlertTitle("Error"); 
-      setAlertMessage(
+      Alert.alert(
+        "Error",
         errorMessage || "Algo salió mal, por favor intenta nuevamente."
       );
-      setAlertIcon("close-circle-outline"); 
-      setAlertVisible(true);
-    } finally {
-      setIsLoading(false); 
     }
   };
 
@@ -173,15 +147,6 @@ const RegisterScreen = ({ navigation }) => {
         </Text>
       </Text>
 
-      <CustomAlert
-        isVisible={alertVisible}
-        onClose={() => setAlertVisible(false)}
-        title={alertTitle}
-        message={alertMessage}
-        iconName={alertIcon}
-        onConfirm={() => setAlertVisible(false)}
-        showCancelButton={false}
-      />
     </ScrollView>
   );
 };

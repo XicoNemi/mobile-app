@@ -50,17 +50,23 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
     setIsLoading(true);
+    let errorResult = null;
     try {
       const { user, token } = await api.signIn(email, password);
       dispatch(logIn({ id: user.id, name: user.name, token, type: user.type }));
-      navigation.navigate("BottomTabs"); 
+      navigation.navigate("BottomTabs");
     } catch (error) {
-      setAlertTitle("Error");
-      setAlertMessage(error.message);
-      setAlertIcon("close-circle-outline");
-      setAlertVisible(true);
+      errorResult = error.message;
     } finally {
       setIsLoading(false);
+    }
+    if (errorResult) {
+      setTimeout(() => {
+        setAlertTitle("Error");
+        setAlertMessage(errorResult);
+        setAlertIcon("close-circle-outline");
+        setAlertVisible(true);
+      }, 300);
     }
   };
 
